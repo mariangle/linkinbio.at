@@ -17,7 +17,7 @@ export function NavItem({
       href={item.href}
       className={cn(
         "flex h-11 items-center justify-start gap-2 rounded-md border border-transparent px-2 py-2 text-sm",
-        active && "border-slate-800 bg-gray-900",
+        active && "border-border bg-black/10",
         collapsed && "justify-center",
       )}
     >

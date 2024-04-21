@@ -2,7 +2,7 @@ import { Navbar } from "@/components/dashboard/navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col gap-4 md:flex-row">
+    <div className="flex min-h-screen flex-col gap-4 bg-background md:flex-row">
       <Navbar />
       <div className="w-full">{children}</div>
     </div>

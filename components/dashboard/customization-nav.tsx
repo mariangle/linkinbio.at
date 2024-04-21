@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 export default function CustomizationNav() {
   const pathname = usePathname();
   return (
-    <nav className="mt-2 w-full">
+    <nav className="w-full">
       <ul className="flex w-full border-b">
         {biolinkCustomizationLinks.map((item, index) => (
           <li key={index}>

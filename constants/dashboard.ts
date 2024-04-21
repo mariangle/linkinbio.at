@@ -8,11 +8,6 @@ import {
 
 export const dashboardLinks = [
   {
-    name: "Integrations",
-    href: "/dashboard/integrations",
-    icon: GitBranch,
-  },
-  {
     name: "Settings",
     href: "/dashboard/settings",
     icon: Settings,
@@ -21,8 +16,8 @@ export const dashboardLinks = [
 
 export const biolinkLinks = [
   {
-    name: "Profile",
-    href: "/dashboard/profile",
+    name: "Information",
+    href: "/dashboard/profile/information",
     icon: User,
   },
   {
@@ -31,29 +26,34 @@ export const biolinkLinks = [
     icon: LinkIcon,
   },
   {
-    name: "Customization",
-    href: "/dashboard/profile/customization",
+    name: "Appearance",
+    href: "/dashboard/profile/appearance",
     icon: Palette,
+  },
+  {
+    name: "Integrations",
+    href: "/dashboard/profile/integrations",
+    icon: GitBranch,
   },
 ];
 
 export const biolinkCustomizationLinks = [
   {
-    name: "Customization",
-    href: "/dashboard/profile/customization",
+    name: "Appearance",
+    href: "/dashboard/profile/appearance",
     icon: Palette,
   },
   {
     name: "Layout",
-    href: "/dashboard/profile/customization/layout",
+    href: "/dashboard/profile/appearance/layout",
   },
   {
     name: "Effects",
-    href: "/dashboard/profile/customization/effects",
+    href: "/dashboard/profile/appearance/effects",
   },
   {
     name: "Animations",
-    href: "/dashboard/profile/customization/animations",
+    href: "/dashboard/profile/appearance/animations",
   },
 ];
 

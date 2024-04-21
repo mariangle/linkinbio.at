@@ -1,5 +1,9 @@
-import { Heading } from "@/components/ui/typography";
+import { UserLinks } from "./user-links";
 
 export default function Links() {
-  return <div></div>;
+  return (
+    <div>
+      <UserLinks />
+    </div>
+  );
 }

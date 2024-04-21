@@ -24,7 +24,7 @@ export function Breadcrumbs({
   }[];
 }) {
   const path = usePathname();
-  const breadcrumbs = path.split("/").filter(Boolean).slice(1);
+  const breadcrumbs = path.split("/").filter(Boolean);
   if (items) {
     return (
       <ul>
@@ -39,6 +39,12 @@ export function Breadcrumbs({
 
   return (
     <ul className="flex items-center gap-2">
+      <li className="flex items-center gap-2 text-sm">
+        <Link href={"/dashboard"} className="text-gray-400">
+          Dashboard
+        </Link>
+        <span className="text-gray-400">/</span>
+      </li>
       {breadcrumbs.map((crumb, index) => {
         // Find the corresponding item
         const item = validationLinks?.find((item) => item.href.includes(crumb));
@@ -46,6 +52,8 @@ export function Breadcrumbs({
 
         // Construct the href for this breadcrumb
         const href = "/dashboard/" + breadcrumbs.slice(0, index + 1).join("/");
+
+        if (!lastItem) return null;
 
         return (
           <li key={href} className="flex items-center gap-2 text-sm">
