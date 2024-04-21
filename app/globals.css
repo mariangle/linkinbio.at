@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 28% 25%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 90.1%;
+    --muted-foreground: 215 28% 25%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+  }
+  */
+  :root {
+    --background: 221 39% 4%;
+    --foreground: 228 96% 95%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --secondary: 221 39% 8%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 219 21% 24%;
+    --muted-foreground: 215 20% 75%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 221 39% 12%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 221 39% 4%;
+    --foreground: 228 96% 95%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --secondary: 221 39% 8%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 219 21% 24%;
+    --muted-foreground: 215 20% 75%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 221 39% 12%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#e0e8ff] text-foreground dark:bg-background;
+  }
+  .card {
+    @apply absolute flex h-[26rem] w-[44rem] flex-row justify-between rounded-lg border border-neutral-600 bg-neutral-800 stroke-[0.1] p-8 hover:stroke-[0.15];
+  }
+  @property --border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-foreground/75 to-foreground bg-clip-text text-transparent dark:from-indigo-200 dark:to-foreground;
+  }
+
+  .animate-gradient {
+    background-size: 300%;
+    -webkit-animation: animatedgradient 6s ease infinite alternate;
+    -moz-animation: animatedgradient 6s ease infinite alternate;
+    animation: animatedgradient 6s ease infinite alternate;
+  }
+
+  @keyframes animatedgradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .vertical-line {
+    @apply h-full w-px bg-gradient-to-b from-primary/10 to-transparent;
+  }
+
+  .vertical-line-shadow {
+    @apply h-full w-px bg-gradient-to-b from-white/10 via-white/10 to-transparent dark:hidden;
+  }
+
+  .horizontal-line {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border/20 to-transparent;
+  }
+
+  .horizontal-line-shadow {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/50 to-transparent dark:hidden;
+  }
+
+  @keyframes float {
+    0% {
+      box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+      transform: translatey(0px);
+    }
+    60% {
+      box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+      transform: translatey(-5px);
+    }
+    100% {
+      box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+      transform: translatey(0px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in infinite;
+  }
+
+  .box-shadow {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+  }
+
+  .perspective {
+    --phone-scale: 0.5;
+    perspective-origin: 50%;
+    perspective: 3000px;
+    transform: translateZ(0) scale(var(--phone-scale));
+    will-change: transform;
+    margin-top: calc(-422px * (1 - var(--phone-scale)));
+    margin-bottom: calc(-422px * (1 - var(--phone-scale)));
+  }
+
+  .iphone-x {
+    position: relative;
+    width: 390px;
+    height: 844px;
+    background-color: #7371ee;
+    background-image: linear-gradient(60deg, #7371ee 1%, #a1d9d6 100%);
+    border-radius: 40px;
+    box-shadow:
+      0 0 0 8px #212121,
+      0 0 0 14px #3a3a3a,
+      8px 6px 0 20px #111;
+    transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .iphone-x {
+      width: 468px;
+      height: 1012.8px;
+    }
+  }
+
+  .iphone-x .reflection {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    opacity: 0.5;
+    transform-origin: bottom;
+    border-radius: 40px;
+  }
+  .iphone-x:before,
+  .iphone-x:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .iphone-x:after {
+    bottom: 7px;
+    width: 140px;
+    height: 4px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+  }
+  .iphone-x:before {
+    top: 0;
+    width: 56%;
+    height: 30px;
+    background-color: #1f1f1f;
+    border-radius: 0 0 40px 40px;
+  }
+  .iphone-x i,
+  .iphone-x b,
+  .iphone-x span {
+    position: absolute;
+    display: block;
+    color: transparent;
+    z-index: 3;
+  }
+  .iphone-x i {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 6px);
+    height: 8px;
+    width: 15%;
+    background-color: #101010;
+    border-radius: 8px;
+    box-shadow: inset 0 -3px 3px 0 rgba(255, 255, 255, 0.2);
+  }
+  .iphone-x b {
+    left: 10%;
+    top: 0;
+    transform: translate(195px, 4px);
+    width: 12px;
+    height: 12px;
+    background-color: #101010;
+    border-radius: 12px;
+    box-shadow: inset 0 -3px 2px 0 rgba(255, 255, 255, 0.2);
+  }
+  .iphone-x b:after {
+    content: "";
+    position: absolute;
+    background-color: #2d4d76;
+    width: 6px;
+    height: 6px;
+    top: 3px;
+    left: 3px;
+    display: block;
+    border-radius: 4px;
+    box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.5);
+  }
+  .iphone-x span {
+    bottom: 50px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    left: 30px;
+  }
+  .iphone-x span + span {
+    left: auto;
+    right: 30px;
+  }
+}
