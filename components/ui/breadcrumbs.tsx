@@ -3,17 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  dashboardLinks,
-  biolinkLinks,
-  biolinkCustomizationLinks,
-} from "@/constants/dashboard";
-
-export const validationLinks = [
-  ...dashboardLinks,
-  ...biolinkLinks,
-  ...biolinkCustomizationLinks,
-];
+import { routes } from "@/constants/dashboard";
 
 export function Breadcrumbs({
   items,
@@ -47,7 +37,7 @@ export function Breadcrumbs({
       </li>
       {breadcrumbs.map((crumb, index) => {
         // Find the corresponding item
-        const item = validationLinks?.find((item) => item.href.includes(crumb));
+        const item = routes?.find((item) => item.href.includes(crumb));
         const lastItem = index === breadcrumbs.length - 1;
 
         // Construct the href for this breadcrumb

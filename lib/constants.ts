@@ -1,5 +1,9 @@
 export const navLinks = [
   {
+    label: "Features",
+    path: "/features",
+  },
+  {
     label: "Templates",
     path: "/templates",
   },

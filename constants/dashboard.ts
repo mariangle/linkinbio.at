@@ -1,12 +1,19 @@
 import {
   Settings,
-  Link as LinkIcon,
+  Link2 as Link,
   User,
   Palette,
   GitBranch,
+  Sparkles,
+  Newspaper,
 } from "lucide-react";
 
 export const dashboardLinks = [
+  {
+    name: "Integrations",
+    href: "/dashboard/integrations",
+    icon: GitBranch,
+  },
   {
     name: "Settings",
     href: "/dashboard/settings",
@@ -14,51 +21,48 @@ export const dashboardLinks = [
   },
 ];
 
-export const biolinkLinks = [
+export const profileLinks = [
   {
     name: "Information",
-    href: "/dashboard/profile/information",
+    href: "/dashboard/information",
     icon: User,
   },
   {
     name: "Links",
-    href: "/dashboard/profile/links",
-    icon: LinkIcon,
+    href: "/dashboard/links",
+    icon: Link,
   },
   {
     name: "Appearance",
-    href: "/dashboard/profile/appearance",
+    href: "/dashboard/appearance",
     icon: Palette,
   },
   {
-    name: "Integrations",
-    href: "/dashboard/profile/integrations",
-    icon: GitBranch,
+    name: "Feed",
+    href: "/dashboard/feed",
+    icon: Newspaper,
   },
 ];
 
 export const biolinkCustomizationLinks = [
   {
     name: "Appearance",
-    href: "/dashboard/profile/appearance",
+    href: "/dashboard/appearance",
     icon: Palette,
   },
   {
     name: "Layout",
-    href: "/dashboard/profile/appearance/layout",
+    href: "/dashboard/appearance/layout",
   },
   {
-    name: "Effects",
-    href: "/dashboard/profile/appearance/effects",
-  },
-  {
-    name: "Animations",
-    href: "/dashboard/profile/appearance/animations",
+    name: "Visual Effects",
+    href: "/dashboard/appearance/visual-effects",
+    icon: Sparkles,
   },
 ];
 
 export const routes = [
   ...dashboardLinks,
-  ...biolinkLinks,
+  ...profileLinks,
   ...biolinkCustomizationLinks,
 ];

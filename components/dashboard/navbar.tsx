@@ -4,19 +4,19 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-import { ThemeToggle } from "../theme-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import { User, ChevronLeft } from "lucide-react";
-import { dashboardLinks, biolinkLinks } from "@/constants/dashboard";
+import { dashboardLinks, profileLinks } from "@/constants/dashboard";
 import { NavItem } from "@/components/dashboard/nav-item";
 
 export function Navbar() {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   return (
-    <div className="sticky top-0 max-h-screen p-4">
+    <>
       <header
         className={cn(
-          "flex h-full max-h-screen flex-col justify-between rounded-xl border bg-secondary p-4 duration-300",
+          "flex h-screen flex-col justify-between border-r p-4 duration-300 sm:sticky sm:top-0",
           isCollapsed ? "w-[83px]" : "w-[200px]",
         )}
       >
@@ -29,9 +29,8 @@ export function Navbar() {
           >
             <Logo />
           </div>
-          <div className="mt-4 h-px w-full bg-border" />
           <ul className="mt-2 flex flex-col gap-1">
-            {biolinkLinks.map((item, index) => (
+            {profileLinks.map((item, index) => (
               <li key={index}>
                 <NavItem item={item} collapsed={isCollapsed} />
               </li>
@@ -78,6 +77,6 @@ export function Navbar() {
           </div>
         </div>
       </header>
-    </div>
+    </>
   );
 }

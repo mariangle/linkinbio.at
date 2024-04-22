@@ -7,7 +7,7 @@ export interface Link {
   url: string;
   hidden?: boolean;
   archived?: boolean;
-  icon: string;
+  icon?: string; // cannot be saved in db. use string intead
 }
 
 export interface SocialLink {

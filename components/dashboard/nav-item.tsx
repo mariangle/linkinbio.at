@@ -24,7 +24,7 @@ export function NavItem({
       <item.icon className="size-4" />
       <span
         className={cn(
-          "block transition-all duration-1000",
+          "whiotespace-nowrap block transition-all duration-1000",
           collapsed && "invisible hidden opacity-0",
         )}
       >

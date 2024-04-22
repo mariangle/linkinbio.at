@@ -33,7 +33,7 @@
   }
 
   .dark {
-    --background: 221 39% 4%;
+    --background: 0 0% 4%;
     --foreground: 228 96% 95%;
 
     --card: 0 0% 3.9%;
@@ -42,7 +42,7 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --secondary: 221 39% 8%;
+    --secondary: 0 0% 8%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 219 21% 24%;
@@ -54,8 +54,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 221 39% 12%;
-    --input: 221 39% 12%;
+    --border: 0 0% 16%;
+    --input: 0 0% 12%;
     --ring: 0 0% 83.1%;
   }
 }
@@ -153,8 +153,13 @@
     width: 390px;
     height: 844px;
     background-color: #7371ee;
-    background-image: linear-gradient(60deg, #7371ee 1%, #a1d9d6 100%);
     border-radius: 40px;
+    box-shadow:
+      0 0 0 8px #212121,
+      0 0 0 14px #3a3a3a;
+  }
+
+  .iphone-x-featured {
     box-shadow:
       0 0 0 8px #212121,
       0 0 0 14px #3a3a3a,
@@ -177,11 +182,7 @@
     right: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background-image: black;
     opacity: 0.5;
     transform-origin: bottom;
     border-radius: 40px;
@@ -207,57 +208,5 @@
     height: 30px;
     background-color: #1f1f1f;
     border-radius: 0 0 40px 40px;
-  }
-  .iphone-x i,
-  .iphone-x b,
-  .iphone-x span {
-    position: absolute;
-    display: block;
-    color: transparent;
-    z-index: 3;
-  }
-  .iphone-x i {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 6px);
-    height: 8px;
-    width: 15%;
-    background-color: #101010;
-    border-radius: 8px;
-    box-shadow: inset 0 -3px 3px 0 rgba(255, 255, 255, 0.2);
-  }
-  .iphone-x b {
-    left: 10%;
-    top: 0;
-    transform: translate(195px, 4px);
-    width: 12px;
-    height: 12px;
-    background-color: #101010;
-    border-radius: 12px;
-    box-shadow: inset 0 -3px 2px 0 rgba(255, 255, 255, 0.2);
-  }
-  .iphone-x b:after {
-    content: "";
-    position: absolute;
-    background-color: #2d4d76;
-    width: 6px;
-    height: 6px;
-    top: 3px;
-    left: 3px;
-    display: block;
-    border-radius: 4px;
-    box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.5);
-  }
-  .iphone-x span {
-    bottom: 50px;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    left: 30px;
-  }
-  .iphone-x span + span {
-    left: auto;
-    right: 30px;
   }
 }

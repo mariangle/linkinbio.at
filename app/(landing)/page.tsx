@@ -1,10 +1,10 @@
 import Image from "next/image";
 import BackgroundImage from "@/public/background.png";
 import { InfiniteMovingHighlights } from "@/components/landing/infinite-moving-highlights";
-import { iPhone as Phone } from "@/components/ui/iphone";
 import { Container } from "@/components/ui/container";
 import { ClaimLink } from "@/components/landing/claim-link";
-
+import { dummyBiolink } from "@/constants/dummy";
+import { PhoneMockup } from "@/components/ui/phone-mockup";
 export default function Page() {
   return (
     <div className="relative">
@@ -30,10 +30,18 @@ export default function Page() {
             customizable and easy-to-use link-in-bio tool.
           </div>
           <ClaimLink />
-          <InfiniteMovingHighlights speed="fast" />
+          <InfiniteMovingHighlights speed="fast">
+            <div className="flex items-center gap-4 text-white">
+              <div className="whitespace-nowrap">Spotify Integration</div>
+              <div className="whitespace-nowrap">Discord Presence</div>
+              <div className="whitespace-nowrap">Background Music</div>
+              <div className="whitespace-nowrap">Animations</div>
+              <div className="whitespace-nowrap">Special Effects</div>
+            </div>
+          </InfiniteMovingHighlights>
         </div>
         <div className="flex flex-1 items-center justify-center md:justify-start">
-          <Phone />
+          <PhoneMockup hero biolink={dummyBiolink} />
         </div>
       </Container>
     </div>
