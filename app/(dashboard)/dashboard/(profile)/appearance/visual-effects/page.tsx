@@ -1,5 +1,13 @@
-import React from "react";
+import { EffectsForm } from "../_components/effects-form";
+import { WeatherEffectForm } from "../_components/weather-effect-form";
+import { AnimationForm } from "../_components/animation-form";
 
 export default function page() {
-  return <div>page</div>;
+  return (
+    <div className="space-y-8 py-8">
+      <EffectsForm />
+      <WeatherEffectForm />
+      <AnimationForm />
+    </div>
+  );
 }

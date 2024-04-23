@@ -1,9 +1,9 @@
-import type { Configuration, User, Profile, Settings, Link } from ".";
+import type { Config, User, Profile, Settings, Link } from ".";
 
 export interface Biolink {
   user: User;
   profile: Profile;
-  config: Configuration;
+  config: Config;
   settings: Settings;
   links: Link[];
 }

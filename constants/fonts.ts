@@ -22,10 +22,3 @@ export const fonts = [
     display: dancingScript.className,
   },
 ];
-
-export enum Font {
-  Inter = "inter",
-  Readex = "readex",
-  Roboto = "roboto",
-  DancingScript = "dancing-script",
-}

@@ -47,7 +47,7 @@ export function LinkItem({ item }: { item: Link }) {
     <div className="group rounded-lg bg-secondary">
       <div className="flex items-center">
         <GripVerticalIcon className="ml-2 size-4 text-muted-foreground" />
-        <div className="w-full p-4">
+        <div className="w-full space-y-1 p-4">
           <div className="flex items-center justify-between gap-8">
             <div className="text-sm text-foreground">{item.title}</div>
             <div className="flex items-center gap-2 text-muted-foreground">

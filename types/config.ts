@@ -3,18 +3,20 @@ import type {
   ButtonOptions,
   ContainerOptions,
   TitleOptions,
-  Visuals,
+  EffectsOptions,
+  TopIconOptions,
 } from ".";
-import type { Layout } from "@/components/biolink/layout";
-import type { Font } from "@/constants/fonts";
+import type { Layout, Font } from "@/types/enums";
 
-export interface Configuration {
+export interface Config {
   layout: Layout;
   font: Font;
+  showTopIcons: boolean;
   darkText: boolean;
   background: BackgroundOptions;
   button: ButtonOptions;
   container: ContainerOptions;
+  topIcon: TopIconOptions;
   title: TitleOptions;
-  visuals: Visuals;
+  effects: EffectsOptions;
 }

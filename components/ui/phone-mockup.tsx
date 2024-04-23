@@ -1,13 +1,16 @@
 import { cn } from "@/lib/utils";
-import { ClassicLayout } from "@/components/biolink/layout";
+import { Layout } from "@/components/biolink/layouts";
 import { Biolink } from "@/types";
+import { Layout as LayoutEnum } from "@/types/enums";
 
 export function PhoneMockup({
   hero,
   biolink,
+  layout = LayoutEnum.Standard,
 }: {
   hero?: boolean;
   biolink: Biolink;
+  layout?: LayoutEnum;
 }) {
   return (
     <div className="perspective">
@@ -18,7 +21,7 @@ export function PhoneMockup({
         )}
       >
         <div className="relative z-0 block h-full overflow-hidden rounded-[2.4rem] border border-black">
-          <ClassicLayout biolink={biolink} preview />
+          <Layout biolink={biolink} layout={layout} preview />
         </div>
         <div className="reflection" />
       </div>

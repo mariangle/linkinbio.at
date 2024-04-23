@@ -70,7 +70,7 @@ export function Navbar() {
               <div>
                 <div className="text-sm">Maria</div>
                 <div className="w-32 truncate text-xs text-slate-400">
-                  mariach171001@gmail.com
+                  maria@gmail.com
                 </div>
               </div>
             )}

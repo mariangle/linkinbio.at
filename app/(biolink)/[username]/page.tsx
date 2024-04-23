@@ -1,7 +1,4 @@
-import {
-  ClassicLayout,
-  GlassmorphismLayout,
-} from "@/components/biolink/layout";
+import { Layout } from "@/components/biolink/layouts";
 import { dummyBiolink } from "@/constants/dummy";
 import { constructMetadata } from "@/actions/construct-metadata";
 
@@ -46,16 +43,9 @@ export default async function Page({
 }) {
   const biolink: Biolink = await getBiolink(params.username);
 
-  if (params.username === "a") {
-    return (
-      <div>
-        <ClassicLayout biolink={biolink} />
-      </div>
-    );
-  }
   return (
     <div>
-      <GlassmorphismLayout biolink={biolink} />
+      <Layout biolink={biolink} layout={biolink.config.layout} />
     </div>
   );
 }

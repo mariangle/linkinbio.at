@@ -1,22 +1,26 @@
 export interface ButtonOptions {
-  shadow: number;
   text: {
     color: string;
+    hidden: boolean;
+  };
+  shadow: {
+    solid: boolean;
+    spreadRadius: number;
   };
   background: {
     color: string;
     opacity: number;
     blur: number;
+    socialIconColor: boolean;
   };
   border: {
     radius: number;
     width: number;
     color: string;
   };
-  options: {
-    socialBackgroundColor: boolean;
+  icon: {
+    hidden: boolean;
+    shadow: boolean;
     socialIconColor: boolean;
-    hideIcon: boolean;
-    hideText: boolean;
   };
 }

@@ -4,7 +4,7 @@ import * as React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ColorPicker } from "@/components/ui/color-picker";
-import { BackgroundOptions } from "@/components/biolink/background";
+import { BackgroundOptions } from "@/types";
 import { dummyBiolink } from "@/constants/dummy";
 
 import {
@@ -19,10 +19,8 @@ export function BackgroundForm() {
   );
   const [backgroundOptions, setBackgroundOptions] =
     React.useState<BackgroundOptions>({
-      blur: 0.5,
-      radius: 0,
-      opacity: 1,
-      color: "#000000",
+      color: dummyBiolink.config.background.color ?? "#FFFFFF",
+      url: "",
     });
 
   const [containerOptions, setContainerOptions] =
@@ -40,11 +38,7 @@ export function BackgroundForm() {
         color={backgroundOptions.color}
         className="h-48 w-full overflow-hidden rounded-xl bg-background p-4"
       >
-        <BackgroundMedia
-          url={backgroundUrl}
-          options={backgroundOptions}
-          className="rounded-lg"
-        />
+        <BackgroundMedia url={backgroundUrl} className="rounded-lg" />
       </BackgroundContainer>
       <div className="mt-4 space-y-4">
         <div className="space-y-2">
@@ -62,25 +56,6 @@ export function BackgroundForm() {
               setBackgroundOptions({
                 ...backgroundOptions,
                 color,
-              })
-            }
-          />
-        </div>
-      </div>
-      <div className="mt-4 rounded-lg border p-4">
-        <div className="mb-4">Profile Container</div>
-        <div>
-          <Label>Opacity</Label>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.1}
-            value={backgroundOptions.opacity}
-            onChange={(e) =>
-              setBackgroundOptions({
-                ...backgroundOptions,
-                opacity: parseFloat(e.target.value),
               })
             }
           />

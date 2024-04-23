@@ -3,13 +3,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BackgroundVideo } from "@/components/biolink/background-video";
 
-export interface BackgroundOptions {
-  opacity: number;
-  radius: number;
-  blur: number;
-  color: string;
-}
-
 export function BackgroundContainer({
   color = "#384bb4",
   children,
@@ -28,19 +21,15 @@ export function BackgroundContainer({
 
 export function BackgroundMedia({
   url,
-  options,
   className,
 }: {
   url?: string;
-  options?: BackgroundOptions;
   className?: string;
 }) {
   if (!url) return null;
 
   if (isValidUrl(url) && isValidVideo(url)) {
-    return (
-      <BackgroundVideo url={url} options={options} className={className} />
-    );
+    return <BackgroundVideo url={url} className={className} />;
   }
 
   if (isValidUrl(url) && isValidImage(url)) {

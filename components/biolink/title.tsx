@@ -2,32 +2,31 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { fonts } from "@/constants/fonts";
-// import { TypewriterEffect } from "@/components/biolink/typewriter-effect";
+import { TypewriterEffect } from "@/components/biolink/typewriter-effect";
 import { TitleOptions } from "@/types";
-
-const defaultOptions: TitleOptions = {
-  font: "inter",
-  color: "#FFFFFF",
-};
+import { defaultTitle } from "@/constants/default-options";
 
 export function Title({
   children,
-  options = defaultOptions,
+  options = defaultTitle,
+  typewriter,
+  sparkles,
   className,
 }: {
   children: React.ReactNode;
   options?: TitleOptions;
   className?: string;
+  typewriter?: boolean;
+  sparkles?: boolean;
 }) {
-  const mergedOptions = { ...defaultOptions, ...options };
+  const mergedOptions = { ...defaultTitle, ...options };
 
   const font = fonts.find((item) => item.value === mergedOptions?.font);
 
-  /*
-  if (mergedOptions?.typewriter) {
+  if (typewriter) {
     return (
       <div className="relative">
-        {mergedOptions.sparkles && (
+        {sparkles && (
           <Image
             src="/sparkle.gif"
             alt="logo"
@@ -51,7 +50,6 @@ export function Title({
       </div>
     );
   }
-  */
 
   return (
     <div className="relative">

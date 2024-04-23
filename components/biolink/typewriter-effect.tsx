@@ -1,14 +1,12 @@
 "use client";
+
 import * as React from "react";
 import Typewriter from "typewriter-effect";
 
-export function TypewriterEffect({ words }: { words: string }) {
-  const [isMounted, setIsMounted] = React.useState(false);
+import { useMounted } from "@/hooks/use-mounted";
 
-  React.useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
-  }, []);
+export function TypewriterEffect({ words }: { words: string }) {
+  const isMounted = useMounted();
 
   if (!isMounted) return <div className="h-[24px]" />;
 

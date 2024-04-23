@@ -17,23 +17,30 @@ model User {
   id       Int    @id @default(autoincrement())
   username String @unique
 
-  profile       Profile?
-  links         Link[]
-  configuration Configuration?
+  profile    Profile?
+  links      Link[]
+  config     Configuration?
+  title      Title?
+  background Background?
+  button     Button?
+  topIcon    TopIcon?
+  effect     Effect?
 
   @@map("users")
 }
 
+enum Layout {
+  CLASSIC
+  MINIMAL
+}
+
 model Configuration {
-  id         Int         @id @default(autoincrement())
-  userId     Int         @unique
-  darkText   Boolean?
-  font       String?
-  layoutId   Int?
-  title      Title?
-  background Background?
-  button     Button?
-  visuals    Visuals?
+  id           Int      @id @default(autoincrement())
+  userId       Int      @unique
+  showTopIcons Boolean  @default(false)
+  darkText     Boolean?
+  font         String?
+  layout       Layout?
 
   user User @relation(fields: [userId], references: [id])
 
@@ -77,43 +84,64 @@ model Background {
   endColor        String?
   angle           Int?
 
-  configuration Configuration @relation(fields: [configurationId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("backgrounds")
 }
 
 model Button {
-  id                    Int     @id @default(autoincrement())
-  userId                Int     @unique
-  configurationId       Int     @unique
-  opacity               Float
-  blur                  Float
-  color                 String
-  textColor             String
-  hideText              Boolean
-  hideIcon              Boolean
-  socialBackgroundColor Boolean
-  socialIconColor       Boolean
+  id                   Int     @id @default(autoincrement())
+  userId               Int     @unique
+  configurationId      Int     @unique
+  backgroundColor      String
+  backgroundBlur       Float
+  backgroundOpacity    Float
+  backgroundSocialIcon Boolean
+  shadowSolid          Boolean
+  shadowSpreadRadius   Int
+  borderRadius         Int
+  borderWidth          Int
+  borderColor          String
+  contentColor         String
+  textHidden           Boolean
+  iconHidden           Boolean
+  iconShadow           Boolean
+  iconSocialColor      Boolean
 
-  configuration Configuration @relation(fields: [configurationId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("buttons")
 }
 
 model Title {
-  id              Int @id @default(autoincrement())
-  userId          Int @unique
-  configurationId Int @unique
+  id              Int     @id @default(autoincrement())
+  userId          Int     @unique
+  configurationId Int     @unique
+  font            String?
+  color           String?
 
-  configuration Configuration @relation(fields: [configurationId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("titles")
 }
 
-enum TitleEffect {
-  SPARKLES
-  TYPEWRITER
-  GLITCH
+enum TopIconStyle {
+  SOCIAL_COLOR
+  SOCIAL_BACKGROUND
+  BLACK_BACKGROUND
+  WHITE_BACKGROUND
+  WHITE_BACKGROUND_SOCIAL_COLOR
+}
+
+model TopIcon {
+  id         Int           @id @default(autoincrement())
+  userId     Int           @unique
+  dropShadow Boolean?
+  style      TopIconStyle?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("icons")
 }
 
 enum WeatherEffect {
@@ -124,14 +152,16 @@ enum WeatherEffect {
   FOG
 }
 
-model Visuals {
-  id               Int            @id @default(autoincrement())
-  userId           Int            @unique
-  configurationId  Int            @unique
-  titleEffect      TitleEffect?
-  backgroundEffect WeatherEffect?
+model Effect {
+  id                Int            @id @default(autoincrement())
+  userId            Int            @unique
+  configurationId   Int            @unique
+  titleTypewriter   Boolean
+  titleSparkles     Boolean
+  bioTypewriter     Boolean
+  backgroundWeather WeatherEffect?
 
-  configuration Configuration @relation(fields: [configurationId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("visuals")
 }

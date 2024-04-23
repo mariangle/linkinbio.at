@@ -1,14 +1,7 @@
 import { NextResponse } from "next/server";
 import { dummyBiolink } from "@/constants/dummy";
 
-import type {
-  Biolink,
-  Profile,
-  User,
-  Configuration,
-  Settings,
-  Link,
-} from "@/types";
+import type { Biolink, Profile, User, Config, Settings, Link } from "@/types";
 
 export const GET = async (req: Request): Promise<NextResponse<Biolink>> => {
   const biolink = constructBiolink({
@@ -31,7 +24,7 @@ const constructBiolink = ({
 }: {
   user: User;
   profile: Profile;
-  config: Configuration;
+  config: Config;
   settings: Settings;
   links: Link[];
 }): Biolink => {

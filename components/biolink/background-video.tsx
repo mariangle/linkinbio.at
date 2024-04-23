@@ -3,15 +3,12 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { BackgroundOptions } from "@/components/biolink/background";
 
 export function BackgroundVideo({
   url,
-  options,
   className,
 }: {
   url: string;
-  options?: BackgroundOptions;
   className?: string;
 }) {
   const videoRef = React.useRef<HTMLVideoElement>(null);

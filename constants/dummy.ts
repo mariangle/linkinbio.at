@@ -1,10 +1,12 @@
 import type { Biolink } from "@/types";
-import { Layout } from "@/components/biolink/layout";
-import { Font } from "./fonts";
-import { WeatherEffect, TitleEffect } from "@/types";
+import { WeatherEffect } from "@/types";
+import { Layout, Font } from "@/types/enums";
+import { TopIconStyle } from "@/types";
+
 export const dummyBiolink: Biolink = {
   user: {
     username: "johndoe",
+    premium: true,
   },
   profile: {
     title: "John Doe",
@@ -14,31 +16,40 @@ export const dummyBiolink: Biolink = {
   config: {
     darkText: false,
     font: Font.Inter,
-    layout: Layout.Classic,
+    layout: Layout.Glassmorphism,
+    showTopIcons: true,
     background: {
-      url: "https://images.unsplash.com/photo-1624422736251-3e4c1f0c4e9d",
+      url: "https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg",
       color: "#000000",
     },
+    topIcon: {
+      dropShadow: true,
+      style: TopIconStyle.WHITE_BACKGROUND_SOCIAL_COLOR,
+    },
     button: {
-      shadow: 0,
+      shadow: {
+        solid: false,
+        spreadRadius: 0,
+      },
       text: {
         color: "#FFFFFF",
+        hidden: false,
       },
       border: {
         color: "#000000",
-        radius: 0,
+        radius: 24,
         width: 0,
       },
       background: {
-        color: "#000000",
-        opacity: 0.5,
-        blur: 50,
-      },
-      options: {
-        socialBackgroundColor: false,
+        color: "#FFFFFF",
+        opacity: 0.1,
+        blur: 0,
         socialIconColor: false,
-        hideIcon: false,
-        hideText: false,
+      },
+      icon: {
+        hidden: false,
+        shadow: false,
+        socialIconColor: false,
       },
     },
     container: {},
@@ -46,9 +57,9 @@ export const dummyBiolink: Biolink = {
       font: "inter",
       color: "#FFFFFF",
     },
-    visuals: {
-      title: TitleEffect.Sparkles,
+    effects: {
       weather: WeatherEffect.Thunder,
+      titleTypewriter: true,
     },
   },
   settings: {},
