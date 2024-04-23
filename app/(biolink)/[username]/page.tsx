@@ -25,7 +25,9 @@ export async function generateMetadata({
 
 async function getBiolink(username: string) {
   try {
-    const res = await fetch(`${process.env.URL}/api/biolink/${username}`);
+    const res = await fetch(`${process.env.URL}/api/biolink/${username}`, {
+      cache: "no-store",
+    });
     if (res.ok) {
       return await res.json();
     }
@@ -47,13 +49,13 @@ export default async function Page({
   if (params.username === "a") {
     return (
       <div>
-        <ClassicLayout biolink={dummyBiolink} />
+        <ClassicLayout biolink={biolink} />
       </div>
     );
   }
   return (
     <div>
-      <GlassmorphismLayout biolink={dummyBiolink} />
+      <GlassmorphismLayout biolink={biolink} />
     </div>
   );
 }

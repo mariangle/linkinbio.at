@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { dummyBiolink } from "@/constants/dummy";
 
 import type {
   Biolink,
@@ -9,27 +10,35 @@ import type {
   Link,
 } from "@/types";
 
-export const GET = async (req: Request) => {
-  return NextResponse.json("username", { status: 200 });
+export const GET = async (req: Request): Promise<NextResponse<Biolink>> => {
+  const biolink = constructBiolink({
+    user: dummyBiolink.user,
+    profile: dummyBiolink.profile,
+    config: dummyBiolink.config,
+    settings: dummyBiolink.settings,
+    links: dummyBiolink.links,
+  });
+
+  return NextResponse.json(biolink, { status: 200 });
 };
 
 const constructBiolink = ({
   user,
   profile,
-  configuration,
+  config,
   settings,
   links,
 }: {
   user: User;
   profile: Profile;
-  configuration: Configuration;
+  config: Configuration;
   settings: Settings;
   links: Link[];
 }): Biolink => {
   return {
     user,
     profile,
-    config: configuration,
+    config,
     settings,
     links,
   };

@@ -33,7 +33,7 @@ model Configuration {
   title      Title?
   background Background?
   button     Button?
-  effect     Effect?
+  visuals    Visuals?
 
   user User @relation(fields: [userId], references: [id])
 
@@ -110,14 +110,28 @@ model Title {
   @@map("titles")
 }
 
-model Effect {
-  id              Int      @id @default(autoincrement())
-  userId          Int      @unique
-  configurationId Int      @unique
-  sparkles        Boolean?
-  typewriter      Boolean?
+enum TitleEffect {
+  SPARKLES
+  TYPEWRITER
+  GLITCH
+}
+
+enum WeatherEffect {
+  SNOW
+  RAIN
+  THUNDER
+  LIGHTNING_BUGS
+  FOG
+}
+
+model Visuals {
+  id               Int            @id @default(autoincrement())
+  userId           Int            @unique
+  configurationId  Int            @unique
+  titleEffect      TitleEffect?
+  backgroundEffect WeatherEffect?
 
   configuration Configuration @relation(fields: [configurationId], references: [id])
 
-  @@map("effects")
+  @@map("visuals")
 }

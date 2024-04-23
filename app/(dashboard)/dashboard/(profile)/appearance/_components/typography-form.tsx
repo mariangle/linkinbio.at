@@ -22,8 +22,6 @@ export function TypographyForm() {
   const [titleOptions, setTitleOptions] = React.useState<TitleOptions>({
     font: "inter",
     color: "#FFFFFF",
-    sparkles: false,
-    typewriter: false,
   });
 
   return (
@@ -77,32 +75,6 @@ export function TypographyForm() {
                 </SelectContent>
               </Select>
             </div>
-          </div>
-        </div>
-        <div className="mt-4 space-y-4">
-          <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-            <div className="text-sm font-semibold">Sparkles Effect</div>
-            <Switch
-              checked={titleOptions.sparkles}
-              onCheckedChange={() =>
-                setTitleOptions({
-                  ...titleOptions,
-                  sparkles: !titleOptions.sparkles,
-                })
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-            <div className="text-sm font-semibold">Typewriter Effect</div>
-            <Switch
-              checked={titleOptions.typewriter}
-              onCheckedChange={() =>
-                setTitleOptions({
-                  ...titleOptions,
-                  typewriter: !titleOptions.typewriter,
-                })
-              }
-            />
           </div>
         </div>
       </div>

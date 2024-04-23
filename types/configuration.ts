@@ -3,6 +3,7 @@ import type {
   ButtonOptions,
   ContainerOptions,
   TitleOptions,
+  Visuals,
 } from ".";
 import type { Layout } from "@/components/biolink/layout";
 import type { Font } from "@/constants/fonts";
@@ -15,4 +16,5 @@ export interface Configuration {
   button: ButtonOptions;
   container: ContainerOptions;
   title: TitleOptions;
+  visuals: Visuals;
 }

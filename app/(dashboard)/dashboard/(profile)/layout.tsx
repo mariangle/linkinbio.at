@@ -20,7 +20,7 @@ export default function ProfileLayout({
           {children}
         </div>
       </div>
-      <div className="hidden xl:sticky xl:top-0 xl:grid xl:h-screen xl:flex-[2] xl:place-content-center xl:overflow-y-auto xl:border-l xl:p-4">
+      <div className="hidden overflow-x-hidden xl:sticky xl:top-0 xl:grid xl:h-screen xl:flex-[2] xl:place-content-center xl:overflow-y-auto xl:border-l xl:p-4">
         <BiolinkPreview />
       </div>
     </div>

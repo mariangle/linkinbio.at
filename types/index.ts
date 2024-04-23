@@ -10,3 +10,4 @@ export * from "./title";
 export * from "./container";
 export * from "./biolink";
 export * from "./settings";
+export * from "./visuals";

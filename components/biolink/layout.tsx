@@ -8,6 +8,9 @@ import {
   BackgroundMedia,
 } from "@/components/biolink/background";
 import { ContentContainer } from "@/components/biolink/content-container";
+
+import { WeatherEffect } from "@/components/biolink/weather-effect";
+
 import type { Biolink } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +36,7 @@ export function ClassicLayout({
         !preview && "min-h-screen",
       )}
     >
+      <WeatherEffect preview={preview} variant={config.visuals.weather} />
       <BackgroundMedia
         url={config.background.url}
         className={cn("fixed inset-0", preview && "absolute")}

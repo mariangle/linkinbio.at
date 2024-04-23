@@ -2,14 +2,12 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { fonts } from "@/constants/fonts";
-import { TypewriterEffect } from "@/components/biolink/typewriter-effect";
+// import { TypewriterEffect } from "@/components/biolink/typewriter-effect";
 import { TitleOptions } from "@/types";
 
 const defaultOptions: TitleOptions = {
   font: "inter",
   color: "#FFFFFF",
-  sparkles: false,
-  typewriter: false,
 };
 
 export function Title({
@@ -25,6 +23,7 @@ export function Title({
 
   const font = fonts.find((item) => item.value === mergedOptions?.font);
 
+  /*
   if (mergedOptions?.typewriter) {
     return (
       <div className="relative">
@@ -52,10 +51,11 @@ export function Title({
       </div>
     );
   }
+  */
 
   return (
     <div className="relative">
-      {mergedOptions?.sparkles && (
+      {true && (
         <Image
           src="/sparkle.gif"
           alt="logo"

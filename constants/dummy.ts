@@ -1,6 +1,7 @@
 import type { Biolink } from "@/types";
 import { Layout } from "@/components/biolink/layout";
 import { Font } from "./fonts";
+import { WeatherEffect, TitleEffect } from "@/types";
 export const dummyBiolink: Biolink = {
   user: {
     username: "johndoe",
@@ -44,14 +45,13 @@ export const dummyBiolink: Biolink = {
     title: {
       font: "inter",
       color: "#FFFFFF",
-      sparkles: false,
-      typewriter: false,
+    },
+    visuals: {
+      title: TitleEffect.Sparkles,
+      weather: WeatherEffect.Thunder,
     },
   },
-  settings: {
-    theme: "light",
-    customCSS: "",
-  },
+  settings: {},
   links: [
     {
       id: "1",
