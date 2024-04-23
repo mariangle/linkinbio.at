@@ -6,10 +6,12 @@ export function Bio({
   children,
   className,
   typewriter,
+  whiteText,
 }: {
   children: React.ReactNode;
   className?: string;
   typewriter?: boolean;
+  whiteText: boolean;
 }) {
   if (typewriter) {
     return (
@@ -23,7 +25,13 @@ export function Bio({
   }
 
   return (
-    <p className={cn("mt-2 text-sm", className)} style={{ color: "#FFFFFF" }}>
+    <p
+      className={cn(
+        "mt-2 text-sm",
+        whiteText ? "text-white" : "text-black",
+        className,
+      )}
+    >
       {children}
     </p>
   );

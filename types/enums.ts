@@ -1,7 +1,7 @@
 export enum Layout {
   Standard = "standard",
+  Clean = "clean",
   Glassmorphism = "glassmorphism", // Feds Profile Inspo
-  Discord = "discord", // Discord Profile Inspo
   Sleek = "sleek", // Seemless Profile Inspo
 }
 

@@ -4,6 +4,7 @@ import { Layout as LayoutEnum } from "@/types/enums";
 import { GlassmorphismLayout } from "@/components/biolink/layouts/glassmorphism-layout";
 import { StandardLayout } from "@/components/biolink/layouts/standard-layout";
 import { SleekLayout } from "@/components/biolink/layouts/sleek-layout";
+import { CleanLayout } from "./layouts/clean-layout";
 
 export function Layout({
   biolink,
@@ -33,6 +34,13 @@ export function Layout({
       return (
         <div className="absolute inset-0">
           <SleekLayout biolink={biolink} preview={preview} />
+        </div>
+      );
+
+    case LayoutEnum.Clean:
+      return (
+        <div className="absolute inset-0">
+          <CleanLayout biolink={biolink} preview={preview} />
         </div>
       );
 

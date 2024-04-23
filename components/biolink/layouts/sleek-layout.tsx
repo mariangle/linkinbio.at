@@ -28,36 +28,43 @@ export function SleekLayout({
 }) {
   const { user, config, profile, links } = biolink;
   const { effects, background } = config;
-  const { isDark } = useBackgroundBrightness({
+  const { backgroundDark } = useBackgroundBrightness({
     color: config.background.color,
-    url: config.background.url,
   });
 
   return (
     <BackgroundContainer
+      color={config.background.color}
       className={cn(
         "relative flex h-full items-start justify-center pt-44",
         !preview && "min-h-screen",
       )}
     >
       <WeatherEffect preview={preview} variant={config.effects.weather} />
-      <BackgroundMedia
-        url={config.background.url}
-        className={cn(
-          "absolute inset-x-0 top-0 mx-auto h-60 max-w-screen-lg overflow-hidden rounded-b-2xl",
-        )}
-      />
+      <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">
+        <BackgroundMedia
+          url={config.background.url}
+          className={cn(
+            "max-w-screen-md rounded-b-md rounded-t-xl",
+            preview && "rounded-t-3xl",
+          )}
+        />
+      </div>
       <ContentContainer className="relative flex h-full w-full flex-col items-center">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" />
           <Title
+            whiteText={backgroundDark}
             typewriter={effects.titleTypewriter}
             sparkles={effects.titleSparkles}
+            options={config.title}
           >
             {profile.title}
           </Title>
-          <Username>{user.username}</Username>
-          <Bio typewriter={effects.bioTypewriter}>{profile.bio}</Bio>
+          <Username whiteText={backgroundDark}>{user.username}</Username>
+          <Bio whiteText={backgroundDark} typewriter={effects.bioTypewriter}>
+            {profile.bio}
+          </Bio>
         </div>
         {config.showTopIcons && (
           <div className="mt-6 flex gap-4">

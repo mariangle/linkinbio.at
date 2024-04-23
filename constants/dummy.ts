@@ -16,11 +16,11 @@ export const dummyBiolink: Biolink = {
   config: {
     darkText: false,
     font: Font.Inter,
-    layout: Layout.Glassmorphism,
+    layout: Layout.Standard,
     showTopIcons: true,
     background: {
-      url: "https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg",
-      color: "#000000",
+      url: "",
+      color: "#242526",
     },
     topIcon: {
       dropShadow: true,
@@ -55,7 +55,7 @@ export const dummyBiolink: Biolink = {
     container: {},
     title: {
       font: "inter",
-      color: "#FFFFFF",
+      color: "#470000",
     },
     effects: {
       weather: WeatherEffect.Thunder,

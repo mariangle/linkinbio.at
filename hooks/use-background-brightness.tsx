@@ -4,11 +4,14 @@ import * as React from "react";
 
 interface ImageBrightnessProps {
   color: string;
-  url: string;
+  threshold?: number; // New parameter for brightness threshold
 }
 
-export function useBackgroundBrightness({ color, url }: ImageBrightnessProps) {
-  const [isDark, setIsDark] = React.useState<boolean>(true);
+export function useBackgroundBrightness({
+  color,
+  threshold = 160, // Default threshold value
+}: ImageBrightnessProps) {
+  const [backgroundDark, setBackgroundDark] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     const isHexColor = (color: string): boolean => {
@@ -28,7 +31,7 @@ export function useBackgroundBrightness({ color, url }: ImageBrightnessProps) {
         const g = parseInt(hex.substring(2, 4), 16);
         const b = parseInt(hex.substring(4, 6), 16);
         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-        return brightness < 128;
+        return brightness < threshold; // Compare brightness with threshold
       } else if (isGradient(value)) {
         // You might implement a more sophisticated approach for gradients
         return true; // Assuming white text for gradients
@@ -38,10 +41,10 @@ export function useBackgroundBrightness({ color, url }: ImageBrightnessProps) {
       }
     };
 
-    setIsDark(determineBrightness(color));
+    setBackgroundDark(determineBrightness(color));
   }, [color]);
 
   return {
-    isDark,
+    backgroundDark,
   };
 }

@@ -12,16 +12,16 @@ export function Title({
   typewriter,
   sparkles,
   className,
+  whiteText,
 }: {
   children: React.ReactNode;
   options?: TitleOptions;
   className?: string;
   typewriter?: boolean;
   sparkles?: boolean;
+  whiteText: boolean;
 }) {
-  const mergedOptions = { ...defaultTitle, ...options };
-
-  const font = fonts.find((item) => item.value === mergedOptions?.font);
+  const font = fonts.find((item) => item.value === options?.font);
 
   if (typewriter) {
     return (
@@ -40,10 +40,11 @@ export function Title({
         <div
           className={cn(
             "text-xl font-semibold",
+            !options.color && whiteText ? "text-white" : "text-black",
             className,
             font?.display ?? "inter",
           )}
-          style={{ color: mergedOptions.color }}
+          style={{ color: options.color ? options.color : undefined }}
         >
           <TypewriterEffect words={children as string} />
         </div>
@@ -68,9 +69,10 @@ export function Title({
         className={cn(
           "relative text-xl font-semibold",
           font?.display ?? "inter",
+          !options.color && whiteText ? "text-white" : "text-black",
           className,
         )}
-        style={{ color: mergedOptions?.color ?? "#FFFFFF" }}
+        style={{ color: options.color ? options.color : undefined }}
       >
         {children}
       </h2>

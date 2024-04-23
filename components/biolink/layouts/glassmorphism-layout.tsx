@@ -30,6 +30,7 @@ export function GlassmorphismLayout({
 
   return (
     <BackgroundContainer
+      color={config.background.color}
       className={cn(
         "relative flex h-full items-center justify-center",
         !preview && "min-h-screen",
@@ -57,13 +58,15 @@ export function GlassmorphismLayout({
         <div className="flex flex-col items-center justify-center">
           <div className="h-12"></div>
           <Title
+            whiteText={true}
             typewriter={effects.titleTypewriter}
             sparkles={effects.titleSparkles}
+            options={config.title}
           >
             {profile.title}
           </Title>
-          <Username>{user.username}</Username>
-          <Bio>{profile.bio}</Bio>
+          <Username whiteText={true}>{user.username}</Username>
+          <Bio whiteText={true}>{profile.bio}</Bio>
         </div>
         <div className="mt-6 w-full space-y-4 rounded-[2.8rem] border border-white/5 bg-white/5 px-4 py-6">
           {links.map((link, index) => (
