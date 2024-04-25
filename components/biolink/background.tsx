@@ -53,7 +53,12 @@ function isValidUrl(url: string) {
 }
 
 function isValidImage(url: string) {
-  return url.includes(".jpg") || url.includes(".png") || url.endsWith(".gif");
+  return (
+    url.includes(".jpg") ||
+    url.includes(".png") ||
+    url.includes(".jpeg") ||
+    url.endsWith(".gif")
+  );
 }
 
 function isValidVideo(url: string) {

@@ -38,7 +38,8 @@ model Configuration {
   id           Int      @id @default(autoincrement())
   userId       Int      @unique
   showTopIcons Boolean  @default(false)
-  darkText     Boolean?
+  blackText    Boolean?
+  hideUsername Boolean?
   font         String?
   layout       Layout?
 
@@ -107,6 +108,7 @@ model Button {
   iconHidden           Boolean
   iconShadow           Boolean
   iconSocialColor      Boolean
+  iconDropShadow       Boolean
 
   user User @relation(fields: [userId], references: [id])
 

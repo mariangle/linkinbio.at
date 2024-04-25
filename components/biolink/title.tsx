@@ -2,24 +2,24 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { fonts } from "@/constants/fonts";
-import { TypewriterEffect } from "@/components/biolink/typewriter-effect";
+import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
 import { TitleOptions } from "@/types";
 import { defaultTitle } from "@/constants/default-options";
 
 export function Title({
-  children,
   options = defaultTitle,
   typewriter,
   sparkles,
   className,
   whiteText,
+  title,
 }: {
-  children: React.ReactNode;
   options?: TitleOptions;
   className?: string;
   typewriter?: boolean;
   sparkles?: boolean;
   whiteText: boolean;
+  title: string;
 }) {
   const font = fonts.find((item) => item.value === options?.font);
 
@@ -46,7 +46,7 @@ export function Title({
           )}
           style={{ color: options.color ? options.color : undefined }}
         >
-          <TypewriterEffect words={children as string} />
+          <TypewriterEffect words={title} />
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ export function Title({
         )}
         style={{ color: options.color ? options.color : undefined }}
       >
-        {children}
+        {title}
       </h2>
     </div>
   );

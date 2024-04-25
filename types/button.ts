@@ -22,5 +22,6 @@ export interface ButtonOptions {
     hidden: boolean;
     shadow: boolean;
     socialIconColor: boolean;
+    dropShadow: boolean;
   };
 }

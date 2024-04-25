@@ -1,5 +1,3 @@
-"use client"; // Using to dertermine brightness of the background color
-
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
 import { Button } from "@/components/biolink/button";
@@ -11,36 +9,30 @@ import {
   BackgroundMedia,
 } from "@/components/biolink/background";
 import { ContentContainer } from "@/components/biolink/content-container";
+import { Details } from "@/components/biolink/details";
 
-import { WeatherEffect } from "@/components/biolink/weather-effect";
-import { useBackgroundBrightness } from "@/hooks/use-background-brightness";
-
-import type { Biolink } from "@/types";
+import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
-import { Layout as LayoutEnum } from "@/types/enums";
+import { determineBrightness } from "@/lib/utils/determine-brightness";
+import { LayoutProps } from ".";
 
-export function SleekLayout({
-  biolink,
+export function WithCoverLayout({
+  user,
+  config,
+  profile,
+  links,
   preview,
-}: {
-  biolink: Biolink;
-  preview?: boolean;
-}) {
-  const { user, config, profile, links } = biolink;
-  const { effects, background } = config;
-  const { backgroundDark } = useBackgroundBrightness({
-    color: config.background.color,
-  });
+}: LayoutProps) {
+  const backgroundDark = determineBrightness(config.background.color);
 
   return (
     <BackgroundContainer
       color={config.background.color}
       className={cn(
-        "relative flex h-full items-start justify-center pt-44",
+        "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
         !preview && "min-h-screen",
       )}
     >
-      <WeatherEffect preview={preview} variant={config.effects.weather} />
       <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">
         <BackgroundMedia
           url={config.background.url}
@@ -50,26 +42,41 @@ export function SleekLayout({
           )}
         />
       </div>
-      <ContentContainer className="relative flex h-full w-full flex-col items-center">
+      <ContentContainer className="relative mb-24 mt-40 flex w-full flex-col items-center">
         <div className="flex flex-col items-center justify-center">
-          <ProfilePicture className="mb-4" />
+          <ProfilePicture className="mb-4" src={profile.image} />
           <Title
             whiteText={backgroundDark}
-            typewriter={effects.titleTypewriter}
-            sparkles={effects.titleSparkles}
+            typewriter={config.effects.titleTypewriter}
+            sparkles={config.effects.titleSparkles}
             options={config.title}
-          >
-            {profile.title}
-          </Title>
-          <Username whiteText={backgroundDark}>{user.username}</Username>
-          <Bio whiteText={backgroundDark} typewriter={effects.bioTypewriter}>
-            {profile.bio}
-          </Bio>
+            title={profile.title ?? `@${user.username}`}
+          />
+          {!config.hideUsername && profile.title && (
+            <Username whiteText={backgroundDark} username={user.username} />
+          )}
+          {profile.bio && (
+            <Bio
+              bio={profile.bio}
+              whiteText={backgroundDark}
+              typewriter={config.effects.bioTypewriter}
+            />
+          )}
+          <Details
+            occupation={profile.occupation}
+            location={profile.location}
+            whiteText={backgroundDark}
+          />
         </div>
         {config.showTopIcons && (
           <div className="mt-6 flex gap-4">
             {links.map((link, index) => (
-              <TopIcon options={config.topIcon} key={index} item={link} />
+              <TopIcon
+                whiteText={backgroundDark}
+                options={config.topIcon}
+                key={index}
+                item={link}
+              />
             ))}
           </div>
         )}
@@ -79,6 +86,7 @@ export function SleekLayout({
           ))}
         </div>
       </ContentContainer>
+      <Footer textDark={!backgroundDark} />
     </BackgroundContainer>
   );
 }

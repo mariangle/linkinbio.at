@@ -16,7 +16,7 @@ interface PrecipitationEffectProps {
 
 export const PrecipitationEffect: React.FC<PrecipitationEffectProps> = ({
   type,
-  color = "#FFFFFF", // Default color is white
+  color = type === "rain" ? "#53789E" : "#FFFFFF", // Default color is white
   speed = type === "rain" ? 4 : 0.5, // Default speed is 7 for rain and 0.5 for snow
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);

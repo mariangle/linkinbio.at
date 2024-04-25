@@ -7,7 +7,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { navLinks } from "@/lib/constants";
+import { navLinks } from "@/constants/nav-links";
 import { NavItem } from "@/components/landing/nav-item";
 import { useScrollThreshold } from "@/hooks/use-scroll-threshold";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
@@ -44,7 +44,7 @@ export function Navbar() {
             >
               <Image
                 src="/logo.svg"
-                alt="webvaerk"
+                alt="logo"
                 width={50}
                 height={50}
                 className="size-5"

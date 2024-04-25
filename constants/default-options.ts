@@ -50,6 +50,7 @@ export const defaultButton: ButtonOptions = {
     hidden: false,
     shadow: false,
     socialIconColor: false,
+    dropShadow: false,
   },
 };
 
@@ -64,6 +65,7 @@ export const defaultBiolink: Config = {
   layout: Layout.Standard,
   font: Font.Inter,
   showTopIcons: true,
+  hideUsername: false,
   darkText: false,
   background: defaultBackground,
   title: defaultTitle,

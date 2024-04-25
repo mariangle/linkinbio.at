@@ -8,5 +8,5 @@ export enum TopIconStyle {
 
 export interface TopIconOptions {
   dropShadow: boolean;
-  style: TopIconStyle;
+  style?: TopIconStyle;
 }

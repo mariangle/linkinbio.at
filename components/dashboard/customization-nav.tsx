@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { biolinkCustomizationLinks } from "@/constants/dashboard";
+import { biolinkCustomizationLinks } from "@/constants/nav-links";
 import { usePathname } from "next/navigation";
 
 export default function CustomizationNav() {

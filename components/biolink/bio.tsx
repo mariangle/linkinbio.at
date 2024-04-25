@@ -1,14 +1,14 @@
 import { cn } from "@/lib/utils";
 
-import { TypewriterEffect } from "@/components/biolink/typewriter-effect";
+import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
 
 export function Bio({
-  children,
+  bio,
   className,
   typewriter,
   whiteText,
 }: {
-  children: React.ReactNode;
+  bio: string;
   className?: string;
   typewriter?: boolean;
   whiteText: boolean;
@@ -19,7 +19,7 @@ export function Bio({
         className={cn("mt-2 text-sm", className)}
         style={{ color: "#FFFFFF" }}
       >
-        <TypewriterEffect words={children as string} />
+        <TypewriterEffect words={bio} />
       </div>
     );
   }
@@ -27,12 +27,12 @@ export function Bio({
   return (
     <p
       className={cn(
-        "mt-2 text-sm",
+        "mt-2 text-base",
         whiteText ? "text-white" : "text-black",
         className,
       )}
     >
-      {children}
+      {bio}
     </p>
   );
 }

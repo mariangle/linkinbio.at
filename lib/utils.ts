@@ -6,7 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getDomain(url: string) {
-  // Remove protocol
   let domain = url.replace(/(^\w+:|^)\/\//, "");
 
   domain = domain.split("/")[0];

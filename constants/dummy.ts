@@ -9,22 +9,26 @@ export const dummyBiolink: Biolink = {
     premium: true,
   },
   profile: {
+    image:
+      "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
     title: "John Doe",
     bio: "I am a developer",
-    image: "https://avatars.dicebear.com/api/avataaars/johndoe.svg",
+    location: "Earth",
+    occupation: "Intelligent Banker",
   },
   config: {
     darkText: false,
     font: Font.Inter,
-    layout: Layout.Standard,
+    layout: Layout.Professional,
     showTopIcons: true,
+    hideUsername: false,
     background: {
-      url: "",
-      color: "#242526",
+      url: "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
+      color: "#dddddd",
     },
     topIcon: {
-      dropShadow: true,
-      style: TopIconStyle.WHITE_BACKGROUND_SOCIAL_COLOR,
+      dropShadow: false,
+      style: TopIconStyle.SOCIAL_ICON_COLOR,
     },
     button: {
       shadow: {
@@ -41,15 +45,16 @@ export const dummyBiolink: Biolink = {
         width: 0,
       },
       background: {
-        color: "#FFFFFF",
-        opacity: 0.1,
+        color: "#000000",
+        opacity: 1,
         blur: 0,
-        socialIconColor: false,
+        socialIconColor: true,
       },
       icon: {
         hidden: false,
         shadow: false,
         socialIconColor: false,
+        dropShadow: false,
       },
     },
     container: {},
@@ -58,8 +63,8 @@ export const dummyBiolink: Biolink = {
       color: "#470000",
     },
     effects: {
-      weather: WeatherEffect.Thunder,
       titleTypewriter: true,
+      weather: WeatherEffect.Thunder,
     },
   },
   settings: {},
@@ -75,6 +80,24 @@ export const dummyBiolink: Biolink = {
       order: 1,
       title: "GitHub",
       url: "https://github.com",
+    },
+    {
+      id: "3",
+      order: 1,
+      title: "Instagram",
+      url: "https://instagram.com",
+    },
+    {
+      id: "3",
+      order: 1,
+      title: "Random Website",
+      url: "https://website.com",
+    },
+    {
+      id: "4",
+      order: 1,
+      title: "Random Website",
+      url: "https://tiktok.com",
     },
   ],
 };

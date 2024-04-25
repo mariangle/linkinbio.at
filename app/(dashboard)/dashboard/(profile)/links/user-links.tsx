@@ -5,33 +5,13 @@ import * as React from "react";
 import { LinkForm } from "./link-form";
 import { LinkItem } from "./link-item";
 
-import type { Link } from "@/lib/types";
+import { dummyBiolink } from "@/constants/dummy";
 
-const dummySocialLinks: Link[] = [
-  {
-    id: "1",
-    order: 1,
-    title: "Facebook",
-    url: "https://www.example.com/dummy1",
-    icon: "FaDummy1Icon", // Placeholder for the icon, replace it with the actual icon name or URL
-  },
-  {
-    id: "2",
-    order: 2,
-    title: "Instagram",
-    url: "https://www.example.com/dummy2",
-    icon: "FaDummy2Icon", // Placeholder for the icon, replace it with the actual icon name or URL
-  },
-];
+import type { Link } from "@/types";
 
 export function UserLinks() {
-  const [userLinks, setUserLinks] = React.useState<Link[]>([]);
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    setUserLinks(dummySocialLinks);
-    setLoading(false);
-  }, []);
+  const [userLinks, setUserLinks] = React.useState<Link[]>(dummyBiolink.links);
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <div>

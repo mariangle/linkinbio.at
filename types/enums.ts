@@ -1,8 +1,8 @@
 export enum Layout {
   Standard = "standard",
-  Clean = "clean",
+  Professional = "professional",
   Glassmorphism = "glassmorphism", // Feds Profile Inspo
-  Sleek = "sleek", // Seemless Profile Inspo
+  WithCover = "with-cover", // Seemless Profile Inspo
 }
 
 export enum Font {

@@ -12,6 +12,7 @@ export interface Config {
   layout: Layout;
   font: Font;
   showTopIcons: boolean;
+  hideUsername: boolean;
   darkText: boolean;
   background: BackgroundOptions;
   button: ButtonOptions;

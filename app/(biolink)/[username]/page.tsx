@@ -1,6 +1,6 @@
-import { Layout } from "@/components/biolink/layouts";
+import { Layout } from "@/components/biolink/layout";
 import { dummyBiolink } from "@/constants/dummy";
-import { constructMetadata } from "@/actions/construct-metadata";
+import { constructMetadata } from "@/lib/utils/construct-metadata";
 
 import type { Biolink } from "@/types";
 
@@ -15,8 +15,8 @@ export async function generateMetadata({
 
   return await constructMetadata({
     title: `${biolink.profile.title} (@${biolink.user.username})  \u00b7 bio.link`,
-    image: biolink.profile.image,
-    description: biolink.profile.bio,
+    image: biolink.profile.image ?? "",
+    description: biolink.profile.bio ?? "bio.link",
   });
 }
 

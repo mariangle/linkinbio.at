@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import { User, ChevronLeft } from "lucide-react";
-import { dashboardLinks, profileLinks } from "@/constants/dashboard";
+import { dashboardLinks, profileLinks } from "@/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 
 export function Navbar() {

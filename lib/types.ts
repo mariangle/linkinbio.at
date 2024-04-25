@@ -1,8 +1,9 @@
 import { IconType } from "react-icons/lib";
 
-export interface SocialLink {
+export interface Social {
   icon: IconType;
-  label: string;
+  name: string;
   url: string;
   color: string;
+  gradientColors?: string[];
 }

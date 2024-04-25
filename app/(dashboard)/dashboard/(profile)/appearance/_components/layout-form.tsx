@@ -31,7 +31,7 @@ export function LayoutForm() {
               >
                 <div className="text-xl font-semibold">{item}</div>
                 <div className="my-4">
-                  <PhoneMockup biolink={dummyBiolink} layout={item} />
+                  <PhoneMockup biolink={dummyBiolink} />
                 </div>
                 <Button onClick={() => setLayout(item)}>Select</Button>
               </div>

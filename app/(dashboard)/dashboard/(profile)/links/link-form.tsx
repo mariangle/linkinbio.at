@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-import { socialLinks } from "@/constants/social-links";
+import { socials } from "@/constants/social-links";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -63,14 +63,14 @@ export function LinkForm() {
           </Label>
           <div className="mt-4 flex gap-4">
             {search
-              ? socialLinks
+              ? socials
                   .filter((item) =>
-                    item.label.toLowerCase().includes(search.toLowerCase()),
+                    item.name.toLowerCase().includes(search.toLowerCase()),
                   )
                   .map((item, index) => (
                     <LinkSuggestion key={index} item={item} />
                   ))
-              : socialLinks
+              : socials
                   .slice(0, 5)
                   .map((item, index) => (
                     <LinkSuggestion key={index} item={item} />

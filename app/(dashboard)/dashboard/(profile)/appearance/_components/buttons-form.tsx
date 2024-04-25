@@ -40,6 +40,7 @@ export function ButtonsForm() {
       hidden: false,
       shadow: false,
       socialIconColor: false,
+      dropShadow: false,
     },
   });
 
@@ -64,9 +65,9 @@ export function ButtonsForm() {
       <div className="mt-4">
         <div className="flex flex-col gap-4">
           <div className="space-y-4 rounded-lg border p-4">
-            <div className="text-sm font-semibold">Text</div>
+            <div className="text-sm font-semibold">Content</div>
             <div className="space-y-2 self-end">
-              <Label>Text</Label>
+              <Label>Color</Label>
               <ColorPicker
                 color={buttonConfig.text.color}
                 setColor={(textColor) =>
@@ -321,6 +322,21 @@ export function ButtonsForm() {
                 }
               />
             </div>
+          </div>
+          <div className="mt-4 flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
+            <div className="text-sm font-semibold">Shadow</div>
+            <Switch
+              checked={buttonConfig.icon.dropShadow}
+              onCheckedChange={() =>
+                setButtonConfig({
+                  ...buttonConfig,
+                  icon: {
+                    ...buttonConfig.icon,
+                    dropShadow: !buttonConfig.icon.dropShadow,
+                  },
+                })
+              }
+            />
           </div>
         </div>
       </div>

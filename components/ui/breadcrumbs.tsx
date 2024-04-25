@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { routes } from "@/constants/dashboard";
+import { routes } from "@/constants/nav-links";
 
 export function Breadcrumbs({
   items,

@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 
 import { Label } from "@/components/ui/label";
@@ -11,7 +12,6 @@ import {
   BackgroundContainer,
   BackgroundMedia,
 } from "@/components/biolink/background";
-import { ContainerOptions } from "@/components/biolink/container";
 
 export function BackgroundForm() {
   const [backgroundUrl, setBackgroundUrl] = React.useState(
@@ -21,14 +21,6 @@ export function BackgroundForm() {
     React.useState<BackgroundOptions>({
       color: dummyBiolink.config.background.color ?? "#FFFFFF",
       url: "",
-    });
-
-  const [containerOptions, setContainerOptions] =
-    React.useState<ContainerOptions>({
-      blur: 0.5,
-      radius: 0,
-      opacity: 1,
-      color: "#000000",
     });
 
   return (

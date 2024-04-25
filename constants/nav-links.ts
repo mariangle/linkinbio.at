@@ -6,7 +6,23 @@ import {
   GitBranch,
   Sparkles,
   Newspaper,
+  SquarePen,
 } from "lucide-react";
+
+export const navLinks = [
+  {
+    label: "Features",
+    path: "/features",
+  },
+  {
+    label: "Templates",
+    path: "/templates",
+  },
+  {
+    label: "Pricing",
+    path: "/pricing",
+  },
+];
 
 export const dashboardLinks = [
   {
@@ -38,9 +54,9 @@ export const profileLinks = [
     icon: Palette,
   },
   {
-    name: "Feed",
-    href: "/dashboard/feed",
-    icon: Newspaper,
+    name: "Posts",
+    href: "/dashboard/posts",
+    icon: SquarePen,
   },
 ];
 

@@ -1,5 +1,3 @@
-"use client"; // Using to dertermine brightness of the background color
-
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
 import { Button } from "@/components/biolink/button";
@@ -11,55 +9,49 @@ import {
   BackgroundMedia,
 } from "@/components/biolink/background";
 import { ContentContainer } from "@/components/biolink/content-container";
-
-import { WeatherEffect } from "@/components/biolink/weather-effect";
-import { useBackgroundBrightness } from "@/hooks/use-background-brightness";
-
-import type { Biolink } from "@/types";
+import { Details } from "@/components/biolink/details";
+import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
-import { Layout as LayoutEnum } from "@/types/enums";
+import { determineBrightness } from "@/lib/utils/determine-brightness";
+import { LayoutProps } from ".";
 
-export function CleanLayout({
-  biolink,
+export function ProfessionalLayout({
+  user,
+  config,
+  profile,
+  links,
   preview,
-}: {
-  biolink: Biolink;
-  preview?: boolean;
-}) {
-  const { user, config, profile, links } = biolink;
-  const { effects, background } = config;
-  const { backgroundDark } = useBackgroundBrightness({
-    color: config.background.color,
-  });
+}: LayoutProps) {
+  const backgroundDark = determineBrightness(config.background.color);
 
   return (
     <BackgroundContainer
       color={config.background.color}
       className={cn(
-        "relative flex h-full items-start justify-center pt-44",
+        "relative flex h-full flex-col items-center justify-between overflow-y-auto p-4",
         !preview && "min-h-screen",
       )}
     >
-      <WeatherEffect preview={preview} variant={config.effects.weather} />
       <BackgroundMedia
         url={config.background.url}
         className={cn(
           "absolute inset-x-0 top-0 mx-auto h-60 max-w-screen-lg overflow-hidden md:rounded-b-2xl",
-          preview && "rounded-b-none sm:rounded-b-none",
+          preview && "rounded-b-none md:rounded-b-none",
         )}
       />
-      <ContentContainer className="relative flex h-full w-full flex-col items-center">
+      <ContentContainer className="relative mb-24 mt-40 flex w-full flex-col items-center">
         <div className="flex w-full flex-col items-start justify-center">
           <div className="flex w-full items-end justify-between">
-            <ProfilePicture className="mb-4" />
+            <ProfilePicture className="mb-4" src={profile.image} />
             {config.showTopIcons && (
-              <div className="flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2 backdrop-blur-xl">
+              <div className="flex gap-4">
                 {links.map((link, index) => (
                   <TopIcon
                     options={config.topIcon}
                     key={index}
                     item={link}
                     size="sm"
+                    whiteText={backgroundDark}
                   />
                 ))}
               </div>
@@ -67,16 +59,26 @@ export function CleanLayout({
           </div>
           <Title
             whiteText={backgroundDark}
-            typewriter={effects.titleTypewriter}
-            sparkles={effects.titleSparkles}
+            typewriter={config.effects.titleTypewriter}
+            sparkles={config.effects.titleSparkles}
             options={config.title}
-          >
-            {profile.title}
-          </Title>
-          <Username whiteText={backgroundDark}>{user.username}</Username>
-          <Bio whiteText={backgroundDark} typewriter={effects.bioTypewriter}>
-            {profile.bio}
-          </Bio>
+            title={profile.title ?? `@${user.username}`}
+          />
+          {!config.hideUsername && profile.title && (
+            <Username whiteText={backgroundDark} username={user.username} />
+          )}
+          {profile.bio && (
+            <Bio
+              bio={profile.bio}
+              whiteText={backgroundDark}
+              typewriter={config.effects.bioTypewriter}
+            />
+          )}
+          <Details
+            occupation={profile.occupation}
+            location={profile.location}
+            whiteText={backgroundDark}
+          />
         </div>
         <div className="mt-8 w-full space-y-4">
           {links.map((link, index) => (
@@ -84,6 +86,7 @@ export function CleanLayout({
           ))}
         </div>
       </ContentContainer>
+      <Footer textDark={!backgroundDark} />
     </BackgroundContainer>
   );
 }

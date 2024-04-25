@@ -2,10 +2,8 @@
 
 import * as React from "react";
 
+import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Title } from "@/components/biolink/title";
-import { Bio } from "@/components/biolink/bio";
-import { Username } from "@/components/biolink/username";
 import { ColorPicker } from "@/components/ui/color-picker";
 import {
   Select,
@@ -23,13 +21,10 @@ export function TitleForm() {
     color: "#FFFFFF",
   });
 
+  const [darkTextOption, setDarkTextOption] = React.useState<boolean>(false);
+
   return (
     <div className="rounded-lg bg-secondary p-4">
-      <div className="relative flex flex-col items-center justify-center rounded-lg border p-4">
-        <Title options={titleOptions}>Maria</Title>
-        <Username>johndoe</Username>
-        <Bio>Lorem ipsum dolor sit amet.</Bio>
-      </div>
       <div className="w-full">
         <div className="mt-3 font-semibold">Title</div>
         <div className="mt-2 flex items-center gap-4">
@@ -74,6 +69,23 @@ export function TitleForm() {
                 </SelectContent>
               </Select>
             </div>
+          </div>
+        </div>
+        <div className="mt-4">
+          <div className="font-semibold">Text</div>
+          <div className="mt-2 flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-1">
+              <div className="text-sm font-semibold">Enable Black Text</div>
+              <div className="text-xs text-muted-foreground">
+                Turn off automatic text color adjustment based on background.
+                Enable to switch to black text, particularly useful for images
+                as backgrounds.
+              </div>
+            </div>
+            <Switch
+              checked={darkTextOption}
+              onCheckedChange={() => setDarkTextOption(!darkTextOption)}
+            />
           </div>
         </div>
       </div>

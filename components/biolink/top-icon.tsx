@@ -1,6 +1,6 @@
 import React from "react";
 import type { Link as LinkType, TopIconOptions } from "@/types";
-import { socialLinks } from "@/constants/social-links";
+import { socials } from "@/constants/social-links";
 import { getDomain, cn } from "@/lib/utils";
 import { TopIconStyle } from "@/types";
 import Link from "next/link";
@@ -10,32 +10,41 @@ export function TopIcon({
   options,
   className,
   size,
+  whiteText = true,
 }: {
   item: Pick<LinkType, "title" | "url">;
   options: TopIconOptions;
   className?: string;
   size?: "sm" | "md" | "lg";
+  whiteText?: boolean;
 }) {
-  const socialLink = socialLinks.find((link) =>
+  const socialLink = socials.find((link) =>
     item.url.includes(getDomain(link.url)),
   );
 
   const blackColor = "#000000";
   const whiteColor = "#FFFFFF";
-  const defaultColor = true ? whiteColor : blackColor;
+  const defaultColor = whiteText ? whiteColor : blackColor;
 
   if (!socialLink) return null;
 
   if (options.style === TopIconStyle.SOCIAL_BACKGROUND) {
     return (
-      <TopIconLink item={item}>
+      <TopIconLink
+        social={{
+          name: socialLink.name,
+          url: item.url,
+        }}
+      >
         <socialLink.icon
           style={{
             filter: options.dropShadow
               ? `drop-shadow(0 0 0.35rem ${socialLink.color})`
               : undefined,
             color: whiteColor,
-            backgroundColor: socialLink.color,
+            background: socialLink.gradientColors
+              ? `linear-gradient(to right, ${socialLink.gradientColors.join(", ")})`
+              : socialLink.color,
           }}
           className={cn("size-8 rounded-full p-2", className)}
         />
@@ -45,7 +54,12 @@ export function TopIcon({
 
   if (options.style === TopIconStyle.BLACK_BACKGROUND) {
     return (
-      <TopIconLink item={item}>
+      <TopIconLink
+        social={{
+          name: socialLink.name,
+          url: item.url,
+        }}
+      >
         <socialLink.icon
           style={{
             filter: options.dropShadow
@@ -62,7 +76,12 @@ export function TopIcon({
 
   if (options.style === TopIconStyle.WHITE_BACKGROUND) {
     return (
-      <TopIconLink item={item}>
+      <TopIconLink
+        social={{
+          name: socialLink.name,
+          url: item.url,
+        }}
+      >
         <socialLink.icon
           style={{
             filter: options.dropShadow
@@ -79,13 +98,20 @@ export function TopIcon({
 
   if (options.style === TopIconStyle.WHITE_BACKGROUND_SOCIAL_COLOR) {
     return (
-      <TopIconLink item={item}>
+      <TopIconLink
+        social={{
+          name: socialLink.name,
+          url: item.url,
+        }}
+      >
         <socialLink.icon
           style={{
             filter: options.dropShadow
               ? `drop-shadow(0 0 0.35rem ${whiteColor})`
               : undefined,
-            color: socialLink.color,
+            color: socialLink.gradientColors
+              ? `linear-gradient(to right, ${socialLink.gradientColors.join(", ")})`
+              : socialLink.color,
             backgroundColor: whiteColor,
           }}
           className={cn(
@@ -100,7 +126,12 @@ export function TopIcon({
 
   if (options.style === TopIconStyle.SOCIAL_ICON_COLOR) {
     return (
-      <TopIconLink item={item}>
+      <TopIconLink
+        social={{
+          name: socialLink.name,
+          url: item.url,
+        }}
+      >
         <socialLink.icon
           style={{
             filter: options.dropShadow
@@ -115,7 +146,12 @@ export function TopIcon({
   }
 
   return (
-    <TopIconLink item={item}>
+    <TopIconLink
+      social={{
+        name: socialLink.name,
+        url: item.url,
+      }}
+    >
       <socialLink.icon
         style={{
           filter: options.dropShadow
@@ -126,7 +162,7 @@ export function TopIcon({
         className={cn(
           "size-6 rounded-full",
           className,
-          size === "sm" && "size-4",
+          size === "sm" && "size-5",
         )}
       />
     </TopIconLink>
@@ -135,14 +171,25 @@ export function TopIcon({
 
 export function TopIconLink({
   children,
-  item,
+  social,
 }: {
   children: React.ReactNode;
-  item: Pick<LinkType, "title" | "url">;
+  social: {
+    url: string;
+    name: string;
+  };
 }) {
   return (
-    <Link target="_blank" rel="noopener noreferrer" href={item.url}>
+    <Link
+      target="_blank"
+      rel="noopener noreferrer"
+      href={social.url}
+      className="group relative block"
+    >
       {children}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-full bg-neutral-950/50 px-2.5 py-1.5 opacity-0 backdrop-blur-2xl duration-200 group-hover:-translate-y-1/2 group-hover:opacity-100">
+        {social.name}
+      </div>
     </Link>
   );
 }
