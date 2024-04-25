@@ -14,14 +14,31 @@ import {
 } from "@/components/ui/select";
 import { TitleOptions } from "@/types";
 import { fonts } from "@/constants/fonts";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function TitleForm() {
+  const { biolink, updateBiolink } = useBiolinkPreview();
   const [titleOptions, setTitleOptions] = React.useState<TitleOptions>({
     font: "inter",
     color: "#FFFFFF",
   });
 
   const [darkTextOption, setDarkTextOption] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (!biolink) return;
+
+    updateBiolink({
+      ...biolink,
+      config: {
+        ...biolink.config,
+        darkText: darkTextOption,
+        title: titleOptions,
+      },
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [titleOptions, darkTextOption]);
 
   return (
     <div className="rounded-lg bg-secondary p-4">

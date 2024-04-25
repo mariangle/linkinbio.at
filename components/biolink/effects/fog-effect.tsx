@@ -100,7 +100,7 @@ export const FogEffect: React.FC = () => {
         id="canvas"
         className="pointer-events-none relative h-[200px] w-full"
       ></div>
-      <div id="cont">Fog Effect</div>
+      <div id="cont"></div>
     </div>
   );
 };

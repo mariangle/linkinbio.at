@@ -54,7 +54,7 @@ export function Title({
 
   return (
     <div className="relative">
-      {true && (
+      {sparkles && (
         <Image
           src="/sparkle.gif"
           alt="logo"

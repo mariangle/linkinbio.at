@@ -64,7 +64,7 @@ export const topIcon: TopIconOptions = {
 export const defaultBiolink: Config = {
   layout: Layout.Standard,
   font: Font.Inter,
-  showTopIcons: true,
+  showTopIcons: false,
   hideUsername: false,
   darkText: false,
   background: defaultBackground,
@@ -72,5 +72,4 @@ export const defaultBiolink: Config = {
   button: defaultButton,
   effects: defaultVisuals,
   topIcon: topIcon,
-  container: {},
 };

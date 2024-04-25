@@ -12,13 +12,30 @@ import {
 } from "@/components/ui/select";
 import { TopIconOptions, TopIconStyle } from "@/types";
 import { topIconStyles } from "@/constants/icons";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function IconForm() {
+  const { biolink, updateBiolink } = useBiolinkPreview();
   const [showTopIcons, setShowTopIcons] = React.useState<boolean>(true);
   const [topIconOptions, setTopIconOptions] = React.useState<TopIconOptions>({
     dropShadow: false,
     style: TopIconStyle.SOCIAL_BACKGROUND,
   });
+
+  React.useEffect(() => {
+    if (!biolink) return;
+
+    updateBiolink({
+      ...biolink,
+      config: {
+        ...biolink.config,
+        showTopIcons: showTopIcons,
+        topIcon: topIconOptions,
+      },
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topIconOptions, showTopIcons]);
 
   return (
     <div className="rounded-lg bg-secondary p-4">

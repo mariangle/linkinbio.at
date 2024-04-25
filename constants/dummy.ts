@@ -19,16 +19,16 @@ export const dummyBiolink: Biolink = {
   config: {
     darkText: false,
     font: Font.Inter,
-    layout: Layout.Professional,
-    showTopIcons: true,
+    layout: Layout.Standard,
+    showTopIcons: false,
     hideUsername: false,
     background: {
       url: "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
       color: "#dddddd",
     },
     topIcon: {
-      dropShadow: false,
-      style: TopIconStyle.SOCIAL_ICON_COLOR,
+      dropShadow: true,
+      style: TopIconStyle.SOCIAL_BACKGROUND,
     },
     button: {
       shadow: {
@@ -41,14 +41,14 @@ export const dummyBiolink: Biolink = {
       },
       border: {
         color: "#000000",
-        radius: 24,
+        radius: 5,
         width: 0,
       },
       background: {
         color: "#000000",
-        opacity: 1,
-        blur: 0,
-        socialIconColor: true,
+        opacity: 0.8,
+        blur: 25,
+        socialIconColor: false,
       },
       icon: {
         hidden: false,
@@ -57,13 +57,14 @@ export const dummyBiolink: Biolink = {
         dropShadow: false,
       },
     },
-    container: {},
     title: {
       font: "inter",
       color: "#470000",
     },
     effects: {
-      titleTypewriter: true,
+      titleTypewriter: false,
+      bioTypewriter: false,
+      titleSparkles: false,
       weather: WeatherEffect.Thunder,
     },
   },
@@ -86,18 +87,6 @@ export const dummyBiolink: Biolink = {
       order: 1,
       title: "Instagram",
       url: "https://instagram.com",
-    },
-    {
-      id: "3",
-      order: 1,
-      title: "Random Website",
-      url: "https://website.com",
-    },
-    {
-      id: "4",
-      order: 1,
-      title: "Random Website",
-      url: "https://tiktok.com",
     },
   ],
 };

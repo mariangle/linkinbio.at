@@ -4,8 +4,10 @@ import * as React from "react";
 
 import { Switch } from "@/components/ui/switch";
 import { EffectsOptions } from "@/types";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function EffectsForm() {
+  const { biolink, updateBiolink } = useBiolinkPreview();
   const [visualsOptions, setVisualOptions] = React.useState<
     Pick<EffectsOptions, "bioTypewriter" | "titleTypewriter" | "titleSparkles">
   >({
@@ -13,6 +15,19 @@ export function EffectsForm() {
     titleTypewriter: false,
     bioTypewriter: false,
   });
+
+  React.useEffect(() => {
+    if (!biolink) return;
+
+    updateBiolink({
+      ...biolink,
+      config: {
+        ...biolink.config,
+        effects: visualsOptions,
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visualsOptions]);
 
   return (
     <div className="rounded-lg bg-secondary p-4">

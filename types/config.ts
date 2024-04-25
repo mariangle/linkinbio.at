@@ -1,12 +1,12 @@
 import type {
   BackgroundOptions,
   ButtonOptions,
-  ContainerOptions,
   TitleOptions,
   EffectsOptions,
   TopIconOptions,
+  Layout,
+  Font,
 } from ".";
-import type { Layout, Font } from "@/types/enums";
 
 export interface Config {
   layout: Layout;
@@ -16,7 +16,6 @@ export interface Config {
   darkText: boolean;
   background: BackgroundOptions;
   button: ButtonOptions;
-  container: ContainerOptions;
   topIcon: TopIconOptions;
   title: TitleOptions;
   effects: EffectsOptions;

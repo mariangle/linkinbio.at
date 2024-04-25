@@ -30,7 +30,7 @@ export function WithCoverLayout({
       color={config.background.color}
       className={cn(
         "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
-        !preview && "min-h-screen",
+        preview && "relative h-full",
       )}
     >
       <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">

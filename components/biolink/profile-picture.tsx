@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { isValidImage } from "@/lib/utils/media-validation";
 
 export function ProfilePicture({
   src,
@@ -8,7 +9,7 @@ export function ProfilePicture({
   src?: string;
   className?: string;
 }) {
-  if (!src) {
+  if (!src || !isValidImage(src)) {
     return <div className={cn("size-24 rounded-full", className)} />;
   }
   return (

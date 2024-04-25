@@ -16,8 +16,11 @@ export function Bio({
   if (typewriter) {
     return (
       <div
-        className={cn("mt-2 text-sm", className)}
-        style={{ color: "#FFFFFF" }}
+        className={cn(
+          "mt-2 text-sm",
+          whiteText ? "text-white" : "text-black",
+          className,
+        )}
       >
         <TypewriterEffect words={bio} />
       </div>

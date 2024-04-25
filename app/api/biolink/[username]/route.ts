@@ -3,7 +3,7 @@ import { dummyBiolink } from "@/constants/dummy";
 
 import type { Biolink, Profile, User, Config, Settings, Link } from "@/types";
 
-export const GET = async (req: Request): Promise<NextResponse<Biolink>> => {
+export async function GET(req: Request): Promise<NextResponse<Biolink>> {
   const biolink = constructBiolink({
     user: dummyBiolink.user,
     profile: dummyBiolink.profile,
@@ -13,7 +13,7 @@ export const GET = async (req: Request): Promise<NextResponse<Biolink>> => {
   });
 
   return NextResponse.json(biolink, { status: 200 });
-};
+}
 
 const constructBiolink = ({
   user,

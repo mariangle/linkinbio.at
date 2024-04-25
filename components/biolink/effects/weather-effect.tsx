@@ -27,7 +27,7 @@ export function WeatherEffect({
       );
     case WeatherEffectType.Rain:
       return (
-        <div className="absolute inset-0 z-10">
+        <div className={cn("absolute inset-0 z-10")}>
           <PrecipitationEffect type="rain" />
         </div>
       );

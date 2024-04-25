@@ -9,12 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AnimationType } from "@/types";
-import { animationsTypes } from "@/constants/animations";
+import { AnimationVariant } from "@/types";
+import { animations } from "@/constants/animations";
 
 export function AnimationForm() {
-  const [animationType, setAnimationType] = React.useState<AnimationType>(
-    AnimationType.FadeIn,
+  const [animationType, setAnimationType] = React.useState<AnimationVariant>(
+    AnimationVariant.FadeIn,
   );
 
   return (
@@ -25,16 +25,16 @@ export function AnimationForm() {
           <Select
             defaultValue={animationType}
             onValueChange={(animation) =>
-              setAnimationType(animation as AnimationType)
+              setAnimationType(animation as AnimationVariant)
             }
           >
             <SelectTrigger>
               <SelectValue placeholder="Weather Effect" />
             </SelectTrigger>
             <SelectContent>
-              {animationsTypes.map((value, index) => (
-                <SelectItem key={index} value={value}>
-                  {value}
+              {animations.map((item, index) => (
+                <SelectItem key={index} value={item.value}>
+                  {item.label}
                 </SelectItem>
               ))}
               <SelectItem value="none">None</SelectItem>

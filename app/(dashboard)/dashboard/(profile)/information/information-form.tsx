@@ -2,20 +2,17 @@
 
 import * as React from "react";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
 import { Profile } from "@/types";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { isValidImage } from "@/lib/utils/media-validation";
 
 export function InformationForm() {
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState("");
-  const [success, setSuccess] = React.useState("");
-
+  const { biolink, updateBiolink } = useBiolinkPreview();
+  const [isImageValid, setIsImageValid] = React.useState(true);
   const [profile, setProfile] = React.useState<Profile>({
     title: "",
     bio: "",
@@ -23,6 +20,16 @@ export function InformationForm() {
     occupation: "",
     location: "",
   });
+
+  React.useEffect(() => {
+    if (!biolink) return;
+
+    updateBiolink({
+      ...biolink,
+      profile,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile]);
 
   return (
     <div>
@@ -32,23 +39,75 @@ export function InformationForm() {
       <div className="my-4 space-y-4">
         <div className="space-y-2">
           <Label>Profile Title</Label>
-          <Input placeholder="Your title" />
+          <Input
+            placeholder="Your title"
+            value={profile.title}
+            onChange={(e) => {
+              setProfile({
+                ...profile,
+                title: e.target.value,
+              });
+            }}
+          />
         </div>
         <div className="space-y-2">
           <Label>Profile Image URL</Label>
-          <Input placeholder="Your title" />
+          <Input
+            placeholder="Profile Image URL"
+            value={profile.image}
+            onChange={(e) => {
+              setProfile({
+                ...profile,
+                image: e.target.value,
+              });
+              setIsImageValid(isValidImage(e.target.value));
+            }}
+          />
+          {!isImageValid && (
+            <div className="text-xs text-destructive">
+              Please enter a valid image URL (PNG, JPG, JPEG)
+            </div>
+          )}
         </div>
         <div className="space-y-2">
           <Label>Biography</Label>
-          <Textarea placeholder="shadcn" rows={3} />
+          <Textarea
+            placeholder="shadcn"
+            rows={3}
+            value={profile.bio}
+            onChange={(e) => {
+              setProfile({
+                ...profile,
+                bio: e.target.value,
+              });
+            }}
+          />
         </div>
         <div className="space-y-2">
           <Label>Occupation</Label>
-          <Input placeholder="Your occupation" />
+          <Input
+            placeholder="Occupation"
+            value={profile.occupation}
+            onChange={(e) => {
+              setProfile({
+                ...profile,
+                occupation: e.target.value,
+              });
+            }}
+          />
         </div>
         <div className="space-y-2">
           <Label>Location</Label>
-          <Input placeholder="Your location" />
+          <Input
+            placeholder="Occupation"
+            value={profile.location}
+            onChange={(e) => {
+              setProfile({
+                ...profile,
+                location: e.target.value,
+              });
+            }}
+          />
         </div>
       </div>
     </div>

@@ -167,26 +167,6 @@
     transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg);
   }
 
-  @media screen and (min-width: 1024px) {
-    .iphone-x {
-      width: 468px;
-      height: 1012.8px;
-    }
-  }
-
-  .iphone-x .reflection {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-image: black;
-    opacity: 0.5;
-    transform-origin: bottom;
-    border-radius: 40px;
-  }
   .iphone-x:before,
   .iphone-x:after {
     content: "";

@@ -1,10 +1,11 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { isValidImage, isValidVideo } from "@/lib/utils/media-validation";
 import { BackgroundVideo } from "@/components/biolink/background-video";
 
 export function BackgroundContainer({
-  color = "#384bb4",
+  color = "#000000",
   children,
   className,
 }: {
@@ -48,19 +49,6 @@ export function BackgroundMedia({
   return null;
 }
 
-function isValidUrl(url: string) {
+export function isValidUrl(url: string) {
   return url.startsWith("https://");
-}
-
-function isValidImage(url: string) {
-  return (
-    url.includes(".jpg") ||
-    url.includes(".png") ||
-    url.includes(".jpeg") ||
-    url.endsWith(".gif")
-  );
-}
-
-function isValidVideo(url: string) {
-  return url.endsWith(".mp4");
 }

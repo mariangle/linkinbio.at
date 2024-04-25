@@ -32,15 +32,14 @@ export function StandardLayout({
       color={config.background.color}
       className={cn(
         "fixed inset-0 flex h-screen flex-col items-center justify-between overflow-y-auto p-4",
-        preview && "py-12",
-        !preview && "min-h-screen",
+        preview && "relative h-full",
       )}
     >
       <BackgroundMedia
         url={config.background.url}
         className={cn("fixed inset-0", preview && "absolute")}
       />
-      <ContentContainer className="relative flex h-fit w-full flex-col items-center py-32">
+      <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-center py-32">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={profile.image} />
           <Title

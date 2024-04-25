@@ -27,7 +27,7 @@ export function GlassmorphismLayout({
       color={config.background.color}
       className={cn(
         "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
-        !preview && "min-h-screen",
+        preview && "relative h-full",
       )}
     >
       <BackgroundMedia

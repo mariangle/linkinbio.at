@@ -6,16 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/ui/color-picker";
 import { Switch } from "@/components/ui/switch";
-
-import { Button } from "@/components/biolink/button";
 import type { ButtonOptions } from "@/types";
-import {
-  BackgroundMedia,
-  BackgroundContainer,
-} from "@/components/biolink/background";
-import { dummyBiolink } from "@/constants/dummy";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function ButtonsForm() {
+  const { biolink, updateBiolink } = useBiolinkPreview();
   const [buttonConfig, setButtonConfig] = React.useState<ButtonOptions>({
     shadow: {
       solid: false,
@@ -44,24 +39,22 @@ export function ButtonsForm() {
     },
   });
 
+  React.useEffect(() => {
+    if (!biolink) return;
+
+    updateBiolink({
+      ...biolink,
+      config: {
+        ...biolink.config,
+        button: buttonConfig,
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [buttonConfig]);
+
   return (
     <div className="rounded-lg bg-secondary p-4">
       <h2 className="mb-2 font-semibold">Buttons</h2>
-      <BackgroundContainer className="relative h-32  overflow-hidden rounded-xl">
-        <BackgroundMedia
-          url={dummyBiolink.config.background.url}
-          className="absolute"
-        />
-        <div className="relative mx-auto flex h-full max-w-md items-center justify-center p-4">
-          <Button
-            item={{
-              title: "Facebook",
-              url: "https://facebook.com",
-            }}
-            config={buttonConfig}
-          />
-        </div>
-      </BackgroundContainer>
       <div className="mt-4">
         <div className="flex flex-col gap-4">
           <div className="space-y-4 rounded-lg border p-4">
@@ -102,7 +95,7 @@ export function ButtonsForm() {
               <div className="mb-4 text-sm font-semibold">Background</div>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label>Border</Label>
+                  <Label>Color</Label>
                   <ColorPicker
                     color={buttonConfig.background.color}
                     setColor={(backgroundColor) =>
