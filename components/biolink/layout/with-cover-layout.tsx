@@ -23,8 +23,9 @@ export function WithCoverLayout({
   links,
   preview,
 }: LayoutProps) {
-  const backgroundDark = determineBrightness(config.background.color);
-
+  const backgroundDark = config.invertTextColor
+    ? !determineBrightness(config.background.color)
+    : determineBrightness(config.background.color);
   return (
     <BackgroundContainer
       color={config.background.color}

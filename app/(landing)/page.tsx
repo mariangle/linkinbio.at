@@ -4,7 +4,8 @@ import { InfiniteMovingHighlights } from "@/components/landing/infinite-moving-h
 import { Container } from "@/components/ui/container";
 import { ClaimLink } from "@/components/landing/claim-link";
 import { dummyBiolink } from "@/constants/dummy";
-import { PhoneMockup } from "@/components/ui/phone-mockup";
+import { PhoneMockup } from "@/components/phone-mockup";
+
 export default function Page() {
   return (
     <div className="relative">
@@ -19,29 +20,20 @@ export default function Page() {
       >
         <div className="relative flex flex-1 flex-col items-start justify-start gap-4 md:justify-center">
           <div className="max-w-4xl pb-4 text-5xl font-semibold text-gray-200 md:text-6xl lg:text-7xl">
-            The most{" "}
+            Lorem, ipsum.{" "}
             <span className="animate-gradient bg-gradient-to-r from-indigo-500 via-indigo-400 via-40% to-indigo-500 to-50% bg-clip-text text-transparent">
               advanced
             </span>{" "}
-            link-in-bio. Ever.
+            Lorem ipsum dolor sit amet.s
           </div>
           <div className="max-w-3xl text-base text-gray-300 sm:text-lg lg:text-left">
-            Streamline your social media accounts with one powerful link. Highly
-            customizable and easy-to-use link-in-bio tool.
+            Lorem ipsum dolor sit amet.
           </div>
           <ClaimLink />
-          <InfiniteMovingHighlights speed="fast">
-            <div className="flex items-center gap-4 text-white">
-              <div className="whitespace-nowrap">Spotify Integration</div>
-              <div className="whitespace-nowrap">Discord Presence</div>
-              <div className="whitespace-nowrap">Background Music</div>
-              <div className="whitespace-nowrap">Animations</div>
-              <div className="whitespace-nowrap">Special Effects</div>
-            </div>
-          </InfiniteMovingHighlights>
+          <InfiniteMovingHighlights speed="fast" />
         </div>
-        <div className="flex flex-1 items-center justify-center md:justify-start">
-          <PhoneMockup hero biolink={dummyBiolink} />
+        <div className="flex flex-1 items-center justify-center md:justify-center">
+          <PhoneMockup hero biolink={dummyBiolink} scale={false} />
         </div>
       </Container>
     </div>

@@ -14,6 +14,9 @@ import {
   FaSpotify,
   FaSoundcloud,
   FaDribbble,
+  FaTumblr,
+  FaSkype,
+  FaQuora,
 } from "react-icons/fa";
 import { BsFillThreadsFill } from "react-icons/bs";
 import { Social } from "@/lib/types";
@@ -111,9 +114,21 @@ export const socials: Social[] = [
     color: "#EA4C89",
   },
   {
-    icon: BsFillThreadsFill,
+    icon: FaTumblr,
     name: "Threads",
     url: "https://www.example.com/threads",
-    color: "#000000",
+    color: "#000000", // ! Change this color
+  },
+  {
+    icon: FaSkype,
+    name: "Skype",
+    url: "https://www.example.com/threads",
+    color: "#000000", // ! Change this color
+  },
+  {
+    icon: FaQuora,
+    name: "Quora",
+    url: "https://www.example.com/threads",
+    color: "#000000", // ! Change this color
   },
 ] as const;

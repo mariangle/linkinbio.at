@@ -3,6 +3,7 @@ import type { Link as LinkType, TopIconOptions } from "@/types";
 import { socials } from "@/constants/social-links";
 import { getDomain, cn } from "@/lib/utils";
 import { TopIconStyle } from "@/types";
+import { Tooltip } from "@/components/ui/tooltip";
 import Link from "next/link";
 
 export function TopIcon({
@@ -180,16 +181,15 @@ export function TopIconLink({
   };
 }) {
   return (
-    <Link
-      target="_blank"
-      rel="noopener noreferrer"
-      href={social.url}
-      className="group relative block"
-    >
-      {children}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-full bg-neutral-950/50 px-2.5 py-1.5 opacity-0 backdrop-blur-2xl duration-200 group-hover:-translate-y-1/2 group-hover:opacity-100">
-        {social.name}
-      </div>
-    </Link>
+    <Tooltip content={social.name}>
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href={social.url}
+        className="group relative block"
+      >
+        {children}
+      </Link>
+    </Tooltip>
   );
 }

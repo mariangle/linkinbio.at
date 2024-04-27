@@ -10,8 +10,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import {
+  FormHeading,
+  FormContainer,
+  FormFooter,
+  FormContent,
+  FormSwitch,
+} from "@/components/dashboard/form";
+
+import { Label } from "@/components/ui/label";
 import { TopIconOptions, TopIconStyle } from "@/types";
-import { topIconStyles } from "@/constants/icons";
+import { topIconStyles } from "@/constants/top-icon-styles";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function IconForm() {
@@ -38,32 +48,24 @@ export function IconForm() {
   }, [topIconOptions, showTopIcons]);
 
   return (
-    <div className="rounded-lg bg-secondary p-4">
-      <div className="text-sm font-semibold">Top Icons</div>
-      <div className="mt-4 space-y-4">
-        <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-1">
-            <div className="text-sm font-semibold">Enable Social Icons</div>
-            <div className="text-xs text-muted-foreground">
-              Automatically display social media icons at the top of your
-              profile.
-            </div>
-          </div>
+    <FormContainer>
+      <FormContent>
+        <FormHeading>Top Icons</FormHeading>
+        <FormSwitch
+          title="Enable Social Icons"
+          description="Automatically display social media icons at the top of your
+              profile."
+        >
           <Switch
             checked={showTopIcons}
             onCheckedChange={() => setShowTopIcons(!showTopIcons)}
           />
-        </div>
-      </div>
-      <div className="mt-4 space-y-4 rounded-lg border p-4">
-        <div className="text-sm font-semibold">Top Icon Styling</div>
-        <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-1">
-            <div className="text-sm font-semibold">Shadow</div>
-            <div className="text-xs text-muted-foreground">
-              Add a drop shadow
-            </div>
-          </div>
+        </FormSwitch>
+        <Label>Styling</Label>
+        <FormSwitch
+          title="Shadow"
+          description="Add a drop shadow to the top icons."
+        >
           <Switch
             checked={topIconOptions.dropShadow}
             disabled={!showTopIcons}
@@ -74,32 +76,34 @@ export function IconForm() {
               })
             }
           />
-        </div>
-        <div className="mt-2 flex items-center gap-4">
-          <Select
-            defaultValue={topIconOptions.style}
-            onValueChange={(style) =>
-              setTopIconOptions({
-                ...topIconOptions,
-                style: style as TopIconStyle,
-              })
-            }
-            disabled={!showTopIcons}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Weather Effect" />
-            </SelectTrigger>
-            <SelectContent>
-              {topIconStyles.map((item, index) => (
-                <SelectItem key={index} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-              <SelectItem value="none">None</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-    </div>
+        </FormSwitch>
+        <Label>Styling</Label>
+        <Select
+          defaultValue={topIconOptions.style}
+          onValueChange={(style) =>
+            setTopIconOptions({
+              ...topIconOptions,
+              style: style as TopIconStyle,
+            })
+          }
+          disabled={!showTopIcons}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Weather Effect" />
+          </SelectTrigger>
+          <SelectContent>
+            {topIconStyles.map((item, index) => (
+              <SelectItem key={index} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+            <SelectItem value="none">None</SelectItem>
+          </SelectContent>
+        </Select>
+      </FormContent>
+      <FormFooter>
+        <Button variant="foreground">Save</Button>
+      </FormFooter>
+    </FormContainer>
   );
 }

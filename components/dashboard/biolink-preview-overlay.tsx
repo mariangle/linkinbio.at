@@ -12,10 +12,10 @@ export function BiolinkPreviewMobile() {
 
   return (
     <>
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-[100]">
         <button
           onClick={() => setPreviewOpen(!previewOpen)}
-          className="flex items-center gap-2 rounded-full bg-primary/75 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl"
+          className="flex items-center gap-2 rounded-full bg-primary/50 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl"
         >
           {previewOpen ? <X className="size-4" /> : <Eye className="size-4" />}
           {previewOpen ? "Close" : "Preview"}
@@ -23,7 +23,7 @@ export function BiolinkPreviewMobile() {
       </div>
       <div
         className={cn(
-          "fixed inset-0 z-20 grid place-content-center overflow-y-auto bg-neutral-200 duration-500 dark:bg-neutral-900",
+          "fixed inset-0 z-[99] grid place-content-center overflow-y-auto bg-background duration-500",
           previewOpen
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-full opacity-0",

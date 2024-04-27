@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { ColorPicker } from "@/components/ui/color-picker";
+import { ColorPicker } from "@/components/color-picker";
 import {
   Select,
   SelectContent,
@@ -12,18 +12,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  FormHeading,
+  FormContainer,
+  FormFooter,
+  FormContent,
+  FormSwitch,
+} from "@/components/dashboard/form";
+import { Button } from "@/components/ui/button";
 import { TitleOptions } from "@/types";
 import { fonts } from "@/constants/fonts";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function TitleForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
+  const { biolink, updateBiolink, loading } = useBiolinkPreview();
   const [titleOptions, setTitleOptions] = React.useState<TitleOptions>({
     font: "inter",
-    color: "#FFFFFF",
+    color: "#aw23ad",
   });
 
-  const [darkTextOption, setDarkTextOption] = React.useState<boolean>(false);
+  const [invertTextColor, setInvertTextColor] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (!biolink) return;
@@ -32,18 +40,22 @@ export function TitleForm() {
       ...biolink,
       config: {
         ...biolink.config,
-        darkText: darkTextOption,
+        invertTextColor: invertTextColor,
         title: titleOptions,
       },
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [titleOptions, darkTextOption]);
+  }, [titleOptions, invertTextColor]);
+
+  if (loading) {
+    return <div>loading</div>;
+  }
 
   return (
-    <div className="rounded-lg bg-secondary p-4">
-      <div className="w-full">
-        <div className="mt-3 font-semibold">Title</div>
+    <FormContainer>
+      <FormContent>
+        <FormHeading>Title</FormHeading>
         <div className="mt-2 flex items-center gap-4">
           <div className="space-y-2">
             <Label>Color</Label>
@@ -88,24 +100,19 @@ export function TitleForm() {
             </div>
           </div>
         </div>
-        <div className="mt-4">
-          <div className="font-semibold">Text</div>
-          <div className="mt-2 flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-            <div className="space-y-1">
-              <div className="text-sm font-semibold">Enable Black Text</div>
-              <div className="text-xs text-muted-foreground">
-                Turn off automatic text color adjustment based on background.
-                Enable to switch to black text, particularly useful for images
-                as backgrounds.
-              </div>
-            </div>
-            <Switch
-              checked={darkTextOption}
-              onCheckedChange={() => setDarkTextOption(!darkTextOption)}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+        <FormSwitch
+          title="Invert Text Color"
+          description="Toggle to manually invert the text color based on the background."
+        >
+          <Switch
+            checked={invertTextColor}
+            onCheckedChange={() => setInvertTextColor(!invertTextColor)}
+          />
+        </FormSwitch>
+      </FormContent>
+      <FormFooter>
+        <Button>Reset</Button>
+      </FormFooter>
+    </FormContainer>
   );
 }

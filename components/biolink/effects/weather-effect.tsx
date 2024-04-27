@@ -1,7 +1,6 @@
 import { ThunderEffect } from "@/components/biolink/effects/thunder-effect";
 import { PrecipitationEffect } from "@/components/biolink/effects/rain-effect";
 import { LightningBugsEffect } from "@/components/biolink/effects/lightnings-bugs-effect";
-import { FogEffect } from "@/components/biolink/effects/fog-effect";
 import { WeatherEffect as WeatherEffectType } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -41,12 +40,6 @@ export function WeatherEffect({
       return (
         <div className="absolute inset-0 z-10">
           <LightningBugsEffect />
-        </div>
-      );
-    case WeatherEffectType.Fog:
-      return (
-        <div className="absolute inset-0 z-10">
-          <FogEffect />
         </div>
       );
     default:

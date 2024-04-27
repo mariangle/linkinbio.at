@@ -7,27 +7,20 @@ import { usePathname } from "next/navigation";
 
 export function NavItem({
   item,
+  className,
 }: {
   item: {
-    path: string;
+    href: string;
     label: string;
   };
+  className?: string;
 }) {
   const path = usePathname();
-  const isActive = path === item.path;
+  const isActive = path === item.href;
 
   return (
-    <div className="relative">
-      <li
-        className={cn(
-          "group relative block h-5 overflow-hidden px-1.5 text-sm text-muted-foreground hover:text-foreground/90",
-          isActive && "text-foreground/90",
-        )}
-      >
-        <Link href={item.path} className="text-white">
-          {item.label}
-        </Link>
-      </li>
-    </div>
+    <Link href={item.href} className={cn("text-sm", className)}>
+      {item.label}
+    </Link>
   );
 }

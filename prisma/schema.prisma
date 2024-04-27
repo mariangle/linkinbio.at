@@ -35,13 +35,13 @@ enum Layout {
 }
 
 model Configuration {
-  id           Int      @id @default(autoincrement())
-  userId       Int      @unique
-  showTopIcons Boolean  @default(false)
-  blackText    Boolean?
-  hideUsername Boolean?
-  font         String?
-  layout       Layout?
+  id              Int      @id @default(autoincrement())
+  userId          Int      @unique
+  showTopIcons    Boolean  @default(false)
+  invertTextColor Boolean?
+  hideUsername    Boolean?
+  font            String?
+  layout          Layout?
 
   user User @relation(fields: [userId], references: [id])
 
@@ -151,7 +151,6 @@ enum WeatherEffect {
   RAIN
   THUNDER
   LIGHTNING_BUGS
-  FOG
 }
 
 model Effect {

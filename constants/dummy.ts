@@ -3,6 +3,10 @@ import { WeatherEffect } from "@/types";
 import { Layout, Font } from "@/types/enums";
 import { TopIconStyle } from "@/types";
 
+// Share
+// Social feed
+// embedded content
+
 export const dummyBiolink: Biolink = {
   user: {
     username: "johndoe",
@@ -14,17 +18,16 @@ export const dummyBiolink: Biolink = {
     title: "John Doe",
     bio: "I am a developer",
     location: "Earth",
-    occupation: "Intelligent Banker",
+    occupation: "Google",
   },
   config: {
-    darkText: false,
+    invertTextColor: false,
     font: Font.Inter,
     layout: Layout.Standard,
     showTopIcons: false,
     hideUsername: false,
     background: {
-      url: "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
-      color: "#dddddd",
+      color: "#000000",
     },
     topIcon: {
       dropShadow: true,
@@ -46,7 +49,7 @@ export const dummyBiolink: Biolink = {
       },
       background: {
         color: "#000000",
-        opacity: 0.8,
+        opacity: 1,
         blur: 25,
         socialIconColor: false,
       },
@@ -87,6 +90,12 @@ export const dummyBiolink: Biolink = {
       order: 1,
       title: "Instagram",
       url: "https://instagram.com",
+    },
+    {
+      id: "4",
+      order: 1,
+      title: "Website",
+      url: "https://website.com",
     },
   ],
 };

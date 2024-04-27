@@ -7,13 +7,11 @@ export const InfiniteMovingHighlights = ({
   direction = "left",
   speed = "fast",
   pauseOnHover = true,
-  children,
   className,
 }: {
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
-  children: React.ReactNode;
   className?: string;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -81,7 +79,13 @@ export const InfiniteMovingHighlights = ({
           pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
-        {children}
+        <div className="flex items-center gap-4 text-white">
+          <div>Spotify Integration</div>
+          <div>Discord Presence</div>
+          <div>Background Music</div>
+          <div>Animations</div>
+          <div>Special Effects</div>
+        </div>
       </ul>
     </div>
   );

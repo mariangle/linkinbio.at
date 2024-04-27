@@ -42,8 +42,8 @@ export const defaultButton: ButtonOptions = {
   },
   background: {
     color: "#000000",
-    opacity: 0.5,
-    blur: 50,
+    opacity: 1,
+    blur: 0,
     socialIconColor: false,
   },
   icon: {
@@ -66,7 +66,7 @@ export const defaultBiolink: Config = {
   font: Font.Inter,
   showTopIcons: false,
   hideUsername: false,
-  darkText: false,
+  invertTextColor: false,
   background: defaultBackground,
   title: defaultTitle,
   button: defaultButton,

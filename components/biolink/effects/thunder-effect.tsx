@@ -171,7 +171,7 @@ export function ThunderEffect() {
             createL(newX, newY, true);
           }
           lightTimeCurrent = 0;
-          lightTimeTotal = rand(30, 100);
+          lightTimeTotal = rand(100, 200);
         }
       };
 

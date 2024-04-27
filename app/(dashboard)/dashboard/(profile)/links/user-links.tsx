@@ -2,16 +2,21 @@
 
 import * as React from "react";
 
-import { LinkForm } from "./link-form";
-import { LinkItem } from "./link-item";
-
-import { dummyBiolink } from "@/constants/dummy";
+import { LinkForm } from "./new-link-form";
+import { LinkItem } from "./link-form";
 
 import type { Link } from "@/types";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function UserLinks() {
-  const [userLinks, setUserLinks] = React.useState<Link[]>(dummyBiolink.links);
-  const [loading, setLoading] = React.useState(false);
+  const { biolink, loading } = useBiolinkPreview();
+  const [userLinks, setUserLinks] = React.useState<Link[]>([]);
+
+  React.useEffect(() => {
+    if (biolink) {
+      setUserLinks(biolink.links);
+    }
+  }, [biolink]);
 
   return (
     <div>

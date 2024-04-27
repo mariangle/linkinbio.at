@@ -28,7 +28,7 @@ export function Heading({
         )}
         id={id}
       >
-        {route?.name || "Untitled"}
+        {route?.label || "Untitled"}
       </HeadingTag>
     );
   }

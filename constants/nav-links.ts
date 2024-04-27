@@ -3,35 +3,28 @@ import {
   Link2 as Link,
   User,
   Palette,
-  GitBranch,
   Sparkles,
-  Newspaper,
-  SquarePen,
+  Layers3,
 } from "lucide-react";
 
 export const navLinks = [
   {
     label: "Features",
-    path: "/features",
+    href: "/features",
   },
   {
     label: "Templates",
-    path: "/templates",
+    href: "/templates",
   },
   {
     label: "Pricing",
-    path: "/pricing",
+    href: "/pricing",
   },
 ];
 
 export const dashboardLinks = [
   {
-    name: "Integrations",
-    href: "/dashboard/integrations",
-    icon: GitBranch,
-  },
-  {
-    name: "Settings",
+    label: "Settings",
     href: "/dashboard/settings",
     icon: Settings,
   },
@@ -39,41 +32,85 @@ export const dashboardLinks = [
 
 export const profileLinks = [
   {
-    name: "Information",
-    href: "/dashboard/information",
+    label: "Profile",
+    href: "/dashboard/profile",
     icon: User,
   },
   {
-    name: "Links",
+    label: "Links",
     href: "/dashboard/links",
     icon: Link,
   },
   {
-    name: "Appearance",
+    label: "Appearance",
     href: "/dashboard/appearance",
     icon: Palette,
   },
   {
-    name: "Posts",
-    href: "/dashboard/posts",
-    icon: SquarePen,
+    label: "Modules",
+    href: "/dashboard/modules",
+    icon: Layers3,
+  },
+];
+
+export const settingsLinks = [
+  {
+    label: "Account",
+    href: "/dashboard/settings/account",
+  },
+  {
+    label: "Appearance",
+    href: "/dashboard/settings/appearance",
+  },
+  {
+    label: "Billing",
+    href: "/dashboard/settings/billing",
+  },
+];
+
+export const modulesLinks = [
+  {
+    label: "Spotify",
+    href: "/dashboard/modules/spotify",
+  },
+  {
+    label: "Discord",
+    href: "/dashboard/modules/discord",
+  },
+  {
+    label: "Twitch",
+    href: "/dashboard/modules/twitch",
+  },
+  {
+    label: "Twitter",
+    href: "/dashboard/modules/twitter",
+  },
+  {
+    label: "Youtube",
+    href: "/dashboard/modules/youtube",
+  },
+  {
+    label: "Soundcloud",
+    href: "/dashboard/modules/soundcloud",
+  },
+  {
+    label: "Instagram",
+    href: "/dashboard/modules/instagram",
   },
 ];
 
 export const biolinkCustomizationLinks = [
   {
-    name: "Appearance",
+    label: "Appearance",
     href: "/dashboard/appearance",
-    icon: Palette,
   },
   {
-    name: "Layout",
+    label: "Layout",
     href: "/dashboard/appearance/layout",
   },
   {
-    name: "Visual Effects",
+    label: "Visual Effects",
     href: "/dashboard/appearance/visual-effects",
-    icon: Sparkles,
   },
 ];
 
@@ -81,4 +118,5 @@ export const routes = [
   ...dashboardLinks,
   ...profileLinks,
   ...biolinkCustomizationLinks,
+  ...settingsLinks,
 ];

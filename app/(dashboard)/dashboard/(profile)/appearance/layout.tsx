@@ -1,10 +1,10 @@
-import CustomizationNav from "@/components/dashboard/customization-nav";
-import React from "react";
+import { SecondaryNav } from "@/components/dashboard/secondary-nav";
+import { biolinkCustomizationLinks } from "@/constants/nav-links";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <CustomizationNav />
+      <SecondaryNav items={biolinkCustomizationLinks} />
       {children}
     </div>
   );

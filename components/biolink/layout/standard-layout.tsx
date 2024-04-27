@@ -23,7 +23,9 @@ export function StandardLayout({
   links,
   preview,
 }: LayoutProps) {
-  const backgroundDark = determineBrightness(config.background.color); // TODO: Check  if theres not a background image
+  const backgroundDark = config.invertTextColor
+    ? !determineBrightness(config.background.color)
+    : determineBrightness(config.background.color);
 
   // TODO: fix redundant classes in ContentContainer and BackgroundContainer
 

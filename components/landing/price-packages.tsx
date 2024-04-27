@@ -1,6 +1,6 @@
 import { Container } from "../ui/container";
 import { CardSpotlightEffect } from "@/components/ui/card";
-import { Tooltip } from "@/components/ui/tooltip";
+import { FeatureTooltip } from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -8,10 +8,11 @@ import Link from "next/link";
 
 const prices = [
   {
-    title: "Starter",
+    title: "Free",
     button: "Start for free",
     description: "Basic features to get you started with your bio link",
     price: 0,
+    included: "What's included",
     features: [
       {
         name: "Customizable URL",
@@ -20,6 +21,21 @@ const prices = [
       },
       {
         name: "Up to 10 Links",
+        explanation:
+          "Add up to 10 links to showcase your various social media profiles, websites, or other content.",
+      },
+      {
+        name: "Custom Icons",
+        explanation:
+          "Choose from a variety of icons to represent your links and create a visually appealing design.",
+      },
+      {
+        name: "Fully Customizable Buttons",
+        explanation:
+          "Add up to 10 links to showcase your various social media profiles, websites, or other content.",
+      },
+      {
+        name: "Custom Background",
         explanation:
           "Add up to 10 links to showcase your various social media profiles, websites, or other content.",
       },
@@ -40,25 +56,17 @@ const prices = [
     button: "Get started with Premium",
     description: "Advanced customization options and additional features",
     price: 5,
+    included: "Everything from Free, plus",
     features: [
-      {
-        name: "Everything from Starter",
-        explanation: "All features from the Starter plan and up to 20 links.",
-      },
       {
         name: "Layout Selection",
         explanation:
           "Choose from a variety of layout options to best showcase your content.",
       },
       {
-        name: "Customizable Colors, Fonts and Opacity",
+        name: "Title color and font customization",
         explanation:
-          "Personalize the color scheme and opacity of your bio link to match your brand or style preferences, creating a unique and captivating design.",
-      },
-      {
-        name: "Dynamic Effects and Animations",
-        explanation:
-          "Captivate your audience with a variety of dynamic effects and animations for your bio link.",
+          "Personalize the color scheme  of your bio link to match your brand or style preferences, creating a unique and captivating design.",
       },
       {
         name: "Spotify Integration",
@@ -66,12 +74,27 @@ const prices = [
           "Integrate your Spotify account to showcase your favorite music and playlists on your bio link.",
       },
       {
-        name: "Icon Selection and Customization",
+        name: "Special Effects",
         explanation:
-          "Choose from a variety of icons and customize their appearance to complement your bio link.",
+          "Add special effects to your bio link to create a visually stunning and engaging experience for your audience.",
       },
       {
-        name: "Background Music and Video",
+        name: "Entrance animations",
+        explanation:
+          "Add entrance animations to your bio link to create a memorable first impression for your audience.",
+      },
+      {
+        name: "Weather Effects",
+        explanation:
+          "Add weather effects to your bio link to create a unique and engaging experience for your audience.",
+      },
+      {
+        name: ".gif, .mp4 background support",
+        explanation:
+          "Enhance your bio link with background music and video to create an immersive and engaging experience for your audience.",
+      },
+      {
+        name: "Background Music",
         explanation:
           "Enhance your bio link with background music and video to create an immersive and engaging experience for your audience.",
       },
@@ -142,9 +165,7 @@ export function PricePackages() {
                 </Link>
               </div>
               <div className="p-6">
-                <div className="mb-4 text-sm font-bold">
-                  What&apos;s included:
-                </div>
+                <div className="mb-4 text-sm font-bold">{item.included}</div>
                 <ul className="mb-4 space-y-2">
                   {item.features.map((item, index) => (
                     <li key={index} className="flex items-center gap-4">
@@ -158,14 +179,14 @@ export function PricePackages() {
                       >
                         <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                       </svg>
-                      <Tooltip content={item.explanation}>
+                      <FeatureTooltip content={item.explanation}>
                         <span
                           className="text-sm text-foreground underline
                         decoration-dotted underline-offset-4"
                         >
                           {item.name}
                         </span>
-                      </Tooltip>
+                      </FeatureTooltip>
                     </li>
                   ))}
                 </ul>

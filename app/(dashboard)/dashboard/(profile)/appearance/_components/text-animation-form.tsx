@@ -3,10 +3,19 @@
 import * as React from "react";
 
 import { Switch } from "@/components/ui/switch";
+import {
+  FormHeading,
+  FormContainer,
+  FormFooter,
+  FormContent,
+  FormSwitch,
+} from "@/components/dashboard/form";
+import { Button } from "@/components/ui/button";
 import { EffectsOptions } from "@/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { Label } from "@/components/ui/label";
 
-export function EffectsForm() {
+export function TextAnimationForm() {
   const { biolink, updateBiolink } = useBiolinkPreview();
   const [visualsOptions, setVisualOptions] = React.useState<
     Pick<EffectsOptions, "bioTypewriter" | "titleTypewriter" | "titleSparkles">
@@ -30,11 +39,11 @@ export function EffectsForm() {
   }, [visualsOptions]);
 
   return (
-    <div className="rounded-lg bg-secondary p-4">
-      <div className="text-sm font-semibold">Typography Effects</div>
-      <div className="mt-4 space-y-4">
-        <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-          <div className="text-sm font-semibold">Title Sparkles Effect</div>
+    <FormContainer>
+      <FormContent>
+        <FormHeading>Text Animations</FormHeading>
+        <Label>Title</Label>
+        <FormSwitch title="Sparkles">
           <Switch
             checked={visualsOptions.titleSparkles}
             onCheckedChange={() =>
@@ -44,9 +53,8 @@ export function EffectsForm() {
               })
             }
           />
-        </div>
-        <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-          <div className="text-sm font-semibold">Title Typewriter Effect</div>
+        </FormSwitch>
+        <FormSwitch title="Typewriter">
           <Switch
             checked={visualsOptions.titleTypewriter}
             onCheckedChange={() =>
@@ -56,9 +64,9 @@ export function EffectsForm() {
               })
             }
           />
-        </div>
-        <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between">
-          <div className="text-sm font-semibold">Bio Typewriter Effect</div>
+        </FormSwitch>
+        <Label>Title</Label>
+        <FormSwitch title="Typewriter">
           <Switch
             checked={visualsOptions.bioTypewriter}
             onCheckedChange={() =>
@@ -68,8 +76,11 @@ export function EffectsForm() {
               })
             }
           />
-        </div>
-      </div>
-    </div>
+        </FormSwitch>
+      </FormContent>
+      <FormFooter>
+        <Button variant="foreground">Save</Button>
+      </FormFooter>
+    </FormContainer>
   );
 }

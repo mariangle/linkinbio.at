@@ -17,7 +17,6 @@ export enum WeatherEffect {
   Snow = "snow",
   Thunder = "thunder",
   LighthingBugs = "lightning-bugs",
-  Fog = "fog",
 }
 
 export enum AnimationVariant {

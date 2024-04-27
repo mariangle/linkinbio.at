@@ -8,7 +8,7 @@ export function IndustrialBackground({
   className?: string;
 }) {
   return (
-    <div className="relative min-h-screen dark:bg-background">
+    <div className="relative min-h-screen bg-background">
       {/* Inner vertical line */}
       <div className="pointer-events-none absolute inset-0 mx-auto max-w-[825px] ">
         <div className="vertical-line absolute right-0 top-0">

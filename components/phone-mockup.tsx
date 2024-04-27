@@ -7,19 +7,22 @@ export function PhoneMockup({
   biolink,
   layout,
   scale = true,
+  className,
 }: {
   hero?: boolean;
   biolink?: Biolink;
   layout?: LayoutEnum;
   scale?: boolean;
+  className?: string;
 }) {
   return (
     <div className="perspective">
       <div
         className={cn(
           "iphone-x not-prose overflow-hidden",
-          hero && "iphone-x-featured",
           scale && "sm:scale-125 md:scale-150",
+          hero && "iphone-x-featured",
+          className,
         )}
       >
         <div className="relative z-0 block h-full overflow-hidden rounded-[2.4rem] border border-black">
@@ -31,7 +34,7 @@ export function PhoneMockup({
             />
           )}
         </div>
-        <div className="absolute inset-0 h-full w-full origin-bottom rounded-[40px] opacity-50" />
+        <div className="pointer-events-none absolute inset-0 h-full w-full origin-bottom rounded-[40px] opacity-50" />
       </div>
     </div>
   );

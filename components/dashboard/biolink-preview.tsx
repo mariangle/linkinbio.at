@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import type { Biolink } from "@/types";
-import { PhoneMockup } from "@/components/ui/phone-mockup";
+import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export async function fetchBiolink(username: string) {
@@ -21,15 +21,16 @@ export async function fetchBiolink(username: string) {
 }
 
 export function BiolinkPreview() {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, updateBiolink, setLoading } = useBiolinkPreview();
 
   React.useEffect(() => {
     async function fetchAndSetBiolink() {
       const biolink: Biolink = await fetchBiolink("johndoe");
-      setBiolink(biolink);
+      updateBiolink(biolink);
+      setLoading(false);
     }
     if (!biolink) fetchAndSetBiolink();
-  }, [biolink, setBiolink]);
+  }, [biolink, updateBiolink, setLoading]);
   return (
     <>
       <PhoneMockup biolink={biolink} layout={biolink?.config.layout} />

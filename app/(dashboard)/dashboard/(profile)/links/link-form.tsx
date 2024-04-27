@@ -1,80 +1,141 @@
 import * as React from "react";
+import { Link } from "@/types";
 
-import { cn } from "@/lib/utils";
+import {
+  EyeIcon,
+  PencilIcon,
+  TrashIcon,
+  GripVerticalIcon,
+  XIcon,
+  CheckIcon,
+} from "lucide-react";
 
+import { IconPicker } from "@/components/icon-picker";
 import { socials } from "@/constants/social-links";
-
+import { getDomain } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { LinkSuggestion } from "./link-suggestion";
-import { SearchIcon, XIcon, PlusIcon } from "lucide-react";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
-export function LinkForm() {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [search, setSearch] = React.useState("");
-  const [url, setUrl] = React.useState("");
+export function socialLink(url: string) {
+  const social = socials.find((link) => url.includes(getDomain(link.url)));
 
-  if (!isOpen) {
-    return (
-      <div className="flex max-w-xs items-center justify-start gap-2">
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="w-full rounded-full"
-          size="lg"
-        >
-          <PlusIcon className="mr-2 size-4 text-gray-300" />
-          Add Link
-        </Button>
-      </div>
-    );
-  }
+  return social;
+}
+
+export function LinkItem({ item }: { item: Link }) {
+  const { biolink, updateBiolink } = useBiolinkPreview();
+
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [link, setLink] = React.useState(item);
+
+  const socialItem = socialLink(item.url);
+
+  const clearChanges = () => {
+    setIsEditing(false);
+    setLink(item);
+  };
+
+  const saveChanges = () => {
+    setIsEditing(false);
+    if (biolink) {
+      const updatedLinks = biolink.links.map((linkItem) => {
+        if (linkItem.id === item.id) {
+          return {
+            ...linkItem,
+            title: link.title,
+            url: link.url,
+          };
+        }
+        return linkItem;
+      });
+
+      updateBiolink({
+        ...biolink,
+        links: updatedLinks,
+      });
+    }
+  };
+
+  const deleteLink = () => {
+    if (biolink) {
+      updateBiolink({
+        ...biolink,
+        links: biolink.links.filter((link) => link.id !== item.id),
+      });
+    }
+  };
 
   return (
-    <div className="relative rounded-lg border">
-      <button
-        onClick={() => setIsOpen(false)}
-        className="absolute right-2 top-2 rounded-full border bg-secondary p-1"
-      >
-        <XIcon className="size-3" />
-      </button>
-      <div className="p-4">
-        <Label className="block pb-2 text-base font-medium text-foreground">
-          Enter URL
-        </Label>
-        <div className="flex items-center gap-2">
-          <Input placeholder="URL" />
-          <Button>Add</Button>
-        </div>
-      </div>
-      <div className="h-px w-full bg-border"></div>
-      <div className="relative p-4">
-        <div className="relative">
-          <SearchIcon className="absolute left-2 top-1/2 size-4 -translate-y-1/2" />
-          <Input
-            placeholder="Search apps..."
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-8"
-          />
-        </div>
-        <div>
-          <Label className="mt-4 block text-xs">
-            {search ? "Results" : "Suggestions"}
-          </Label>
-          <div className="mt-4 flex gap-4">
-            {search
-              ? socials
-                  .filter((item) =>
-                    item.name.toLowerCase().includes(search.toLowerCase()),
-                  )
-                  .map((item, index) => (
-                    <LinkSuggestion key={index} item={item} />
-                  ))
-              : socials
-                  .slice(0, 5)
-                  .map((item, index) => (
-                    <LinkSuggestion key={index} item={item} />
-                  ))}
+    <div className="group rounded-lg bg-secondary">
+      <div className="flex items-center">
+        <GripVerticalIcon className="ml-2 size-4 text-muted-foreground" />
+        <div className="flex w-full items-center justify-between gap-4 p-4">
+          {socialItem ? (
+            <div className="flex rounded-full border border-border bg-foreground p-1">
+              <socialItem.icon className="size-4 cursor-not-allowed text-background" />
+            </div>
+          ) : (
+            <IconPicker
+              iconId={link.iconId}
+              setIconId={(iconId) => {
+                setLink({ ...link, iconId });
+              }}
+            />
+          )}
+          <div className="flex w-full items-center justify-between gap-4">
+            {isEditing ? (
+              <div className="w-full space-y-1.5">
+                <Input
+                  placeholder="Title"
+                  className="w-full"
+                  value={link.title}
+                  onChange={(e) => {
+                    setLink({ ...link, title: e.target.value });
+                  }}
+                />
+                <Input
+                  placeholder="URL"
+                  className="w-full"
+                  value={link.url}
+                  onChange={(e) => {
+                    setLink({ ...link, url: e.target.value });
+                  }}
+                />
+              </div>
+            ) : (
+              <div>
+                <div className="text-sm text-foreground">{link.title}</div>
+                <div className="text-xs text-muted-foreground">{link.url}</div>
+              </div>
+            )}
+            <div className="flex items-start gap-2 text-muted-foreground">
+              {isEditing ? (
+                <div className="flex items-center gap-2">
+                  <button onClick={clearChanges}>
+                    <XIcon className="size-4" />
+                  </button>
+                  <button onClick={saveChanges}>
+                    <CheckIcon className="size-4" />
+                  </button>
+                </div>
+              ) : (
+                <button onClick={() => setIsEditing(true)}>
+                  <PencilIcon className="size-4" />
+                </button>
+              )}
+              {!isEditing && (
+                <>
+                  {socialItem && (
+                    <button>
+                      <EyeIcon className="size-4" />
+                    </button>
+                  )}
+                  <button onClick={deleteLink}>
+                    <TrashIcon className="size-0 duration-300 group-hover:size-4" />
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

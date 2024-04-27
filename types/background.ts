@@ -1,5 +1,5 @@
 export interface BackgroundOptions {
-  url: string;
+  url?: string;
   color: string;
   gradient?: {
     startColor: string;

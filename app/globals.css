@@ -33,7 +33,7 @@
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 221 39% 08%;
     --foreground: 228 96% 95%;
 
     --card: 0 0% 3.9%;
@@ -42,20 +42,20 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 8%;
+    --secondary: 221 39% 11%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 24%;
-    --muted-foreground: 215 20% 75%;
+    --muted: 221 39% 20%;
+    --muted-foreground: 215 39% 75%;
 
-    --accent: 0 0% 14.9%;
+    --accent: 221 39% 16%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 16%;
-    --input: 0 0% 12%;
+    --border: 221 39% 16%;
+    --input: 221 39% 12%;
     --ring: 0 0% 83.1%;
   }
 }
@@ -165,6 +165,10 @@
       0 0 0 14px #3a3a3a,
       8px 6px 0 20px #111;
     transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg);
+
+    @media screen and (min-width: 1240px) {
+      transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg) scale(1.25);
+    }
   }
 
   .iphone-x:before,

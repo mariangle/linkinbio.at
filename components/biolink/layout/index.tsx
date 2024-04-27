@@ -32,7 +32,7 @@ export function Layout({
   layout?: LayoutEnum;
 }) {
   const useDarkText = biolink.config.background.url
-    ? biolink.config.darkText
+    ? biolink.config.invertTextColor
     : determineBrightness(biolink.config.background.color);
 
   switch (layout) {

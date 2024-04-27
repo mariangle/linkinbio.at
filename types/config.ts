@@ -13,7 +13,7 @@ export interface Config {
   font: Font;
   showTopIcons: boolean;
   hideUsername: boolean;
-  darkText: boolean;
+  invertTextColor: boolean;
   background: BackgroundOptions;
   button: ButtonOptions;
   topIcon: TopIconOptions;

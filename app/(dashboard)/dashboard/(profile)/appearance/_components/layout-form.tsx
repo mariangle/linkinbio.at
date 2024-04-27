@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { Layout } from "@/types/enums";
 import { layouts } from "@/constants/layouts";
-import { PhoneMockup } from "@/components/ui/phone-mockup";
-import { dummyBiolink } from "@/constants/dummy";
+import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Button } from "@/components/ui/button";
 
@@ -30,7 +29,7 @@ export function LayoutForm() {
 
   return (
     <div>
-      <div className="mt-2 flex w-fit flex-wrap items-center justify-start gap-4">
+      <div className="mt-2 flex w-fit flex-wrap items-center justify-start gap-x-4 gap-y-6">
         {layouts.map((item, index) => {
           const selected = layout === item.value;
           return (
@@ -39,16 +38,17 @@ export function LayoutForm() {
               role="button"
               key={index}
               className={cn(
-                "flex flex-col items-center justify-center p-2",
-                selected && "rounded-xl border bg-primary/5",
+                "flex flex-col items-center justify-center border border-transparent p-2",
+                selected && "rounded-xl border-border bg-primary/5",
               )}
             >
               <div className="text-xl font-semibold">{item.label}</div>
-              <div className="my-4 w-fit">
+              <div className="my-8 w-fit">
                 <PhoneMockup
-                  biolink={dummyBiolink}
+                  biolink={biolink}
                   layout={item.value}
                   scale={false}
+                  className="pointer-events-none"
                 />
               </div>
               <Button>Select</Button>
