@@ -17,7 +17,7 @@ import {
 } from "@/components/dashboard/form";
 import { Button } from "@/components/ui/button";
 import { ButtonTemplates } from "./button-templates";
-import { Paintbrush, PencilRuler, Settings2 } from "lucide-react";
+import { Paintbrush } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -25,7 +25,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
 
 export function ButtonsForm() {
   const { biolink, updateBiolink } = useBiolinkPreview();
@@ -75,12 +74,7 @@ export function ButtonsForm() {
       <FormContent>
         <FormHeading>Buttons</FormHeading>
         <div className="text-sm text-muted-foreground">Templates</div>
-        <ButtonTemplates
-          onSelect={(button) => {
-            setButtonConfig(button);
-            alert("Button template selected");
-          }}
-        />
+        <ButtonTemplates onSelect={(button) => setButtonConfig(button)} />
         <div className="text-sm text-muted-foreground">Custom</div>
         <Sheet>
           <SheetTrigger asChild>

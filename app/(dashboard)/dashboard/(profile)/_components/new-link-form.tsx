@@ -1,13 +1,17 @@
 import * as React from "react";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { XIcon, PlusIcon } from "lucide-react";
 import { IconPicker } from "@/components/icon-picker";
 import { Link } from "@/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
-
+import {
+  FormHeading,
+  FormContainer,
+  FormFooter,
+  FormContent,
+} from "@/components/dashboard/form";
 export function LinkForm() {
   const { biolink, updateBiolink } = useBiolinkPreview();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -47,18 +51,21 @@ export function LinkForm() {
     }
   };
 
+  const cancel = () => {
+    setIsOpen(false);
+    setLink({ title: "", url: "" });
+  };
+
   return (
-    <div className="relative rounded-lg border">
+    <FormContainer>
       <button
         onClick={() => setIsOpen(false)}
         className="absolute right-2 top-2 rounded-full border bg-secondary p-1"
       >
         <XIcon className="size-3" />
       </button>
-      <div className="p-4">
-        <Label className="block pb-2 text-base font-medium text-foreground">
-          New Link
-        </Label>
+      <FormContent>
+        <FormHeading>New Link</FormHeading>
         <div className="space-y-4">
           <div className="flex items-center gap-4">
             <div>
@@ -84,9 +91,14 @@ export function LinkForm() {
               />
             </div>
           </div>
-          <Button onClick={add}>Add</Button>
         </div>
-      </div>
-    </div>
+      </FormContent>
+      <FormFooter>
+        <Button onClick={cancel} variant="secondary">
+          Cancel
+        </Button>
+        <Button onClick={add}>Add</Button>
+      </FormFooter>
+    </FormContainer>
   );
 }

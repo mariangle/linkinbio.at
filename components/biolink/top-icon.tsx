@@ -29,7 +29,7 @@ export function TopIcon({
 
   if (!socialLink) return null;
 
-  if (options.style === TopIconStyle.SOCIAL_BACKGROUND) {
+  if (options.style === TopIconStyle.SocialBackground) {
     return (
       <TopIconLink
         social={{
@@ -53,7 +53,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.BLACK_BACKGROUND) {
+  if (options.style === TopIconStyle.BlackBackground) {
     return (
       <TopIconLink
         social={{
@@ -75,7 +75,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.WHITE_BACKGROUND) {
+  if (options.style === TopIconStyle.WhiteBackground) {
     return (
       <TopIconLink
         social={{
@@ -97,7 +97,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.WHITE_BACKGROUND_SOCIAL_COLOR) {
+  if (options.style === TopIconStyle.WhiteBackgroundSocialColor) {
     return (
       <TopIconLink
         social={{
@@ -125,7 +125,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.SOCIAL_ICON_COLOR) {
+  if (options.style === TopIconStyle.SocialIconColor) {
     return (
       <TopIconLink
         social={{

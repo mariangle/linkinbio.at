@@ -20,6 +20,7 @@ export function WithCoverLayout({
   user,
   config,
   profile,
+  modules,
   links,
   preview,
 }: LayoutProps) {

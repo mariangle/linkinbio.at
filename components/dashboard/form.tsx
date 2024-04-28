@@ -8,12 +8,28 @@ export function FormDescription({ children }: { children: React.ReactNode }) {
   return <p className="mt-1 text-sm text-muted-foreground">{children}</p>;
 }
 
-export function FormContainer({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-4 rounded-lg border">{children}</div>;
+export function FormContainer({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("relative space-y-4 rounded-lg border", className)}>
+      {children}
+    </div>
+  );
 }
 
-export function FormContent({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-4 p-4">{children}</div>;
+export function FormContent({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={cn("space-y-4 p-4", className)}>{children}</div>;
 }
 
 export function FormFooter({ children }: { children: React.ReactNode }) {

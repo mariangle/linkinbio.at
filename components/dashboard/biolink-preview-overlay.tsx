@@ -5,10 +5,19 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 import { Eye, X } from "lucide-react";
-import { BiolinkPreview } from "./biolink-preview";
+import { BiolinkPreview } from "@/components/dashboard/biolink-preview";
+import { biolinkLinks } from "@/constants/nav-links";
+import { usePathname } from "next/navigation";
 
 export function BiolinkPreviewMobile() {
   const [previewOpen, setPreviewOpen] = React.useState(false);
+
+  const currentPath = usePathname();
+  const isBiolinkPage = biolinkLinks.some((link) =>
+    currentPath.includes(link.href),
+  );
+
+  if (!isBiolinkPage) return null;
 
   return (
     <>

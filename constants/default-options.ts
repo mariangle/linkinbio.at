@@ -58,7 +58,7 @@ export const defaultVisuals: EffectsOptions = {};
 
 export const topIcon: TopIconOptions = {
   dropShadow: true,
-  style: TopIconStyle.SOCIAL_BACKGROUND,
+  style: TopIconStyle.SocialBackground,
 };
 
 export const defaultBiolink: Config = {

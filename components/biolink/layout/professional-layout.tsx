@@ -20,6 +20,7 @@ export function ProfessionalLayout({
   config,
   profile,
   links,
+  modules,
   preview,
 }: LayoutProps) {
   const backgroundDark = config.invertTextColor

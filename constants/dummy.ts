@@ -24,14 +24,14 @@ export const dummyBiolink: Biolink = {
     invertTextColor: false,
     font: Font.Inter,
     layout: Layout.Standard,
-    showTopIcons: false,
+    showTopIcons: true,
     hideUsername: false,
     background: {
-      color: "#000000",
+      color: "#23a6d5",
     },
     topIcon: {
       dropShadow: true,
-      style: TopIconStyle.SOCIAL_BACKGROUND,
+      style: TopIconStyle.SocialBackground,
     },
     button: {
       shadow: {
@@ -98,4 +98,19 @@ export const dummyBiolink: Biolink = {
       url: "https://website.com",
     },
   ],
+  modules: {
+    spotify: {
+      enabled: true,
+      trackId: "123",
+      darkMode: false,
+    },
+    youtube: {
+      videoId: "123",
+      darkMode: false,
+    },
+    soundcloud: {
+      trackId: "123",
+      compactLayout: false,
+    },
+  },
 };

@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/dashboard/breadcrumbs";
 import { User } from "lucide-react";
 import { BurgerMenu } from "@/components/burger-menu";
 import { MobileMenu } from "../mobile-menu";
-import { dashboardLinks, profileLinks } from "@/constants/nav-links";
+import { dashboardLinks, biolinkLinks } from "@/constants/nav-links";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -16,7 +16,7 @@ export function Navbar() {
       <MobileMenu
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        items={[...profileLinks, ...dashboardLinks]}
+        items={[...biolinkLinks, ...dashboardLinks]}
       />
       <nav
         className={cn(

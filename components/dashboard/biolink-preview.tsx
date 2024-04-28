@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+import { usePathname } from "next/navigation";
+import { biolinkLinks } from "@/constants/nav-links";
 import type { Biolink } from "@/types";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
@@ -22,6 +24,7 @@ export async function fetchBiolink(username: string) {
 
 export function BiolinkPreview() {
   const { biolink, updateBiolink, setLoading } = useBiolinkPreview();
+  const isBiolinkPage = usePathname().includes(biolinkLinks[0].href);
 
   React.useEffect(() => {
     async function fetchAndSetBiolink() {

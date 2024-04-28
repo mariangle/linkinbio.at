@@ -1,6 +1,6 @@
-import { TextAnimationForm } from "../_components/text-animation-form";
-import { WeatherEffectForm } from "../_components/weather-effect-form";
-import { AnimationForm } from "../_components/animation-form";
+import { TextAnimationForm } from "../../_components/text-animation-form";
+import { WeatherEffectForm } from "../../_components/weather-effect-form";
+import { AnimationForm } from "../../_components/animation-form";
 
 export default function page() {
   return (

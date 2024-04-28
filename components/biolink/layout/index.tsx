@@ -4,6 +4,7 @@ import type {
   EffectsOptions,
   Link,
   Profile,
+  Modules,
   User,
 } from "@/types";
 import { Layout as LayoutEnum } from "@/types/enums";
@@ -18,7 +19,8 @@ export interface LayoutProps {
   user: User;
   config: Config;
   profile: Profile;
-  links: Link[];
+  links?: Link[];
+  modules?: Modules;
   preview?: boolean;
 }
 
@@ -40,6 +42,7 @@ export function Layout({
       return (
         <LayoutWrapper preview={preview} effects={biolink.config.effects}>
           <GlassmorphismLayout
+            modules={biolink.modules}
             user={biolink.user}
             profile={biolink.profile}
             links={biolink.links}
@@ -53,6 +56,7 @@ export function Layout({
       return (
         <LayoutWrapper preview={preview} effects={biolink.config.effects}>
           <WithCoverLayout
+            modules={biolink.modules}
             user={biolink.user}
             profile={biolink.profile}
             links={biolink.links}
@@ -66,6 +70,7 @@ export function Layout({
       return (
         <LayoutWrapper preview={preview} effects={biolink.config.effects}>
           <ProfessionalLayout
+            modules={biolink.modules}
             user={biolink.user}
             profile={biolink.profile}
             links={biolink.links}
@@ -79,6 +84,7 @@ export function Layout({
       return (
         <LayoutWrapper preview={preview} effects={biolink.config.effects}>
           <StandardLayout
+            modules={biolink.modules}
             user={biolink.user}
             profile={biolink.profile}
             links={biolink.links}

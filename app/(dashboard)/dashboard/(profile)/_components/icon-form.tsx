@@ -29,7 +29,7 @@ export function IconForm() {
   const [showTopIcons, setShowTopIcons] = React.useState<boolean>(true);
   const [topIconOptions, setTopIconOptions] = React.useState<TopIconOptions>({
     dropShadow: false,
-    style: TopIconStyle.SOCIAL_BACKGROUND,
+    style: TopIconStyle.SocialBackground,
   });
 
   React.useEffect(() => {

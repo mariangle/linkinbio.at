@@ -3,22 +3,22 @@ import { TopIconStyle } from "@/types";
 export const topIconStyles = [
   {
     label: "Social Background",
-    value: TopIconStyle.SOCIAL_BACKGROUND,
+    value: TopIconStyle.SocialBackground,
   },
   {
     label: "Social Icon Color",
-    value: TopIconStyle.SOCIAL_ICON_COLOR,
+    value: TopIconStyle.SocialIconColor,
   },
   {
     label: "Black Background",
-    value: TopIconStyle.BLACK_BACKGROUND,
+    value: TopIconStyle.BlackBackground,
   },
   {
     label: "White Background",
-    value: TopIconStyle.WHITE_BACKGROUND,
+    value: TopIconStyle.WhiteBackground,
   },
   {
     label: "White Background Social Color",
-    value: TopIconStyle.WHITE_BACKGROUND_SOCIAL_COLOR,
+    value: TopIconStyle.WhiteBackgroundSocialColor,
   },
 ];

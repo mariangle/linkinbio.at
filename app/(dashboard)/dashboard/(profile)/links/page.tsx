@@ -1,4 +1,4 @@
-import { UserLinks } from "./user-links";
+import { UserLinks } from "../_components/user-links";
 
 async function getLinks() {
   const res = await fetch("https://api.example.com/links");

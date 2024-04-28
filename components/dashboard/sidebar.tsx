@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { Logo } from "@/components/ui/logo";
 import { ChevronLeft } from "lucide-react";
-import { dashboardLinks, profileLinks } from "@/constants/nav-links";
+import { dashboardLinks, biolinkLinks } from "@/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 
 export function Sidebar() {
@@ -23,7 +23,7 @@ export function Sidebar() {
           <Logo />
         </div>
         <ul className="my-2">
-          {profileLinks.map((item, index) => (
+          {biolinkLinks.map((item, index) => (
             <li key={index}>
               <NavItem item={item} collapsed={isCollapsed} />
             </li>

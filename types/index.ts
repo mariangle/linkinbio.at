@@ -1,4 +1,3 @@
-export * from "./discord";
 export * from "./user";
 export * from "./background";
 export * from "./profile";
@@ -12,3 +11,4 @@ export * from "./settings";
 export * from "./effect";
 export * from "./icon";
 export * from "./enums";
+export * from "./modules";

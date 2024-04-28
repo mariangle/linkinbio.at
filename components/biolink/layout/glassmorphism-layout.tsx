@@ -20,6 +20,7 @@ export function GlassmorphismLayout({
   config,
   profile,
   links,
+  modules,
   preview,
 }: LayoutProps) {
   return (

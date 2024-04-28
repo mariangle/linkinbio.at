@@ -13,13 +13,16 @@ import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { cn } from "@/lib/utils";
 import { determineBrightness } from "@/lib/utils/determine-brightness";
-
+import { SoundcloudTrack } from "../modules/soundcloud";
+import { SpotifyTrack, SpotifyAlbum } from "../modules/spotify";
+import { YoutubeVideo } from "../modules/youtube";
 import { LayoutProps } from ".";
 
 export function StandardLayout({
   user,
   config,
   profile,
+  modules,
   links,
   preview,
 }: LayoutProps) {
@@ -67,7 +70,7 @@ export function StandardLayout({
             whiteText={backgroundDark}
           />
         </div>
-        {config.showTopIcons && (
+        {config.showTopIcons && links && (
           <div className="mt-6 flex gap-4">
             {links.map((link, index) => (
               <TopIcon
@@ -79,10 +82,18 @@ export function StandardLayout({
             ))}
           </div>
         )}
-        <div className="my-8 w-full space-y-4">
-          {links.map((link, index) => (
-            <Button key={index} item={link} config={config.button} />
-          ))}
+        {links && (
+          <div className="my-8 w-full space-y-4">
+            {links.map((link, index) => (
+              <Button key={index} item={link} config={config.button} />
+            ))}
+          </div>
+        )}
+        <div className="w-full space-y-6">
+          <SoundcloudTrack options={modules?.soundcloud} />
+          <SpotifyTrack options={modules?.spotify?.track} />
+          <SpotifyAlbum options={modules?.spotify?.album} />
+          <YoutubeVideo options={modules?.youtube} />
         </div>
       </ContentContainer>
       <Footer textDark={!backgroundDark} />

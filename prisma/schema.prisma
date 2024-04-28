@@ -25,13 +25,16 @@ model User {
   button     Button?
   topIcon    TopIcon?
   effect     Effect?
+  Embed      Embed[]
 
   @@map("users")
 }
 
 enum Layout {
-  CLASSIC
-  MINIMAL
+  Standard
+  Professional
+  Glassmorphism
+  WithCover
 }
 
 model Configuration {
@@ -93,7 +96,6 @@ model Background {
 model Button {
   id                   Int     @id @default(autoincrement())
   userId               Int     @unique
-  configurationId      Int     @unique
   backgroundColor      String
   backgroundBlur       Float
   backgroundOpacity    Float
@@ -116,11 +118,10 @@ model Button {
 }
 
 model Title {
-  id              Int     @id @default(autoincrement())
-  userId          Int     @unique
-  configurationId Int     @unique
-  font            String?
-  color           String?
+  id     Int     @id @default(autoincrement())
+  userId Int     @unique
+  font   String?
+  color  String?
 
   user User @relation(fields: [userId], references: [id])
 
@@ -128,11 +129,11 @@ model Title {
 }
 
 enum TopIconStyle {
-  SOCIAL_COLOR
-  SOCIAL_BACKGROUND
-  BLACK_BACKGROUND
-  WHITE_BACKGROUND
-  WHITE_BACKGROUND_SOCIAL_COLOR
+  SocialColor
+  SocialBackground
+  BlackBackground
+  WhiteBackground
+  WhiteBackgroundSocialIconColor
 }
 
 model TopIcon {
@@ -147,16 +148,15 @@ model TopIcon {
 }
 
 enum WeatherEffect {
-  SNOW
-  RAIN
-  THUNDER
-  LIGHTNING_BUGS
+  Snow
+  Rain
+  Thunder
+  LightningBugs
 }
 
 model Effect {
   id                Int            @id @default(autoincrement())
   userId            Int            @unique
-  configurationId   Int            @unique
   titleTypewriter   Boolean
   titleSparkles     Boolean
   bioTypewriter     Boolean
@@ -165,4 +165,26 @@ model Effect {
   user User @relation(fields: [userId], references: [id])
 
   @@map("visuals")
+}
+
+enum EmbedType {
+  Youtube
+  Soundcloud
+  SpotifyTrack
+  SpotifyAlbum
+}
+
+model Embed {
+  id            Int       @id @default(autoincrement())
+  userId        Int
+  embedType     EmbedType
+  embedContent  String
+  darkMode      Boolean?
+  compactLayout Boolean?
+  enabled       Boolean   @default(true)
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, embedType])
+  @@map("embeds")
 }

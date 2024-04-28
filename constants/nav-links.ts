@@ -3,7 +3,7 @@ import {
   Link2 as Link,
   User,
   Palette,
-  Sparkles,
+  Puzzle,
   Layers3,
 } from "lucide-react";
 
@@ -30,7 +30,7 @@ export const dashboardLinks = [
   },
 ];
 
-export const profileLinks = [
+export const biolinkLinks = [
   {
     label: "Profile",
     href: "/dashboard/profile",
@@ -49,53 +49,18 @@ export const profileLinks = [
   {
     label: "Modules",
     href: "/dashboard/modules",
-    icon: Layers3,
+    icon: Puzzle,
   },
 ];
 
 export const settingsLinks = [
   {
-    label: "Account",
-    href: "/dashboard/settings/account",
-  },
-  {
-    label: "Appearance",
-    href: "/dashboard/settings/appearance",
+    label: "General",
+    href: "/dashboard/settings/general",
   },
   {
     label: "Billing",
     href: "/dashboard/settings/billing",
-  },
-];
-
-export const modulesLinks = [
-  {
-    label: "Spotify",
-    href: "/dashboard/modules/spotify",
-  },
-  {
-    label: "Discord",
-    href: "/dashboard/modules/discord",
-  },
-  {
-    label: "Twitch",
-    href: "/dashboard/modules/twitch",
-  },
-  {
-    label: "Twitter",
-    href: "/dashboard/modules/twitter",
-  },
-  {
-    label: "Youtube",
-    href: "/dashboard/modules/youtube",
-  },
-  {
-    label: "Soundcloud",
-    href: "/dashboard/modules/soundcloud",
-  },
-  {
-    label: "Instagram",
-    href: "/dashboard/modules/instagram",
   },
 ];
 
@@ -116,7 +81,7 @@ export const biolinkCustomizationLinks = [
 
 export const routes = [
   ...dashboardLinks,
-  ...profileLinks,
+  ...biolinkLinks,
   ...biolinkCustomizationLinks,
   ...settingsLinks,
 ];

@@ -1,7 +1,7 @@
-import { IconForm } from "./_components/icon-form";
-import { TitleForm } from "./_components/title-form";
-import { BackgroundForm } from "./_components/background-form";
-import { ButtonsForm } from "./_components/buttons-form";
+import { IconForm } from "../_components/icon-form";
+import { TitleForm } from "../_components/title-form";
+import { BackgroundForm } from "../_components/background-form";
+import { ButtonsForm } from "../_components/buttons-form";
 
 export default function Customization() {
   return (

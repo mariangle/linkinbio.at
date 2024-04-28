@@ -26,9 +26,16 @@ export enum AnimationVariant {
 }
 
 export enum TopIconStyle {
-  SOCIAL_BACKGROUND = "social-background",
-  BLACK_BACKGROUND = "black-background",
-  WHITE_BACKGROUND = "white-background",
-  SOCIAL_ICON_COLOR = "social-icon-color",
-  WHITE_BACKGROUND_SOCIAL_COLOR = "white-background-social-color",
+  SocialBackground = "social-background",
+  BlackBackground = "black-background",
+  WhiteBackground = "white-background",
+  SocialIconColor = "social-icon-color",
+  WhiteBackgroundSocialColor = "white-background-social-color",
+}
+
+export enum EmbedType {
+  Youtube = "youtube",
+  SpotifyAlbum = "spotify-album",
+  SpotifyTrack = "spotify-track",
+  Soundcloud = "soundcloud",
 }

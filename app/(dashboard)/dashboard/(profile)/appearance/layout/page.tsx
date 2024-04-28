@@ -1,4 +1,4 @@
-import { LayoutForm } from "../_components/layout-form";
+import { LayoutForm } from "../../_components/layout-form";
 
 export default function page() {
   return (
