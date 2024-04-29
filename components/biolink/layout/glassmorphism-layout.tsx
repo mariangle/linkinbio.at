@@ -18,7 +18,6 @@ import { LayoutProps } from ".";
 export function GlassmorphismLayout({
   user,
   config,
-  profile,
   links,
   modules,
   preview,
@@ -39,7 +38,7 @@ export function GlassmorphismLayout({
         <ContentContainer className="relative m-4 mb-12 mt-32 flex h-fit w-full max-w-lg flex-col items-center rounded-[3rem] border border-white/10 bg-gray-950/50 backdrop-blur-2xl">
           <ProfilePicture
             className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
-            src={profile.image}
+            src={user.image}
           />
           <div className="flex flex-col items-center justify-center">
             <div className="h-12"></div>
@@ -48,26 +47,26 @@ export function GlassmorphismLayout({
               typewriter={config.effects.titleTypewriter}
               sparkles={config.effects.titleSparkles}
               options={config.title}
-              title={profile.title ?? `@${user.username}`}
+              title={user.title ?? `@${user.username}`}
             />
-            {!config.hideUsername && profile.title && (
+            {!config.hideUsername && user.title && (
               <Username whiteText={true} username={user.username} />
             )}
-            {profile.bio && (
+            {user.bio && (
               <Bio
-                bio={profile.bio}
+                bio={user.bio}
                 whiteText={true}
                 typewriter={config.effects.bioTypewriter}
               />
             )}
             <Details
-              occupation={profile.occupation}
-              location={profile.location}
+              occupation={user.occupation}
+              location={user.location}
             />
           </div>
           {config.showTopIcons && (
             <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
-              {links.map((link, index) => (
+              {links?.map((link, index) => (
                 <TopIcon
                   options={config.topIcon}
                   key={index}
@@ -78,7 +77,7 @@ export function GlassmorphismLayout({
             </div>
           )}
           <div className="mt-6 w-full space-y-4 rounded-[2.8rem] border border-white/5 bg-white/5 px-4 py-6">
-            {links.map((link, index) => (
+            {links?.map((link, index) => (
               <Button key={index} item={link} config={config.button} />
             ))}
           </div>

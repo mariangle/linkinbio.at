@@ -41,7 +41,7 @@ export function LinkForm() {
     if (biolink) {
       const newLink = {
         ...link,
-        id: (biolink.links.length + 1).toString(),
+        id: (biolink.links?.length + 1).toString(),
       } as Link;
       updateBiolink({
         ...biolink,

@@ -1,13 +1,22 @@
 "use client";
 
 import * as React from "react";
+import { signOut } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 import { Breadcrumbs } from "@/components/dashboard/breadcrumbs";
 import { User } from "lucide-react";
 import { BurgerMenu } from "@/components/burger-menu";
 import { MobileMenu } from "../mobile-menu";
-import { dashboardLinks, biolinkLinks } from "@/constants/nav-links";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -28,10 +37,25 @@ export function Navbar() {
           <Breadcrumbs />
         </div>
         <div className="flex items-center gap-3">
-          <div className="rounded-full bg-muted">
-            <User className="size-7 p-1.5 text-foreground" />
-          </div>
-          <div>Maria</div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-2" role="button">
+                <div className="rounded-full bg-muted">
+                  <User className="size-7 p-1.5 text-foreground" />
+                </div>
+                <div className="text-sm">maria</div>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>maria</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <button onClick={async () => await signOut()}>
+                  sign out google
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <div className="flex items-center gap-2 md:hidden">
           <BurgerMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />

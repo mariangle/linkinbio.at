@@ -3,40 +3,34 @@ import { WeatherEffect } from "@/types";
 import { Layout, Font } from "@/types/enums";
 import { TopIconStyle } from "@/types";
 
-// Share
-// Social feed
-// embedded content
-
 export const dummyBiolink: Biolink = {
   user: {
     username: "johndoe",
     premium: true,
-  },
-  profile: {
     image:
-      "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
-    title: "John Doe",
-    bio: "I am a developer",
-    location: "Earth",
-    occupation: "Google",
+    "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
+  title: "John Doe",
+  bio: "I am a developer",
+  location: "Earth",
+  occupation: "Google",
   },
   config: {
     invertTextColor: false,
     font: Font.Inter,
     layout: Layout.Standard,
-    showTopIcons: true,
     hideUsername: false,
     background: {
       color: "#23a6d5",
     },
     topIcon: {
-      dropShadow: true,
-      style: TopIconStyle.SocialBackground,
+      shadow: true,
+      style: TopIconStyle.BlackBackgroundWhiteColor,
     },
     button: {
       shadow: {
         solid: false,
         spreadRadius: 0,
+        color: "#000000",
       },
       text: {
         color: "#FFFFFF",
@@ -57,7 +51,6 @@ export const dummyBiolink: Biolink = {
         hidden: false,
         shadow: false,
         socialIconColor: false,
-        dropShadow: false,
       },
     },
     title: {
@@ -78,39 +71,51 @@ export const dummyBiolink: Biolink = {
       order: 0,
       title: "Twitter",
       url: "https://twitter.com",
+      isTopIcon: true,
     },
     {
       id: "2",
       order: 1,
       title: "GitHub",
       url: "https://github.com",
+      isTopIcon: true,
     },
     {
       id: "3",
       order: 1,
       title: "Instagram",
       url: "https://instagram.com",
+      isTopIcon: true,
     },
     {
       id: "4",
       order: 1,
       title: "Website",
       url: "https://website.com",
+      isTopIcon: true,
     },
   ],
   modules: {
     spotify: {
-      enabled: true,
-      trackId: "123",
-      darkMode: false,
+      track: {
+        enabled: true,
+        trackId: "123",
+        darkMode: false,
+      },
+      album: {
+        enabled: true,
+        albumId: "123",
+        darkMode: false,
+        compactLayout: false,
+      },
     },
     youtube: {
       videoId: "123",
-      darkMode: false,
+      enabled: true,
     },
     soundcloud: {
       trackId: "123",
-      compactLayout: false,
+      enabled: true,
     },
   },
 };

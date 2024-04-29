@@ -8,7 +8,7 @@ import {
 import { FaGlobe } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { icons, hasRedundantIcon } from "@/constants/icons";
+import { icons, hasRedundantIcon } from "@/lib/constants/icons";
 
 export function IconPicker({
   iconId,

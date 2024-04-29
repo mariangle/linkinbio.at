@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { WeatherEffect } from "@/types";
-import { weatherEffects } from "@/constants/weather-effects";
+import { weatherEffects } from "@/lib/constants/weather-effects";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 import {

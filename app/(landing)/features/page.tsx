@@ -1,6 +1,6 @@
 const testData = async () => {
   try {
-    const res = await fetch(process.env.URL + "/api/biolink/username");
+    const res = await fetch(process.env.DEV_URL + "/api/biolink/username");
 
     return res.json();
   } catch (error) {

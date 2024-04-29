@@ -6,6 +6,7 @@ export interface ButtonOptions {
   shadow: {
     solid: boolean;
     spreadRadius: number;
+    color: string;
   };
   background: {
     color: string;
@@ -22,6 +23,5 @@ export interface ButtonOptions {
     hidden: boolean;
     shadow: boolean;
     socialIconColor: boolean;
-    dropShadow: boolean;
   };
 }

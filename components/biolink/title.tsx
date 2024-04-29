@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { fonts } from "@/constants/fonts";
+import { fonts } from "@/lib/constants/fonts";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
 import { TitleOptions } from "@/types";
-import { defaultTitle } from "@/constants/default-options";
+import { defaultTitle } from "@/lib/constants/default-options";
 
 export function Title({
   options = defaultTitle,

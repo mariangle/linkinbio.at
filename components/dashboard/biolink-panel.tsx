@@ -1,7 +1,7 @@
 "use client";
 
 import { BiolinkPreview } from "@/components/dashboard/biolink-preview";
-import { biolinkLinks } from "@/constants/nav-links";
+import { biolinkLinks } from "@/lib/constants/nav-links";
 import { usePathname } from "next/navigation";
 
 export function BiolinkPanel() {

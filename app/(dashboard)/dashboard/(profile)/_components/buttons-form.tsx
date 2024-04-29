@@ -32,6 +32,7 @@ export function ButtonsForm() {
     shadow: {
       solid: false,
       spreadRadius: 0,
+      color: "#000000",
     },
     text: {
       color: "#FFFFFF",
@@ -52,7 +53,6 @@ export function ButtonsForm() {
       hidden: false,
       shadow: false,
       socialIconColor: false,
-      dropShadow: false,
     },
   });
 
@@ -381,13 +381,13 @@ export function ButtonsForm() {
                         Icon Shadow
                       </div>
                       <Switch
-                        checked={buttonConfig.icon.dropShadow}
+                        checked={buttonConfig.icon.shadow}
                         onCheckedChange={() =>
                           setButtonConfig({
                             ...buttonConfig,
                             icon: {
                               ...buttonConfig.icon,
-                              dropShadow: !buttonConfig.icon.dropShadow,
+                              shadow: !buttonConfig.icon.shadow,
                             },
                           })
                         }

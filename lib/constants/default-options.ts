@@ -30,6 +30,7 @@ export const defaultButton: ButtonOptions = {
   shadow: {
     solid: false,
     spreadRadius: 0,
+    color: "#000000",
   },
   text: {
     color: "#FFFFFF",
@@ -50,21 +51,19 @@ export const defaultButton: ButtonOptions = {
     hidden: false,
     shadow: false,
     socialIconColor: false,
-    dropShadow: false,
   },
 };
 
 export const defaultVisuals: EffectsOptions = {};
 
 export const topIcon: TopIconOptions = {
-  dropShadow: true,
-  style: TopIconStyle.SocialBackground,
+  shadow: true,
+  style: TopIconStyle.SocialBackgroundWhiteColor,
 };
 
 export const defaultBiolink: Config = {
   layout: Layout.Standard,
   font: Font.Inter,
-  showTopIcons: false,
   hideUsername: false,
   invertTextColor: false,
   background: defaultBackground,

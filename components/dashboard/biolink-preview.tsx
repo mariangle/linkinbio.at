@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { usePathname } from "next/navigation";
-import { biolinkLinks } from "@/constants/nav-links";
+import { biolinkLinks } from "@/lib/constants/nav-links";
 import type { Biolink } from "@/types";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
@@ -13,6 +13,7 @@ export async function fetchBiolink(username: string) {
     const res = await fetch(`/api/biolink/${username}`, {
       cache: "no-store",
     });
+    console.log("fetching");
     if (res.ok) {
       return await res.json();
     }

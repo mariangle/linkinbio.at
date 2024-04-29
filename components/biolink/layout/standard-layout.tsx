@@ -21,7 +21,6 @@ import { LayoutProps } from ".";
 export function StandardLayout({
   user,
   config,
-  profile,
   modules,
   links,
   preview,
@@ -46,27 +45,27 @@ export function StandardLayout({
       />
       <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-center py-32">
         <div className="flex flex-col items-center justify-center">
-          <ProfilePicture className="mb-4" src={profile.image} />
+          <ProfilePicture className="mb-4" src={user.image} />
           <Title
             whiteText={backgroundDark}
             typewriter={config.effects.titleTypewriter}
             sparkles={config.effects.titleSparkles}
             options={config.title}
-            title={profile.title ?? `@${user.username}`}
+            title={user.title ?? `@${user.username}`}
           />
-          {!config.hideUsername && profile.title && (
+          {!config.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
           )}
-          {profile.bio && (
+          {user.bio && (
             <Bio
-              bio={profile.bio}
+              bio={user.bio}
               whiteText={backgroundDark}
               typewriter={config.effects.bioTypewriter}
             />
           )}
           <Details
-            occupation={profile.occupation}
-            location={profile.location}
+            occupation={user.occupation}
+            location={user.location}
             whiteText={backgroundDark}
           />
         </div>
@@ -89,6 +88,7 @@ export function StandardLayout({
             ))}
           </div>
         )}
+        <div>{JSON.stringify(config.hideUsername)}</div>
         <div className="w-full space-y-6">
           <SoundcloudTrack options={modules?.soundcloud} />
           <SpotifyTrack options={modules?.spotify?.track} />

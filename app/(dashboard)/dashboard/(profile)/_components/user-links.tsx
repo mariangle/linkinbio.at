@@ -10,7 +10,7 @@ import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function UserLinks() {
   const { biolink, loading } = useBiolinkPreview();
-  const [userLinks, setUserLinks] = React.useState<Link[]>([]);
+  const [userLinks, setUserLinks] = React.useState<Link[] | undefined>([]);
 
   React.useEffect(() => {
     if (biolink) {
@@ -28,7 +28,7 @@ export function UserLinks() {
           <div>
             <div>Your links</div>
             <ul className="mt-4 space-y-4">
-              {userLinks.map((item, index) => (
+              {userLinks?.map((item, index) => (
                 <li key={index}>
                   <LinkItem item={item} />
                 </li>

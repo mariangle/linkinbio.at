@@ -21,15 +21,14 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { TopIconOptions, TopIconStyle } from "@/types";
-import { topIconStyles } from "@/constants/top-icon-styles";
+import { topIconStyles } from "@/lib/constants/top-icon-styles";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function IconForm() {
   const { biolink, updateBiolink } = useBiolinkPreview();
-  const [showTopIcons, setShowTopIcons] = React.useState<boolean>(true);
   const [topIconOptions, setTopIconOptions] = React.useState<TopIconOptions>({
-    dropShadow: false,
-    style: TopIconStyle.SocialBackground,
+    shadow: false,
+    style: TopIconStyle.SocialBackgroundWhiteColor,
   });
 
   React.useEffect(() => {
@@ -39,40 +38,28 @@ export function IconForm() {
       ...biolink,
       config: {
         ...biolink.config,
-        showTopIcons: showTopIcons,
         topIcon: topIconOptions,
       },
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topIconOptions, showTopIcons]);
+  }, [topIconOptions]);
 
   return (
     <FormContainer>
       <FormContent>
         <FormHeading>Top Icons</FormHeading>
-        <FormSwitch
-          title="Enable Social Icons"
-          description="Automatically display social media icons at the top of your
-              profile."
-        >
-          <Switch
-            checked={showTopIcons}
-            onCheckedChange={() => setShowTopIcons(!showTopIcons)}
-          />
-        </FormSwitch>
         <Label>Styling</Label>
         <FormSwitch
           title="Shadow"
           description="Add a drop shadow to the top icons."
         >
           <Switch
-            checked={topIconOptions.dropShadow}
-            disabled={!showTopIcons}
+            checked={topIconOptions.shadow}
             onCheckedChange={() =>
               setTopIconOptions({
                 ...topIconOptions,
-                dropShadow: !topIconOptions.dropShadow,
+                shadow: !topIconOptions.shadow,
               })
             }
           />
@@ -86,7 +73,6 @@ export function IconForm() {
               style: style as TopIconStyle,
             })
           }
-          disabled={!showTopIcons}
         >
           <SelectTrigger>
             <SelectValue placeholder="Weather Effect" />

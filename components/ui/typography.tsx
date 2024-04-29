@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { routes } from "@/constants/nav-links";
+import { routes } from "@/lib/constants/nav-links";
 
 export function Heading({
   children,

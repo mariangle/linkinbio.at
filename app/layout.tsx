@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter } from "@/constants/fonts";
+import { inter } from "@/lib/constants/fonts";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 

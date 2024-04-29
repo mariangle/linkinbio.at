@@ -3,7 +3,6 @@ import type {
   Config,
   EffectsOptions,
   Link,
-  Profile,
   Modules,
   User,
 } from "@/types";
@@ -18,7 +17,6 @@ import { determineBrightness } from "@/lib/utils/determine-brightness";
 export interface LayoutProps {
   user: User;
   config: Config;
-  profile: Profile;
   links?: Link[];
   modules?: Modules;
   preview?: boolean;
@@ -44,7 +42,6 @@ export function Layout({
           <GlassmorphismLayout
             modules={biolink.modules}
             user={biolink.user}
-            profile={biolink.profile}
             links={biolink.links}
             config={biolink.config}
             preview={preview}
@@ -58,7 +55,6 @@ export function Layout({
           <WithCoverLayout
             modules={biolink.modules}
             user={biolink.user}
-            profile={biolink.profile}
             links={biolink.links}
             config={biolink.config}
             preview={preview}
@@ -72,7 +68,6 @@ export function Layout({
           <ProfessionalLayout
             modules={biolink.modules}
             user={biolink.user}
-            profile={biolink.profile}
             links={biolink.links}
             config={biolink.config}
             preview={preview}
@@ -86,7 +81,6 @@ export function Layout({
           <StandardLayout
             modules={biolink.modules}
             user={biolink.user}
-            profile={biolink.profile}
             links={biolink.links}
             config={biolink.config}
             preview={preview}

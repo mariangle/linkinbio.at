@@ -21,7 +21,7 @@ import {
 } from "@/components/dashboard/form";
 import { Button } from "@/components/ui/button";
 import { TitleOptions } from "@/types";
-import { fonts } from "@/constants/fonts";
+import { fonts } from "@/lib/constants/fonts";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function TitleForm() {
@@ -32,6 +32,7 @@ export function TitleForm() {
   });
 
   const [invertTextColor, setInvertTextColor] = React.useState<boolean>(false);
+  const [hideUsername, setHideUsername] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (!biolink) return;
@@ -41,12 +42,13 @@ export function TitleForm() {
       config: {
         ...biolink.config,
         invertTextColor: invertTextColor,
+        hideUsername: hideUsername,
         title: titleOptions,
       },
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [titleOptions, invertTextColor]);
+  }, [titleOptions, invertTextColor, hideUsername]);
 
   if (loading) {
     return <div>loading</div>;
@@ -107,6 +109,15 @@ export function TitleForm() {
           <Switch
             checked={invertTextColor}
             onCheckedChange={() => setInvertTextColor(!invertTextColor)}
+          />
+        </FormSwitch>
+        <FormSwitch
+          title="Hide Username"
+          description="Toggle to not display the username."
+        >
+          <Switch
+            checked={hideUsername}
+            onCheckedChange={() => setHideUsername(!hideUsername)}
           />
         </FormSwitch>
       </FormContent>

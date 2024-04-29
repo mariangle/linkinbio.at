@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import { IconPicker } from "@/components/icon-picker";
-import { socials } from "@/constants/social-links";
+import { socials } from "@/lib/constants/social-links";
 import { getDomain } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
@@ -38,7 +38,7 @@ export function LinkItem({ item }: { item: Link }) {
   const saveChanges = () => {
     setIsEditing(false);
     if (biolink) {
-      const updatedLinks = biolink.links.map((linkItem) => {
+      const updatedLinks = biolink.links?.map((linkItem) => {
         if (linkItem.id === item.id) {
           return {
             ...linkItem,
@@ -60,7 +60,7 @@ export function LinkItem({ item }: { item: Link }) {
     if (biolink) {
       updateBiolink({
         ...biolink,
-        links: biolink.links.filter((link) => link.id !== item.id),
+        links: biolink.links?.filter((link) => link.id !== item.id),
       });
     }
   };

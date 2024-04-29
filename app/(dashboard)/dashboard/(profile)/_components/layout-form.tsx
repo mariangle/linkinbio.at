@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 import { Layout } from "@/types/enums";
-import { layouts } from "@/constants/layouts";
+import { layouts } from "@/lib/constants/layouts";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Button } from "@/components/ui/button";

@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { AnimationVariant } from "@/types";
-import { animations } from "@/constants/animations";
+import { animations } from "@/lib/constants/animations";
 
 export function AnimationForm() {
   const [animationType, setAnimationType] = React.useState<AnimationVariant>(

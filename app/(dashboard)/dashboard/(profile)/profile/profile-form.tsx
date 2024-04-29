@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Profile } from "@/types";
+import { User } from "@/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { ImagePicker } from "@/components/image-picker";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
@@ -15,7 +15,7 @@ import { ProfilePicture } from "@/components/biolink/profile-picture";
 export function ProfileForm() {
   const { biolink, updateBiolink, loading } = useBiolinkPreview();
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [profileOptions, setProfileOptions] = React.useState<Profile>({
+  const [profileOptions, setProfileOptions] = React.useState<Partial<User>>({
     title: "",
     bio: "",
     image: "",
@@ -28,7 +28,10 @@ export function ProfileForm() {
 
     updateBiolink({
       ...biolink,
-      profile: profileOptions,
+      user: {
+        ...biolink.user,
+        ...profileOptions,
+      },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileOptions]);

@@ -18,7 +18,6 @@ import { LayoutProps } from ".";
 export function ProfessionalLayout({
   user,
   config,
-  profile,
   links,
   modules,
   preview,
@@ -44,10 +43,10 @@ export function ProfessionalLayout({
       <ContentContainer className="relative mb-24 mt-40 flex w-full flex-col items-center">
         <div className="flex w-full flex-col items-start justify-center">
           <div className="flex w-full items-end justify-between">
-            <ProfilePicture className="mb-4" src={profile.image} />
+            <ProfilePicture className="mb-4" src={user.image} />
             {config.showTopIcons && (
               <div className="flex gap-4">
-                {links.map((link, index) => (
+                {links?.map((link, index) => (
                   <TopIcon
                     options={config.topIcon}
                     key={index}
@@ -64,26 +63,26 @@ export function ProfessionalLayout({
             typewriter={config.effects.titleTypewriter}
             sparkles={config.effects.titleSparkles}
             options={config.title}
-            title={profile.title ?? `@${user.username}`}
+            title={user.title ?? `@${user.username}`}
           />
-          {!config.hideUsername && profile.title && (
+          {!config.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
           )}
-          {profile.bio && (
+          {user.bio && (
             <Bio
-              bio={profile.bio}
+              bio={user.bio}
               whiteText={backgroundDark}
               typewriter={config.effects.bioTypewriter}
             />
           )}
           <Details
-            occupation={profile.occupation}
-            location={profile.location}
+            occupation={user.occupation}
+            location={user.location}
             whiteText={backgroundDark}
           />
         </div>
         <div className="mt-8 w-full space-y-4">
-          {links.map((link, index) => (
+          {links?.map((link, index) => (
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>

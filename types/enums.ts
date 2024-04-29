@@ -26,10 +26,10 @@ export enum AnimationVariant {
 }
 
 export enum TopIconStyle {
-  SocialBackground = "social-background",
-  BlackBackground = "black-background",
-  WhiteBackground = "white-background",
-  SocialIconColor = "social-icon-color",
+  SocialBackgroundWhiteColor = "social-background-white-color",
+  BlackBackgroundWhiteColor = "black-background-white-color",
+  WhiteBackgroundBlackColor = "white-background-black-color",
+  NoBackgroundSocialColor = "no-background-social-color",
   WhiteBackgroundSocialColor = "white-background-social-color",
 }
 

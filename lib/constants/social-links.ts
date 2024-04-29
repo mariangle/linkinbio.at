@@ -18,8 +18,15 @@ import {
   FaSkype,
   FaQuora,
 } from "react-icons/fa";
-import { BsFillThreadsFill } from "react-icons/bs";
-import { Social } from "@/lib/types";
+import { IconType } from "react-icons/lib";
+
+export interface Social {
+  icon: IconType;
+  name: string;
+  url: string;
+  color: string;
+  gradientColors?: string[];
+}
 
 export const socials: Social[] = [
   {

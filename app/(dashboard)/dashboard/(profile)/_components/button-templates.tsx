@@ -7,6 +7,7 @@ const buttonTemplates: ButtonOptions[] = [
     shadow: {
       solid: false,
       spreadRadius: 0,
+      color: "#000000",
     },
     text: {
       color: "#FFFFFF",
@@ -27,13 +28,13 @@ const buttonTemplates: ButtonOptions[] = [
       hidden: false,
       shadow: false,
       socialIconColor: false,
-      dropShadow: false,
     },
   },
   {
     shadow: {
       solid: false,
       spreadRadius: 0,
+      color: "#000000",
     },
     text: {
       color: "#000000",
@@ -54,13 +55,13 @@ const buttonTemplates: ButtonOptions[] = [
       hidden: false,
       shadow: false,
       socialIconColor: false,
-      dropShadow: false,
     },
   },
   {
     shadow: {
       solid: true,
       spreadRadius: 0,
+      color: "#000000",
     },
     text: {
       color: "#FFFFFF",
@@ -81,13 +82,13 @@ const buttonTemplates: ButtonOptions[] = [
       hidden: true,
       shadow: false,
       socialIconColor: false,
-      dropShadow: false,
     },
   },
   {
     shadow: {
       solid: false,
       spreadRadius: 10,
+      color: "#000000",
     },
     text: {
       color: "#FFFFFF",
@@ -108,13 +109,13 @@ const buttonTemplates: ButtonOptions[] = [
       hidden: false,
       shadow: false,
       socialIconColor: false,
-      dropShadow: false,
     },
   },
   {
     shadow: {
       solid: false,
       spreadRadius: 0,
+      color: "#000000",
     },
     text: {
       color: "#FFFFFF",
@@ -135,13 +136,13 @@ const buttonTemplates: ButtonOptions[] = [
       hidden: false,
       shadow: false,
       socialIconColor: false,
-      dropShadow: true,
     },
   },
   {
     shadow: {
       solid: false,
       spreadRadius: 0,
+      color: "#000000",
     },
     text: {
       color: "#FFFFFF",
@@ -162,7 +163,6 @@ const buttonTemplates: ButtonOptions[] = [
       hidden: false,
       shadow: false,
       socialIconColor: true,
-      dropShadow: true,
     },
   },
 ];

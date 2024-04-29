@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "biolinker",
+  name: "linkinbio",
   description:
     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, amet.",
   url:

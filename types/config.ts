@@ -11,7 +11,6 @@ import type {
 export interface Config {
   layout: Layout;
   font: Font;
-  showTopIcons: boolean;
   hideUsername: boolean;
   invertTextColor: boolean;
   background: BackgroundOptions;

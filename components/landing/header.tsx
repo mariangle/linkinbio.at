@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { navLinks } from "@/constants/nav-links";
+import { navLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/landing/nav-item";
 import { useScrollThreshold } from "@/hooks/use-scroll-threshold";
 import { Container } from "@/components/ui/container";
@@ -59,7 +59,7 @@ export function Navbar() {
                 height={50}
                 className="size-5"
               />
-              <div className="font-semibold">biolinker</div>
+              <div className="font-semibold">linkinbio</div>
             </Link>
             <ul className="flex-2 hidden items-center gap-4 md:flex">
               {navLinks.map((link) => (
@@ -71,7 +71,7 @@ export function Navbar() {
             <ThemeToggle />
             <div className="flex items-center gap-2">
               <Link
-                href="/register"
+                href="/sign-up"
                 className={cn(
                   buttonVariants({ variant: "default" }),
                   "rounded-full",
@@ -80,7 +80,7 @@ export function Navbar() {
                 Get Started
               </Link>
               <Link
-                href="/login"
+                href="/sign-in"
                 className={cn(
                   buttonVariants({ variant: "secondary" }),
                   "rounded-full",

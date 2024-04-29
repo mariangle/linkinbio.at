@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { Logo } from "@/components/ui/logo";
 import { ChevronLeft } from "lucide-react";
-import { dashboardLinks, biolinkLinks } from "@/constants/nav-links";
+import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 
 export function Sidebar() {

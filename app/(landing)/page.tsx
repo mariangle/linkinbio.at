@@ -3,7 +3,7 @@ import BackgroundImage from "@/public/background.png";
 import { InfiniteMovingHighlights } from "@/components/landing/infinite-moving-highlights";
 import { Container } from "@/components/ui/container";
 import { ClaimLink } from "@/components/landing/claim-link";
-import { dummyBiolink } from "@/constants/dummy";
+import { dummyBiolink } from "@/lib/constants/dummy";
 import { PhoneMockup } from "@/components/phone-mockup";
 
 export default function Page() {

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { socials } from "@/constants/social-links";
+import { socials } from "@/lib/constants/social-links";
 import { hexToRgb, getDomain } from "@/lib/utils";
-import { icons } from "@/constants/icons";
+import { icons } from "@/lib/constants/icons";
 
 import type { Link as LinkType } from "@/types";
 import type { ButtonOptions } from "@/types";
@@ -76,7 +76,7 @@ export function Button({
                 color: config.icon.socialIconColor
                   ? socialLink.color
                   : config.text.color,
-                filter: config.icon.dropShadow
+                filter: config.icon.shadow
                   ? `drop-shadow(0 0 0.5rem ${
                       config.icon.socialIconColor
                         ? socialLink.color
@@ -90,7 +90,7 @@ export function Button({
             <icon.value
               style={{
                 color: config.text.color,
-                filter: config.icon.dropShadow
+                filter: config.icon.shadow
                   ? `drop-shadow(0 0 0.5rem ${config.text.color})`
                   : undefined,
               }}
@@ -100,7 +100,7 @@ export function Button({
             <FaGlobe
               style={{
                 color: config.text.color,
-                filter: config.icon.dropShadow
+                filter: config.icon.shadow
                   ? `drop-shadow(0 0 0.5rem ${config.text.color})`
                   : undefined,
               }}

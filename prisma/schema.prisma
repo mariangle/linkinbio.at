@@ -9,18 +9,60 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+model Account {
+  id                String  @id @default(cuid()) @map("_id")
+  userId            String  @map("user_id") @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
-  profile    Profile?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid()) @map("_id")
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id") @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  username            String?   @unique
+  lastUpdatedUsername DateTime?
+  emailVerified       DateTime?
+  name                String?
+  email               String?   @unique
+  bio                 String?
+  title               String?
+  image               String?
+  occupation          String?
+  location            String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  accounts   Account[]
+  sessions   Session[]
   links      Link[]
   config     Configuration?
-  title      Title?
+  userTitle  Title?
   background Background?
   button     Button?
   topIcon    TopIcon?
@@ -38,116 +80,109 @@ enum Layout {
 }
 
 model Configuration {
-  id              Int      @id @default(autoincrement())
-  userId          Int      @unique
-  showTopIcons    Boolean  @default(false)
-  invertTextColor Boolean?
-  hideUsername    Boolean?
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @unique @map("user_id") @db.ObjectId
+  invertTextColor Boolean? @map("invert_text_color")
+  hideUsername    Boolean? @map("hide_username")
   font            String?
-  layout          Layout?
+  layout          Layout?  @default(Standard)
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("configurations")
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  userId Int     @unique
-  bio    String?
-  title  String?
-  image  String?
-
-  user User @relation(fields: [userId], references: [id])
-
-  @@map("profiles")
-}
-
 model Link {
-  id       Int     @id @default(autoincrement())
-  userId   Int     @unique
-  url      String
-  hidden   Boolean
-  archived Boolean
-  title    String
-  order    Int
-  iconId   Int
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String  @unique @map("user_id") @db.ObjectId
+  url       String
+  isTopIcon Boolean @default(false) @map("is_top_icon")
+  archived  Boolean
+  title     String
+  order     Int
+  iconId    Int     @map("icon_id")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("links")
 }
 
 model Background {
-  id              Int     @id @default(autoincrement())
-  userId          Int     @unique
-  configurationId Int     @unique
-  url             String?
-  color           String?
-  startColor      String?
-  endColor        String?
-  angle           Int?
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String  @unique @map("user_id") @db.ObjectId
+  url        String?
+  color      String?
+  startColor String? @map("start_color")
+  endColor   String? @map("end_color")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("backgrounds")
 }
 
 model Button {
-  id                   Int     @id @default(autoincrement())
-  userId               Int     @unique
-  backgroundColor      String
-  backgroundBlur       Float
-  backgroundOpacity    Float
-  backgroundSocialIcon Boolean
-  shadowSolid          Boolean
-  shadowSpreadRadius   Int
-  borderRadius         Int
-  borderWidth          Int
-  borderColor          String
-  contentColor         String
-  textHidden           Boolean
-  iconHidden           Boolean
-  iconShadow           Boolean
-  iconSocialColor      Boolean
-  iconDropShadow       Boolean
+  id                   String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId               String  @unique @db.ObjectId
+  backgroundColor      String  @map("background_color")
+  backgroundBlur       Float   @map("background_blur")
+  backgroundOpacity    Float   @map("background_opacity")
+  backgroundSocialIcon Boolean @map("background_social_icon")
+  shadowSolid          Boolean @map("shadow_solid")
+  shadowSpreadRadius   Int     @map("shadow_spread_radius")
+  shadowColor          String  @map("shadow_color")
+  borderRadius         Int     @map("border_radius")
+  borderWidth          Int     @map("border_width")
+  borderColor          String  @map("border_color")
+  textColor            String  @map("text_color")
+  textHidden           Boolean @map("text_hidden")
+  iconHidden           Boolean @map("icon_hidden")
+  iconShadow           Boolean @map("icon_shadow")
+  iconSocialColor      Boolean @map("icon_social_color")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("buttons")
 }
 
 model Title {
-  id     Int     @id @default(autoincrement())
-  userId Int     @unique
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId String  @unique @map("user_id") @db.ObjectId
   font   String?
   color  String?
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("titles")
 }
 
 enum TopIconStyle {
-  SocialColor
-  SocialBackground
-  BlackBackground
-  WhiteBackground
-  WhiteBackgroundSocialIconColor
+  None
+  NoBackgroundSocialColor
+  SocialBackgroundWhiteColor
+  BlackBackgroundWhiteColor
+  WhiteBackgroundBlackColor
+  WhiteBackgroundSocialColor
 }
 
 model TopIcon {
-  id         Int           @id @default(autoincrement())
-  userId     Int           @unique
-  dropShadow Boolean?
-  style      TopIconStyle?
+  id     String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId String        @unique @map("user_id") @db.ObjectId
+  shadow Boolean?
+  style  TopIconStyle? @default(None)
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("icons")
 }
 
 enum WeatherEffect {
+  None
   Snow
   Rain
   Thunder
@@ -155,15 +190,16 @@ enum WeatherEffect {
 }
 
 model Effect {
-  id                Int            @id @default(autoincrement())
-  userId            Int            @unique
-  titleTypewriter   Boolean
-  titleSparkles     Boolean
-  bioTypewriter     Boolean
-  backgroundWeather WeatherEffect?
+  id                String         @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String         @unique @map("user_id") @db.ObjectId
+  titleTypewriter   Boolean        @map("title_typewriter")
+  titleSparkles     Boolean        @map("title_sparkles")
+  bioTypewriter     Boolean        @map("bio_typewriter")
+  backgroundWeather WeatherEffect? @default(None) @map("background_weather")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, id])
   @@map("visuals")
 }
 
@@ -175,15 +211,15 @@ enum EmbedType {
 }
 
 model Embed {
-  id            Int       @id @default(autoincrement())
-  userId        Int
-  embedType     EmbedType
-  embedContent  String
-  darkMode      Boolean?
-  compactLayout Boolean?
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String    @unique @map("user_id") @db.ObjectId
+  embedType     EmbedType @map("embed_type")
+  embedContent  String    @map("embed_content")
+  darkMode      Boolean?  @map("dark_mode")
+  compactLayout Boolean?  @map("compact_layout")
   enabled       Boolean   @default(true)
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, embedType])
   @@map("embeds")

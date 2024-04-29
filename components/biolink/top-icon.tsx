@@ -1,10 +1,11 @@
 import React from "react";
 import type { Link as LinkType, TopIconOptions } from "@/types";
-import { socials } from "@/constants/social-links";
+import { socials } from "@/lib/constants/social-links";
 import { getDomain, cn } from "@/lib/utils";
 import { TopIconStyle } from "@/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import Link from "next/link";
+import { Social } from "@/lib/constants/social-links";
 
 export function TopIcon({
   item,
@@ -29,7 +30,7 @@ export function TopIcon({
 
   if (!socialLink) return null;
 
-  if (options.style === TopIconStyle.SocialBackground) {
+  if (options.style === TopIconStyle.SocialBackgroundWhiteColor) {
     return (
       <TopIconLink
         social={{
@@ -39,7 +40,7 @@ export function TopIcon({
       >
         <socialLink.icon
           style={{
-            filter: options.dropShadow
+            filter: options.shadow
               ? `drop-shadow(0 0 0.35rem ${socialLink.color})`
               : undefined,
             color: whiteColor,
@@ -53,7 +54,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.BlackBackground) {
+  if (options.style === TopIconStyle.BlackBackgroundWhiteColor) {
     return (
       <TopIconLink
         social={{
@@ -63,7 +64,7 @@ export function TopIcon({
       >
         <socialLink.icon
           style={{
-            filter: options.dropShadow
+            filter: options.shadow
               ? `drop-shadow(0 0 0.35rem ${blackColor})`
               : undefined,
             color: whiteColor,
@@ -75,7 +76,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.WhiteBackground) {
+  if (options.style === TopIconStyle.WhiteBackgroundBlackColor) {
     return (
       <TopIconLink
         social={{
@@ -85,7 +86,7 @@ export function TopIcon({
       >
         <socialLink.icon
           style={{
-            filter: options.dropShadow
+            filter: options.shadow
               ? `drop-shadow(0 0 0.35rem ${whiteColor})`
               : undefined,
             color: blackColor,
@@ -107,7 +108,7 @@ export function TopIcon({
       >
         <socialLink.icon
           style={{
-            filter: options.dropShadow
+            filter: options.shadow
               ? `drop-shadow(0 0 0.35rem ${whiteColor})`
               : undefined,
             color: socialLink.gradientColors
@@ -125,7 +126,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.SocialIconColor) {
+  if (options.style === TopIconStyle.NoBackgroundSocialColor) {
     return (
       <TopIconLink
         social={{
@@ -135,7 +136,7 @@ export function TopIcon({
       >
         <socialLink.icon
           style={{
-            filter: options.dropShadow
+            filter: options.shadow
               ? `drop-shadow(0 0 0.35rem ${socialLink.color})`
               : undefined,
             color: socialLink.color,
@@ -155,7 +156,7 @@ export function TopIcon({
     >
       <socialLink.icon
         style={{
-          filter: options.dropShadow
+          filter: options.shadow
             ? `drop-shadow(0 0 0.5rem ${defaultColor})`
             : undefined,
           color: defaultColor,

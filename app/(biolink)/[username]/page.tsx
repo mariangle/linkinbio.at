@@ -5,7 +5,7 @@ import type { Biolink } from "@/types";
 
 async function getBiolink(username: string) {
   try {
-    const res = await fetch(`${process.env.URL}/api/biolink/${username}`, {
+    const res = await fetch(`${process.env.DEV_URL}/api/biolink/${username}`, {
       cache: "no-store",
     });
     if (res.ok) {
@@ -27,9 +27,9 @@ export async function generateMetadata({
   const biolink: Biolink = await getBiolink(params.username);
 
   return await constructMetadata({
-    title: `${biolink.profile.title} (@${biolink.user.username})  \u00b7 bio.link`,
-    image: biolink.profile.image ?? "",
-    description: biolink.profile.bio ?? "bio.link",
+    title: `${biolink.user.title} (@${biolink.user.username})  \u00b7 bio.link`,
+    image: biolink.user.image ?? "",
+    description: biolink.user.bio ?? "bio.link",
   });
 }
 

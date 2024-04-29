@@ -1,6 +1,5 @@
 export * from "./user";
 export * from "./background";
-export * from "./profile";
 export * from "./biolink";
 export * from "./config";
 export * from "./button";

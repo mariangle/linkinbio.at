@@ -17,7 +17,7 @@ export function ClaimLink() {
         isFocused && "bg-black/30 ring-1 ring-primary",
       )}
     >
-      <label htmlFor="claim-link">biolinker.in/</label>
+      <label htmlFor="claim-link">linkinbio.at/</label>
       <Input
         id="claim-link"
         onChange={(e) => setLink(e.target.value)}
