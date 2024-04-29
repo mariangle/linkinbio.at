@@ -1,4 +1,4 @@
-import { WeatherEffect } from "@/types";
+import { WeatherEffect } from "@/lib/types";
 
 export const weatherEffects = [
   {

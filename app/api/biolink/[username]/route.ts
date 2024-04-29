@@ -1,34 +1,54 @@
 import { NextResponse } from "next/server";
-import { dummyBiolink } from "@/lib/constants/dummy";
+import { constructBiolink } from "@/lib/utils/construct-biolink";
+import { db } from "@/lib/db";
+import { ExtendedUser } from "@/lib/utils/construct-biolink";
 
-import type { Biolink, User, Config, Settings, Link } from "@/types";
+export async function GET(
+  req: Request,
+  { params }: { params: { username: string } },
+) {
+  if (!params.username) {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Username is required",
+    });
+  }
 
-export async function GET(req: Request): Promise<NextResponse<Biolink>> {
-  const biolink = constructBiolink({
-    user: dummyBiolink.user,
-    config: dummyBiolink.config,
-    settings: dummyBiolink.settings,
-    links: dummyBiolink.links || [],
+  const user = await db.user.findUnique({
+    where: {
+      username: params.username,
+    },
+    include: {
+      background: true,
+      button: true,
+      config: true,
+      links: true,
+      userTitle: true,
+      topIcon: true,
+      embed: true,
+      effect: true,
+    },
   });
 
-  return NextResponse.json(biolink, { status: 200 });
-}
+  if (!user) {
+    return NextResponse.json({
+      status: 404,
+      ok: false,
+      data: null,
+      message: "User not found",
+    });
+  }
 
-const constructBiolink = ({
-  user,
-  config,
-  settings,
-  links,
-}: {
-  user: User;
-  config: Config;
-  settings: Settings;
-  links: Link[];
-}): Biolink => {
-  return {
-    user,
-    config,
-    settings,
-    links,
-  };
-};
+  const biolink = constructBiolink({
+    user: user as ExtendedUser,
+  });
+
+  return NextResponse.json({
+    status: 200,
+    ok: true,
+    data: biolink,
+    message: "Biolink fetched successfully",
+  });
+}

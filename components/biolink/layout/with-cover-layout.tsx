@@ -51,7 +51,7 @@ export function WithCoverLayout({
             typewriter={config.effects.titleTypewriter}
             sparkles={config.effects.titleSparkles}
             options={config.title}
-            title={user.title ?? `@${user.username}`}
+            title={user.title || `@${user.username}`}
           />
           {!config.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
@@ -69,18 +69,16 @@ export function WithCoverLayout({
             whiteText={backgroundDark}
           />
         </div>
-        {config.showTopIcons && (
-          <div className="mt-6 flex gap-4">
-            {links?.map((link, index) => (
-              <TopIcon
-                whiteText={backgroundDark}
-                options={config.topIcon}
-                key={index}
-                item={link}
-              />
-            ))}
-          </div>
-        )}
+        <div className="mt-6 flex gap-4">
+          {links?.map((link, index) => (
+            <TopIcon
+              whiteText={backgroundDark}
+              options={config.topIcon}
+              key={index}
+              item={link}
+            />
+          ))}
+        </div>
         <div className="mt-8 w-full space-y-4">
           {links?.map((link, index) => (
             <Button key={index} item={link} config={config.button} />

@@ -1,18 +1,18 @@
-import type { Biolink } from "@/types";
-import { WeatherEffect } from "@/types";
-import { Layout, Font } from "@/types/enums";
-import { TopIconStyle } from "@/types";
+import type { Biolink } from "@/lib/types";
+import { WeatherEffect } from "@/lib/types";
+import { Layout, Font } from "@/lib/types/enums";
+import { TopIconStyle } from "@/lib/types";
 
-export const dummyBiolink: Biolink = {
+export const defaultBiolink: Biolink = {
   user: {
     username: "johndoe",
-    premium: true,
+    premium: false,
     image:
-    "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
-  title: "John Doe",
-  bio: "I am a developer",
-  location: "Earth",
-  occupation: "Google",
+      "https://i.pinimg.com/564x/29/06/09/2906099a50ab7fc23dbc1a8f01ec64ac.jpg",
+    title: "John Doe",
+    bio: "I am a developer",
+    location: "Earth",
+    occupation: "",
   },
   config: {
     invertTextColor: false,
@@ -45,12 +45,12 @@ export const dummyBiolink: Biolink = {
         color: "#000000",
         opacity: 1,
         blur: 25,
-        socialIconColor: false,
+        socialColor: false,
       },
       icon: {
         hidden: false,
         shadow: false,
-        socialIconColor: false,
+        socialColor: false,
       },
     },
     title: {

@@ -47,7 +47,7 @@ export function GlassmorphismLayout({
               typewriter={config.effects.titleTypewriter}
               sparkles={config.effects.titleSparkles}
               options={config.title}
-              title={user.title ?? `@${user.username}`}
+              title={user.title || `@${user.username}`}
             />
             {!config.hideUsername && user.title && (
               <Username whiteText={true} username={user.username} />
@@ -59,23 +59,18 @@ export function GlassmorphismLayout({
                 typewriter={config.effects.bioTypewriter}
               />
             )}
-            <Details
-              occupation={user.occupation}
-              location={user.location}
-            />
+            <Details occupation={user.occupation} location={user.location} />
           </div>
-          {config.showTopIcons && (
-            <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
-              {links?.map((link, index) => (
-                <TopIcon
-                  options={config.topIcon}
-                  key={index}
-                  item={link}
-                  size="sm"
-                />
-              ))}
-            </div>
-          )}
+          <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
+            {links?.map((link, index) => (
+              <TopIcon
+                options={config.topIcon}
+                key={index}
+                item={link}
+                size="sm"
+              />
+            ))}
+          </div>
           <div className="mt-6 w-full space-y-4 rounded-[2.8rem] border border-white/5 bg-white/5 px-4 py-6">
             {links?.map((link, index) => (
               <Button key={index} item={link} config={config.button} />

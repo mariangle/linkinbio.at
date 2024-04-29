@@ -7,11 +7,11 @@ import { ChevronDown } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { YoutubeOptions } from "@/types";
+import { YoutubeOptions } from "@/lib/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function YoutubeForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreview();
   const [expanded, setExpanded] = React.useState(false);
   const [youtubeOptions, setYoutubeOptions] = React.useState<YoutubeOptions>({
     videoId: "",
@@ -23,7 +23,7 @@ export function YoutubeForm() {
   React.useEffect(() => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       modules: {
         ...biolink.modules,

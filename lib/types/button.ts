@@ -12,7 +12,7 @@ export interface ButtonOptions {
     color: string;
     opacity: number;
     blur: number;
-    socialIconColor: boolean;
+    socialColor: boolean;
   };
   border: {
     radius: number;
@@ -22,6 +22,6 @@ export interface ButtonOptions {
   icon: {
     hidden: boolean;
     shadow: boolean;
-    socialIconColor: boolean;
+    socialColor: boolean;
   };
 }

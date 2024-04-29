@@ -1,21 +1,21 @@
-import { TopIconStyle } from "@/types";
+import { TopIconStyle } from "@/lib/types";
 
 export const topIconStyles = [
   {
-    label: "Social Background",
-    value: TopIconStyle.SocialBackground,
+    label: "Social Background White Color",
+    value: TopIconStyle.SocialBackgroundWhiteColor,
   },
   {
-    label: "Social Icon Color",
-    value: TopIconStyle.SocialIconColor,
+    label: "No Background Social Color",
+    value: TopIconStyle.NoBackgroundSocialColor,
   },
   {
-    label: "Black Background",
-    value: TopIconStyle.BlackBackground,
+    label: "Black Background White Color",
+    value: TopIconStyle.BlackBackgroundWhiteColor,
   },
   {
-    label: "White Background",
-    value: TopIconStyle.WhiteBackground,
+    label: "White Background Black Color",
+    value: TopIconStyle.WhiteBackgroundBlackColor,
   },
   {
     label: "White Background Social Color",

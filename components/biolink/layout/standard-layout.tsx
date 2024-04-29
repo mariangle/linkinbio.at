@@ -51,7 +51,7 @@ export function StandardLayout({
             typewriter={config.effects.titleTypewriter}
             sparkles={config.effects.titleSparkles}
             options={config.title}
-            title={user.title ?? `@${user.username}`}
+            title={user.title || `@${user.username}`}
           />
           {!config.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
@@ -69,26 +69,21 @@ export function StandardLayout({
             whiteText={backgroundDark}
           />
         </div>
-        {config.showTopIcons && links && (
-          <div className="mt-6 flex gap-4">
-            {links.map((link, index) => (
-              <TopIcon
-                whiteText={backgroundDark}
-                options={config.topIcon}
-                key={index}
-                item={link}
-              />
-            ))}
-          </div>
-        )}
-        {links && (
-          <div className="my-8 w-full space-y-4">
-            {links.map((link, index) => (
-              <Button key={index} item={link} config={config.button} />
-            ))}
-          </div>
-        )}
-        <div>{JSON.stringify(config.hideUsername)}</div>
+        <div className="mt-6 flex gap-4">
+          {links.map((link, index) => (
+            <TopIcon
+              whiteText={backgroundDark}
+              options={config.topIcon}
+              key={index}
+              item={link}
+            />
+          ))}
+        </div>
+        <div className="my-8 w-full space-y-4">
+          {links.map((link, index) => (
+            <Button key={index} item={link} config={config.button} />
+          ))}
+        </div>
         <div className="w-full space-y-6">
           <SoundcloudTrack options={modules?.soundcloud} />
           <SpotifyTrack options={modules?.spotify?.track} />

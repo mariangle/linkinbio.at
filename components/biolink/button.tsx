@@ -3,8 +3,8 @@ import { socials } from "@/lib/constants/social-links";
 import { hexToRgb, getDomain } from "@/lib/utils";
 import { icons } from "@/lib/constants/icons";
 
-import type { Link as LinkType } from "@/types";
-import type { ButtonOptions } from "@/types";
+import type { Link as LinkType } from "@/lib/types";
+import type { ButtonOptions } from "@/lib/types";
 import { FaGlobe } from "react-icons/fa";
 
 export function Button({
@@ -12,28 +12,32 @@ export function Button({
   config,
   display,
 }: {
-  item: Pick<LinkType, "title" | "url" | "iconId">;
+  item: Pick<LinkType, "title" | "url" | "iconId" | "isTopIcon">;
   config: ButtonOptions;
   display?: boolean;
 }) {
+  if (item.isTopIcon) {
+    return null;
+  }
+
   const socialLink = socials.find((link) =>
     item.url.includes(getDomain(link.url)),
   );
 
   const icon = icons.find((icon) => icon.id === item.iconId);
 
-  const textColor = config.background.socialIconColor
+  const textColor = config.background.socialColor
     ? "#FFFFFF"
     : config.text.color;
 
   const backgroundColorRgb = hexToRgb(
-    config.background.socialIconColor
+    config.background.socialColor
       ? socialLink?.color ?? config.background.color
       : config.background.color,
   );
 
   const gradientBackground =
-    config.background.socialIconColor && socialLink?.gradientColors
+    config.background.socialColor && socialLink?.gradientColors
       ? `linear-gradient(to right, ${socialLink?.gradientColors.join(", ")})`
       : undefined;
 
@@ -58,7 +62,7 @@ export function Button({
         color: textColor,
         borderRadius: config.border.radius,
         border: `${config.border.width}px solid ${config.border.color}`,
-        backgroundImage: config.background.socialIconColor
+        backgroundImage: config.background.socialColor
           ? gradientBackground
           : undefined,
         backgroundColor: backgroundColorRgb
@@ -73,12 +77,12 @@ export function Button({
           {socialLink ? (
             <socialLink.icon
               style={{
-                color: config.icon.socialIconColor
+                color: config.icon.socialColor
                   ? socialLink.color
                   : config.text.color,
                 filter: config.icon.shadow
                   ? `drop-shadow(0 0 0.5rem ${
-                      config.icon.socialIconColor
+                      config.icon.socialColor
                         ? socialLink.color
                         : config.text.color
                     })`

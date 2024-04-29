@@ -1,0 +1,69 @@
+import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { auth } from "@/lib/auth";
+
+export async function PATCH(req: Request) {
+  const session = await auth();
+
+  if (!session?.user) {
+    return NextResponse.json({
+      status: 401,
+      ok: false,
+      data: null,
+      message: "Unauthorized",
+    });
+  }
+
+  const { username } = await req.json();
+
+  if (!username) {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Username is required",
+    });
+  }
+
+  const existingUserWithUsername = await db.user.findFirst({
+    where: {
+      username: username,
+    },
+  });
+
+  if (existingUserWithUsername) {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Username already exists",
+    });
+  }
+
+  // TODO: Check if username has been changed in the last 14 days
+
+  const user = await db.user.update({
+    where: {
+      id: session.user.id,
+    },
+    data: {
+      username: username,
+    },
+  });
+
+  if (!user) {
+    return NextResponse.json({
+      status: 404,
+      ok: false,
+      data: null,
+      message: "User not found",
+    });
+  }
+
+  return NextResponse.json({
+    status: 200,
+    ok: true,
+    data: null,
+    message: "Username updated successfully",
+  });
+}

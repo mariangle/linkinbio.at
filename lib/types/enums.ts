@@ -19,12 +19,6 @@ export enum WeatherEffect {
   LighthingBugs = "lightning-bugs",
 }
 
-export enum AnimationVariant {
-  FadeIn = "fade-in",
-  SlideIn = "slide-in",
-  Staggered = "staggered",
-}
-
 export enum TopIconStyle {
   SocialBackgroundWhiteColor = "social-background-white-color",
   BlackBackgroundWhiteColor = "black-background-white-color",

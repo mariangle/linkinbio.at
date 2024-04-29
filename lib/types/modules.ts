@@ -5,8 +5,8 @@ export interface Modules {
 }
 
 export interface SpotifyOptions {
-  track?: SpotifyTrackOptions;
-  album?: SpotifyAlbumOptions;
+  track: SpotifyTrackOptions;
+  album: SpotifyAlbumOptions;
 }
 
 export interface SpotifyAlbumOptions {

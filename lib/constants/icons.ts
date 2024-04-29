@@ -62,13 +62,13 @@ import {
 export const icons = [
   {
     id: 0,
-    label: "Amazon",
-    value: FaAmazon,
+    label: "Globe",
+    value: FaGlobe,
   },
   {
     id: 1,
-    label: "Globe",
-    value: FaGlobe,
+    label: "Amazon",
+    value: FaAmazon,
   },
   {
     id: 2,

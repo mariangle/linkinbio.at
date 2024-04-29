@@ -1,15 +1,27 @@
-import { UserLinks } from "../_components/user-links";
+import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { LinkForm } from "./link-form";
+import { NewLinkForm } from "./new-link-form";
 
-async function getLinks() {
-  const res = await fetch("https://api.example.com/links");
-  const data = await res.json();
-  return data;
-}
+export default async function Links() {
+  const biolink = await getBiolinkServer();
 
-export default function Links() {
+  if (!biolink) return null;
+
   return (
     <div>
-      <UserLinks />
+      <NewLinkForm />
+      <div className="mt-4">
+        <div>
+          <div>Your links</div>
+          <ul className="mt-4 space-y-4">
+            {biolink.links?.map((item) => (
+              <li key={item.id}>
+                <LinkForm item={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

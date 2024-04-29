@@ -1,7 +1,7 @@
 import { ThunderEffect } from "@/components/biolink/effects/thunder-effect";
 import { PrecipitationEffect } from "@/components/biolink/effects/rain-effect";
 import { LightningBugsEffect } from "@/components/biolink/effects/lightnings-bugs-effect";
-import { WeatherEffect as WeatherEffectType } from "@/types";
+import { WeatherEffect as WeatherEffectType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export function WeatherEffect({

@@ -4,20 +4,26 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-import { Layout } from "@/types/enums";
+import { Layout } from "@/lib/types/enums";
 import { layouts } from "@/lib/constants/layouts";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Button } from "@/components/ui/button";
 
-export function LayoutForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
-  const [layout, setLayout] = React.useState<Layout>(Layout.Standard);
+export function LayoutForm({
+  data,
+}: {
+  data: {
+    layout: Layout;
+  };
+}) {
+  const { biolink, setBiolink } = useBiolinkPreview();
+  const [layout, setLayout] = React.useState<Layout>(data.layout);
 
   React.useEffect(() => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       config: {
         ...biolink.config,
@@ -42,7 +48,7 @@ export function LayoutForm() {
                 selected && "rounded-xl border-border bg-primary/5",
               )}
             >
-              <div className="text-xl font-semibold">{item.label}</div>
+              <div className="text-xl font-semibold">{item.name}</div>
               <div className="my-8 w-fit">
                 <PhoneMockup
                   biolink={biolink}

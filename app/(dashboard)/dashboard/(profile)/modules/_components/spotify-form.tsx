@@ -6,14 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FaSpotify } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
-import { SpotifyAlbumOptions, SpotifyTrackOptions } from "@/types";
+import { SpotifyAlbumOptions, SpotifyTrackOptions } from "@/lib/types";
 import { Label } from "@/components/ui/label";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export function SpotifyForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreview();
   const [expanded, setExpanded] = React.useState(false);
   const [albumOptions, setAlbumOptions] = React.useState<SpotifyAlbumOptions>({
     albumId: "",
@@ -35,7 +35,7 @@ export function SpotifyForm() {
   React.useEffect(() => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       modules: {
         ...biolink.modules,

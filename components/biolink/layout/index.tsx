@@ -5,8 +5,8 @@ import type {
   Link,
   Modules,
   User,
-} from "@/types";
-import { Layout as LayoutEnum } from "@/types/enums";
+} from "@/lib/types";
+import { Layout as LayoutEnum } from "@/lib/types/enums";
 import { GlassmorphismLayout } from "@/components/biolink/layout/glassmorphism-layout";
 import { StandardLayout } from "@/components/biolink/layout/standard-layout";
 import { WithCoverLayout } from "@/components/biolink/layout/with-cover-layout";
@@ -17,7 +17,7 @@ import { determineBrightness } from "@/lib/utils/determine-brightness";
 export interface LayoutProps {
   user: User;
   config: Config;
-  links?: Link[];
+  links: Link[];
   modules?: Modules;
   preview?: boolean;
 }

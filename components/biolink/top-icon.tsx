@@ -1,25 +1,25 @@
 import React from "react";
-import type { Link as LinkType, TopIconOptions } from "@/types";
-import { socials } from "@/lib/constants/social-links";
-import { getDomain, cn } from "@/lib/utils";
-import { TopIconStyle } from "@/types";
+import type { Link as LinkType, TopIconOptions } from "@/lib/types";
+import { Social, socials } from "@/lib/constants/social-links";
+import { getDomain } from "@/lib/utils";
+import { TopIconStyle } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import Link from "next/link";
-import { Social } from "@/lib/constants/social-links";
+import { icons } from "@/lib/constants/icons";
+import { FaGlobe } from "react-icons/fa";
 
 export function TopIcon({
   item,
   options,
-  className,
-  size,
   whiteText = true,
 }: {
-  item: Pick<LinkType, "title" | "url">;
+  item: LinkType;
   options: TopIconOptions;
   className?: string;
-  size?: "sm" | "md" | "lg";
   whiteText?: boolean;
 }) {
+  if (!item.isTopIcon) return null;
+
   const socialLink = socials.find((link) =>
     item.url.includes(getDomain(link.url)),
   );
@@ -27,147 +27,210 @@ export function TopIcon({
   const blackColor = "#000000";
   const whiteColor = "#FFFFFF";
   const defaultColor = whiteText ? whiteColor : blackColor;
+  const icon = icons.find((icon) => icon.id === item.iconId);
 
-  if (!socialLink) return null;
+  const getDropShadow = (color: string) => {
+    return options.shadow ? `drop-shadow(0 0 0.35rem ${color})` : undefined;
+  };
 
-  if (options.style === TopIconStyle.SocialBackgroundWhiteColor) {
+  const getGradientColors = (socialLink: Social) =>
+    socialLink.gradientColors
+      ? getLinearGradient(socialLink.gradientColors)
+      : socialLink.color;
+
+  const getBackground = (color: string) => {
+    return socialLink ? getGradientColors(socialLink) : color;
+  };
+
+  const getLinearGradient = (colors: string[]) => {
+    return `linear-gradient(to right, ${colors.join(", ")})`;
+  };
+
+  function TopIconDisplay({
+    shadowOptions,
+    backgroundOptions,
+    iconOptions,
+  }: {
+    className?: string;
+    shadowOptions: {
+      color: string;
+      colorOnly: boolean;
+    };
+    backgroundOptions?: {
+      color: string;
+      colorOnly: boolean;
+    };
+    iconOptions: {
+      color: string;
+      colorOnly: boolean;
+    };
+  }) {
+    const DisplayIcon = socialLink
+      ? socialLink.icon
+      : item.iconId && icon
+        ? icon.value
+        : FaGlobe;
+
+    const shadowColor = socialLink ? socialLink.color : shadowOptions.color;
+    const iconColor = socialLink ? socialLink.color : iconOptions.color;
+
+    const filter = !shadowOptions.colorOnly
+      ? getDropShadow(shadowColor)
+      : getDropShadow(shadowOptions.color);
+
+    const color = !iconOptions.colorOnly
+      ? getBackground(iconColor)
+      : iconOptions.color;
+
+    if (!backgroundOptions) {
+      return (
+        <TopIconLink
+          social={{
+            name: socialLink?.name || item.title,
+            url: item.url,
+          }}
+        >
+          <DisplayIcon
+            style={{
+              filter,
+              color,
+            }}
+            className="size-6"
+          />
+        </TopIconLink>
+      );
+    }
+
+    const background = !backgroundOptions.colorOnly
+      ? getBackground(socialLink ? socialLink.color : backgroundOptions.color)
+      : backgroundOptions.color;
+
     return (
       <TopIconLink
         social={{
-          name: socialLink.name,
+          name: socialLink?.name || item.title,
           url: item.url,
         }}
       >
-        <socialLink.icon
+        <div
+          className="grid size-8 place-content-center rounded-full"
           style={{
-            filter: options.shadow
-              ? `drop-shadow(0 0 0.35rem ${socialLink.color})`
-              : undefined,
-            color: whiteColor,
-            background: socialLink.gradientColors
-              ? `linear-gradient(to right, ${socialLink.gradientColors.join(", ")})`
-              : socialLink.color,
+            filter,
+            background,
           }}
-          className={cn("size-8 rounded-full p-2", className)}
-        />
+        >
+          <DisplayIcon
+            style={{
+              color,
+            }}
+          />
+        </div>
       </TopIconLink>
+    );
+  }
+
+  if (options.style === TopIconStyle.SocialBackgroundWhiteColor) {
+    return (
+      <TopIconDisplay
+        shadowOptions={{
+          color: blackColor,
+          colorOnly: false,
+        }}
+        backgroundOptions={{
+          color: blackColor,
+          colorOnly: false,
+        }}
+        iconOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+      />
     );
   }
 
   if (options.style === TopIconStyle.BlackBackgroundWhiteColor) {
     return (
-      <TopIconLink
-        social={{
-          name: socialLink.name,
-          url: item.url,
+      <TopIconDisplay
+        shadowOptions={{
+          color: blackColor,
+          colorOnly: true,
         }}
-      >
-        <socialLink.icon
-          style={{
-            filter: options.shadow
-              ? `drop-shadow(0 0 0.35rem ${blackColor})`
-              : undefined,
-            color: whiteColor,
-            backgroundColor: blackColor,
-          }}
-          className={cn("size-8 rounded-full p-2", className)}
-        />
-      </TopIconLink>
+        backgroundOptions={{
+          color: blackColor,
+          colorOnly: true,
+        }}
+        iconOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+      />
     );
   }
 
   if (options.style === TopIconStyle.WhiteBackgroundBlackColor) {
     return (
-      <TopIconLink
-        social={{
-          name: socialLink.name,
-          url: item.url,
+      <TopIconDisplay
+        shadowOptions={{
+          color: whiteColor,
+          colorOnly: true,
         }}
-      >
-        <socialLink.icon
-          style={{
-            filter: options.shadow
-              ? `drop-shadow(0 0 0.35rem ${whiteColor})`
-              : undefined,
-            color: blackColor,
-            backgroundColor: whiteColor,
-          }}
-          className={cn("size-8 rounded-full p-2", className)}
-        />
-      </TopIconLink>
+        backgroundOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+        iconOptions={{
+          color: blackColor,
+          colorOnly: true,
+        }}
+      />
     );
   }
 
   if (options.style === TopIconStyle.WhiteBackgroundSocialColor) {
     return (
-      <TopIconLink
-        social={{
-          name: socialLink.name,
-          url: item.url,
+      <TopIconDisplay
+        shadowOptions={{
+          color: whiteColor,
+          colorOnly: true,
         }}
-      >
-        <socialLink.icon
-          style={{
-            filter: options.shadow
-              ? `drop-shadow(0 0 0.35rem ${whiteColor})`
-              : undefined,
-            color: socialLink.gradientColors
-              ? `linear-gradient(to right, ${socialLink.gradientColors.join(", ")})`
-              : socialLink.color,
-            backgroundColor: whiteColor,
-          }}
-          className={cn(
-            "size-8 rounded-full p-2",
-            size === "sm" && "size-6 p-1",
-            className,
-          )}
-        />
-      </TopIconLink>
+        backgroundOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+        iconOptions={{
+          color: blackColor,
+          colorOnly: false,
+        }}
+      />
     );
   }
 
   if (options.style === TopIconStyle.NoBackgroundSocialColor) {
     return (
-      <TopIconLink
-        social={{
-          name: socialLink.name,
-          url: item.url,
+      <TopIconDisplay
+        shadowOptions={{
+          color: defaultColor,
+          colorOnly: false,
         }}
-      >
-        <socialLink.icon
-          style={{
-            filter: options.shadow
-              ? `drop-shadow(0 0 0.35rem ${socialLink.color})`
-              : undefined,
-            color: socialLink.color,
-          }}
-          className={cn("size-6", className)}
-        />
-      </TopIconLink>
+        iconOptions={{
+          color: defaultColor,
+          colorOnly: false,
+        }}
+      />
     );
   }
 
   return (
-    <TopIconLink
-      social={{
-        name: socialLink.name,
-        url: item.url,
+    <TopIconDisplay
+      shadowOptions={{
+        color: defaultColor,
+        colorOnly: true,
       }}
-    >
-      <socialLink.icon
-        style={{
-          filter: options.shadow
-            ? `drop-shadow(0 0 0.5rem ${defaultColor})`
-            : undefined,
-          color: defaultColor,
-        }}
-        className={cn(
-          "size-6 rounded-full",
-          className,
-          size === "sm" && "size-5",
-        )}
-      />
-    </TopIconLink>
+      iconOptions={{
+        color: defaultColor,
+        colorOnly: true,
+      }}
+    />
   );
 }
 
@@ -182,7 +245,7 @@ export function TopIconLink({
   };
 }) {
   return (
-    <Tooltip content={social.name}>
+    <Tooltip content={social.name} smallWidth>
       <Link
         target="_blank"
         rel="noopener noreferrer"

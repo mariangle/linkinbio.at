@@ -55,6 +55,10 @@ model User {
   image               String?
   occupation          String?
   location            String?
+  invertTextColor     Boolean?  @map("invert_text_color")
+  hideUsername        Boolean?  @map("hide_username")
+  font                String?
+  layout              Layout?   @default(Standard)
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
@@ -67,7 +71,7 @@ model User {
   button     Button?
   topIcon    TopIcon?
   effect     Effect?
-  Embed      Embed[]
+  embed      Embed[]
 
   @@map("users")
 }
@@ -95,13 +99,13 @@ model Configuration {
 
 model Link {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String  @unique @map("user_id") @db.ObjectId
+  userId    String  @map("user_id") @db.ObjectId
   url       String
   isTopIcon Boolean @default(false) @map("is_top_icon")
   archived  Boolean
   title     String
   order     Int
-  iconId    Int     @map("icon_id")
+  iconId    Int?    @map("icon_id")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -124,23 +128,23 @@ model Background {
 }
 
 model Button {
-  id                   String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId               String  @unique @db.ObjectId
-  backgroundColor      String  @map("background_color")
-  backgroundBlur       Float   @map("background_blur")
-  backgroundOpacity    Float   @map("background_opacity")
-  backgroundSocialIcon Boolean @map("background_social_icon")
-  shadowSolid          Boolean @map("shadow_solid")
-  shadowSpreadRadius   Int     @map("shadow_spread_radius")
-  shadowColor          String  @map("shadow_color")
-  borderRadius         Int     @map("border_radius")
-  borderWidth          Int     @map("border_width")
-  borderColor          String  @map("border_color")
-  textColor            String  @map("text_color")
-  textHidden           Boolean @map("text_hidden")
-  iconHidden           Boolean @map("icon_hidden")
-  iconShadow           Boolean @map("icon_shadow")
-  iconSocialColor      Boolean @map("icon_social_color")
+  id                    String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String  @unique @db.ObjectId
+  backgroundColor       String  @map("background_color")
+  backgroundBlur        Float   @map("background_blur")
+  backgroundOpacity     Float   @map("background_opacity")
+  backgroundSocialColor Boolean @map("background_social_icon")
+  shadowSolid           Boolean @map("shadow_solid")
+  shadowSpreadRadius    Int     @map("shadow_spread_radius")
+  shadowColor           String  @map("shadow_color")
+  borderRadius          Int     @map("border_radius")
+  borderWidth           Int     @map("border_width")
+  borderColor           String  @map("border_color")
+  textColor             String  @map("text_color")
+  textHidden            Boolean @map("text_hidden")
+  iconHidden            Boolean @map("icon_hidden")
+  iconShadow            Boolean @map("icon_shadow")
+  iconSocialColor       Boolean @map("icon_social_color")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -192,9 +196,9 @@ enum WeatherEffect {
 model Effect {
   id                String         @id @default(auto()) @map("_id") @db.ObjectId
   userId            String         @unique @map("user_id") @db.ObjectId
-  titleTypewriter   Boolean        @map("title_typewriter")
-  titleSparkles     Boolean        @map("title_sparkles")
-  bioTypewriter     Boolean        @map("bio_typewriter")
+  titleTypewriter   Boolean        @default(false) @map("title_typewriter")
+  titleSparkles     Boolean        @default(false) @map("title_sparkles")
+  bioTypewriter     Boolean        @default(false) @map("bio_typewriter")
   backgroundWeather WeatherEffect? @default(None) @map("background_weather")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -212,7 +216,7 @@ enum EmbedType {
 
 model Embed {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String    @unique @map("user_id") @db.ObjectId
+  userId        String    @map("user_id") @db.ObjectId
   embedType     EmbedType @map("embed_type")
   embedContent  String    @map("embed_content")
   darkMode      Boolean?  @map("dark_mode")

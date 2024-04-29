@@ -44,26 +44,24 @@ export function ProfessionalLayout({
         <div className="flex w-full flex-col items-start justify-center">
           <div className="flex w-full items-end justify-between">
             <ProfilePicture className="mb-4" src={user.image} />
-            {config.showTopIcons && (
-              <div className="flex gap-4">
-                {links?.map((link, index) => (
-                  <TopIcon
-                    options={config.topIcon}
-                    key={index}
-                    item={link}
-                    size="sm"
-                    whiteText={backgroundDark}
-                  />
-                ))}
-              </div>
-            )}
+            <div className="flex gap-4">
+              {links?.map((link, index) => (
+                <TopIcon
+                  options={config.topIcon}
+                  key={index}
+                  item={link}
+                  size="sm"
+                  whiteText={backgroundDark}
+                />
+              ))}
+            </div>
           </div>
           <Title
             whiteText={backgroundDark}
             typewriter={config.effects.titleTypewriter}
             sparkles={config.effects.titleSparkles}
             options={config.title}
-            title={user.title ?? `@${user.username}`}
+            title={user.title || `@${user.username}`}
           />
           {!config.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />

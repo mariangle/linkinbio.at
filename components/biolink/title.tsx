@@ -3,11 +3,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { fonts } from "@/lib/constants/fonts";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
-import { TitleOptions } from "@/types";
-import { defaultTitle } from "@/lib/constants/default-options";
+import { TitleOptions } from "@/lib/types";
 
 export function Title({
-  options = defaultTitle,
+  options,
   typewriter,
   sparkles,
   className,
@@ -40,11 +39,11 @@ export function Title({
         <div
           className={cn(
             "text-xl font-semibold",
-            !options.color && whiteText ? "text-white" : "text-black",
+            !options?.color && whiteText ? "text-white" : "text-black",
             className,
             font?.display ?? "inter",
           )}
-          style={{ color: options.color ? options.color : undefined }}
+          style={{ color: options?.color ? options.color : undefined }}
         >
           <TypewriterEffect words={title} />
         </div>
@@ -69,10 +68,10 @@ export function Title({
         className={cn(
           "relative text-xl font-semibold",
           font?.display ?? "inter",
-          !options.color && whiteText ? "text-white" : "text-black",
+          !options?.color && whiteText ? "text-white" : "text-black",
           className,
         )}
-        style={{ color: options.color ? options.color : undefined }}
+        style={{ color: options?.color ? options.color : undefined }}
       >
         {title}
       </h2>

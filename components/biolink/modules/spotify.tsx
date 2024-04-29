@@ -1,4 +1,4 @@
-import { SpotifyAlbumOptions, SpotifyTrackOptions } from "@/types";
+import { SpotifyAlbumOptions, SpotifyTrackOptions } from "@/lib/types";
 
 export function SpotifyTrack({ options }: { options?: SpotifyTrackOptions }) {
   if (!options?.trackId) return null;
@@ -29,6 +29,20 @@ export function SpotifyAlbum({ options }: { options?: SpotifyAlbumOptions }) {
       allowFullScreen
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
+    ></iframe>
+  );
+}
+
+export function SpotifyPlaylist({ options }: { options?: any }) {
+  return (
+    <iframe
+      title="Spotify Playlist"
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DX5KpP2LN299J?utm_source=generator"
+      width="100%"
+      height="352"
+      allowFullScreen
+      loading="lazy"
+      style={{ borderRadius: "12px" }}
     ></iframe>
   );
 }

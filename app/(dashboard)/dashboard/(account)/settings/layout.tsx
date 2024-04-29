@@ -7,7 +7,7 @@ export default function SettingsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="md:max-w-screen-md">
       <SecondaryNav items={settingsLinks} />
       {children}
     </div>

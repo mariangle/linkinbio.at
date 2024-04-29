@@ -6,5 +6,5 @@ export interface Link {
   hidden?: boolean;
   archived?: boolean;
   isTopIcon: boolean;
-  iconId?: number;
+  iconId?: number | null;
 }

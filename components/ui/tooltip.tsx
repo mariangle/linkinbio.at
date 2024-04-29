@@ -35,10 +35,12 @@ export function Tooltip({
   children,
   content,
   position = "top",
+  smallWidth = false,
 }: {
   children: React.ReactNode;
   content: string;
   position?: "top" | "bottom" | "left" | "right";
+  smallWidth?: boolean;
 }) {
   return (
     <div className="group relative">
@@ -50,6 +52,7 @@ export function Tooltip({
             "bottom-6 left-1/2 -translate-x-1/2 -translate-y-1 group-hover:-translate-y-1/2",
           position === "right" &&
             "left-12 top-1/2 -translate-x-2 -translate-y-1/2 text-xs group-hover:translate-x-0",
+          smallWidth && "w-fit max-w-[100px] truncate text-center text-xs",
         )}
       >
         {content}

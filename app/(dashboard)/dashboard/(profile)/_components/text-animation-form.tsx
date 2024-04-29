@@ -11,24 +11,32 @@ import {
   FormSwitch,
 } from "@/components/dashboard/form";
 import { Button } from "@/components/ui/button";
-import { EffectsOptions } from "@/types";
+import { EffectsOptions } from "@/lib/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Label } from "@/components/ui/label";
 
-export function TextAnimationForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
+export function TextAnimationForm({
+  data,
+}: {
+  data: {
+    titleSparkles: boolean;
+    titleTypewriter: boolean;
+    bioTypewriter: boolean;
+  };
+}) {
+  const { biolink, setBiolink } = useBiolinkPreview();
   const [visualsOptions, setVisualOptions] = React.useState<
     Pick<EffectsOptions, "bioTypewriter" | "titleTypewriter" | "titleSparkles">
   >({
-    titleSparkles: false,
-    titleTypewriter: false,
-    bioTypewriter: false,
+    titleSparkles: data.titleSparkles,
+    titleTypewriter: data.titleTypewriter,
+    bioTypewriter: data.bioTypewriter,
   });
 
   React.useEffect(() => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       config: {
         ...biolink.config,

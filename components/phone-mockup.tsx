@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Layout } from "@/components/biolink/layout";
-import { Biolink, Layout as LayoutEnum } from "@/types";
+import { Biolink, Layout as LayoutEnum } from "@/lib/types";
 
 export function PhoneMockup({
   hero,

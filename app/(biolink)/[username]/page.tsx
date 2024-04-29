@@ -1,20 +1,14 @@
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
 
-import type { Biolink } from "@/types";
+import type { Biolink } from "@/lib/types";
 
-async function getBiolink(username: string) {
-  try {
-    const res = await fetch(`${process.env.DEV_URL}/api/biolink/${username}`, {
-      cache: "no-store",
-    });
-    if (res.ok) {
-      return await res.json();
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+export async function getServerBiolink(username: string) {
+  const res = await fetch(`${process.env.DEV_URL}/api/biolink/${username}`, {
+    cache: "no-store",
+  });
+  const apiResponse = await res.json();
+  return apiResponse.data;
 }
 
 export async function generateMetadata({
@@ -24,7 +18,9 @@ export async function generateMetadata({
     username: string;
   };
 }) {
-  const biolink: Biolink = await getBiolink(params.username);
+  const biolink: Biolink = await getServerBiolink(params.username);
+
+  if (!biolink) return null;
 
   return await constructMetadata({
     title: `${biolink.user.title} (@${biolink.user.username})  \u00b7 bio.link`,
@@ -40,7 +36,9 @@ export default async function Page({
     username: string;
   };
 }) {
-  const biolink: Biolink = await getBiolink(params.username);
+  const biolink: Biolink = await getServerBiolink(params.username);
+
+  if (!biolink) return "not found";
 
   return (
     <div>

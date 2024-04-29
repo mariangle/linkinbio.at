@@ -8,11 +8,11 @@ import { FaSoundcloud } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { SoundcloudOptions } from "@/types";
+import { SoundcloudOptions } from "@/lib/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
 export function SoundcloudForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreview();
   const [expanded, setExpanded] = React.useState(false);
   const [soundcloudOptions, setSoundcloudOptions] =
     React.useState<SoundcloudOptions>({
@@ -23,7 +23,7 @@ export function SoundcloudForm() {
   const update = () => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       modules: {
         ...biolink.modules,

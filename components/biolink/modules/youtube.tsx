@@ -1,4 +1,4 @@
-import { YoutubeOptions } from "@/types";
+import { YoutubeOptions } from "@/lib/types";
 
 export function YoutubeVideo({ options }: { options?: YoutubeOptions }) {
   if (!options?.videoId) return null;

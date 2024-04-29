@@ -1,4 +1,4 @@
-import { SoundcloudOptions } from "@/types";
+import { SoundcloudOptions } from "@/lib/types";
 
 export function SoundcloudTrack({ options }: { options?: SoundcloudOptions }) {
   if (!options?.trackId) return null;

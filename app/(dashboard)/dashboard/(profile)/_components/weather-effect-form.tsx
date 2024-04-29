@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { WeatherEffect } from "@/types";
+import { WeatherEffect } from "@/lib/types";
 import { weatherEffects } from "@/lib/constants/weather-effects";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 
@@ -21,16 +21,22 @@ import {
 } from "@/components/dashboard/form";
 import { Button } from "@/components/ui/button";
 
-export function WeatherEffectForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
-  const [weatherEffect, setWeatherEffect] = React.useState<WeatherEffect>(
-    WeatherEffect.Snow,
-  );
+export function WeatherEffectForm({
+  data,
+}: {
+  data: {
+    weatherEffect?: WeatherEffect;
+  };
+}) {
+  const { biolink, setBiolink } = useBiolinkPreview();
+  const [weatherEffect, setWeatherEffect] = React.useState<
+    WeatherEffect | undefined
+  >(data.weatherEffect);
 
   React.useEffect(() => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       config: {
         ...biolink.config,
@@ -54,11 +60,14 @@ export function WeatherEffectForm() {
           </FormDescription>
         </div>
         <Select
-          defaultValue={weatherEffect}
+          defaultValue={weatherEffect || "none"}
           onValueChange={(font) => setWeatherEffect(font as WeatherEffect)}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Weather Effect" />
+            <SelectValue
+              placeholder="Select Weather Effect"
+              className="placeholder:text-red-foreground"
+            />
           </SelectTrigger>
           <SelectContent>
             {weatherEffects.map((item, index) => (

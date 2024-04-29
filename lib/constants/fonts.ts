@@ -1,5 +1,6 @@
 import { Dancing_Script, Inter } from "next/font/google";
 import localFont from "next/font/local";
+import { Font } from "@/lib/types";
 
 export const inter = Inter({ subsets: ["latin"] });
 export const readex = localFont({
@@ -17,22 +18,22 @@ export const dancingScript = Dancing_Script({
 export const fonts = [
   {
     name: "Inter",
-    value: "inter",
+    value: Font.Inter,
     display: inter.className,
   },
   {
     name: "Readex",
-    value: "readex",
+    value: Font.Readex,
     display: readex.className,
   },
   {
     name: "Roboto",
-    value: "roboto",
+    value: Font.Roboto,
     display: roboto.className,
   },
   {
     name: "Dancing Script",
-    value: "dancing-script",
+    value: Font.DancingScript,
     display: dancingScript.className,
   },
 ];

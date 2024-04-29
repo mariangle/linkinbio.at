@@ -4,6 +4,5 @@ export interface BackgroundOptions {
   gradient?: {
     startColor: string;
     endColor: string;
-    angle: number;
   };
 }

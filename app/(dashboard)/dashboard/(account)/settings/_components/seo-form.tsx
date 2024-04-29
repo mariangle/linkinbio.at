@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 export function SeoForm() {
-  const { biolink, updateBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreview();
 
   return (
     <FormContainer>

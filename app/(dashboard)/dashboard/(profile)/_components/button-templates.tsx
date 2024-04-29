@@ -1,4 +1,4 @@
-import { ButtonOptions } from "@/types";
+import { ButtonOptions } from "@/lib/types";
 import { Button } from "@/components/biolink/button";
 import Image from "next/image";
 
@@ -22,12 +22,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
       opacity: 1,
       blur: 0,
-      socialIconColor: true,
+      socialColor: true,
     },
     icon: {
       hidden: false,
       shadow: false,
-      socialIconColor: false,
+      socialColor: false,
     },
   },
   {
@@ -49,12 +49,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#FFFFFF",
       opacity: 1,
       blur: 0,
-      socialIconColor: false,
+      socialColor: false,
     },
     icon: {
       hidden: false,
       shadow: false,
-      socialIconColor: false,
+      socialColor: false,
     },
   },
   {
@@ -76,12 +76,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#3492eb",
       opacity: 1,
       blur: 0,
-      socialIconColor: false,
+      socialColor: false,
     },
     icon: {
       hidden: true,
       shadow: false,
-      socialIconColor: false,
+      socialColor: false,
     },
   },
   {
@@ -103,12 +103,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
       opacity: 1,
       blur: 0,
-      socialIconColor: false,
+      socialColor: false,
     },
     icon: {
       hidden: false,
       shadow: false,
-      socialIconColor: false,
+      socialColor: false,
     },
   },
   {
@@ -130,12 +130,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
       opacity: 0.25,
       blur: 50,
-      socialIconColor: false,
+      socialColor: false,
     },
     icon: {
       hidden: false,
       shadow: false,
-      socialIconColor: false,
+      socialColor: false,
     },
   },
   {
@@ -157,12 +157,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#3f51b5",
       opacity: 0.5,
       blur: 50,
-      socialIconColor: false,
+      socialColor: false,
     },
     icon: {
       hidden: false,
       shadow: false,
-      socialIconColor: true,
+      socialColor: true,
     },
   },
 ];

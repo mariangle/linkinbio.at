@@ -1,20 +1,20 @@
-import { Layout } from "@/types/enums";
+import { Layout } from "@/lib/types/enums";
 
 export const layouts = [
   {
     value: Layout.Standard,
-    label: "Standard",
+    name: "Standard",
   },
   {
     value: Layout.WithCover,
-    label: "With Cover",
+    name: "With Cover",
   },
   {
     value: Layout.Professional,
-    label: "Professional",
+    name: "Professional",
   },
   {
     value: Layout.Glassmorphism,
-    label: "Glassmorphism",
+    name: "Glassmorphism",
   },
 ];

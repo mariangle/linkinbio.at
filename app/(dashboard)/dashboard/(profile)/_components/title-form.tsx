@@ -2,6 +2,11 @@
 
 import * as React from "react";
 
+import * as z from "zod";
+import { toast } from "sonner";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/color-picker";
@@ -19,111 +24,160 @@ import {
   FormContent,
   FormSwitch,
 } from "@/components/dashboard/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormLabel,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { TitleOptions } from "@/types";
+import { TitleOptions } from "@/lib/types";
 import { fonts } from "@/lib/constants/fonts";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { Font } from "@/lib/types/enums";
 
-export function TitleForm() {
-  const { biolink, updateBiolink, loading } = useBiolinkPreview();
-  const [titleOptions, setTitleOptions] = React.useState<TitleOptions>({
-    font: "inter",
-    color: "#aw23ad",
+const FormSchema = z.object({
+  color: z.string(),
+  font: z.string(),
+  invertTextColor: z.boolean(),
+  hideUsername: z.boolean(),
+});
+
+export function TitleForm({
+  data,
+}: {
+  data: {
+    title: Font;
+    color: string;
+    invertTextColor: boolean;
+    hideUsername: boolean;
+  };
+}) {
+  const { biolink, setBiolink } = useBiolinkPreview();
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      color: data.color,
+      font: data.title,
+      invertTextColor: data.invertTextColor,
+      hideUsername: data.hideUsername,
+    },
   });
 
-  const [invertTextColor, setInvertTextColor] = React.useState<boolean>(false);
-  const [hideUsername, setHideUsername] = React.useState<boolean>(false);
+  const invertTextColorWatch = form.watch("invertTextColor");
+  const hideUsernameWatch = form.watch("hideUsername");
+  const colorWatch = form.watch("color");
+  const fontWatch = form.watch("font");
 
   React.useEffect(() => {
     if (!biolink) return;
 
-    updateBiolink({
+    setBiolink({
       ...biolink,
       config: {
         ...biolink.config,
-        invertTextColor: invertTextColor,
-        hideUsername: hideUsername,
-        title: titleOptions,
+        invertTextColor: form.getValues("invertTextColor"),
+        hideUsername: form.getValues("hideUsername"),
+        title: {
+          color: form.getValues("color"),
+          font: form.getValues("font") as Font,
+        },
       },
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [titleOptions, invertTextColor, hideUsername]);
+  }, [invertTextColorWatch, hideUsernameWatch, colorWatch, fontWatch]);
 
-  if (loading) {
-    return <div>loading</div>;
-  }
+  const onSubmit = () => alert("submit");
 
   return (
-    <FormContainer>
-      <FormContent>
-        <FormHeading>Title</FormHeading>
-        <div className="mt-2 flex items-center gap-4">
-          <div className="space-y-2">
-            <Label>Color</Label>
-            <ColorPicker
-              small
-              color={titleOptions.color}
-              setColor={(color) =>
-                setTitleOptions({
-                  ...titleOptions,
-                  color,
-                })
-              }
-            />
-          </div>
-          <div className="w-full space-y-2">
-            <Label>Font</Label>
-            <div className="flex items-center gap-2">
-              <Select
-                defaultValue={titleOptions.font}
-                onValueChange={(font) =>
-                  setTitleOptions({
-                    ...titleOptions,
-                    font,
-                  })
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Font" />
-                </SelectTrigger>
-                <SelectContent>
-                  {fonts.map((item, index) => (
-                    <SelectItem
-                      key={index}
-                      value={item.value}
-                      className={item.display}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormContainer>
+          <FormContent>
+            <FormHeading>Title</FormHeading>
+            <div className="mt-2 flex items-center gap-4">
+              <div className="space-y-2">
+                <Label>Color</Label>
+                <ColorPicker
+                  color={form.getValues("color")}
+                  setColor={(color) => form.setValue("color", color)}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="font"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Style</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
                     >
-                      {item.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a top icon style" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fonts.map((item, index) => (
+                          <SelectItem key={index} value={item.value}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                        <SelectItem value="none">None</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-          </div>
-        </div>
-        <FormSwitch
-          title="Invert Text Color"
-          description="Toggle to manually invert the text color based on the background."
-        >
-          <Switch
-            checked={invertTextColor}
-            onCheckedChange={() => setInvertTextColor(!invertTextColor)}
-          />
-        </FormSwitch>
-        <FormSwitch
-          title="Hide Username"
-          description="Toggle to not display the username."
-        >
-          <Switch
-            checked={hideUsername}
-            onCheckedChange={() => setHideUsername(!hideUsername)}
-          />
-        </FormSwitch>
-      </FormContent>
-      <FormFooter>
-        <Button>Reset</Button>
-      </FormFooter>
-    </FormContainer>
+            <FormSwitch
+              title="Invert Text Color"
+              description="Toggle to manually invert the text color based on the background."
+            >
+              <FormField
+                control={form.control}
+                name="invertTextColor"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </FormSwitch>
+            <FormSwitch
+              title="Hide Username"
+              description="Toggle to not display the username."
+            >
+              <FormField
+                control={form.control}
+                name="hideUsername"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </FormSwitch>
+          </FormContent>
+          <FormFooter>
+            <Button>Reset</Button>
+          </FormFooter>
+        </FormContainer>
+      </form>
+    </Form>
   );
 }

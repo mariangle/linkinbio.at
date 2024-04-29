@@ -4,6 +4,6 @@ export interface Biolink {
   user: User;
   config: Config;
   settings: Settings;
-  links?: Link[];
+  links: Link[];
   modules?: Modules;
 }
