@@ -14,7 +14,7 @@ export const weatherEffects = [
     label: "Thunder",
   },
   {
-    value: WeatherEffect.LighthingBugs,
+    value: WeatherEffect.LightningBugs,
     label: "Lightning Bugs",
   },
 ];

@@ -1,8 +1,11 @@
 import { TopIconForm } from "../_components/top-icon-form";
-import { TitleForm } from "../_components/title-form";
+import { TitleForm } from "../_components/profile-form";
 import { BackgroundForm } from "../_components/background-form";
 import { ButtonsForm } from "../_components/buttons-form";
 import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { PageWithPreview } from "@/components/dashboard/page";
+import { SecondaryNav } from "@/components/dashboard/secondary-nav";
+import { biolinkCustomizationLinks } from "@/lib/constants/nav-links";
 
 export default async function Customization() {
   const biolink = await getBiolinkServer();
@@ -10,26 +13,30 @@ export default async function Customization() {
   if (!biolink) return null;
 
   return (
-    <div className="space-y-8 pt-8">
+    <PageWithPreview biolink={biolink}>
+      <SecondaryNav items={biolinkCustomizationLinks} />
       <TopIconForm
         data={{
           shadow: biolink.config?.topIcon?.shadow,
           style: biolink.config?.topIcon?.style,
         }}
+        customized={biolink.config?.topIcon?.customized}
       />
       <TitleForm
         data={{
-          title: biolink.config?.title?.font,
-          color: biolink.config?.title?.color,
-          invertTextColor: biolink.config?.invertTextColor,
-          hideUsername: biolink.config?.hideUsername,
+          titleFont: biolink.config?.profile?.title?.font,
+          titleColor: biolink.config?.profile?.title?.color,
+          invertTextColor: biolink.config?.profile.invertTextColor,
+          hideUsername: biolink.config?.profile.hideUsername,
         }}
+        customized={biolink.config?.profile?.customized}
       />
       <BackgroundForm
         data={{
           color: biolink.config?.background?.color,
           url: biolink.config?.background?.url,
         }}
+        customized={biolink.config?.background?.customized}
       />
       <ButtonsForm
         data={{
@@ -49,7 +56,8 @@ export default async function Customization() {
           iconShadow: biolink.config?.button?.icon.shadow,
           iconSocialColor: biolink.config?.button?.icon.socialColor,
         }}
+        customized={biolink.config?.button?.customized}
       />
-    </div>
+    </PageWithPreview>
   );
 }

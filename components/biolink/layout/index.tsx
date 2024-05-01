@@ -32,10 +32,10 @@ export function Layout({
   layout?: LayoutEnum;
 }) {
   const useDarkText = biolink.config.background.url
-    ? biolink.config.invertTextColor
+    ? biolink.config.profile.invertTextColor
     : determineBrightness(biolink.config.background.color);
 
-  switch (layout) {
+  switch (layout ?? biolink.config.profile.layout) {
     case LayoutEnum.Glassmorphism:
       return (
         <LayoutWrapper preview={preview} effects={biolink.config.effects}>
@@ -101,7 +101,7 @@ export function LayoutWrapper({
 }) {
   return (
     <div className="absolute inset-0">
-      <WeatherEffect preview={preview} variant={effects.weather} />
+      <WeatherEffect preview={preview} variant={effects.weatherEffect} />
       {children}
     </div>
   );

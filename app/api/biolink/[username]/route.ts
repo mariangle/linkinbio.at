@@ -23,11 +23,9 @@ export async function GET(
     include: {
       background: true,
       button: true,
-      config: true,
       links: true,
-      userTitle: true,
+      profile: true,
       topIcon: true,
-      embed: true,
       effect: true,
     },
   });

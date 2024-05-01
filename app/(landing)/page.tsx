@@ -21,10 +21,16 @@ export const dummyBiolink: Biolink = {
     occupation: "Google",
   },
   config: {
-    invertTextColor: false,
-    font: Font.Inter,
-    layout: Layout.Standard,
-    hideUsername: false,
+    profile: {
+      invertTextColor: false,
+      title: {
+        font: Font.Inter,
+        color: "#470000",
+      },
+      font: Font.Inter,
+      layout: Layout.Standard,
+      hideUsername: false,
+    },
     background: {
       color: "#23a6d5",
     },
@@ -59,18 +65,13 @@ export const dummyBiolink: Biolink = {
         socialColor: false,
       },
     },
-    title: {
-      font: Font.Inter,
-      color: "#470000",
-    },
     effects: {
       titleTypewriter: false,
       bioTypewriter: false,
       titleSparkles: false,
-      weather: WeatherEffect.Thunder,
+      weatherEffect: WeatherEffect.Thunder,
     },
   },
-  settings: {},
   links: [
     {
       id: "1",
@@ -132,7 +133,7 @@ export default function Page() {
       <Image
         src={BackgroundImage}
         alt="abstract background image"
-        className="fixed inset-0 h-full w-full scale-105 object-cover blur-md brightness-75 hue-rotate-[20deg]"
+        className="fixed inset-0 h-full w-full scale-105 object-cover blur-md brightness-75"
       />
       <Container
         className="relative flex min-h-screen flex-col gap-12 py-24 md:pt-32 lg:flex-row"
@@ -141,7 +142,7 @@ export default function Page() {
         <div className="relative flex flex-1 flex-col items-start justify-start gap-4 md:justify-center">
           <div className="max-w-4xl pb-4 text-5xl font-semibold text-gray-200 md:text-6xl lg:text-7xl">
             Lorem, ipsum.{" "}
-            <span className="animate-gradient bg-gradient-to-r from-indigo-500 via-indigo-400 via-40% to-indigo-500 to-50% bg-clip-text text-transparent">
+            <span className="animate-gradient bg-gradient-to-r from-blue-500 via-blue-600 via-40% to-blue-500 to-50% bg-clip-text text-transparent">
               advanced
             </span>{" "}
             Lorem ipsum dolor sit amet.s

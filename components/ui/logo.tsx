@@ -5,7 +5,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "o-indigo-800/20 w-fit rounded-full border border-border/50 bg-neutral-900 bg-gradient-to-tr from-slate-950 p-1.5 shadow-xl",
+        "w-fit rounded-full border border-border/50 bg-neutral-900 bg-gradient-to-tr from-slate-950 to-indigo-800/20 p-0.5 shadow-xl",
         className,
       )}
     >

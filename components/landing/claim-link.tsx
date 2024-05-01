@@ -27,14 +27,7 @@ export function ClaimLink() {
         maxLength={20}
       />
       <Link
-        href={
-          link
-            ? {
-                pathname: "/register",
-                query: { username: link },
-              }
-            : "/register"
-        }
+        href="/sign-up"
         className={cn(buttonVariants({ variant: "foreground" }))}
       >
         Claim your link

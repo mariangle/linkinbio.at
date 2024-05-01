@@ -47,7 +47,7 @@ export function UsernameForm({ username }: { username?: string }) {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
       setLoading(true);
-      const res = await fetch("/api/biolink/manage/username", {
+      const res = await fetch("/api/manage/username", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

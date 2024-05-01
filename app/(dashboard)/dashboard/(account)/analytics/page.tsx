@@ -1,3 +1,3 @@
 export function Analytics() {
-  return <div>page</div>;
+  return <div>Coming...</div>;
 }

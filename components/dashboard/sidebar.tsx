@@ -14,7 +14,7 @@ export function Sidebar() {
   return (
     <header
       className={cn(
-        "hidden md:sticky md:top-0 md:flex md:h-screen md:flex-col md:justify-between md:border-r md:duration-300",
+        "hidden md:sticky md:top-0 md:flex md:h-screen md:flex-col md:justify-between md:self-start md:border-r md:duration-300",
         isCollapsed ? "w-[72px]" : "w-[190px]",
       )}
     >

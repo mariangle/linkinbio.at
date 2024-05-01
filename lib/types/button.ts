@@ -24,4 +24,5 @@ export interface ButtonOptions {
     shadow: boolean;
     socialColor: boolean;
   };
+  customized?: boolean;
 }

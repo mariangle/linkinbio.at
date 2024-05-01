@@ -4,10 +4,9 @@ import * as React from "react";
 import { signOut } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
-import { Breadcrumbs } from "@/components/dashboard/breadcrumbs";
-import { User } from "lucide-react";
+import { User, LogOut, Settings, LifeBuoy, CreditCard } from "lucide-react";
 import { BurgerMenu } from "@/components/burger-menu";
-import { MobileMenu } from "../mobile-menu";
+import { MobileMenu } from "@/components/mobile-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,8 +16,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
+import type { User as UserType } from "@prisma/client";
+import Link from "next/link";
 
-export function Navbar() {
+export function Navbar({ user }: { user: UserType }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   return (
     <>
@@ -33,9 +34,6 @@ export function Navbar() {
           "flex items-center justify-between",
         )}
       >
-        <div className="hidden lg:block">
-          <Breadcrumbs />
-        </div>
         <div className="flex items-center gap-3">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -43,15 +41,45 @@ export function Navbar() {
                 <div className="rounded-full bg-muted">
                   <User className="size-7 p-1.5 text-foreground" />
                 </div>
-                <div className="text-sm">maria</div>
+                <div className="text-sm">{user.username}</div>
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>maria</DropdownMenuLabel>
+            <DropdownMenuContent className="max-w-[200px]">
+              <DropdownMenuLabel className="truncate">
+                {user.email}
+                {user.email}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <button onClick={async () => await signOut()}>
-                  sign out google
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/settings" className="flex items-center">
+                  <Settings className="mr-2 size-4" />
+                  Settings
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild disabled>
+                <Link
+                  href="/dashboard/settings/billing"
+                  className="flex items-center"
+                >
+                  <CreditCard className="mr-2 size-4" />
+                  Billing
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild disabled>
+                <Link href="/dashboard/settings" className="flex items-center">
+                  <LifeBuoy className="mr-2 size-4" />
+                  Support
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <button
+                  onClick={async () => await signOut()}
+                  className="w-full cursor-pointer"
+                >
+                  <LogOut className="mr-2 size-4" />
+                  Sign Out
                 </button>
               </DropdownMenuItem>
             </DropdownMenuContent>

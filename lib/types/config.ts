@@ -1,21 +1,15 @@
 import type {
   BackgroundOptions,
   ButtonOptions,
-  TitleOptions,
   EffectsOptions,
   TopIconOptions,
-  Layout,
-  Font,
+  ProfileOptions,
 } from ".";
 
 export interface Config {
-  layout: Layout;
-  font: Font;
-  hideUsername: boolean;
-  invertTextColor: boolean;
+  profile: ProfileOptions;
   background: BackgroundOptions;
   button: ButtonOptions;
   topIcon: TopIconOptions;
-  title: TitleOptions;
   effects: EffectsOptions;
 }

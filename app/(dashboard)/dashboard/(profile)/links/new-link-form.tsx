@@ -9,33 +9,38 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { XIcon, PlusIcon } from "lucide-react";
-import { IconPicker } from "@/components/icon-picker";
+import { PlusIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import {
-  FormHeading,
-  FormContainer,
-  FormFooter,
-  FormContent,
-} from "@/components/dashboard/form";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
-  title: z.string().max(20, {
-    message: "Title must be at most 20 characters.",
-  }),
+  title: z
+    .string()
+    .min(2, { message: "Title must be at least 2 characters." })
+    .max(20, {
+      message: "Title must be at most 20 characters.",
+    }),
   url: z.string().url(),
   isTopIcon: z.boolean().default(false),
-  iconId: z.number().optional(),
 });
 
 export function NewLinkForm() {
@@ -53,25 +58,10 @@ export function NewLinkForm() {
     },
   });
 
-  if (!isOpen) {
-    return (
-      <div className="flex max-w-xs items-center justify-start gap-2">
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="w-full rounded-full"
-          size="lg"
-        >
-          <PlusIcon className="mr-2 size-4 text-gray-300" />
-          Add Link
-        </Button>
-      </div>
-    );
-  }
-
   const add = async (data: z.infer<typeof FormSchema>) => {
     try {
       setLoading(true);
-      const res = await fetch("/api/biolink/manage/links", {
+      const res = await fetch("/api/manage/links", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,81 +99,80 @@ export function NewLinkForm() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(add)}>
-        <FormContainer>
-          <button
-            type="button"
-            onClick={() => setIsOpen(false)}
-            className="absolute right-2 top-2 rounded-full border bg-secondary p-1"
-          >
-            <XIcon className="size-3" />
-          </button>
-          <FormContent>
-            <FormHeading>New Link</FormHeading>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger
+        className="flex max-w-xs items-center justify-center gap-2"
+        asChild
+      >
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="w-full rounded-full"
+          size="lg"
+        >
+          <PlusIcon className="mr-2 size-4 text-gray-300" />
+          Add Link
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create a new Link</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(add)}>
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div>
-                  <IconPicker
-                    iconId={form.watch("iconId")}
-                    setIconId={(iconId) => {
-                      form.setValue("iconId", iconId);
-                      alert("Icon ID: " + iconId);
-                    }}
-                  />
-                </div>
-                <div className="w-full space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input placeholder="Title" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="url"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input placeholder="URL" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder="Title" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="url"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder="URL" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="isTopIcon"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                      <FormDescription>
+                        Display this link in the top icon section?
+                      </FormDescription>
+                    </div>
                     <FormControl>
-                      <Checkbox
+                      <Switch
                         checked={field.value}
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
-                    <FormLabel>Display as top icon</FormLabel>
                   </FormItem>
                 )}
               />
             </div>
-          </FormContent>
-          <FormFooter>
-            <Button type="button" onClick={cancel} variant="secondary">
-              Cancel
-            </Button>
-            <Button loading={loading}>Add</Button>
-          </FormFooter>
-        </FormContainer>
-      </form>
-    </Form>
+            <DialogFooter className="mt-4">
+              <Button type="button" onClick={cancel} variant="secondary">
+                Cancel
+              </Button>
+              <Button loading={loading}>Create Link</Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }

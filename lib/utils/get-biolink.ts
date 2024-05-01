@@ -3,15 +3,6 @@ import { db } from "@/lib/db";
 import { constructBiolink } from "@/lib/utils/construct-biolink";
 import { ExtendedUser } from "@/lib/utils/construct-biolink";
 
-export async function getCurrentUserBiolink() {
-  const res = await fetch(`/api/biolink/me`, {
-    cache: "no-store",
-  });
-  const apiResponse = await res.json();
-
-  return apiResponse.data;
-}
-
 export async function getBiolinkServer() {
   const session = await auth();
 
@@ -24,11 +15,9 @@ export async function getBiolinkServer() {
     include: {
       background: true,
       button: true,
-      config: true,
       links: true,
-      userTitle: true,
+      profile: true,
       topIcon: true,
-      embed: true,
       effect: true,
     },
   });

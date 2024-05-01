@@ -175,7 +175,7 @@ export function ButtonTemplates({
   return (
     <div className="relative overflow-hidden rounded-2xl">
       <Image
-        src="https://t4.ftcdn.net/jpg/04/89/68/23/360_F_489682374_ckc0OVyT6Av0NGcuYbwBSCxy62blF4CQ.jpg"
+        src="/background.png"
         unoptimized
         alt="awddwa"
         width={500}
@@ -197,6 +197,7 @@ export function ButtonTemplates({
                 item={{
                   title: "Facebook",
                   url: "https://facebook.com/username",
+                  isTopIcon: false,
                 }}
               />
             </div>

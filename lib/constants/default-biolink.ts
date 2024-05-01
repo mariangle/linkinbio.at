@@ -1,7 +1,6 @@
 import type { Biolink } from "@/lib/types";
 import { WeatherEffect } from "@/lib/types";
-import { Layout, Font } from "@/lib/types/enums";
-import { TopIconStyle } from "@/lib/types";
+import { TopIconStyle, Layout, Font } from "@/lib/types";
 
 export const defaultBiolink: Biolink = {
   user: {
@@ -54,7 +53,7 @@ export const defaultBiolink: Biolink = {
       },
     },
     title: {
-      font: "inter",
+      font: Font.Inter,
       color: "#470000",
     },
     effects: {
@@ -64,7 +63,6 @@ export const defaultBiolink: Biolink = {
       weather: WeatherEffect.Thunder,
     },
   },
-  settings: {},
   links: [
     {
       id: "1",

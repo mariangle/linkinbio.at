@@ -16,15 +16,6 @@ export async function PATCH(req: Request) {
 
   const { title, bio, image, occupation, location } = await req.json();
 
-  if (!title && !bio && !image && !occupation && !location) {
-    return NextResponse.json({
-      status: 400,
-      ok: false,
-      data: null,
-      message: "At least one field is required",
-    });
-  }
-
   // TODO: Get user and update user in two separate queries
 
   const user = await db.user.update({

@@ -27,41 +27,43 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormLabel,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { TitleOptions } from "@/lib/types";
 import { fonts } from "@/lib/constants/fonts";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Font } from "@/lib/types/enums";
 
 const FormSchema = z.object({
-  color: z.string(),
-  font: z.string(),
+  titleColor: z.string(),
+  titleFont: z.string(),
   invertTextColor: z.boolean(),
   hideUsername: z.boolean(),
 });
 
 export function TitleForm({
   data,
+  customized,
 }: {
   data: {
-    title: Font;
-    color: string;
+    titleFont: Font;
+    titleColor: string;
     invertTextColor: boolean;
     hideUsername: boolean;
   };
+  customized?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
+  const [loading, setLoading] = React.useState(false);
+  const [hasCustomized, setHasCustomized] = React.useState(customized);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      color: data.color,
-      font: data.title,
+      titleColor: data.titleColor,
+      titleFont: data.titleFont,
       invertTextColor: data.invertTextColor,
       hideUsername: data.hideUsername,
     },
@@ -69,8 +71,8 @@ export function TitleForm({
 
   const invertTextColorWatch = form.watch("invertTextColor");
   const hideUsernameWatch = form.watch("hideUsername");
-  const colorWatch = form.watch("color");
-  const fontWatch = form.watch("font");
+  const colorWatch = form.watch("titleColor");
+  const fontWatch = form.watch("titleFont");
 
   React.useEffect(() => {
     if (!biolink) return;
@@ -79,11 +81,14 @@ export function TitleForm({
       ...biolink,
       config: {
         ...biolink.config,
-        invertTextColor: form.getValues("invertTextColor"),
-        hideUsername: form.getValues("hideUsername"),
-        title: {
-          color: form.getValues("color"),
-          font: form.getValues("font") as Font,
+        profile: {
+          ...biolink.config.profile,
+          title: {
+            color: form.getValues("titleColor"),
+            font: form.getValues("titleFont") as Font,
+          },
+          invertTextColor: form.getValues("invertTextColor"),
+          hideUsername: form.getValues("hideUsername"),
         },
       },
     });
@@ -91,7 +96,30 @@ export function TitleForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invertTextColorWatch, hideUsernameWatch, colorWatch, fontWatch]);
 
-  const onSubmit = () => alert("submit");
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/manage/profile", {
+        method: hasCustomized ? "PATCH" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const { message, ok } = await res.json();
+
+      if (ok) {
+        toast.success(message);
+        setHasCustomized(true);
+      } else {
+        toast.error(message);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -103,13 +131,15 @@ export function TitleForm({
               <div className="space-y-2">
                 <Label>Color</Label>
                 <ColorPicker
-                  color={form.getValues("color")}
-                  setColor={(color) => form.setValue("color", color)}
+                  color={form.getValues("titleColor")}
+                  setColor={(color) => {
+                    form.setValue("titleColor", color);
+                  }}
                 />
               </div>
               <FormField
                 control={form.control}
-                name="font"
+                name="titleFont"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Style</FormLabel>
@@ -155,7 +185,7 @@ export function TitleForm({
             </FormSwitch>
             <FormSwitch
               title="Hide Username"
-              description="Toggle to not display the username."
+              description="Toggle to not display the username. You need a profile title to hide the username."
             >
               <FormField
                 control={form.control}
@@ -174,7 +204,7 @@ export function TitleForm({
             </FormSwitch>
           </FormContent>
           <FormFooter>
-            <Button>Reset</Button>
+            <Button loading={loading}>Reset</Button>
           </FormFooter>
         </FormContainer>
       </form>

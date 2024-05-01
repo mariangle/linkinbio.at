@@ -25,7 +25,7 @@ export function StandardLayout({
   links,
   preview,
 }: LayoutProps) {
-  const backgroundDark = config.invertTextColor
+  const backgroundDark = config.profile.invertTextColor
     ? !determineBrightness(config.background.color)
     : determineBrightness(config.background.color);
 
@@ -45,15 +45,18 @@ export function StandardLayout({
       />
       <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-center py-32">
         <div className="flex flex-col items-center justify-center">
-          <ProfilePicture className="mb-4" src={user.image} />
+          <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
+            options={{
+              typewriter: config.effects.titleTypewriter,
+              sparkles: config.effects.titleSparkles,
+              font: config.profile.title.font,
+              color: config.profile.title.color,
+            }}
             whiteText={backgroundDark}
-            typewriter={config.effects.titleTypewriter}
-            sparkles={config.effects.titleSparkles}
-            options={config.title}
             title={user.title || `@${user.username}`}
           />
-          {!config.hideUsername && user.title && (
+          {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
           )}
           {user.bio && (

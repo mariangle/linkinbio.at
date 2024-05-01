@@ -1,70 +1,59 @@
 import type { Biolink } from "@/lib/types";
-import { Layout, Font, TopIconStyle } from "@/lib/types/enums";
+import { Font } from "@/lib/types/enums";
+import {
+  convertToTopIconStyle,
+  convertToWeatherEffect,
+  convertToLayout,
+} from "@/lib/utils/enum-mappings";
 
 import { fonts } from "@/lib/constants/fonts";
-import { layouts } from "@/lib/constants/layouts";
-import { topIconStyles } from "@/lib/constants/top-icon-styles";
-import { weatherEffects } from "@/lib/constants/weather-effects";
 
 import type {
   User,
   Background,
   Button,
-  Title,
   TopIcon,
   Effect,
-  Configuration,
   Link,
-  Embed,
+  Profile,
 } from "@prisma/client";
 
 export interface ExtendedUser extends User {
   links?: Link[];
   background?: Background;
   button?: Button;
-  userTitle?: Title;
   topIcon?: TopIcon;
   effect?: Effect;
-  config?: Configuration;
-  embed?: Embed[];
+  profile?: Profile;
 }
 
-// TODO: Either use fallback or undefined to all - not both
-
-function getFont(font: string | null | undefined) {
-  return fonts.find((f) => f.name === font)?.value ?? Font.Inter;
+function getFont(titleFont: string | null | undefined): Font {
+  return fonts.find((f) => f.value === titleFont)?.value ?? Font.Inter;
 }
-
-function getLayout(layout: string | null | undefined) {
-  return layouts.find((l) => l.name === layout)?.value ?? Layout.Standard;
-}
-
-function getTopIconStyle(style: string | null | undefined) {
-  return topIconStyles.find((s) => s.label === style)?.value ?? undefined;
-}
-
-function getWeatherEffect(effect: string | null | undefined) {
-  return weatherEffects.find((e) => e.label === effect)?.value ?? undefined;
-}
-
-// TODO: Also check if user is premium
 
 export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
   return {
     user: {
-      username: user.username ?? "nousername",
+      username: user.username ?? "",
       title: user.title ?? undefined,
       image: user.image ?? undefined,
       occupation: user.occupation ?? undefined,
       location: user.location ?? undefined,
       bio: user.bio ?? undefined,
-      premium: true || false, // ! set to true for now
+      premium: true || false, // TODO: Also check if user is premium
     },
     config: {
-      invertTextColor: user.config?.invertTextColor ?? false,
-      font: getFont(user.config?.font),
-      layout: getLayout(user.config?.layout),
-      hideUsername: user.config?.hideUsername ?? false,
+      profile: {
+        customized: user.profile ? true : false,
+        title: {
+          color: user.profile?.titleColor ?? "#FFFFFF",
+          font: getFont(user.profile?.titleFont),
+        },
+        font: Font.Inter,
+        layout: convertToLayout(user.profile?.layout),
+        hideUsername: user.profile?.hideUsername ?? false,
+        invertTextColor: user.profile?.invertTextColor ?? false,
+      },
       button: {
         shadow: {
           solid: user.button?.shadowSolid ?? false,
@@ -91,9 +80,11 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
           shadow: user.button?.iconShadow ?? false,
           socialColor: user.button?.iconSocialColor ?? false,
         },
+        customized: user.button ? true : false,
       },
       background: {
-        color: user.background?.color ?? "#23a6d5",
+        customized: user.background ? true : false,
+        color: user.background?.color ?? "#0055B3",
         url: user.background?.url ?? undefined,
         gradient: {
           startColor: user.background?.startColor ?? "#FF512F",
@@ -102,20 +93,17 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       },
       topIcon: {
         shadow: user.topIcon?.shadow ?? false,
-        style: getTopIconStyle(user.topIcon?.style),
+        style: convertToTopIconStyle(user.topIcon?.style),
+        customized: user.topIcon ? true : false,
       },
       effects: {
+        customized: user.effect ? true : false,
         titleTypewriter: user.effect?.titleTypewriter ?? false,
         bioTypewriter: user.effect?.bioTypewriter ?? false,
         titleSparkles: user.effect?.titleSparkles ?? false,
-        weather: getWeatherEffect(user.effect?.backgroundWeather),
-      },
-      title: {
-        font: getFont(user.userTitle?.font),
-        color: user.userTitle?.color ?? "#470000",
+        weatherEffect: convertToWeatherEffect(user.effect?.backgroundWeather),
       },
     },
-    settings: {},
     links: user.links ?? [],
     modules: {},
   };

@@ -15,7 +15,7 @@ export const siteConfig = {
 export const metadata: Metadata = {
   title: {
     default: `${siteConfig.name}`,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s \u00b7 ${siteConfig.name}`,
   },
   description: siteConfig.description,
   icons: {

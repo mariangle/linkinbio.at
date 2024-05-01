@@ -5,4 +5,5 @@ export interface BackgroundOptions {
     startColor: string;
     endColor: string;
   };
+  customized?: boolean;
 }

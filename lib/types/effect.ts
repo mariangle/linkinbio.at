@@ -4,5 +4,6 @@ export interface EffectsOptions {
   bioTypewriter: boolean;
   titleTypewriter: boolean;
   titleSparkles: boolean;
-  weather?: WeatherEffect;
+  weatherEffect?: WeatherEffect;
+  customized?: boolean;
 }

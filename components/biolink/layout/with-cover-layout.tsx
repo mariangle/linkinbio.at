@@ -23,7 +23,7 @@ export function WithCoverLayout({
   links,
   preview,
 }: LayoutProps) {
-  const backgroundDark = config.invertTextColor
+  const backgroundDark = config.profile.invertTextColor
     ? !determineBrightness(config.background.color)
     : determineBrightness(config.background.color);
   return (
@@ -45,15 +45,18 @@ export function WithCoverLayout({
       </div>
       <ContentContainer className="relative mb-24 mt-40 flex w-full flex-col items-center">
         <div className="flex flex-col items-center justify-center">
-          <ProfilePicture className="mb-4" src={user.image} />
+          <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
             whiteText={backgroundDark}
-            typewriter={config.effects.titleTypewriter}
-            sparkles={config.effects.titleSparkles}
-            options={config.title}
+            options={{
+              typewriter: config.effects.titleTypewriter,
+              sparkles: config.effects.titleSparkles,
+              font: config.profile.title.font,
+              color: config.profile.title.color,
+            }}
             title={user.title || `@${user.username}`}
           />
-          {!config.hideUsername && user.title && (
+          {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
           )}
           {user.bio && (

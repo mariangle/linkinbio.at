@@ -77,7 +77,7 @@ export function LinkForm({ item }: { item: Link }) {
   const save = async (data: z.infer<typeof FormSchema>) => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/biolink/manage/links/${item.id}`, {
+      const res = await fetch(`/api/manage/links/${item.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export function LinkForm({ item }: { item: Link }) {
   const remove = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/biolink/manage/links/${item.id}`, {
+      const res = await fetch(`/api/manage/links/${item.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

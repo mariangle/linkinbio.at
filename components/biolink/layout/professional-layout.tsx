@@ -22,7 +22,7 @@ export function ProfessionalLayout({
   modules,
   preview,
 }: LayoutProps) {
-  const backgroundDark = config.invertTextColor
+  const backgroundDark = config.profile.invertTextColor
     ? !determineBrightness(config.background.color)
     : determineBrightness(config.background.color);
   return (
@@ -50,20 +50,22 @@ export function ProfessionalLayout({
                   options={config.topIcon}
                   key={index}
                   item={link}
-                  size="sm"
                   whiteText={backgroundDark}
                 />
               ))}
             </div>
           </div>
           <Title
+            options={{
+              typewriter: config.effects.titleTypewriter,
+              sparkles: config.effects.titleSparkles,
+              font: config.profile.title.font,
+              color: config.profile.title.color,
+            }}
             whiteText={backgroundDark}
-            typewriter={config.effects.titleTypewriter}
-            sparkles={config.effects.titleSparkles}
-            options={config.title}
             title={user.title || `@${user.username}`}
           />
-          {!config.hideUsername && user.title && (
+          {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
           )}
           {user.bio && (

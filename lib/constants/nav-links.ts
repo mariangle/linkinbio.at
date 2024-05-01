@@ -53,17 +53,6 @@ export const biolinkLinks = [
   },
 ];
 
-export const settingsLinks = [
-  {
-    label: "General",
-    href: "/dashboard/settings/general",
-  },
-  {
-    label: "Billing",
-    href: "/dashboard/settings/billing",
-  },
-];
-
 export const biolinkCustomizationLinks = [
   {
     label: "Appearance",
@@ -83,5 +72,4 @@ export const routes = [
   ...dashboardLinks,
   ...biolinkLinks,
   ...biolinkCustomizationLinks,
-  ...settingsLinks,
 ];

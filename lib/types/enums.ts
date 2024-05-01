@@ -16,7 +16,7 @@ export enum WeatherEffect {
   Rain = "rain",
   Snow = "snow",
   Thunder = "thunder",
-  LighthingBugs = "lightning-bugs",
+  LightningBugs = "lightning-bugs",
 }
 
 export enum TopIconStyle {

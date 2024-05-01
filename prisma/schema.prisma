@@ -46,8 +46,8 @@ model Session {
 model User {
   id                  String    @id @default(auto()) @map("_id") @db.ObjectId
   username            String?   @unique
-  lastUpdatedUsername DateTime?
-  emailVerified       DateTime?
+  lastUpdatedUsername DateTime? @map("last_updated_username")
+  emailVerified       DateTime? @map("email_verified")
   name                String?
   email               String?   @unique
   bio                 String?
@@ -58,20 +58,22 @@ model User {
   invertTextColor     Boolean?  @map("invert_text_color")
   hideUsername        Boolean?  @map("hide_username")
   font                String?
+  premium             Boolean?  @default(false)
   layout              Layout?   @default(Standard)
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
 
   accounts   Account[]
   sessions   Session[]
   links      Link[]
-  config     Configuration?
-  userTitle  Title?
+  profile    Profile?
   background Background?
   button     Button?
   topIcon    TopIcon?
   effect     Effect?
-  embed      Embed[]
+  spotify    Spotify?
+  youtube    Youtube?
+  soundcloud Soundcloud?
 
   @@map("users")
 }
@@ -81,20 +83,6 @@ enum Layout {
   Professional
   Glassmorphism
   WithCover
-}
-
-model Configuration {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId          String   @unique @map("user_id") @db.ObjectId
-  invertTextColor Boolean? @map("invert_text_color")
-  hideUsername    Boolean? @map("hide_username")
-  font            String?
-  layout          Layout?  @default(Standard)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, id])
-  @@map("configurations")
 }
 
 model Link {
@@ -152,20 +140,23 @@ model Button {
   @@map("buttons")
 }
 
-model Title {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId String  @unique @map("user_id") @db.ObjectId
-  font   String?
-  color  String?
+model Profile {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @unique @map("user_id") @db.ObjectId
+  titleFont       String?  @map("title_font")
+  titleColor      String?  @map("title_color")
+  invertTextColor Boolean? @map("invert_text_color")
+  hideUsername    Boolean? @map("hide_username")
+  textFont        String?  @map("text_font")
+  layout          Layout?  @default(Standard)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, id])
-  @@map("titles")
+  @@map("profiles")
 }
 
 enum TopIconStyle {
-  None
   NoBackgroundSocialColor
   SocialBackgroundWhiteColor
   BlackBackgroundWhiteColor
@@ -177,7 +168,7 @@ model TopIcon {
   id     String        @id @default(auto()) @map("_id") @db.ObjectId
   userId String        @unique @map("user_id") @db.ObjectId
   shadow Boolean?
-  style  TopIconStyle? @default(None)
+  style  TopIconStyle?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -186,7 +177,6 @@ model TopIcon {
 }
 
 enum WeatherEffect {
-  None
   Snow
   Rain
   Thunder
@@ -199,7 +189,7 @@ model Effect {
   titleTypewriter   Boolean        @default(false) @map("title_typewriter")
   titleSparkles     Boolean        @default(false) @map("title_sparkles")
   bioTypewriter     Boolean        @default(false) @map("bio_typewriter")
-  backgroundWeather WeatherEffect? @default(None) @map("background_weather")
+  backgroundWeather WeatherEffect? @map("background_weather")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -207,24 +197,36 @@ model Effect {
   @@map("visuals")
 }
 
-enum EmbedType {
-  Youtube
-  Soundcloud
-  SpotifyTrack
-  SpotifyAlbum
-}
-
-model Embed {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String    @map("user_id") @db.ObjectId
-  embedType     EmbedType @map("embed_type")
-  embedContent  String    @map("embed_content")
-  darkMode      Boolean?  @map("dark_mode")
-  compactLayout Boolean?  @map("compact_layout")
-  enabled       Boolean   @default(true)
+model Spotify {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String   @unique @map("user_id") @db.ObjectId
+  trackId       String?  @unique(map: "track_id") @map("track_id")
+  albumId       String?  @unique(map: "album_id") @map("album_id")
+  playlistId    String?  @unique(map: "playlist_id") @map("playlist_id")
+  darkMode      Boolean? @map("dark_mode")
+  compactLayout Boolean? @map("compact_layout")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, embedType])
-  @@map("embeds")
+  @@map("spotify")
+}
+
+model Youtube {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String @unique @map("user_id") @db.ObjectId
+  videoId String @map("video_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("youtube")
+}
+
+model Soundcloud {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String @unique @map("user_id") @db.ObjectId
+  trackId String @map("track_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("soundcloud")
 }

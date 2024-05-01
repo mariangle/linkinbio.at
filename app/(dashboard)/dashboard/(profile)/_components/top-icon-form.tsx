@@ -42,12 +42,15 @@ const FormSchema = z.object({
 
 export function TopIconForm({
   data,
+  customized,
 }: {
   data: {
     shadow: boolean;
     style?: string;
   };
+  customized?: boolean;
 }) {
+  const [hasCustomized, setHasCustomized] = React.useState(customized);
   const { biolink, setBiolink } = useBiolinkPreview();
   const [loading, setLoading] = React.useState(false);
 
@@ -79,34 +82,30 @@ export function TopIconForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shadowWatch, stylewatch]);
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    alert("submit");
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      /*
       setLoading(true);
-      const res = await fetch("/api/biolink/manage/username", {
-        method: "PATCH",
+      const res = await fetch("/api/manage/top-icons", {
+        method: hasCustomized ? "PATCH" : "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-
       const { message, ok } = await res.json();
 
       if (ok) {
         toast.success(message);
+        setHasCustomized(true);
       } else {
         toast.error(message);
       }
-      */
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <Form {...form}>
@@ -161,7 +160,9 @@ export function TopIconForm({
             />
           </FormContent>
           <FormFooter>
-            <Button variant="foreground">Save</Button>
+            <Button loading={loading} variant="foreground">
+              Save
+            </Button>
           </FormFooter>
         </FormContainer>
       </form>

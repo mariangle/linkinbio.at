@@ -1,16 +1,19 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { isValidImage } from "@/lib/utils/media-validation";
 
 export function ProfilePicture({
   src,
   className,
+  nullable,
 }: {
   src?: string;
   className?: string;
+  nullable?: boolean;
 }) {
   if (!src) {
-    return (
+    return nullable ? (
+      <div className="size-24"></div>
+    ) : (
       <Image
         alt="profile image"
         src="/default-pfp.png"

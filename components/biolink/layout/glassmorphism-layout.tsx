@@ -39,17 +39,21 @@ export function GlassmorphismLayout({
           <ProfilePicture
             className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
             src={user.image}
+            nullable
           />
           <div className="flex flex-col items-center justify-center">
             <div className="h-12"></div>
             <Title
+              options={{
+                typewriter: config.effects.titleTypewriter,
+                sparkles: config.effects.titleSparkles,
+                font: config.profile.title.font,
+                color: config.profile.title.color,
+              }}
               whiteText={true}
-              typewriter={config.effects.titleTypewriter}
-              sparkles={config.effects.titleSparkles}
-              options={config.title}
               title={user.title || `@${user.username}`}
             />
-            {!config.hideUsername && user.title && (
+            {!config.profile.hideUsername && user.title && (
               <Username whiteText={true} username={user.username} />
             )}
             {user.bio && (
@@ -63,12 +67,7 @@ export function GlassmorphismLayout({
           </div>
           <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
             {links?.map((link, index) => (
-              <TopIcon
-                options={config.topIcon}
-                key={index}
-                item={link}
-                size="sm"
-              />
+              <TopIcon options={config.topIcon} key={index} item={link} />
             ))}
           </div>
           <div className="mt-6 w-full space-y-4 rounded-[2.8rem] border border-white/5 bg-white/5 px-4 py-6">

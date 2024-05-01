@@ -30,19 +30,23 @@ import {
 
 const FormSchema = z.object({
   color: z.string(),
-  url: z.string(),
+  url: z.string().optional(),
 });
 
 export function BackgroundForm({
   data,
+  customized,
 }: {
   data: {
     color: string;
     url?: string;
   };
+  customized?: boolean;
 }) {
+  const [hasCustomized, setHasCustomized] = React.useState(customized);
   const { biolink, setBiolink } = useBiolinkPreview();
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -71,7 +75,30 @@ export function BackgroundForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [colorWatch, urlWatch]);
 
-  const onSubmit = () => alert("submit");
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/manage/background", {
+        method: hasCustomized ? "PATCH" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const { message, ok } = await res.json();
+
+      if (ok) {
+        toast.success(message);
+        setHasCustomized(true);
+      } else {
+        toast.error(message);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -109,7 +136,7 @@ export function BackgroundForm({
             </div>
           </FormContent>
           <FormFooter>
-            <Button>Save</Button>
+            <Button loading={loading}>Save</Button>
           </FormFooter>
         </FormContainer>
       </form>

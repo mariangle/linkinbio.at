@@ -79,7 +79,9 @@ export function TopIcon({
       : getDropShadow(shadowOptions.color);
 
     const color = !iconOptions.colorOnly
-      ? getBackground(iconColor)
+      ? socialLink
+        ? socialLink.color
+        : iconColor
       : iconOptions.color;
 
     if (!backgroundOptions) {

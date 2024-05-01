@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 
@@ -11,14 +12,15 @@ import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Button } from "@/components/ui/button";
 
 export function LayoutForm({
-  data,
+  layout: defaultLayout,
+  customized,
 }: {
-  data: {
-    layout: Layout;
-  };
+  layout: Layout;
+  customized?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [layout, setLayout] = React.useState<Layout>(data.layout);
+  const [layout, setLayout] = React.useState<Layout>(defaultLayout);
+  const [hasCustomized, setHasCustomized] = React.useState(customized);
 
   React.useEffect(() => {
     if (!biolink) return;
@@ -27,7 +29,10 @@ export function LayoutForm({
       ...biolink,
       config: {
         ...biolink.config,
-        layout,
+        profile: {
+          ...biolink.config.profile,
+          layout: layout,
+        },
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +45,25 @@ export function LayoutForm({
           const selected = layout === item.value;
           return (
             <div
-              onClick={() => setLayout(item.value)}
+              onClick={async () => {
+                setLayout(item.value);
+
+                const res = await fetch("/api/manage/layout", {
+                  method: hasCustomized ? "PATCH" : "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ layout: item.value }),
+                });
+                const { message, ok } = await res.json();
+
+                if (ok) {
+                  toast.success(message);
+                  setHasCustomized(true);
+                } else {
+                  toast.error(message);
+                }
+              }}
               role="button"
               key={index}
               className={cn(

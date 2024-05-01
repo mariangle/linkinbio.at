@@ -7,19 +7,16 @@ import { toast } from "sonner";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { User } from "@/lib/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { ImagePicker } from "@/components/image-picker";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormLabel,
   FormField,
   FormItem,
@@ -33,7 +30,7 @@ const FormSchema = z.object({
   bio: z.string().max(160, {
     message: "Bio must be at most 160 characters.",
   }),
-  image: z.string().url(),
+  image: z.string().optional(),
   occupation: z.string().max(20, {
     message: "Occupation must be at most 20 characters.",
   }),
@@ -94,7 +91,7 @@ export function ProfileForm({
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
       setLoading(true);
-      const res = await fetch("/api/biolink/manage/profile", {
+      const res = await fetch("/api/manage/user", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

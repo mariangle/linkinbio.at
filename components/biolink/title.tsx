@@ -3,29 +3,32 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { fonts } from "@/lib/constants/fonts";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
-import { TitleOptions } from "@/lib/types";
+import { Font } from "@/lib/types";
+
+interface TitleOptions {
+  typewriter: boolean;
+  sparkles: boolean;
+  font: Font;
+  color: string;
+}
 
 export function Title({
   options,
-  typewriter,
-  sparkles,
   className,
   whiteText,
   title,
 }: {
-  options?: TitleOptions;
+  options: TitleOptions;
   className?: string;
-  typewriter?: boolean;
-  sparkles?: boolean;
   whiteText: boolean;
   title: string;
 }) {
-  const font = fonts.find((item) => item.value === options?.font);
+  const font = fonts.find((f) => f.value === options.font)?.display;
 
-  if (typewriter) {
+  if (options.typewriter) {
     return (
       <div className="relative">
-        {sparkles && (
+        {options.sparkles && (
           <Image
             src="/sparkle.gif"
             alt="logo"
@@ -41,7 +44,7 @@ export function Title({
             "text-xl font-semibold",
             !options?.color && whiteText ? "text-white" : "text-black",
             className,
-            font?.display ?? "inter",
+            font ?? "inter",
           )}
           style={{ color: options?.color ? options.color : undefined }}
         >
@@ -53,7 +56,7 @@ export function Title({
 
   return (
     <div className="relative">
-      {sparkles && (
+      {options.sparkles && (
         <Image
           src="/sparkle.gif"
           alt="logo"
@@ -67,7 +70,7 @@ export function Title({
       <h2
         className={cn(
           "relative text-xl font-semibold",
-          font?.display ?? "inter",
+          font ?? "inter",
           !options?.color && whiteText ? "text-white" : "text-black",
           className,
         )}

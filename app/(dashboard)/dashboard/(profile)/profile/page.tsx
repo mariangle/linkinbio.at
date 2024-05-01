@@ -1,5 +1,6 @@
 import { ProfileForm } from "./profile-form";
 import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { PageWithPreview } from "@/components/dashboard/page";
 
 export default async function Profile() {
   const biolink = await getBiolinkServer();
@@ -7,7 +8,7 @@ export default async function Profile() {
   if (!biolink) return null;
 
   return (
-    <div>
+    <PageWithPreview biolink={biolink}>
       <ProfileForm
         data={{
           title: biolink.user.title,
@@ -17,6 +18,6 @@ export default async function Profile() {
           location: biolink.user.location,
         }}
       />
-    </div>
+    </PageWithPreview>
   );
 }

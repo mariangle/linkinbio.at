@@ -12,7 +12,6 @@ import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/color-picker";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { ButtonOptions } from "@/lib/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import {
   FormHeading,
@@ -20,14 +19,7 @@ import {
   FormFooter,
   FormContent,
 } from "@/components/dashboard/form";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { ButtonTemplates } from "./button-templates";
 import { Paintbrush } from "lucide-react";
@@ -59,6 +51,7 @@ const FormSchema = z.object({
 
 export function ButtonsForm({
   data,
+  customized,
 }: {
   data: {
     shadowSolid: boolean;
@@ -77,8 +70,11 @@ export function ButtonsForm({
     iconShadow: boolean;
     iconSocialColor: boolean;
   };
+  customized?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
+  const [hasCustomized, setHasCustomized] = React.useState(customized);
+  const [loading, setLoading] = React.useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -172,7 +168,30 @@ export function ButtonsForm({
     iconSocialColorWatch,
   ]);
 
-  const onSubmit = () => alert("submit");
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/manage/button", {
+        method: hasCustomized ? "PATCH" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const { message, ok } = await res.json();
+
+      if (ok) {
+        toast.success(message);
+        setHasCustomized(true);
+      } else {
+        toast.error(message);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -500,7 +519,7 @@ export function ButtonsForm({
             </Sheet>
           </FormContent>
           <FormFooter>
-            <Button>Save Changes</Button>
+            <Button loading={loading}>Save Changes</Button>
           </FormFooter>
         </FormContainer>
       </form>
