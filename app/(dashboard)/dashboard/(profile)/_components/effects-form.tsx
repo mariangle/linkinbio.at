@@ -1,16 +1,20 @@
 "use client";
 
 import * as React from "react";
-import { toast } from "sonner";
 
-import { Switch } from "@/components/ui/switch";
+import { useFormSubmit } from "@/hooks/use-form-submit";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import {
-  FormHeading,
-  FormContainer,
-  FormFooter,
-  FormContent,
-  FormSwitch,
-} from "@/components/dashboard/form";
+  Form,
+  FormControl,
+  FormLabel,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { Switch } from "@/components/ui/switch";
+import { FormHeading, FormSwitch } from "@/components/dashboard/form";
 import {
   Select,
   SelectContent,
@@ -19,15 +23,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { EffectsOptions } from "@/lib/types";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Label } from "@/components/ui/label";
 import { WeatherEffect } from "@/lib/types";
 import { weatherEffects } from "@/lib/constants/weather-effects";
+import { EffectsFormValues, EffectsFormSchema } from "@/lib/validations";
 
 export function EffectsForm({
   data,
-  customized,
+  modified,
 }: {
   data: {
     titleSparkles: boolean;
@@ -35,101 +39,103 @@ export function EffectsForm({
     bioTypewriter: boolean;
     weatherEffect?: WeatherEffect;
   };
-  customized?: boolean;
+  modified?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [hasCustomized, setHasCustomized] = React.useState(customized);
-  const [loading, setLoading] = React.useState(false);
-  const [visualsOptions, setVisualOptions] = React.useState<
-    Pick<
-      EffectsOptions,
-      "bioTypewriter" | "titleTypewriter" | "titleSparkles" | "weatherEffect"
-    >
-  >({
-    titleSparkles: data.titleSparkles,
-    titleTypewriter: data.titleTypewriter,
-    bioTypewriter: data.bioTypewriter,
-    weatherEffect: data.weatherEffect ?? undefined,
+
+  const form = useForm<EffectsFormValues>({
+    resolver: zodResolver(EffectsFormSchema),
+    defaultValues: {
+      titleSparkles: data.titleSparkles,
+      titleTypewriter: data.titleTypewriter,
+      bioTypewriter: data.bioTypewriter,
+      weatherEffect: data.weatherEffect,
+    },
+  });
+
+  const { loading, dirty, submit } = useFormSubmit<EffectsFormValues>({
+    initialData: data,
+    formValues: form.getValues(),
+    endpoint: "/api/manage/effects",
+    modified,
   });
 
   React.useEffect(() => {
-    if (!biolink) return;
-
-    setBiolink({
-      ...biolink,
-      config: {
-        ...biolink.config,
-        effects: {
-          ...biolink.config.effects,
-          ...visualsOptions,
-        },
-      },
+    form.watch((value) => {
+      if (biolink) {
+        setBiolink({
+          ...biolink,
+          config: {
+            ...biolink.config,
+            effects: {
+              titleSparkles: value.titleSparkles ?? false,
+              titleTypewriter: value.titleTypewriter ?? false,
+              bioTypewriter: value.bioTypewriter ?? false,
+              weatherEffect: value.weatherEffect as WeatherEffect,
+            },
+          },
+        });
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visualsOptions]);
+  }, [form.watch, biolink]);
 
-  const onSubmit = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/effects", {
-        method: hasCustomized ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(visualsOptions),
-      });
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-        setHasCustomized(true);
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  async function onSubmit() {
+    await submit();
+  }
 
   return (
-    <FormContainer>
-      <FormContent>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormHeading>Text Animations</FormHeading>
         <Label>Title</Label>
         <FormSwitch title="Sparkles">
-          <Switch
-            checked={visualsOptions.titleSparkles}
-            onCheckedChange={() =>
-              setVisualOptions({
-                ...visualsOptions,
-                titleSparkles: !visualsOptions.titleSparkles,
-              })
-            }
+          <FormField
+            control={form.control}
+            name="titleSparkles"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
           />
         </FormSwitch>
         <FormSwitch title="Typewriter">
-          <Switch
-            checked={visualsOptions.titleTypewriter}
-            onCheckedChange={() =>
-              setVisualOptions({
-                ...visualsOptions,
-                titleTypewriter: !visualsOptions.titleTypewriter,
-              })
-            }
+          <FormField
+            control={form.control}
+            name="titleTypewriter"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
           />
         </FormSwitch>
         <Label>Title</Label>
         <FormSwitch title="Typewriter">
-          <Switch
-            checked={visualsOptions.bioTypewriter}
-            onCheckedChange={() =>
-              setVisualOptions({
-                ...visualsOptions,
-                bioTypewriter: !visualsOptions.bioTypewriter,
-              })
-            }
+          <FormField
+            control={form.control}
+            name="bioTypewriter"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
           />
         </FormSwitch>
         <div>
@@ -139,36 +145,35 @@ export function EffectsForm({
             darker backgrounds.
           </div>
         </div>
-        <Select
-          defaultValue={visualsOptions.weatherEffect || "none"}
-          onValueChange={(weatherEffect) => {
-            setVisualOptions({
-              ...visualsOptions,
-              weatherEffect: weatherEffect as WeatherEffect,
-            });
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue
-              placeholder="Select Weather Effect"
-              className="placeholder:text-red-foreground"
-            />
-          </SelectTrigger>
-          <SelectContent>
-            {weatherEffects.map((item, index) => (
-              <SelectItem key={index} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-            <SelectItem value="none">None</SelectItem>
-          </SelectContent>
-        </Select>
-      </FormContent>
-      <FormFooter>
-        <Button loading={loading} onClick={onSubmit} variant="foreground">
-          Save
+        <FormField
+          control={form.control}
+          name="weatherEffect"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a background weather effect" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {weatherEffects.map((item, index) => (
+                    <SelectItem key={index} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value="none">None</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button loading={loading} disabled={!dirty}>
+          Save Changes
         </Button>
-      </FormFooter>
-    </FormContainer>
+      </form>
+    </Form>
   );
 }

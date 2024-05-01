@@ -2,11 +2,9 @@
 
 import React from "react";
 
-import * as z from "zod";
-import { toast } from "sonner";
-
+import { useFormSubmit } from "@/hooks/use-form-submit";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { UseFormReturn, useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { ColorPicker } from "@/components/color-picker";
@@ -30,28 +28,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-const FormSchema = z.object({
-  shadowSolid: z.boolean(),
-  shadowSpreadRadius: z.number(),
-  shadowColor: z.string(),
-  textColor: z.string(),
-  textHidden: z.boolean(),
-  borderColor: z.string(),
-  borderRadius: z.number(),
-  borderWidth: z.number(),
-  backgroundColor: z.string(),
-  backgroundOpacity: z.number(),
-  backgroundBlur: z.number(),
-  backgroundSocialColor: z.boolean(),
-  iconHidden: z.boolean(),
-  iconShadow: z.boolean(),
-  iconSocialColor: z.boolean(),
-});
+import { ButtonsFormSchema, ButtonsFormValues } from "@/lib/validations";
+import { ButtonOptions } from "@/lib/types";
 
 export function ButtonsForm({
   data,
-  customized,
+  modified,
 }: {
   data: {
     shadowSolid: boolean;
@@ -70,14 +52,12 @@ export function ButtonsForm({
     iconShadow: boolean;
     iconSocialColor: boolean;
   };
-  customized?: boolean;
+  modified?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [hasCustomized, setHasCustomized] = React.useState(customized);
-  const [loading, setLoading] = React.useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<ButtonsFormValues>({
+    resolver: zodResolver(ButtonsFormSchema),
     defaultValues: {
       shadowSolid: data.shadowSolid,
       shadowSpreadRadius: data.shadowSpreadRadius,
@@ -97,100 +77,78 @@ export function ButtonsForm({
     },
   });
 
-  const shadowSolidWatch = form.watch("shadowSolid");
-  const shadowSpreadRadiusWatch = form.watch("shadowSpreadRadius");
-  const shadowColorWatch = form.watch("shadowColor");
-  const textColorWatch = form.watch("textColor");
-  const textHiddenWatch = form.watch("textHidden");
-  const borderColorWatch = form.watch("borderColor");
-  const borderRadiusWatch = form.watch("borderRadius");
-  const borderWidthWatch = form.watch("borderWidth");
-  const backgroundColorWatch = form.watch("backgroundColor");
-  const backgroundOpacityWatch = form.watch("backgroundOpacity");
-  const backgroundBlurWatch = form.watch("backgroundBlur");
-  const backgroundSocialColorWatch = form.watch("backgroundSocialColor");
-  const iconHiddenWatch = form.watch("iconHidden");
-  const iconShadowWatch = form.watch("iconShadow");
-  const iconSocialColorWatch = form.watch("iconSocialColor");
+  const { loading, dirty, submit } = useFormSubmit<ButtonsFormValues>({
+    initialData: data,
+    formValues: form.getValues(),
+    endpoint: "/api/manage/button",
+    modified,
+  });
 
   React.useEffect(() => {
-    if (!biolink) return;
-
-    setBiolink({
-      ...biolink,
-      config: {
-        ...biolink.config,
-        button: {
-          shadow: {
-            solid: form.getValues("shadowSolid"),
-            spreadRadius: form.getValues("shadowSpreadRadius"),
-            color: form.getValues("shadowColor"),
+    form.watch((value) => {
+      if (biolink) {
+        setBiolink({
+          ...biolink,
+          config: {
+            ...biolink.config,
+            button: {
+              shadow: {
+                solid: value.shadowSolid ?? data.shadowSolid,
+                spreadRadius:
+                  value.shadowSpreadRadius ?? data.shadowSpreadRadius,
+                color: value.shadowColor ?? data.shadowColor,
+              },
+              text: {
+                color: value.textColor ?? data.textColor,
+                hidden: value.textHidden ?? data.textHidden,
+              },
+              border: {
+                color: value.borderColor ?? data.borderColor,
+                radius: value.borderRadius ?? data.borderRadius,
+                width: value.borderWidth ?? data.borderWidth,
+              },
+              background: {
+                color: value.backgroundColor ?? data.backgroundColor,
+                opacity: value.backgroundOpacity ?? data.backgroundOpacity,
+                blur: value.backgroundBlur ?? data.backgroundBlur,
+                socialColor:
+                  value.backgroundSocialColor ?? data.backgroundSocialColor,
+              },
+              icon: {
+                hidden: value.iconHidden ?? data.iconHidden,
+                shadow: value.iconShadow ?? data.iconShadow,
+                socialColor: value.iconSocialColor ?? data.iconSocialColor,
+              },
+            },
           },
-          text: {
-            color: form.getValues("textColor"),
-            hidden: form.getValues("textHidden"),
-          },
-          border: {
-            color: form.getValues("borderColor"),
-            radius: form.getValues("borderRadius"),
-            width: form.getValues("borderWidth"),
-          },
-          background: {
-            color: form.getValues("backgroundColor"),
-            opacity: form.getValues("backgroundOpacity"),
-            blur: form.getValues("backgroundBlur"),
-            socialColor: form.getValues("backgroundSocialColor"),
-          },
-          icon: {
-            hidden: form.getValues("iconHidden"),
-            shadow: form.getValues("iconShadow"),
-            socialColor: form.getValues("iconSocialColor"),
-          },
-        },
-      },
+        });
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    shadowSolidWatch,
-    shadowSpreadRadiusWatch,
-    shadowColorWatch,
-    textColorWatch,
-    textHiddenWatch,
-    borderColorWatch,
-    borderRadiusWatch,
-    borderWidthWatch,
-    backgroundColorWatch,
-    backgroundOpacityWatch,
-    backgroundBlurWatch,
-    backgroundSocialColorWatch,
-    iconHiddenWatch,
-    iconShadowWatch,
-    iconSocialColorWatch,
-  ]);
+  }, [form.watch, biolink]);
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/button", {
-        method: hasCustomized ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const { message, ok } = await res.json();
+  const onSubmit = async () => {
+    await submit();
+  };
 
-      if (ok) {
-        toast.success(message);
-        setHasCustomized(true);
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  const setButtonValues = (button: ButtonOptions, form: any) => {
+    const { shadow, text, border, background, icon } = button;
+
+    form.setValue("shadowSolid", shadow.solid);
+    form.setValue("shadowSpreadRadius", shadow.spreadRadius);
+    form.setValue("shadowColor", shadow.color);
+    form.setValue("textColor", text.color);
+    form.setValue("textHidden", text.hidden);
+    form.setValue("borderColor", border.color);
+    form.setValue("borderRadius", border.radius);
+    form.setValue("borderWidth", border.width);
+    form.setValue("backgroundColor", background.color);
+    form.setValue("backgroundOpacity", background.opacity);
+    form.setValue("backgroundBlur", background.blur);
+    form.setValue("backgroundSocialColor", background.socialColor);
+    form.setValue("iconHidden", icon.hidden);
+    form.setValue("iconShadow", icon.shadow);
+    form.setValue("iconSocialColor", icon.socialColor);
   };
 
   return (
@@ -201,26 +159,7 @@ export function ButtonsForm({
             <FormHeading>Buttons</FormHeading>
             <div className="text-sm text-muted-foreground">Templates</div>
             <ButtonTemplates
-              onSelect={(button) => {
-                form.setValue("shadowSolid", button.shadow.solid);
-                form.setValue("shadowSpreadRadius", button.shadow.spreadRadius);
-                form.setValue("shadowColor", button.shadow.color);
-                form.setValue("textColor", button.text.color);
-                form.setValue("textHidden", button.text.hidden);
-                form.setValue("borderColor", button.border.color);
-                form.setValue("borderRadius", button.border.radius);
-                form.setValue("borderWidth", button.border.width);
-                form.setValue("backgroundColor", button.background.color);
-                form.setValue("backgroundOpacity", button.background.opacity);
-                form.setValue("backgroundBlur", button.background.blur);
-                form.setValue(
-                  "backgroundSocialColor",
-                  button.background.socialColor,
-                );
-                form.setValue("iconHidden", button.icon.hidden);
-                form.setValue("iconShadow", button.icon.shadow);
-                form.setValue("iconSocialColor", button.icon.socialColor);
-              }}
+              onSelect={(button) => setButtonValues(button, form)}
             />
             <div className="text-sm text-muted-foreground">Custom</div>
             <Sheet>
@@ -519,7 +458,9 @@ export function ButtonsForm({
             </Sheet>
           </FormContent>
           <FormFooter>
-            <Button loading={loading}>Save Changes</Button>
+            <Button loading={loading} disabled={!dirty}>
+              Save Changes
+            </Button>
           </FormFooter>
         </FormContainer>
       </form>

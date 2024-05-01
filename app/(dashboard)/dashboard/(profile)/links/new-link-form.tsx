@@ -31,26 +31,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
-
-const FormSchema = z.object({
-  title: z
-    .string()
-    .min(2, { message: "Title must be at least 2 characters." })
-    .max(20, {
-      message: "Title must be at most 20 characters.",
-    }),
-  url: z.string().url(),
-  isTopIcon: z.boolean().default(false),
-});
+import { LinkFormValues, LinkFormSchema } from "@/lib/validations";
+import { useFormSubmit } from "@/hooks/use-form-submit";
 
 export function NewLinkForm() {
   const router = useRouter();
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [loading, setLoading] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<LinkFormValues>({
+    resolver: zodResolver(LinkFormSchema),
     defaultValues: {
       title: "",
       url: "",
@@ -58,38 +48,32 @@ export function NewLinkForm() {
     },
   });
 
-  const add = async (data: z.infer<typeof FormSchema>) => {
+  const { loading, dirty, submit } = useFormSubmit<LinkFormValues>({
+    initialData: {
+      title: "",
+      url: "",
+      isTopIcon: false,
+    },
+    formValues: form.getValues(),
+    endpoint: "/api/manage/links",
+    modified: false,
+  });
+
+  const onSubmit = async () => {
     try {
-      setLoading(true);
-      const res = await fetch("/api/manage/links", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const data = await submit();
 
-      const { message, ok, data: newLink } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-
-        if (!biolink) return;
-
+      if (biolink) {
         setBiolink({
           ...biolink,
-          links: [...biolink.links, newLink],
+          links: [...biolink.links, data],
         });
-
-        router.refresh();
-        cancel();
-      } else {
-        toast.error(message);
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+
+      router.refresh();
+      cancel();
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -118,7 +102,7 @@ export function NewLinkForm() {
           <DialogTitle>Create a new Link</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(add)}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-4">
               <FormField
                 control={form.control}
@@ -168,7 +152,9 @@ export function NewLinkForm() {
               <Button type="button" onClick={cancel} variant="secondary">
                 Cancel
               </Button>
-              <Button loading={loading}>Create Link</Button>
+              <Button loading={loading} disabled={!dirty}>
+                Create Link
+              </Button>
             </DialogFooter>
           </form>
         </Form>

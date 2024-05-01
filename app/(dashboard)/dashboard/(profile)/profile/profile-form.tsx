@@ -2,16 +2,15 @@
 
 import * as React from "react";
 
-import * as z from "zod";
-import { toast } from "sonner";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { ImagePicker } from "@/components/image-picker";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
 import {
@@ -22,22 +21,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-
-const FormSchema = z.object({
-  title: z.string().max(20, {
-    message: "Title must be at most 20 characters.",
-  }),
-  bio: z.string().max(160, {
-    message: "Bio must be at most 160 characters.",
-  }),
-  image: z.string().optional(),
-  occupation: z.string().max(20, {
-    message: "Occupation must be at most 20 characters.",
-  }),
-  location: z.string().max(20, {
-    message: "Location must be at most 20 characters.",
-  }),
-});
+import { ProfileFormSchema, ProfileFormValues } from "@/lib/validations";
 
 export function ProfileForm({
   data,
@@ -51,65 +35,46 @@ export function ProfileForm({
   };
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [loading, setLoading] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<ProfileFormValues>({
+    resolver: zodResolver(ProfileFormSchema),
     defaultValues: {
-      title: data.title ?? "",
-      bio: data.bio ?? "",
-      image: data.image ?? "",
-      occupation: data.occupation ?? "",
-      location: data.location ?? "",
+      title: data.title,
+      bio: data.bio,
+      image: data.image,
+      occupation: data.occupation,
+      location: data.location,
     },
   });
 
-  const titleWatch = form.watch("title");
-  const bioWatch = form.watch("bio");
-  const imageWatch = form.watch("image");
-  const occupationWatch = form.watch("occupation");
-  const locationWatch = form.watch("location");
+  const { loading, dirty, submit } = useFormSubmit<ProfileFormValues>({
+    initialData: data,
+    formValues: form.getValues(),
+    endpoint: "/api/manage/user",
+  });
 
   React.useEffect(() => {
-    if (!biolink) return;
-
-    setBiolink({
-      ...biolink,
-      user: {
-        ...biolink.user,
-        title: form.getValues("title"),
-        bio: form.getValues("bio"),
-        image: form.getValues("image"),
-        occupation: form.getValues("occupation"),
-        location: form.getValues("location"),
-      },
+    form.watch((value) => {
+      if (biolink) {
+        setBiolink({
+          ...biolink,
+          user: {
+            ...biolink.user,
+            title: value.title,
+            bio: value.bio,
+            image: value.image,
+            occupation: value.occupation,
+            location: value.location,
+          },
+        });
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [titleWatch, bioWatch, imageWatch, occupationWatch, locationWatch]);
+  }, [form.watch, biolink]);
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/user", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  async function onSubmit() {
+    await submit();
   }
 
   return (
@@ -183,7 +148,7 @@ export function ProfileForm({
               </FormItem>
             )}
           />
-          <Button type="submit" loading={loading}>
+          <Button type="submit" disabled={!dirty} loading={loading}>
             Save Changes
           </Button>
         </div>

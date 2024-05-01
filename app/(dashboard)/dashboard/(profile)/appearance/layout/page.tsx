@@ -14,7 +14,7 @@ export default async function page() {
       <SecondaryNav items={biolinkCustomizationLinks} />
       <LayoutForm
         layout={biolink.config?.profile.layout}
-        customized={biolink.config.profile.customized}
+        modified={biolink.config.profile.customized}
       />
     </PageWithPreview>
   );

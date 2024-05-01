@@ -16,7 +16,6 @@ export async function PATCH(req: Request) {
   }
 
   const { layout } = await req.json();
-  console.log("patch", layout);
 
   if (!layout) {
     return NextResponse.json({
@@ -59,8 +58,6 @@ export async function POST(req: Request) {
   }
 
   const { layout } = await req.json();
-
-  console.log("post", layout);
 
   if (!layout) {
     return NextResponse.json({

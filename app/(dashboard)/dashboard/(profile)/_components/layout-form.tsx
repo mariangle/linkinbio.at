@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 
@@ -9,18 +8,29 @@ import { Layout } from "@/lib/types/enums";
 import { layouts } from "@/lib/constants/layouts";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useFormSubmit } from "@/hooks/use-form-submit";
 import { Button } from "@/components/ui/button";
 
 export function LayoutForm({
   layout: defaultLayout,
-  customized,
+  modified,
 }: {
   layout: Layout;
-  customized?: boolean;
+  modified?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
   const [layout, setLayout] = React.useState<Layout>(defaultLayout);
-  const [hasCustomized, setHasCustomized] = React.useState(customized);
+
+  const { loading, dirty, submit } = useFormSubmit({
+    initialData: {
+      layout: defaultLayout,
+    },
+    formValues: {
+      layout,
+    },
+    endpoint: "/api/manage/layout",
+    modified,
+  });
 
   React.useEffect(() => {
     if (!biolink) return;
@@ -47,22 +57,7 @@ export function LayoutForm({
             <div
               onClick={async () => {
                 setLayout(item.value);
-
-                const res = await fetch("/api/manage/layout", {
-                  method: hasCustomized ? "PATCH" : "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ layout: item.value }),
-                });
-                const { message, ok } = await res.json();
-
-                if (ok) {
-                  toast.success(message);
-                  setHasCustomized(true);
-                } else {
-                  toast.error(message);
-                }
+                await submit();
               }}
               role="button"
               key={index}

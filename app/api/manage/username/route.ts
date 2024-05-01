@@ -16,6 +16,8 @@ export async function PATCH(req: Request) {
 
   const { username } = await req.json();
 
+  const lowercaseUsername = username.toLowerCase();
+
   if (!username) {
     return NextResponse.json({
       status: 400,
@@ -27,7 +29,7 @@ export async function PATCH(req: Request) {
 
   const existingUserWithUsername = await db.user.findFirst({
     where: {
-      username: username,
+      username: lowercaseUsername,
     },
   });
 
@@ -47,7 +49,8 @@ export async function PATCH(req: Request) {
       id: session.user.id,
     },
     data: {
-      username: username,
+      username: lowercaseUsername,
+      lastUpdatedUsername: new Date(),
     },
   });
 

@@ -2,10 +2,8 @@
 
 import * as React from "react";
 
-import * as z from "zod";
-import { toast } from "sonner";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useFormSubmit } from "@/hooks/use-form-submit";
 import { useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -36,31 +34,27 @@ import { Button } from "@/components/ui/button";
 import { fonts } from "@/lib/constants/fonts";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Font } from "@/lib/types/enums";
-
-const FormSchema = z.object({
-  titleColor: z.string(),
-  titleFont: z.string(),
-  invertTextColor: z.boolean(),
-  hideUsername: z.boolean(),
-});
+import {
+  ProfileOptionsFormSchema,
+  ProfileOptionsFormValues,
+} from "@/lib/validations";
 
 export function TitleForm({
   data,
-  customized,
+  modified,
 }: {
   data: {
-    titleFont: Font;
     titleColor: string;
+    titleFont: Font;
     invertTextColor: boolean;
     hideUsername: boolean;
   };
-  customized?: boolean;
+  modified?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [loading, setLoading] = React.useState(false);
-  const [hasCustomized, setHasCustomized] = React.useState(customized);
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+
+  const form = useForm<ProfileOptionsFormValues>({
+    resolver: zodResolver(ProfileOptionsFormSchema),
     defaultValues: {
       titleColor: data.titleColor,
       titleFont: data.titleFont,
@@ -69,56 +63,39 @@ export function TitleForm({
     },
   });
 
-  const invertTextColorWatch = form.watch("invertTextColor");
-  const hideUsernameWatch = form.watch("hideUsername");
-  const colorWatch = form.watch("titleColor");
-  const fontWatch = form.watch("titleFont");
+  const { loading, dirty, submit } = useFormSubmit<ProfileOptionsFormValues>({
+    initialData: data,
+    formValues: form.getValues(),
+    endpoint: "/api/manage/profile",
+    modified,
+  });
 
   React.useEffect(() => {
-    if (!biolink) return;
-
-    setBiolink({
-      ...biolink,
-      config: {
-        ...biolink.config,
-        profile: {
-          ...biolink.config.profile,
-          title: {
-            color: form.getValues("titleColor"),
-            font: form.getValues("titleFont") as Font,
+    form.watch((value) => {
+      if (biolink) {
+        console.log(value.hideUsername);
+        setBiolink({
+          ...biolink,
+          config: {
+            ...biolink.config,
+            profile: {
+              ...biolink.config.profile,
+              title: {
+                color: value.titleColor ?? data.titleColor,
+                font: value.titleFont as Font,
+              },
+              invertTextColor: value.invertTextColor ?? data.invertTextColor,
+              hideUsername: value.hideUsername ?? data.hideUsername,
+            },
           },
-          invertTextColor: form.getValues("invertTextColor"),
-          hideUsername: form.getValues("hideUsername"),
-        },
-      },
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invertTextColorWatch, hideUsernameWatch, colorWatch, fontWatch]);
-
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/profile", {
-        method: hasCustomized ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-        setHasCustomized(true);
-      } else {
-        toast.error(message);
+        });
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.watch, biolink]);
+
+  const onSubmit = async () => {
+    await submit();
   };
 
   return (
@@ -126,6 +103,7 @@ export function TitleForm({
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormContainer>
           <FormContent>
+            <div>{JSON.stringify(form.getValues("hideUsername"))}</div>
             <FormHeading>Title</FormHeading>
             <div className="mt-2 flex items-center gap-4">
               <div className="space-y-2">
@@ -204,7 +182,9 @@ export function TitleForm({
             </FormSwitch>
           </FormContent>
           <FormFooter>
-            <Button loading={loading}>Reset</Button>
+            <Button loading={loading} disabled={!dirty}>
+              Save Changes
+            </Button>
           </FormFooter>
         </FormContainer>
       </form>

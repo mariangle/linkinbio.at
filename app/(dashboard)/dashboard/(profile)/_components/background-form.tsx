@@ -1,15 +1,15 @@
 "use client";
 
 import * as React from "react";
-import * as z from "zod";
+import { Image as ImageIcon } from "lucide-react";
 
-import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/color-picker";
-import { BackgroundOptions } from "@/lib/types";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import {
   FormHeading,
   FormContainer,
@@ -18,86 +18,57 @@ import {
 } from "@/components/dashboard/form";
 import { Button } from "@/components/ui/button";
 import { ImagePicker } from "@/components/image-picker";
-import { Image as ImageIcon } from "lucide-react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-
-const FormSchema = z.object({
-  color: z.string(),
-  url: z.string().optional(),
-});
+import { BackgroundFormSchema, BackgroundFormValues } from "@/lib/validations";
+import { Form } from "@/components/ui/form";
 
 export function BackgroundForm({
   data,
-  customized,
+  modified,
 }: {
   data: {
     color: string;
     url?: string;
   };
-  customized?: boolean;
+  modified?: boolean;
 }) {
-  const [hasCustomized, setHasCustomized] = React.useState(customized);
   const { biolink, setBiolink } = useBiolinkPreview();
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<BackgroundFormValues>({
+    resolver: zodResolver(BackgroundFormSchema),
     defaultValues: {
       color: data.color,
-      url: data.url ?? undefined,
+      url: data.url,
     },
   });
 
-  const colorWatch = form.watch("color");
-  const urlWatch = form.watch("url");
+  const { loading, dirty, submit } = useFormSubmit<BackgroundFormValues>({
+    initialData: data,
+    formValues: form.getValues(),
+    endpoint: "/api/manage/background",
+    modified,
+  });
 
   React.useEffect(() => {
-    if (!biolink) return;
-
-    setBiolink({
-      ...biolink,
-      config: {
-        ...biolink.config,
-        background: {
-          color: form.getValues("color"),
-          url: form.getValues("url"),
-        },
-      },
+    form.watch((value) => {
+      if (biolink) {
+        setBiolink({
+          ...biolink,
+          config: {
+            ...biolink.config,
+            background: {
+              color: value.color || data.color,
+              url: value.url,
+            },
+          },
+        });
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colorWatch, urlWatch]);
+  }, [form.watch, biolink]);
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/background", {
-        method: hasCustomized ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-        setHasCustomized(true);
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  const onSubmit = async () => {
+    await submit();
   };
 
   return (
@@ -136,7 +107,9 @@ export function BackgroundForm({
             </div>
           </FormContent>
           <FormFooter>
-            <Button loading={loading}>Save</Button>
+            <Button loading={loading} disabled={!dirty}>
+              Save
+            </Button>
           </FormFooter>
         </FormContainer>
       </form>

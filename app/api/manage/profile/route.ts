@@ -43,8 +43,6 @@ export async function PATCH(req: Request) {
     },
   });
 
-  console.log(profile);
-
   return NextResponse.json({
     status: 200,
     ok: true,

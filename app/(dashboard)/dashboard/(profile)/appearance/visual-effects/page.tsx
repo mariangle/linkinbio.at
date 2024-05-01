@@ -19,7 +19,7 @@ export default async function page() {
           bioTypewriter: biolink.config?.effects?.bioTypewriter,
           weatherEffect: biolink.config?.effects?.weatherEffect,
         }}
-        customized={biolink.config?.effects?.customized}
+        modified={biolink.config?.effects?.customized}
       />
     </PageWithPreview>
   );

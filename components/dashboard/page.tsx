@@ -16,7 +16,7 @@ export function PageWithPreview({
     <div className="flex flex-row">
       <div
         className={cn(
-          "mx-auto h-[calc(100vh-57px)] w-full overflow-y-auto p-4 pt-12",
+          "mx-auto h-[calc(100vh-57px)] w-full overflow-y-auto overflow-x-hidden p-4 pt-12",
           className,
         )}
       >

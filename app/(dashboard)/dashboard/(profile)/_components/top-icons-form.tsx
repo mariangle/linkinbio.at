@@ -1,11 +1,10 @@
 "use client";
 
 import * as React from "react";
-import * as z from "zod";
-import { toast } from "sonner";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useFormSubmit } from "@/hooks/use-form-submit";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -33,78 +32,55 @@ import {
 import { TopIconStyle } from "@/lib/types";
 import { topIconStyles } from "@/lib/constants/top-icon-styles";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
-import { Checkbox } from "@/components/ui/checkbox";
-
-const FormSchema = z.object({
-  shadow: z.boolean(),
-  style: z.string(),
-});
+import { TopIconsFormSchema, TopIconsFormValues } from "@/lib/validations";
 
 export function TopIconForm({
   data,
-  customized,
+  modified,
 }: {
   data: {
     shadow: boolean;
     style?: string;
   };
-  customized?: boolean;
+  modified?: boolean;
 }) {
-  const [hasCustomized, setHasCustomized] = React.useState(customized);
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [loading, setLoading] = React.useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<TopIconsFormValues>({
+    resolver: zodResolver(TopIconsFormSchema),
     defaultValues: {
       shadow: data.shadow,
-      style: data.style ?? undefined,
+      style: data.style,
     },
   });
 
-  const shadowWatch = form.watch("shadow");
-  const stylewatch = form.watch("style");
-
   React.useEffect(() => {
-    if (!biolink) return;
-
-    setBiolink({
-      ...biolink,
-      config: {
-        ...biolink.config,
-        topIcon: {
-          shadow: form.getValues("shadow"),
-          style: form.getValues("style") as TopIconStyle | undefined,
-        },
-      },
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shadowWatch, stylewatch]);
-
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/top-icons", {
-        method: hasCustomized ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-        setHasCustomized(true);
-      } else {
-        toast.error(message);
+    form.watch((value) => {
+      if (biolink) {
+        setBiolink({
+          ...biolink,
+          config: {
+            ...biolink.config,
+            topIcon: {
+              shadow: value.shadow ?? data.shadow,
+              style: value.style as TopIconStyle | undefined,
+            },
+          },
+        });
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.watch, biolink]);
+
+  const { loading, dirty, submit } = useFormSubmit<TopIconsFormValues>({
+    initialData: data,
+    formValues: form.getValues(),
+    endpoint: "/api/manage/top-icons",
+    modified,
+  });
+
+  const onSubmit = async () => {
+    await submit();
   };
 
   return (
@@ -160,8 +136,8 @@ export function TopIconForm({
             />
           </FormContent>
           <FormFooter>
-            <Button loading={loading} variant="foreground">
-              Save
+            <Button disabled={!dirty} loading={loading}>
+              Save Changes
             </Button>
           </FormFooter>
         </FormContainer>

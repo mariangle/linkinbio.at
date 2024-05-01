@@ -33,16 +33,8 @@ import { socials } from "@/lib/constants/social-links";
 import { getDomain } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
-
-const FormSchema = z.object({
-  id: z.string(),
-  title: z.string().max(20, {
-    message: "Title must be at most 20 characters.",
-  }),
-  url: z.string().url(),
-  isTopIcon: z.boolean().default(false),
-  iconId: z.number().optional(),
-});
+import { LinkFormValues, LinkFormSchema } from "@/lib/validations";
+import { useFormSubmit } from "@/hooks/use-form-submit";
 
 export function socialLink(url: string) {
   const social = socials.find((link) => url.includes(getDomain(link.url)));
@@ -54,17 +46,26 @@ export function LinkForm({ item }: { item: Link }) {
   const router = useRouter();
   const { biolink, setBiolink } = useBiolinkPreview();
   const [isEditing, setIsEditing] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<LinkFormValues>({
+    resolver: zodResolver(LinkFormSchema),
     defaultValues: {
-      id: item.id,
       title: item.title,
       url: item.url,
       isTopIcon: item.isTopIcon,
       iconId: item.iconId ?? undefined,
     },
+  });
+
+  const { loading, dirty, submit, remove } = useFormSubmit<LinkFormValues>({
+    initialData: {
+      title: "",
+      url: "",
+      isTopIcon: false,
+    },
+    formValues: form.getValues(),
+    endpoint: `/api/manage/links/${item.id}`,
+    modified: true,
   });
 
   const socialItem = socialLink(item.url);
@@ -74,24 +75,11 @@ export function LinkForm({ item }: { item: Link }) {
     form.reset();
   };
 
-  const save = async (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async () => {
     try {
-      setLoading(true);
-      const res = await fetch(`/api/manage/links/${item.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const updatedLink = await submit();
 
-      const { message, ok, data: updatedLink } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-
-        if (!biolink) return;
-
+      if (biolink) {
         const updatedLinks = biolink.links.map((link) => {
           if (link.id === updatedLink.id) {
             return updatedLink;
@@ -103,54 +91,34 @@ export function LinkForm({ item }: { item: Link }) {
           ...biolink,
           links: updatedLinks,
         });
-
-        setIsEditing(false);
-      } else {
-        toast.error(message);
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+
+      setIsEditing(false);
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  const remove = async () => {
+  const removeLink = async () => {
     try {
-      setLoading(true);
-      const res = await fetch(`/api/manage/links/${item.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const removedLink = await remove();
 
-      const { message, ok, data: removedLink } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-
-        if (biolink) {
-          setBiolink({
-            ...biolink,
-            links: biolink.links?.filter((link) => link.id !== removedLink.id),
-          });
-        }
-
-        router.refresh();
-      } else {
-        toast.error(message);
+      if (biolink) {
+        setBiolink({
+          ...biolink,
+          links: biolink.links?.filter((link) => link.id !== removedLink.id),
+        });
       }
+
+      router.refresh();
     } catch (e) {
       console.error(e);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(save)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="group rounded-lg bg-secondary">
           <div className="flex items-center">
             <GripVerticalIcon className="ml-2 size-4 text-muted-foreground" />
@@ -227,7 +195,7 @@ export function LinkForm({ item }: { item: Link }) {
                       <button type="button" onClick={clear}>
                         <XIcon className="size-4" />
                       </button>
-                      <button disabled={loading}>
+                      <button disabled={loading || !dirty}>
                         <CheckIcon className="size-4" />
                       </button>
                     </div>
@@ -246,7 +214,7 @@ export function LinkForm({ item }: { item: Link }) {
                           <EyeIcon className="size-4" />
                         </button>
                       )}
-                      <button type="button" onClick={remove}>
+                      <button type="button" onClick={removeLink}>
                         <TrashIcon className="size-0 duration-300 group-hover:size-4" />
                       </button>
                     </>

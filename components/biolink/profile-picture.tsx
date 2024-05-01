@@ -6,7 +6,7 @@ export function ProfilePicture({
   className,
   nullable,
 }: {
-  src?: string;
+  src?: string | null;
   className?: string;
   nullable?: boolean;
 }) {

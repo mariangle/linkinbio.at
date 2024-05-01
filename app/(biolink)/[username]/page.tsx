@@ -26,7 +26,9 @@ export async function generateMetadata({
   if (!biolink) return null;
 
   return await constructMetadata({
-    title: `${biolink.user.title} (@${biolink.user.username})`,
+    title: biolink.user.title
+      ? `${biolink.user.title} (@${biolink.user.username})`
+      : `${biolink.user.username}`,
     image: biolink.user.image ?? "",
     description: biolink.user.bio || "Connect with me on social media.",
   });
@@ -43,9 +45,5 @@ export default async function Page({
 
   if (!biolink) return "not found";
 
-  return (
-    <div>
-      <Layout biolink={biolink} layout={biolink.config.layout} />
-    </div>
-  );
+  return <Layout biolink={biolink} />;
 }

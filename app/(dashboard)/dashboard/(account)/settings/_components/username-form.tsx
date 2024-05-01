@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import * as z from "zod";
-import { toast } from "sonner";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -23,50 +21,29 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-
-const FormSchema = z.object({
-  username: z
-    .string()
-    .min(1, {
-      message: "Username must be at least 1 characters.",
-    })
-    .max(20, {
-      message: "Username must be at most 20 characters.",
-    }),
-});
+import { UserFormSchema, UserFormValues } from "@/lib/validations";
+import { useFormSubmit } from "@/hooks/use-form-submit";
 
 export function UsernameForm({ username }: { username?: string }) {
-  const [loading, setLoading] = React.useState(false);
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<UserFormValues>({
+    resolver: zodResolver(UserFormSchema),
     defaultValues: {
       username: username ?? "",
     },
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/username", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+  const { loading, dirty, submit } = useFormSubmit({
+    initialData: {
+      username: username,
+    },
+    formValues: {
+      username: form.getValues().username,
+    },
+    endpoint: "/api/manage/username",
+  });
 
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  async function onSubmit() {
+    await submit();
   }
 
   return (
@@ -99,7 +76,7 @@ export function UsernameForm({ username }: { username?: string }) {
             />
           </FormContent>
           <FormFooter>
-            <Button type="submit" variant="foreground" loading={loading}>
+            <Button type="submit" disabled={!dirty} loading={loading}>
               Save
             </Button>
           </FormFooter>

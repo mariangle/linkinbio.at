@@ -9,9 +9,7 @@ import {
 } from "@/components/ui/dialog";
 
 import * as React from "react";
-import * as z from "zod";
-import { toast } from "sonner";
-
+import { useFormSubmit } from "@/hooks/use-form-submit";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -25,55 +23,34 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useMounted } from "@/hooks/use-mounted";
-
-const FormSchema = z.object({
-  username: z
-    .string()
-    .min(1, {
-      message: "Username must be at least 1 characters.",
-    })
-    .max(20, {
-      message: "Username must be at most 20 characters.",
-    }),
-});
+import { UserFormSchema, UserFormValues } from "@/lib/validations";
 
 export function UsernameDialog({ isOpen }: { isOpen: boolean }) {
   const [defaultOpen, setDefaultOpen] = React.useState(isOpen);
-  const [loading, setLoading] = React.useState(false);
 
   const isMounted = useMounted();
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<UserFormValues>({
+    resolver: zodResolver(UserFormSchema),
     defaultValues: {
       username: "",
     },
   });
+
+  const { loading, dirty, submit } = useFormSubmit({
+    initialData: {
+      username: "",
+    },
+    formValues: {
+      username: form.getValues().username,
+    },
+    endpoint: "/api/manage/username",
+  });
+
   if (!isMounted) return null;
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/manage/username", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const { message, ok } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-        setDefaultOpen(false);
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  async function onSubmit() {
+    await submit();
+    setDefaultOpen(false);
   }
 
   return (
@@ -103,13 +80,8 @@ export function UsernameDialog({ isOpen }: { isOpen: boolean }) {
                 </FormItem>
               )}
             />
-            <div className="flex justify-end">
-              <Button
-                type="submit"
-                variant="foreground"
-                className="mt-4"
-                loading={loading}
-              >
+            <div className="mt-4 flex justify-end">
+              <Button type="submit" loading={loading} disabled={!dirty}>
                 Save Username
               </Button>
             </div>

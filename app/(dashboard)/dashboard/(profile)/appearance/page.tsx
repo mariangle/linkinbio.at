@@ -1,4 +1,4 @@
-import { TopIconForm } from "../_components/top-icon-form";
+import { TopIconForm } from "../_components/top-icons-form";
 import { TitleForm } from "../_components/profile-form";
 import { BackgroundForm } from "../_components/background-form";
 import { ButtonsForm } from "../_components/buttons-form";
@@ -20,23 +20,23 @@ export default async function Customization() {
           shadow: biolink.config?.topIcon?.shadow,
           style: biolink.config?.topIcon?.style,
         }}
-        customized={biolink.config?.topIcon?.customized}
+        modified={biolink.config?.topIcon?.customized}
       />
       <TitleForm
         data={{
-          titleFont: biolink.config?.profile?.title?.font,
           titleColor: biolink.config?.profile?.title?.color,
+          titleFont: biolink.config?.profile?.title?.font,
           invertTextColor: biolink.config?.profile.invertTextColor,
           hideUsername: biolink.config?.profile.hideUsername,
         }}
-        customized={biolink.config?.profile?.customized}
+        modified={biolink.config?.profile?.customized}
       />
       <BackgroundForm
         data={{
           color: biolink.config?.background?.color,
           url: biolink.config?.background?.url,
         }}
-        customized={biolink.config?.background?.customized}
+        modified={biolink.config?.background?.customized}
       />
       <ButtonsForm
         data={{
@@ -56,7 +56,7 @@ export default async function Customization() {
           iconShadow: biolink.config?.button?.icon.shadow,
           iconSocialColor: biolink.config?.button?.icon.socialColor,
         }}
-        customized={biolink.config?.button?.customized}
+        modified={biolink.config?.button?.customized}
       />
     </PageWithPreview>
   );

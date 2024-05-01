@@ -4,7 +4,7 @@ import * as React from "react";
 import { signOut } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
-import { User, LogOut, Settings, LifeBuoy, CreditCard } from "lucide-react";
+import { LogOut, Settings, LifeBuoy, CreditCard } from "lucide-react";
 import { BurgerMenu } from "@/components/burger-menu";
 import { MobileMenu } from "@/components/mobile-menu";
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import type { User as UserType } from "@prisma/client";
+import { ProfilePicture } from "../biolink/profile-picture";
 import Link from "next/link";
 
 export function Navbar({ user }: { user: UserType }) {
@@ -30,19 +31,14 @@ export function Navbar({ user }: { user: UserType }) {
       />
       <nav
         className={cn(
-          "sticky top-0 z-50 border-b bg-secondary/75 px-4 py-3.5 backdrop-blur-xl",
+          "sticky top-0 z-50 h-[57px] border-b bg-secondary/75 px-4 backdrop-blur-xl",
           "flex items-center justify-between",
         )}
       >
         <div className="flex items-center gap-3">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="flex items-center gap-2" role="button">
-                <div className="rounded-full bg-muted">
-                  <User className="size-7 p-1.5 text-foreground" />
-                </div>
-                <div className="text-sm">{user.username}</div>
-              </div>
+            <DropdownMenuTrigger>
+              <ProfilePicture className="size-8" src={user.image} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="max-w-[200px]">
               <DropdownMenuLabel className="truncate">
