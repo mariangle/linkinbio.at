@@ -15,10 +15,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SharePopover } from "@/components/dashboard/share-dialog";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import type { User as UserType } from "@prisma/client";
-import { ProfilePicture } from "../biolink/profile-picture";
+import { ProfilePicture } from "@/components/biolink/profile-picture";
 import Link from "next/link";
+import { ModeToggle } from "@/components/dashboard/mode-toggle";
 
 export function Navbar({ user }: { user: UserType }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -31,11 +33,12 @@ export function Navbar({ user }: { user: UserType }) {
       />
       <nav
         className={cn(
-          "sticky top-0 z-50 h-[57px] border-b bg-secondary/75 px-4 backdrop-blur-xl",
+          "sticky top-0 z-50 h-[57px] border-b bg-background px-4 backdrop-blur-xl dark:bg-secondary/75",
           "flex items-center justify-between",
         )}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex w-full items-center justify-end gap-3">
+          <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger>
               <ProfilePicture className="size-8" src={user.image} />
@@ -80,9 +83,10 @@ export function Navbar({ user }: { user: UserType }) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-        <div className="flex items-center gap-2 md:hidden">
-          <BurgerMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          <SharePopover username={user.username || ""} />
+          <div className="flex items-center gap-2 md:hidden">
+            <BurgerMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          </div>
         </div>
       </nav>
     </>

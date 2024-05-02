@@ -17,7 +17,7 @@ export function Footer({
       <div
         className={cn("text-xs", !textDark ? "text-white/70" : "text-black/50")}
       >
-        Made with linkinbio
+        Made with linkinbio.at
       </div>
     </Link>
   );

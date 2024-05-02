@@ -1,12 +1,11 @@
-import { SpotifyAlbumOptions, SpotifyTrackOptions } from "@/lib/types";
+import { SpotifyOptions, ContentType } from "@/lib/types";
 
-export function SpotifyTrack({ options }: { options?: SpotifyTrackOptions }) {
-  if (!options?.trackId) return null;
+export function SpotifyTrack({ options }: { options: SpotifyOptions }) {
   return (
     <iframe
       src={`https://open.spotify.com/embed/track/${
-        options.trackId ?? "7JjCwLgqMtu2yLPq9G15G3"
-      }?utm_source=generator&theme=${options.darkMode && 0}`}
+        options.contentId
+      }?utm_source=generator&theme=${options.darkBackground && 0}`}
       width="100%"
       height="80"
       style={{ borderRadius: "15px" }}
@@ -17,15 +16,13 @@ export function SpotifyTrack({ options }: { options?: SpotifyTrackOptions }) {
   );
 }
 
-export function SpotifyAlbum({ options }: { options?: SpotifyAlbumOptions }) {
-  if (!options?.albumId) return null;
+export function SpotifyAlbum({ options }: { options: SpotifyOptions }) {
   return (
     <iframe
       style={{ borderRadius: "12px" }}
-      src={`https://open.spotify.com/embed/album/${options.albumId}?utm_source=generator&theme=${options.darkMode && 0}`}
+      src={`https://open.spotify.com/embed/album/${options.contentId}?utm_source=generator&theme=${options.darkBackground && 0}`}
       height={options.compactLayout ? 152 : 352}
       width="100%"
-      frameBorder="0"
       allowFullScreen
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
@@ -33,16 +30,32 @@ export function SpotifyAlbum({ options }: { options?: SpotifyAlbumOptions }) {
   );
 }
 
-export function SpotifyPlaylist({ options }: { options?: any }) {
+export function SpotifyPlaylist({ options }: { options: SpotifyOptions }) {
   return (
     <iframe
       title="Spotify Playlist"
-      src="https://open.spotify.com/embed/playlist/37i9dQZF1DX5KpP2LN299J?utm_source=generator"
+      src={`https://open.spotify.com/embed/playlist/${options.contentId}?utm_source=generator&theme=${options.darkBackground && 0}`}
       width="100%"
       height="352"
+      allow="encrypted-media *;"
       allowFullScreen
       loading="lazy"
       style={{ borderRadius: "12px" }}
     ></iframe>
   );
+}
+
+export function Spotify({ options }: { options?: SpotifyOptions }) {
+  if (!options?.contentId || !options.enabled) return null;
+
+  switch (options.type) {
+    case ContentType.Track:
+      return <SpotifyTrack options={options} />;
+    case ContentType.Album:
+      return <SpotifyAlbum options={options} />;
+    case ContentType.Playlist:
+      return <SpotifyPlaylist options={options} />;
+    default:
+      return null;
+  }
 }

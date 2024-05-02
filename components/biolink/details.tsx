@@ -18,7 +18,7 @@ export function Details({
   return (
     <div
       className={cn(
-        "mt-2 flex items-center justify-center gap-2 text-sm",
+        "mt-2 flex flex-wrap items-center justify-center gap-2 text-sm",
         whiteText ? "text-white/70" : "text-black/50",
         className,
       )}

@@ -19,6 +19,9 @@ export async function getBiolinkServer() {
       profile: true,
       topIcon: true,
       effect: true,
+      spotify: true,
+      youtube: true,
+      soundcloud: true,
     },
   });
 

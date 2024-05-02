@@ -1,7 +1,7 @@
 import { YoutubeOptions } from "@/lib/types";
 
 export function YoutubeVideo({ options }: { options?: YoutubeOptions }) {
-  if (!options?.videoId) return null;
+  if (!options?.videoId || !options.enabled) return null;
   return (
     <div className="iframe-responsive">
       <iframe

@@ -16,7 +16,12 @@ export function FormContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("relative space-y-4 rounded-lg border", className)}>
+    <div
+      className={cn(
+        "relative space-y-4 rounded-lg border bg-background",
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -34,7 +39,7 @@ export function FormContent({
 
 export function FormFooter({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-end gap-4 border-t bg-secondary p-4">
+    <div className="flex items-center justify-end gap-4 rounded-b-lg border-t bg-secondary p-4">
       {children}
     </div>
   );
@@ -50,7 +55,7 @@ export function FormSwitch({
   description?: string;
 }) {
   return (
-    <div className="flex flex-col gap-4 rounded-lg border bg-secondary p-4 md:flex-row md:items-center md:justify-between">
+    <div className="flex flex-col gap-4 rounded-lg border bg-background p-4 dark:bg-secondary md:flex-row md:items-center md:justify-between">
       <div className="space-y-1">
         <div className="text-sm font-semibold">{title}</div>
         {description && (

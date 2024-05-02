@@ -1,9 +1,9 @@
-import type { Biolink } from "@/lib/types";
-import { Font } from "@/lib/types/enums";
+import { Biolink, ContentType, Font } from "@/lib/types";
 import {
   convertToTopIconStyle,
   convertToWeatherEffect,
   convertToLayout,
+  convertToContentType,
 } from "@/lib/utils/enum-mappings";
 
 import { fonts } from "@/lib/constants/fonts";
@@ -16,6 +16,9 @@ import type {
   Effect,
   Link,
   Profile,
+  Spotify,
+  Soundcloud,
+  Youtube,
 } from "@prisma/client";
 
 export interface ExtendedUser extends User {
@@ -25,6 +28,9 @@ export interface ExtendedUser extends User {
   topIcon?: TopIcon;
   effect?: Effect;
   profile?: Profile;
+  spotify?: Spotify;
+  soundcloud?: Soundcloud;
+  youtube?: Youtube;
 }
 
 function getFont(titleFont: string | null | undefined): Font {
@@ -105,6 +111,22 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       },
     },
     links: user.links ?? [],
-    modules: {},
+    modules: {
+      spotify: user.spotify && {
+        enabled: user.spotify.enabled,
+        compactLayout: user.spotify.compactLayout,
+        darkBackground: user.spotify.darkBackground,
+        contentId: user.spotify.contentId,
+        type: convertToContentType(user.spotify.type) ?? ContentType.Track,
+      },
+      youtube: user.youtube && {
+        enabled: user.youtube.enabled,
+        videoId: user.youtube.videoId,
+      },
+      soundcloud: user.soundcloud && {
+        enabled: user.soundcloud.enabled,
+        trackId: user.soundcloud.trackId,
+      },
+    },
   };
 }

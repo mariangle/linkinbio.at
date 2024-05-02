@@ -26,7 +26,7 @@ export function LayoutForm({
       layout: defaultLayout,
     },
     formValues: {
-      layout,
+      layout: layout,
     },
     endpoint: "/api/manage/layout",
     modified,
@@ -57,7 +57,6 @@ export function LayoutForm({
             <div
               onClick={async () => {
                 setLayout(item.value);
-                await submit();
               }}
               role="button"
               key={index}
@@ -75,11 +74,17 @@ export function LayoutForm({
                   className="pointer-events-none"
                 />
               </div>
-              <Button>Select</Button>
             </div>
           );
         })}
       </div>
+      <Button
+        disabled={!dirty}
+        loading={loading}
+        onClick={async () => await submit()}
+      >
+        Select
+      </Button>
     </div>
   );
 }

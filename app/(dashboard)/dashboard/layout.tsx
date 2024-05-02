@@ -19,9 +19,9 @@ export default async function Layout({
   return (
     <>
       <UsernameDialog isOpen={!user.username} />
-      <div className="relative flex flex-col overflow-hidden bg-secondary md:flex-row">
+      <div className="relative flex flex-col overflow-hidden bg-background dark:bg-secondary md:flex-row">
         <Sidebar />
-        <div className="h-screen w-full bg-background">
+        <div className="h-screen w-full bg-secondary dark:bg-background">
           <Navbar user={user} />
           {children}
         </div>

@@ -19,7 +19,7 @@ export function Sidebar() {
       )}
     >
       <div>
-        <div className="mx-3 mt-3 px-1">
+        <div className="mx-3 mt-3 px-2.5">
           <Logo />
         </div>
         <ul className="my-2">

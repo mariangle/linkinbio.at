@@ -1,8 +1,14 @@
-import { Layout, TopIconStyle, WeatherEffect } from "@/lib/types/enums";
+import {
+  Layout,
+  TopIconStyle,
+  WeatherEffect,
+  ContentType,
+} from "@/lib/types/enums";
 import {
   TopIconStyle as PrismaTopIconStyle,
   Layout as PrismaLayout,
   WeatherEffect as PrismaWeatherEffect,
+  ContentType as PrismaContentType,
 } from "@prisma/client";
 
 export function convertToPrismaTopIconStyle(iconStyle: string) {
@@ -96,6 +102,34 @@ export function convertToPrismaWeatherEffect(
       return PrismaWeatherEffect.LightningBugs;
     case WeatherEffect.Thunder:
       return PrismaWeatherEffect.Thunder;
+    default:
+      return null;
+  }
+}
+
+export function convertToContentType(
+  prismaContentType?: PrismaContentType | null,
+) {
+  switch (prismaContentType) {
+    case PrismaContentType.Album:
+      return ContentType.Album;
+    case PrismaContentType.Playlist:
+      return ContentType.Playlist;
+    case PrismaContentType.Track:
+      return ContentType.Track;
+    default:
+      return undefined;
+  }
+}
+
+export function convertToPrismaContentType(contentType: string | undefined) {
+  switch (contentType) {
+    case ContentType.Album:
+      return PrismaContentType.Album;
+    case ContentType.Playlist:
+      return PrismaContentType.Playlist;
+    case ContentType.Track:
+      return PrismaContentType.Track;
     default:
       return null;
   }

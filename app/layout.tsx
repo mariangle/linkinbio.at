@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster position="top-right" richColors />
+        <Toaster position="top-right" richColors closeButton />
         <NextTopLoader color="#0055B3" showSpinner={false} />
         <ThemeProvider
           attribute="class"

@@ -1,3 +1,5 @@
+import { ContentType } from ".";
+
 export interface Modules {
   spotify?: SpotifyOptions;
   youtube?: YoutubeOptions;
@@ -5,21 +7,11 @@ export interface Modules {
 }
 
 export interface SpotifyOptions {
-  track: SpotifyTrackOptions;
-  album: SpotifyAlbumOptions;
-}
-
-export interface SpotifyAlbumOptions {
-  albumId: string;
-  darkMode: boolean;
+  contentId: string;
+  type: ContentType;
   enabled: boolean;
+  darkBackground: boolean;
   compactLayout: boolean;
-}
-
-export interface SpotifyTrackOptions {
-  trackId: string;
-  darkMode: boolean;
-  enabled: boolean;
 }
 
 export interface YoutubeOptions {

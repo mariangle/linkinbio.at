@@ -65,11 +65,15 @@ export function GlassmorphismLayout({
             )}
             <Details occupation={user.occupation} location={user.location} />
           </div>
-          <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
-            {links?.map((link, index) => (
-              <TopIcon options={config.topIcon} key={index} item={link} />
-            ))}
-          </div>
+          {links?.some((link) => link.isTopIcon) ? (
+            <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
+              {links
+                ?.filter((link) => link.isTopIcon === true)
+                .map((link, index) => (
+                  <TopIcon options={config.topIcon} key={index} item={link} />
+                ))}
+            </div>
+          ) : null}
           <div className="mt-6 w-full space-y-4 rounded-[2.8rem] border border-white/5 bg-white/5 px-4 py-6">
             {links?.map((link, index) => (
               <Button key={index} item={link} config={config.button} />

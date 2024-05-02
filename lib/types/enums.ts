@@ -27,9 +27,8 @@ export enum TopIconStyle {
   WhiteBackgroundSocialColor = "white-background-social-color",
 }
 
-export enum EmbedType {
-  Youtube = "youtube",
-  SpotifyAlbum = "spotify-album",
-  SpotifyTrack = "spotify-track",
-  Soundcloud = "soundcloud",
+export enum ContentType {
+  Track = "track",
+  Album = "album",
+  Playlist = "playlist",
 }

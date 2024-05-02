@@ -119,7 +119,7 @@ export function LinkForm({ item }: { item: Link }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="group rounded-lg bg-secondary">
+        <div className="group rounded-lg bg-background dark:bg-secondary">
           <div className="flex items-center">
             <GripVerticalIcon className="ml-2 size-4 text-muted-foreground" />
             <div className="flex w-full items-center justify-between gap-4 p-4">

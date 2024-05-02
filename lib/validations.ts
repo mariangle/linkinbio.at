@@ -105,3 +105,27 @@ export const LinkFormSchema = z.object({
 });
 
 export type LinkFormValues = z.infer<typeof LinkFormSchema>;
+
+export const SpotifyFormSchema = z.object({
+  contentId: z.string(),
+  type: z.string(),
+  enabled: z.boolean().default(true),
+  darkBackground: z.boolean().default(true),
+  compactLayout: z.boolean().default(true),
+});
+
+export type SpotifyFormValues = z.infer<typeof SpotifyFormSchema>;
+
+export const SoundcloudFormSchema = z.object({
+  trackId: z.string(),
+  enabled: z.boolean().default(true),
+});
+
+export type SoundcloudFormValues = z.infer<typeof SoundcloudFormSchema>;
+
+export const YoutubeFormSchema = z.object({
+  videoId: z.string(),
+  enabled: z.boolean().default(true),
+});
+
+export type YoutubeFormValues = z.infer<typeof YoutubeFormSchema>;

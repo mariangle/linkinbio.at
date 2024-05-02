@@ -103,7 +103,6 @@ export function TitleForm({
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormContainer>
           <FormContent>
-            <div>{JSON.stringify(form.getValues("hideUsername"))}</div>
             <FormHeading>Title</FormHeading>
             <div className="mt-2 flex items-center gap-4">
               <div className="space-y-2">

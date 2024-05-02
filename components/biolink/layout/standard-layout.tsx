@@ -14,7 +14,7 @@ import { Details } from "@/components/biolink/details";
 import { cn } from "@/lib/utils";
 import { determineBrightness } from "@/lib/utils/determine-brightness";
 import { SoundcloudTrack } from "../modules/soundcloud";
-import { SpotifyTrack, SpotifyAlbum } from "../modules/spotify";
+import { Spotify } from "../modules/spotify";
 import { YoutubeVideo } from "../modules/youtube";
 import { LayoutProps } from ".";
 
@@ -89,8 +89,7 @@ export function StandardLayout({
         </div>
         <div className="w-full space-y-6">
           <SoundcloudTrack options={modules?.soundcloud} />
-          <SpotifyTrack options={modules?.spotify?.track} />
-          <SpotifyAlbum options={modules?.spotify?.album} />
+          <Spotify options={modules?.spotify} />
           <YoutubeVideo options={modules?.youtube} />
         </div>
       </ContentContainer>

@@ -16,8 +16,11 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
 }) => {
   const [loading, setLoading] = React.useState(false);
   const [modified, setModified] = React.useState(customized);
+  const [newValues, setNewValues] = React.useState<T>();
 
-  const dirty = JSON.stringify(initialData) !== JSON.stringify(formValues);
+  const dirty = newValues
+    ? JSON.stringify(newValues) !== JSON.stringify(formValues)
+    : JSON.stringify(initialData) !== JSON.stringify(formValues);
 
   const submit = async () => {
     setLoading(true);
@@ -35,6 +38,7 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
       if (ok) {
         toast.success(message);
         setModified(true);
+        setNewValues(formValues);
       } else {
         toast.error(message);
       }

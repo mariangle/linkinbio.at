@@ -18,7 +18,7 @@ export function TopIcon({
   className?: string;
   whiteText?: boolean;
 }) {
-  if (!item.isTopIcon) return null;
+  if (!item?.isTopIcon) return null;
 
   const socialLink = socials.find((link) =>
     item.url.includes(getDomain(link.url)),

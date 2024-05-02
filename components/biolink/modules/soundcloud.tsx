@@ -1,7 +1,7 @@
 import { SoundcloudOptions } from "@/lib/types";
 
 export function SoundcloudTrack({ options }: { options?: SoundcloudOptions }) {
-  if (!options?.trackId) return null;
+  if (!options?.trackId || !options.enabled) return null;
 
   return (
     <div className="w-full overflow-hidden rounded-lg">

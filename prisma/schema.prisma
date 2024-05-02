@@ -197,14 +197,20 @@ model Effect {
   @@map("visuals")
 }
 
+enum ContentType {
+  Playlist
+  Album
+  Track
+}
+
 model Spotify {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String   @unique @map("user_id") @db.ObjectId
-  trackId       String?  @unique(map: "track_id") @map("track_id")
-  albumId       String?  @unique(map: "album_id") @map("album_id")
-  playlistId    String?  @unique(map: "playlist_id") @map("playlist_id")
-  darkMode      Boolean? @map("dark_mode")
-  compactLayout Boolean? @map("compact_layout")
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String      @unique @map("user_id") @db.ObjectId
+  contentId      String      @map("content_id")
+  type           ContentType
+  darkBackground Boolean     @default(false) @map("dark_background")
+  compactLayout  Boolean     @default(false) @map("compact_layout")
+  enabled        Boolean     @default(true)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -212,9 +218,10 @@ model Spotify {
 }
 
 model Youtube {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String @unique @map("user_id") @db.ObjectId
-  videoId String @map("video_id")
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String  @unique @map("user_id") @db.ObjectId
+  videoId String  @map("video_id")
+  enabled Boolean @default(true)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -222,9 +229,10 @@ model Youtube {
 }
 
 model Soundcloud {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String @unique @map("user_id") @db.ObjectId
-  trackId String @map("track_id")
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String  @unique @map("user_id") @db.ObjectId
+  trackId String  @map("track_id")
+  enabled Boolean @default(true)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
