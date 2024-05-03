@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import type { User } from "@prisma/client";
 import { UsernameDialog } from "@/components/dashboard/username-modal";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export default async function Layout({
   children,
@@ -17,7 +18,12 @@ export default async function Layout({
   const user = session.user as User;
 
   return (
-    <>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <UsernameDialog isOpen={!user.username} />
       <div className="relative flex flex-col overflow-hidden bg-background dark:bg-secondary md:flex-row">
         <Sidebar />
@@ -26,6 +32,6 @@ export default async function Layout({
           {children}
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 }

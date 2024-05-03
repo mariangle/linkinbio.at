@@ -3,6 +3,7 @@ import {
   FaBell,
   FaBookmark,
   FaCalendar,
+  FaCoffee,
   FaComment,
   FaCompass,
   FaEnvelope,
@@ -349,6 +350,11 @@ export const icons = [
     id: 57,
     label: "Questionmark",
     value: FaQuestion,
+  },
+  {
+    id: 58,
+    label: "Coffee",
+    value: FaCoffee,
   },
   // FaPlane and up..
 ];

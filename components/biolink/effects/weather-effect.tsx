@@ -1,5 +1,5 @@
 import { ThunderEffect } from "@/components/biolink/effects/thunder-effect";
-import { PrecipitationEffect } from "@/components/biolink/effects/rain-effect";
+import { PrecipitationEffect } from "@/components/biolink/effects/precipitation-effect";
 import { LightningBugsEffect } from "@/components/biolink/effects/lightnings-bugs-effect";
 import { WeatherEffect as WeatherEffectType } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -26,19 +26,19 @@ export function WeatherEffect({
       );
     case WeatherEffectType.Rain:
       return (
-        <div className={cn("absolute inset-0 z-10")}>
+        <div className={cn("pointer-events-none absolute inset-0 z-10")}>
           <PrecipitationEffect type="rain" />
         </div>
       );
     case WeatherEffectType.Snow:
       return (
-        <div className="absolute inset-0 z-10">
+        <div className="pointer-events-none absolute inset-0 z-10">
           <PrecipitationEffect type="snow" />
         </div>
       );
     case WeatherEffectType.LightningBugs:
       return (
-        <div className="absolute inset-0 z-10">
+        <div className="pointer-events-none absolute inset-0 z-10">
           <LightningBugsEffect />
         </div>
       );

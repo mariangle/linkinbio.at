@@ -23,7 +23,8 @@ export function ClaimLink() {
         onChange={(e) => setLink(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="focus-visible:ring-none border-none bg-transparent px-0 focus-visible:ring-transparent"
+        placeholder="username"
+        className="focus-visible:ring-none border-none bg-transparent px-0 text-base placeholder:text-gray-400 focus-visible:ring-transparent"
         maxLength={20}
       />
       <Link

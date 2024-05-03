@@ -6,7 +6,6 @@ import NextTopLoader from "nextjs-toploader";
 import { metadata as configMetadata } from "@/lib/metadata";
 
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/theme-provider";
 import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = configMetadata;
@@ -22,15 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Toaster position="top-right" richColors closeButton />
-        <NextTopLoader color="#0055B3" showSpinner={false} />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <NextTopLoader color="#312A86" showSpinner={false} />
+        {children}
       </body>
     </html>
   );

@@ -133,7 +133,6 @@ export function TitleForm({
                             {item.name}
                           </SelectItem>
                         ))}
-                        <SelectItem value="none">None</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

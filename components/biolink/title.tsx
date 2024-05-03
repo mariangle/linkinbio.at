@@ -6,9 +6,9 @@ import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect
 import { Font } from "@/lib/types";
 
 interface TitleOptions {
-  typewriter: boolean;
-  sparkles: boolean;
-  font: Font;
+  typewriter?: boolean;
+  sparkles?: boolean;
+  font?: Font;
   color: string;
 }
 
@@ -20,7 +20,7 @@ export function Title({
 }: {
   options: TitleOptions;
   className?: string;
-  whiteText: boolean;
+  whiteText?: boolean;
   title: string;
 }) {
   const font = fonts.find((f) => f.value === options.font)?.display;
@@ -55,7 +55,7 @@ export function Title({
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-fit">
       {options.sparkles && (
         <Image
           src="/sparkle.gif"
@@ -69,7 +69,7 @@ export function Title({
       )}
       <h2
         className={cn(
-          "relative text-xl font-semibold",
+          "relative w-fit text-xl font-semibold",
           font ?? "inter",
           !options?.color && whiteText ? "text-white" : "text-black",
           className,

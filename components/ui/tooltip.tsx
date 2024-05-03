@@ -4,33 +4,6 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-export function FeatureTooltip({
-  children,
-  content,
-}: {
-  children: React.ReactNode;
-  content: string;
-}) {
-  const [showTooltip, setShowTooltip] = React.useState(false);
-
-  return (
-    <div className="relative">
-      <button
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        className="cursor-help"
-      >
-        {children}
-      </button>
-      {showTooltip && (
-        <div className="absolute top-full z-10 mt-2 w-[250px] rounded border bg-background p-2 text-xs text-foreground shadow-lg">
-          {content}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export function Tooltip({
   children,
   content,
@@ -43,7 +16,7 @@ export function Tooltip({
   smallWidth?: boolean;
 }) {
   return (
-    <div className="group relative">
+    <div className="group relative w-fit">
       {children}
       <div
         className={cn(

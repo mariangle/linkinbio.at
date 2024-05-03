@@ -30,7 +30,7 @@ export function PhoneMockup({
             <Layout
               biolink={biolink}
               preview
-              layout={layout ?? biolink.config.layout}
+              layout={layout ?? biolink.config.profile.layout}
             />
           )}
         </div>

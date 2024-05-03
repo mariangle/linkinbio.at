@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { socials } from "@/lib/constants/social-links";
-import { hexToRgb, getDomain } from "@/lib/utils";
+import { hexToRgb, getDomain, cn } from "@/lib/utils";
 import { icons } from "@/lib/constants/icons";
 
 import type { Link as LinkType } from "@/lib/types";
@@ -11,10 +11,14 @@ export function Button({
   item,
   config,
   display,
+  className,
+  size,
 }: {
   item: Pick<LinkType, "title" | "url" | "iconId" | "isTopIcon">;
   config: ButtonOptions;
   display?: boolean;
+  className?: string;
+  size?: "sm";
 }) {
   if (item.isTopIcon) {
     return null;
@@ -57,7 +61,10 @@ export function Button({
       target="_blank"
       rel="noopener noreferrer"
       href={item.url}
-      className="flex h-12 w-full items-center justify-center gap-3 whitespace-nowrap px-4 py-3 font-medium transition-all duration-200 hover:brightness-90"
+      className={cn(
+        "flex w-full items-center justify-center gap-3 whitespace-nowrap px-4 py-3 font-medium transition-all duration-200 hover:brightness-90",
+        size === "sm" && "text-sm",
+      )}
       style={{
         color: textColor,
         borderRadius: config.border.radius,
@@ -88,7 +95,7 @@ export function Button({
                     })`
                   : undefined,
               }}
-              className="size-5"
+              className={cn("size-5", size === "sm" && "size-4")}
             />
           ) : icon ? (
             <icon.value
@@ -98,7 +105,7 @@ export function Button({
                   ? `drop-shadow(0 0 0.5rem ${config.text.color})`
                   : undefined,
               }}
-              className="size-5"
+              className={cn("size-5", size === "sm" && "size-4")}
             />
           ) : (
             <FaGlobe
@@ -108,7 +115,7 @@ export function Button({
                   ? `drop-shadow(0 0 0.5rem ${config.text.color})`
                   : undefined,
               }}
-              className="size-5"
+              className={cn("size-5", size === "sm" && "size-4")}
             />
           )}
         </>

@@ -3,6 +3,8 @@
 
 import React, { useEffect, useRef } from "react";
 
+import { cn } from "@/lib/utils";
+
 interface Lightning {
   x: number;
   y: number;
@@ -14,7 +16,7 @@ interface Lightning {
   hasFired: boolean;
 }
 
-export function ThunderEffect() {
+export function ThunderEffect({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let ctx: CanvasRenderingContext2D | null = null;
   let cw: number = 0;
@@ -208,6 +210,10 @@ export function ThunderEffect() {
     }
   }, []);
   return (
-    <canvas ref={canvasRef} id="canvas" className="h-full w-full"></canvas>
+    <canvas
+      ref={canvasRef}
+      id="canvas"
+      className={cn("h-full w-full", className)}
+    ></canvas>
   );
 }

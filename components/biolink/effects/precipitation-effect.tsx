@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef } from "react";
 
 interface Precipitation {
@@ -12,12 +13,14 @@ interface PrecipitationEffectProps {
   type: "rain" | "snow";
   color?: string;
   speed?: number;
+  className?: string;
 }
 
 export const PrecipitationEffect: React.FC<PrecipitationEffectProps> = ({
   type,
-  color = type === "rain" ? "#53789E" : "#FFFFFF", // Default color is white
+  color = type === "rain" ? "#006BDF" : "#FFFFFF", // Default color is white
   speed = type === "rain" ? 4 : 0.5, // Default speed is 7 for rain and 0.5 for snow
+  className,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -112,6 +115,10 @@ export const PrecipitationEffect: React.FC<PrecipitationEffectProps> = ({
   }, [type, color, speed]);
 
   return (
-    <canvas ref={canvasRef} id="canvas" className="h-full w-full"></canvas>
+    <canvas
+      ref={canvasRef}
+      id="canvas"
+      className={cn("h-full w-full", className)}
+    ></canvas>
   );
 };

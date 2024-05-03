@@ -132,7 +132,6 @@ export function LinkForm({ item }: { item: Link }) {
                   iconId={form.watch("iconId")}
                   setIconId={(iconId) => {
                     form.setValue("iconId", iconId);
-                    alert("Icon ID: " + iconId);
                   }}
                 />
               )}

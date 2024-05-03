@@ -88,7 +88,7 @@ export const LightningBugsEffect: React.FC<LightningBugsProps> = ({
       ctx.clearRect(0, 0, width, height);
       ctxRef.current = null;
     };
-  }, [density]);
+  }, [bugs, density]);
 
-  return <canvas ref={canvasRef} className="fixed inset-0" />;
+  return <canvas ref={canvasRef} />;
 };

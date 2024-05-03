@@ -13,6 +13,7 @@ import {
   FaStackOverflow,
   FaSpotify,
   FaSoundcloud,
+  FaPinterest,
   FaDribbble,
   FaTumblr,
   FaSkype,
@@ -122,20 +123,26 @@ export const socials: Social[] = [
   },
   {
     icon: FaTumblr,
-    name: "Threads",
-    url: "https://www.example.com/threads",
-    color: "#000000", // ! Change this color
+    name: "Tumblr",
+    url: "https://www.tumblr.com",
+    color: "#1D3666",
   },
   {
     icon: FaSkype,
     name: "Skype",
-    url: "https://www.example.com/threads",
-    color: "#000000", // ! Change this color
+    url: "https://skype.com",
+    color: "#01A8ED", // ! Change this color
   },
   {
     icon: FaQuora,
     name: "Quora",
-    url: "https://www.example.com/threads",
-    color: "#000000", // ! Change this color
+    url: "https://quora.com",
+    color: "#B32A26",
+  },
+  {
+    icon: FaPinterest,
+    name: "Pinterest",
+    url: "https://pinterest.com",
+    color: "#DF0019",
   },
 ] as const;

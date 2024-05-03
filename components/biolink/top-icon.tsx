@@ -1,7 +1,7 @@
 import React from "react";
 import type { Link as LinkType, TopIconOptions } from "@/lib/types";
 import { Social, socials } from "@/lib/constants/social-links";
-import { getDomain } from "@/lib/utils";
+import { cn, getDomain } from "@/lib/utils";
 import { TopIconStyle } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import Link from "next/link";
@@ -12,11 +12,13 @@ export function TopIcon({
   item,
   options,
   whiteText = true,
+  size,
 }: {
-  item: LinkType;
+  item: Pick<LinkType, "isTopIcon" | "iconId" | "title" | "url">;
   options: TopIconOptions;
   className?: string;
   whiteText?: boolean;
+  size?: "sm";
 }) {
   if (!item?.isTopIcon) return null;
 
@@ -97,7 +99,7 @@ export function TopIcon({
               filter,
               color,
             }}
-            className="size-6"
+            className={cn("size-6", size === "sm" && "size-5")}
           />
         </TopIconLink>
       );
@@ -115,7 +117,10 @@ export function TopIcon({
         }}
       >
         <div
-          className="grid size-8 place-content-center rounded-full"
+          className={cn(
+            "grid size-8 place-content-center rounded-full",
+            size === "sm" && "size-7",
+          )}
           style={{
             filter,
             background,
@@ -125,6 +130,7 @@ export function TopIcon({
             style={{
               color,
             }}
+            className={cn("size-[18px]", size === "sm" && "size-4")}
           />
         </div>
       </TopIconLink>
@@ -252,7 +258,7 @@ export function TopIconLink({
         target="_blank"
         rel="noopener noreferrer"
         href={social.url}
-        className="group relative block"
+        className="group relative block w-fit"
       >
         {children}
       </Link>

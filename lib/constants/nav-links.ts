@@ -1,20 +1,9 @@
-import {
-  Settings,
-  Link2 as Link,
-  User,
-  Palette,
-  Puzzle,
-  Layers3,
-} from "lucide-react";
+import { Settings, Link2 as Link, User, Palette, Puzzle } from "lucide-react";
 
 export const navLinks = [
   {
     label: "Features",
     href: "/features",
-  },
-  {
-    label: "Templates",
-    href: "/templates",
   },
   {
     label: "Pricing",

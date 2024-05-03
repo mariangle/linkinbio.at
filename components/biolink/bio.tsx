@@ -11,7 +11,7 @@ export function Bio({
   bio: string;
   className?: string;
   typewriter?: boolean;
-  whiteText: boolean;
+  whiteText?: boolean;
 }) {
   if (typewriter) {
     return (

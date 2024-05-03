@@ -7,7 +7,9 @@ export default function Page() {
   return (
     <IndustrialBackground>
       <Container variant="landing" page>
-        <Heading className="text-center">Pricing</Heading>
+        <Heading className="mb-12 bg-gradient-to-b from-indigo-200 to-indigo-50 bg-clip-text text-center text-transparent">
+          Simple, transparent pricing
+        </Heading>
         <PricePackages />
       </Container>
     </IndustrialBackground>

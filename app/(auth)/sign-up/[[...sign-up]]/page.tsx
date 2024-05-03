@@ -6,11 +6,11 @@ import { ChevronLeft } from "lucide-react";
 
 export default function Page() {
   return (
-    <div className="relative flex h-screen justify-between bg-[#090D15] p-8">
+    <div className="relative flex h-screen justify-between bg-[#030010] p-8">
       <div className="relative grid w-full place-content-center xl:flex-[2]">
         <div className="absolute left-0 top-0">
-          <Link href="/" className="flex items-center gap-2">
-            <ChevronLeft className="size-4 text-white" />
+          <Link href="/" className="flex items-center gap-2 text-white">
+            <ChevronLeft className="size-4" />
             Back
           </Link>
         </div>
@@ -20,7 +20,7 @@ export default function Page() {
         <Image
           src={BackgroundImage}
           alt="abstract background image"
-          className="h-full w-full scale-105 object-cover blur-md brightness-75"
+          className="h-full w-full scale-105 object-cover blur-md brightness-[50%] hue-rotate-[10deg]"
         />
       </div>
     </div>

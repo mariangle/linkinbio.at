@@ -1,6 +1,10 @@
 import { SpotifyOptions, ContentType } from "@/lib/types";
 
-export function SpotifyTrack({ options }: { options: SpotifyOptions }) {
+export function SpotifyTrack({
+  options,
+}: {
+  options: Omit<SpotifyOptions, "type">;
+}) {
   return (
     <iframe
       src={`https://open.spotify.com/embed/track/${
@@ -16,7 +20,11 @@ export function SpotifyTrack({ options }: { options: SpotifyOptions }) {
   );
 }
 
-export function SpotifyAlbum({ options }: { options: SpotifyOptions }) {
+export function SpotifyAlbum({
+  options,
+}: {
+  options: Omit<SpotifyOptions, "type">;
+}) {
   return (
     <iframe
       style={{ borderRadius: "12px" }}
@@ -30,7 +38,11 @@ export function SpotifyAlbum({ options }: { options: SpotifyOptions }) {
   );
 }
 
-export function SpotifyPlaylist({ options }: { options: SpotifyOptions }) {
+export function SpotifyPlaylist({
+  options,
+}: {
+  options: Omit<SpotifyOptions, "type">;
+}) {
   return (
     <iframe
       title="Spotify Playlist"

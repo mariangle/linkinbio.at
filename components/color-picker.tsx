@@ -9,24 +9,26 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 const colors = [
-  "#FF0000",
-  "#FFA500",
-  "#FFFF00",
-  "#008000",
-  "#0000FF",
-  "#800080",
-  "#FFFFFF",
-  "#000000",
+  "#FF6347", // Tomato
+  "#7FFFD4", // Aquamarine
+  "#40E0D0", // Turquoise
+  "#FFD700", // Gold
+  "#9932CC", // Dark Orchid
+  "#FF8C00", // Dark Orange
+  "#4682B4", // Steel Blue
+  "#8A2BE2", // Blue Violet
 ];
 
 export function ColorPicker({
   color,
   setColor,
   small = false,
+  className,
 }: {
   color: string;
   setColor: (color: string) => void;
   small?: boolean;
+  className?: string;
 }) {
   const [colorValue, setColorValue] = useState(color);
   const colorFallback = "#FFFFFF";
@@ -41,11 +43,12 @@ export function ColorPicker({
       <PopoverTrigger
         className={cn(
           "flex h-9 w-full items-center gap-2 rounded-lg border border-border bg-input p-2",
-          small && "w-9 justify-center",
+          small && "w-9 justify-center border-none bg-transparent p-0",
+          className,
         )}
       >
         <div
-          className="size-4 rounded-sm"
+          className="size-6 rounded-full"
           style={{
             backgroundColor: isValidHexColor(colorValue)
               ? colorValue

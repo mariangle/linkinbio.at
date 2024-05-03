@@ -42,7 +42,7 @@
     --popover: 221 39% 4%;
     --popover-foreground: 0 0% 98%;
 
-    --secondary: 221 39% 10%;
+    --secondary: 221 39% 8%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 221 39% 16%;
@@ -103,16 +103,8 @@
     @apply h-full w-px bg-gradient-to-b from-primary/10 to-transparent;
   }
 
-  .vertical-line-shadow {
-    @apply h-full w-px bg-gradient-to-b from-white/10 via-white/10 to-transparent dark:hidden;
-  }
-
   .horizontal-line {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-border/20 to-transparent;
-  }
-
-  .horizontal-line-shadow {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-white/50 to-transparent dark:hidden;
+    @apply h-px w-full bg-gradient-to-r from-transparent via-primary/25 to-transparent;
   }
 
   @keyframes float {
@@ -205,5 +197,9 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  .border-showcase {
+    @apply border-[rgba(63,81,116,0.5)];
   }
 }

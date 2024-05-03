@@ -6,7 +6,7 @@ import { ClaimLink } from "@/components/landing/claim-link";
 import { PhoneMockup } from "@/components/phone-mockup";
 import type { Biolink } from "@/lib/types";
 import { WeatherEffect } from "@/lib/types";
-import { Layout, Font } from "@/lib/types/enums";
+import { Layout, Font, ContentType } from "@/lib/types/enums";
 import { TopIconStyle } from "@/lib/types";
 
 export const dummyBiolink: Biolink = {
@@ -104,17 +104,11 @@ export const dummyBiolink: Biolink = {
   ],
   modules: {
     spotify: {
-      track: {
-        enabled: true,
-        trackId: "123",
-        darkMode: false,
-      },
-      album: {
-        enabled: true,
-        albumId: "123",
-        darkMode: false,
-        compactLayout: false,
-      },
+      enabled: true,
+      contentId: "123",
+      darkBackground: false,
+      compactLayout: false,
+      type: ContentType.Album,
     },
     youtube: {
       videoId: "123",
@@ -133,29 +127,24 @@ export default function Page() {
       <Image
         src={BackgroundImage}
         alt="abstract background image"
-        className="fixed inset-0 h-full w-full scale-105 object-cover blur-md brightness-75"
+        className="fixed inset-0 h-full w-full scale-110 object-cover blur-md brightness-[50%] hue-rotate-[10deg]"
       />
       <Container
         className="relative flex min-h-screen flex-col gap-12 py-24 md:pt-32 lg:flex-row"
         variant="landing"
       >
-        <div className="relative flex flex-1 flex-col items-start justify-start gap-4 md:justify-center">
-          <div className="max-w-4xl pb-4 text-5xl font-semibold text-gray-200 md:text-6xl lg:text-7xl">
-            Lorem, ipsum.{" "}
-            <span className="animate-gradient bg-gradient-to-r from-blue-500 via-blue-600 via-40% to-blue-500 to-50% bg-clip-text text-transparent">
-              advanced
-            </span>{" "}
-            Lorem ipsum dolor sit amet.s
+        <div className="relative flex flex-1 flex-col items-start justify-start gap-6 md:justify-center">
+          <div className="max-w-3xl pb-4 text-5xl font-medium text-indigo-100 md:text-6xl lg:text-7xl">
+            Connect all your links with one single link.
           </div>
-          <div className="max-w-3xl text-base text-gray-300 sm:text-lg lg:text-left">
-            Lorem ipsum dolor sit amet.
+          <div className="max-w-2xl text-base text-slate-300 sm:text-xl lg:text-left">
+            linkinbio.at is your modern, customizable, and free solution for
+            connecting with your audience.
           </div>
           <ClaimLink />
-          <InfiniteMovingHighlights speed="fast" />
+          <InfiniteMovingHighlights speed="slow" />
         </div>
-        <div className="flex flex-1 items-center justify-center md:justify-center">
-          <PhoneMockup hero biolink={dummyBiolink} scale={false} />
-        </div>
+        <div className="hidden flex-1 items-center justify-center md:justify-center xl:flex"></div>
       </Container>
     </div>
   );

@@ -39,14 +39,14 @@ export function AuthForm({ variant }: { variant: Variant }) {
         <h1 className="mt-2 text-2xl font-bold text-white">
           {variant === "sign-in" ? "Sign In" : "Sign Up"}
         </h1>
-        <p className="mt-2 text-sm text-gray-400">
+        <p className="mt-2 text-sm text-slate-300">
           Get started for free. No credit card required.
         </p>
       </div>
       <div className="mt-4">
         <Button
           onClick={login}
-          disabled={isLoading}
+          disabled={true}
           className="h-12 w-full"
           size="lg"
         >
