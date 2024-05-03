@@ -112,6 +112,7 @@ export const PrecipitationEffect: React.FC<PrecipitationEffectProps> = ({
       ctx.clearRect(0, 0, width, height);
       ctxRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, color, speed]);
 
   return (
