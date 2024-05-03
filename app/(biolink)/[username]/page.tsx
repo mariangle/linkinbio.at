@@ -1,18 +1,6 @@
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
-
-import type { Biolink } from "@/lib/types";
-
-export async function getServerBiolink(username: string) {
-  const res = await fetch(
-    `${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://linkinbio.at"}/api/biolink/${username}`,
-    {
-      cache: "no-store",
-    },
-  );
-  const apiResponse = await res.json();
-  return apiResponse.data;
-}
+import { getBiolinkByUsername } from "@/lib/utils/get-biolink";
 
 export async function generateMetadata({
   params,
@@ -21,17 +9,21 @@ export async function generateMetadata({
     username: string;
   };
 }) {
-  const biolink: Biolink = await getServerBiolink(params.username);
+  try {
+    const biolink = await getBiolinkByUsername(params.username);
 
-  if (!biolink) return null;
+    if (!biolink) return null;
 
-  return await constructMetadata({
-    title: biolink.user.title
-      ? `${biolink.user.title} (@${biolink.user.username})`
-      : `${biolink.user.username}`,
-    image: biolink.user.image ?? "",
-    description: biolink.user.bio || "Connect with me on social media.",
-  });
+    return await constructMetadata({
+      title: biolink.user.title
+        ? `${biolink.user.title} (@${biolink.user.username})`
+        : `${biolink.user.username}`,
+      image: biolink.user.image ?? "",
+      description: biolink.user.bio || "Connect with me on social media.",
+    });
+  } catch (e) {
+    return null;
+  }
 }
 
 export default async function Page({
@@ -41,7 +33,7 @@ export default async function Page({
     username: string;
   };
 }) {
-  const biolink: Biolink = await getServerBiolink(params.username);
+  const biolink = await getBiolinkByUsername(params.username);
 
   if (!biolink) return "not found";
 

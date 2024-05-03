@@ -33,3 +33,30 @@ export async function getBiolinkServer() {
 
   return biolink;
 }
+
+export async function getBiolinkByUsername(username: string) {
+  const user = await db.user.findFirst({
+    where: {
+      username: username,
+    },
+    include: {
+      background: true,
+      button: true,
+      links: true,
+      profile: true,
+      topIcon: true,
+      effect: true,
+      spotify: true,
+      youtube: true,
+      soundcloud: true,
+    },
+  });
+
+  if (!user) return null;
+
+  const biolink = constructBiolink({
+    user: user as ExtendedUser,
+  });
+
+  return biolink;
+}
