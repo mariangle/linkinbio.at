@@ -11,6 +11,7 @@ import {
   FormContainer,
   FormFooter,
   FormContent,
+  FormActions,
 } from "@/components/dashboard/form";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -120,6 +121,10 @@ export function ButtonsForm({
     await submit();
   };
 
+  const onCancel = () => {
+    form.reset();
+  };
+
   const setButtonValues = (
     button: ButtonOptions,
     form: UseFormReturn<ButtonsFormValues>,
@@ -162,9 +167,7 @@ export function ButtonsForm({
             </ButtonCustomizerSheet>
           </FormContent>
           <FormFooter>
-            <Button loading={loading} disabled={!dirty}>
-              Save Changes
-            </Button>
+            <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
           </FormFooter>
         </FormContainer>
       </form>

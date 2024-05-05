@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import BackgroundImage from "@/public/background.png";
+import BackgroundImage from "@/public/dashboard.png";
 import { AuthForm } from "../../auth-form";
 import { ChevronLeft } from "lucide-react";
 
 export default function Page() {
   return (
-    <div className="relative flex h-screen justify-between bg-[#030010] p-8">
-      <div className="relative grid w-full place-content-center xl:flex-[2]">
-        <div className="absolute left-0 top-0">
+    <div className="relative flex h-screen justify-between overflow-x-hidden bg-[#030010] bg-gradient-to-br from-indigo-900/10 to-blue-950/5">
+      <div className="relative grid w-full place-content-center p-6 xl:flex-[2]">
+        <div className="absolute left-6 top-6">
           <Link href="/" className="flex items-center gap-2 text-white">
             <ChevronLeft className="size-4" />
             Back
@@ -16,12 +16,19 @@ export default function Page() {
         </div>
         <AuthForm variant="sign-up" />
       </div>
-      <div className="hidden h-full w-full overflow-hidden rounded-3xl xl:block xl:flex-[3]">
-        <Image
-          src={BackgroundImage}
-          alt="abstract background image"
-          className="h-full w-full scale-105 object-cover blur-md brightness-[50%] hue-rotate-[10deg]"
-        />
+      <div className="hidden h-full w-full xl:flex xl:flex-[3] xl:items-center xl:justify-center">
+        <div className="relative">
+          <div className="absolute inset-0 h-full w-full scale-105 transform rounded-full bg-gradient-to-r from-indigo-800/25 to-blue-800/50 blur-3xl" />
+          <div className="border-rotate rounded-2xl rounded-r-none">
+            <div className="relative overflow-hidden rounded-2xl rounded-r-none border border-r-0 border-white/10 shadow-2xl shadow-indigo-950/25">
+              <Image
+                src={BackgroundImage}
+                alt="abstract background image"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

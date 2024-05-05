@@ -15,6 +15,7 @@ import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
 import { determineBrightness } from "@/lib/utils/determine-brightness";
 import { LayoutProps } from ".";
+import { Spotify } from "../modules/spotify";
 
 export function WithCoverLayout({
   user,
@@ -64,6 +65,7 @@ export function WithCoverLayout({
               bio={user.bio}
               whiteText={backgroundDark}
               typewriter={config.effects.bioTypewriter}
+              className="text-center"
             />
           )}
           <Details
@@ -82,10 +84,13 @@ export function WithCoverLayout({
             />
           ))}
         </div>
-        <div className="mt-8 w-full space-y-4">
+        <div className="my-8 w-full space-y-4">
           {links?.map((link, index) => (
             <Button key={index} item={link} config={config.button} />
           ))}
+        </div>
+        <div className="w-full space-y-6">
+          <Spotify options={modules?.spotify} />
         </div>
       </ContentContainer>
       <Footer textDark={!backgroundDark} />

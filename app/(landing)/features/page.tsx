@@ -1,9 +1,9 @@
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/typography";
 import { IndustrialBackground } from "@/components/ui/industrial-background";
-import { ButtonCustomizer } from "../_components/button-customizer";
+import { ButtonCustomizer } from "../_components/button-showcase";
 import { EmbedShowcase } from "../_components/embed-showcase";
-import { ProfileCustomizer } from "../_components/profile-customizer";
+import { ProfileCustomizer } from "../_components/profile-showcase";
 import { TopIconShowcase } from "../_components/top-icons-showcase";
 import { WeatherEffectCustomizer } from "../_components/weather-effect-customizer";
 import { DashboardShowcase } from "../_components/dashboard-showcase";
@@ -52,12 +52,12 @@ export default function Page() {
   return (
     <IndustrialBackground>
       <Container variant="landing" page>
-        <Heading className="bg-gradient-to-b from-indigo-200 to-indigo-50 bg-clip-text text-center text-transparent">
-          Features like no other
+        <Heading className="bg-gradient-to-b from-indigo-100 to-white bg-clip-text text-center text-transparent">
+          Features
         </Heading>
         <p className="mx-auto mb-12 max-w-prose text-center text-slate-300">
-          Essentiel features with unmatched features that will make your biolink
-          page stand out from the rest.
+          Discover the powerful features that make linkinbio.at the best bio
+          link tool for personal and professional use.
         </p>
         <div className="mx-auto w-full max-w-screen-xl space-y-6">
           <div className="space-y-8 lg:grid lg:grid-cols-5 lg:gap-8 lg:space-y-0">
@@ -84,7 +84,7 @@ export default function Page() {
             {features.map((feature, index) => (
               <div key={index}>
                 <div className="flex items-center gap-2">
-                  <feature.icon className="size-4 text-blue-800/75" />
+                  <feature.icon className="size-4 text-primary" />
                   <h3 className="text-sm font-medium text-white">
                     {feature.title}
                   </h3>

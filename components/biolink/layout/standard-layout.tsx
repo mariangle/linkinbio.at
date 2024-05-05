@@ -64,6 +64,7 @@ export function StandardLayout({
               bio={user.bio}
               whiteText={backgroundDark}
               typewriter={config.effects.bioTypewriter}
+              className="text-center"
             />
           )}
           <Details

@@ -17,8 +17,7 @@ export function DashboardShowcase() {
         </ShowcaseIconContainer>
         <ShowcaseHeader>Dashboard</ShowcaseHeader>
         <ShowcaseDescription>
-          A dashboard that is easy to use and navigate. It&apos;s designed to
-          give you a quick overview of your biolink page.
+          A dashboard that is easy to use and navigate.
         </ShowcaseDescription>
       </div>
       <div className="overflow-hidden pl-6 md:pl-10">

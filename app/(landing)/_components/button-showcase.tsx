@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/biolink/button";
 import { ButtonsFormSchema, ButtonsFormValues } from "@/lib/validations";
 import { ButtonCustomizerSheet } from "@/components/button-customizer-sheet";
-import { Paintbrush } from "lucide-react";
+import { Paintbrush, SlidersHorizontal } from "lucide-react";
 
 export function ButtonCustomizer() {
   const form = useForm<ButtonsFormValues>({
@@ -30,8 +30,8 @@ export function ButtonCustomizer() {
       borderWidth: 0,
       backgroundColor: "#FFFFFF",
       backgroundOpacity: 0.1,
-      backgroundBlur: 50,
-      backgroundSocialColor: true,
+      backgroundBlur: 0,
+      backgroundSocialColor: false,
       iconHidden: false,
       iconShadow: true,
       iconSocialColor: true,
@@ -42,7 +42,7 @@ export function ButtonCustomizer() {
     <ShowcaseContainer className="h-full">
       <Form {...form}>
         <div className="flex h-full flex-col justify-between">
-          <div className="mb-6 flex flex-col items-center justify-center">
+          <div className="mb-6">
             <ShowcaseIconContainer>
               <Paintbrush className="size-5 text-white" />
             </ShowcaseIconContainer>
@@ -51,13 +51,13 @@ export function ButtonCustomizer() {
               No templates, just customize yourself. Try it out below.
             </ShowcaseDescription>
             <ButtonCustomizerSheet form={form}>
-              <button className="mt-4 block w-fit rounded-lg border border-blue-950 bg-white/5 bg-gradient-to-r from-[#000010] to-blue-500/25 px-5 py-2.5 text-center text-sm text-white shadow-lg">
+              <button className="border-showcase mt-4 block w-fit rounded-lg border bg-white/5 bg-gradient-to-r from-[#000010] to-blue-500/25 px-5 py-2.5 text-center text-sm text-white shadow-lg">
                 <span
                   style={{
                     filter: `drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5))`,
                   }}
                 >
-                  <Paintbrush className="mr-1 inline-block size-4" />
+                  <SlidersHorizontal className="mr-2 inline-block size-4" />
                   Customize
                 </span>
               </button>

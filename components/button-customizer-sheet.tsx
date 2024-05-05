@@ -11,8 +11,10 @@ import { UseFormReturn } from "react-hook-form";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { ButtonsFormValues } from "@/lib/validations";
+import { cn } from "@/lib/utils";
 
 export function ButtonCustomizerSheet({
   form,
@@ -53,36 +55,18 @@ export function ButtonCustomizerSheet({
                     />
                   </div>
                 </div>
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                  <div className="text-sm text-muted-foreground">
-                    Toggle Social Media Background for social links
-                  </div>
-                  <FormField
-                    control={form.control}
-                    name="backgroundSocialColor"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <Label>Background Opacity</Label>
                     <div className="text-xs">
-                      {form.getValues("backgroundOpacity")}
+                      {(form.getValues("backgroundOpacity") * 100).toFixed(0)}%
                     </div>
                   </div>
                   <Slider
                     min={0}
                     max={1}
-                    step={0.01}
+                    step={0.05}
                     defaultValue={[form.getValues("backgroundOpacity")]}
                     onValueChange={(backgroundOpacity) =>
                       form.setValue("backgroundOpacity", backgroundOpacity[0])
@@ -93,13 +77,13 @@ export function ButtonCustomizerSheet({
                   <div className="flex items-center justify-between">
                     <Label>Background Blur</Label>
                     <div className="text-xs">
-                      {form.getValues("backgroundBlur")}
+                      {form.getValues("backgroundBlur")}%
                     </div>
                   </div>
                   <Slider
                     min={0}
                     max={100}
-                    step={1}
+                    step={5}
                     defaultValue={[form.getValues("backgroundBlur")]}
                     onValueChange={(backdropBlur) =>
                       form.setValue("backgroundBlur", backdropBlur[0])
@@ -107,7 +91,7 @@ export function ButtonCustomizerSheet({
                   />
                   <div className="text-xs text-muted-foreground">
                     Looks best with background images. Ensure you have lowered
-                    opacity for background opacity.
+                    opacity for background opacity to be visible.
                   </div>
                 </div>
               </div>
@@ -127,38 +111,92 @@ export function ButtonCustomizerSheet({
                   />
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Label>Border Width</Label>
-                    <div className="text-xs">
-                      {form.getValues("borderWidth")}
-                    </div>
+                  <Label>Border Width</Label>
+                  <div className="grid grid-cols-6 gap-2">
+                    {[
+                      {
+                        label: "0px",
+                        value: 0,
+                      },
+                      {
+                        label: "1px",
+                        value: 1,
+                      },
+                      {
+                        label: "2px",
+                        value: 2,
+                      },
+                      {
+                        label: "3px",
+                        value: 3,
+                      },
+                      {
+                        label: "4px",
+                        value: 4,
+                      },
+                      {
+                        label: "5px",
+                        value: 5,
+                      },
+                    ].map((radius, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        onClick={() =>
+                          form.setValue("borderWidth", radius.value)
+                        }
+                        className={cn(
+                          "rounded-lg px-3 py-1 text-xs",
+                          form.getValues("borderWidth") === radius.value &&
+                            "ring-1 ring-foreground/50",
+                        )}
+                      >
+                        {radius.label}
+                      </Button>
+                    ))}
                   </div>
-                  <Slider
-                    min={0}
-                    max={5}
-                    step={1}
-                    defaultValue={[form.getValues("borderWidth")]}
-                    onValueChange={(borderWidth) =>
-                      form.setValue("borderWidth", borderWidth[0])
-                    }
-                  />
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Label>Border Radius</Label>
-                    <div className="text-xs">
-                      {form.getValues("borderRadius")}
-                    </div>
+                  <Label>Border Radius</Label>
+                  <div className="grid grid-cols-5 gap-2">
+                    {[
+                      {
+                        label: "None",
+                        value: 0,
+                      },
+                      {
+                        label: "Small",
+                        value: 10,
+                      },
+                      {
+                        label: "Medium",
+                        value: 15,
+                      },
+                      {
+                        label: "Large",
+                        value: 20,
+                      },
+                      {
+                        label: "Full",
+                        value: 25,
+                      },
+                    ].map((radius, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        onClick={() =>
+                          form.setValue("borderRadius", radius.value)
+                        }
+                        className={cn(
+                          "rounded-lg px-3 py-1 text-xs",
+                          form.getValues("borderRadius") === radius.value &&
+                            "ring-1 ring-foreground/50",
+                        )}
+                      >
+                        {radius.label}
+                      </Button>
+                    ))}
                   </div>
-                  <Slider
-                    min={0}
-                    max={25}
-                    step={5}
-                    defaultValue={[form.getValues("borderRadius")]}
-                    onValueChange={(borderRadius) =>
-                      form.setValue("borderRadius", borderRadius[0])
-                    }
-                  />
                 </div>
               </div>
             </div>
@@ -168,10 +206,22 @@ export function ButtonCustomizerSheet({
                 <div className="whitespace-nowrap">Shadow</div>
                 <div className="h-px w-full bg-border"></div>
               </div>
+              <div className="space-y-4">
+                <Label>Shadow Color</Label>
+                <ColorPicker
+                  color={form.getValues("shadowColor")}
+                  setColor={(color) => form.setValue("shadowColor", color)}
+                />
+              </div>
               <div className="my-6 space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <Label>Shadow Width</Label>
+                    <Label>
+                      Shadow{" "}
+                      {form.getValues("shadowSolid") === true
+                        ? "Offset"
+                        : "Width"}
+                    </Label>
                     <div className="text-xs">
                       {form.getValues("shadowSpreadRadius")}px
                     </div>
@@ -188,7 +238,7 @@ export function ButtonCustomizerSheet({
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-muted-foreground">
-                    Override with solid offset shadow
+                    Solid shadow
                   </div>
                   <FormField
                     control={form.control}
@@ -274,6 +324,25 @@ export function ButtonCustomizerSheet({
                   <FormField
                     control={form.control}
                     name="iconShadow"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
+                        <FormControl>
+                          <Switch
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">
+                    Social Media Background Color
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="backgroundSocialColor"
                     render={({ field }) => (
                       <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
                         <FormControl>

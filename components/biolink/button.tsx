@@ -10,14 +10,10 @@ import { FaGlobe } from "react-icons/fa";
 export function Button({
   item,
   config,
-  display,
-  className,
   size,
 }: {
   item: Pick<LinkType, "title" | "url" | "iconId" | "isTopIcon">;
   config: ButtonOptions;
-  display?: boolean;
-  className?: string;
   size?: "sm";
 }) {
   if (item.isTopIcon) {
@@ -40,15 +36,17 @@ export function Button({
       : config.background.color,
   );
 
+  const shadowColorRgb = hexToRgb(config.shadow.color);
+
   const gradientBackground =
     config.background.socialColor && socialLink?.gradientColors
       ? `linear-gradient(to right, ${socialLink?.gradientColors.join(", ")})`
       : undefined;
 
   const boxShadow = config.shadow.solid
-    ? `4px 4px 0px 0px rgba(0, 0, 0, 0.5)`
+    ? `${config.shadow.spreadRadius}px ${config.shadow.spreadRadius}px 0px 0px rgba(${shadowColorRgb?.r}, ${shadowColorRgb?.g}, ${shadowColorRgb?.b}, 1)`
     : config.shadow.spreadRadius > 0
-      ? `4px 4px ${config.shadow.spreadRadius}px rgba(0, 0, 0, 1)`
+      ? `4px 4px ${config.shadow.spreadRadius}px rgba(${shadowColorRgb?.r}, ${shadowColorRgb?.g}, ${shadowColorRgb?.b}, 1)`
       : undefined;
 
   const backdropFilter =

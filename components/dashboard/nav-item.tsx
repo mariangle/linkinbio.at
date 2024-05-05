@@ -13,39 +13,27 @@ export function NavItem({
   const pathname = usePathname();
   const active = item.href === pathname;
 
-  const link = (
-    <Link
-      href={item.href}
-      className={cn(
-        "mx-3 flex h-11 items-center justify-start gap-3 rounded-md px-3.5 py-2 text-sm text-muted-foreground",
-        active &&
-          "bg-gradient-to-r from-secondary to-transparent text-foreground dark:from-primary/10",
-      )}
-    >
-      <item.icon className="size-4 shrink-0" />
-      <span
-        className={cn(
-          "block whitespace-nowrap transition-all duration-1000",
-          collapsed && "invisible hidden opacity-0",
-        )}
-      >
-        {item.label}
-      </span>
-    </Link>
-  );
-
   return (
     <div className="relative">
       {active && (
-        <div className="absolute h-full w-[2.5px] rounded-r-md bg-primary" />
+        <div className="absolute bottom-0 left-1/2 z-10 h-0.5 w-5 -translate-x-1/2 rounded-r-md bg-primary md:left-0 md:top-1/2 md:h-5 md:w-0.5 md:-translate-y-1/2" />
       )}
-      {collapsed ? (
-        <Tooltip content={item.label} position="right">
-          {link}
-        </Tooltip>
-      ) : (
-        link
-      )}
+      <Link
+        href={item.href}
+        className={cn(
+          "flex h-11 items-center justify-start gap-3 rounded-xl bg-secondary px-3.5 py-2 text-sm text-muted-foreground opacity-75",
+          active &&
+            "bg-gradient-to-t from-indigo-100 to-transparent text-foreground opacity-100 dark:from-primary/20 md:bg-gradient-to-r",
+          !collapsed && "md:bg-transparent",
+        )}
+      >
+        <item.icon className="size-3.5 shrink-0" />
+        <span
+          className={cn("hidden whitespace-nowrap", !collapsed && "md:block")}
+        >
+          {item.label}
+        </span>
+      </Link>
     </div>
   );
 }

@@ -17,18 +17,17 @@ export function EmbedShowcase() {
         </ShowcaseIconContainer>
         <ShowcaseHeader>Embeds</ShowcaseHeader>
         <ShowcaseDescription>
-          Add your favorite tracks, playlists, albums and videos to your
-          biolink.
+          Add your favorite tracks, playlists, albums and videos.
         </ShowcaseDescription>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6">
-        <SoundcloudTrack options={{ enabled: true, trackId: "509599005" }} />
+        <SoundcloudTrack options={{ enabled: true, trackId: "1396880899" }} />
         <SpotifyTrack
           options={{
             enabled: true,
             darkBackground: false,
-            compactLayout: false,
-            contentId: "6wWaVoUOzLQJHd3bWAUpdZ",
+            compactLayout: true,
+            contentId: "0xaFw2zDYf1rIJWl2dXiSF",
           }}
         />
       </div>

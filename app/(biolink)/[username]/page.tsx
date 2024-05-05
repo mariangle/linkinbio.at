@@ -22,6 +22,7 @@ export async function generateMetadata({
       description: biolink.user.bio || "Connect with me on social media.",
     });
   } catch (e) {
+    console.log(e);
     return null;
   }
 }

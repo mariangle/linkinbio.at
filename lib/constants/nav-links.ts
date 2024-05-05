@@ -1,4 +1,5 @@
-import { Settings, Link2 as Link, User, Palette, Puzzle } from "lucide-react";
+import { Settings, LineChart } from "lucide-react";
+import { FaLink, FaPalette, FaLayerGroup, FaUser } from "react-icons/fa";
 
 export const navLinks = [
   {
@@ -13,6 +14,11 @@ export const navLinks = [
 
 export const dashboardLinks = [
   {
+    label: "Analytics",
+    href: "/dashboard/analytics",
+    icon: LineChart,
+  },
+  {
     label: "Settings",
     href: "/dashboard/settings",
     icon: Settings,
@@ -23,22 +29,22 @@ export const biolinkLinks = [
   {
     label: "Profile",
     href: "/dashboard/profile",
-    icon: User,
+    icon: FaUser,
   },
   {
     label: "Links",
     href: "/dashboard/links",
-    icon: Link,
+    icon: FaLink,
   },
   {
     label: "Appearance",
     href: "/dashboard/appearance",
-    icon: Palette,
+    icon: FaPalette,
   },
   {
     label: "Modules",
     href: "/dashboard/modules",
-    icon: Puzzle,
+    icon: FaLayerGroup,
   },
 ];
 

@@ -6,22 +6,22 @@ export function PhoneMockup({
   hero,
   biolink,
   layout,
-  scale = true,
   className,
+  scale = true,
 }: {
   hero?: boolean;
   biolink?: Biolink;
   layout?: LayoutEnum;
-  scale?: boolean;
   className?: string;
+  scale?: boolean;
 }) {
   return (
     <div className="perspective">
       <div
         className={cn(
           "iphone-x not-prose overflow-hidden",
+          hero && "iphone-x-featured pointer-events-none",
           scale && "sm:scale-125 md:scale-150",
-          hero && "iphone-x-featured",
           className,
         )}
       >

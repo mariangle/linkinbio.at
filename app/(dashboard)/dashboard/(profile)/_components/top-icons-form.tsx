@@ -20,6 +20,7 @@ import {
   FormFooter,
   FormContent,
   FormSwitch,
+  FormActions,
 } from "@/components/dashboard/form";
 import {
   Form,
@@ -83,6 +84,10 @@ export function TopIconForm({
     await submit();
   };
 
+  const onCancel = () => {
+    form.reset();
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -136,9 +141,7 @@ export function TopIconForm({
             />
           </FormContent>
           <FormFooter>
-            <Button disabled={!dirty} loading={loading}>
-              Save Changes
-            </Button>
+            <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
           </FormFooter>
         </FormContainer>
       </form>

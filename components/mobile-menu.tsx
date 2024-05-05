@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export function MobileMenu({
   isMenuOpen,
   setIsMenuOpen,
   items,
+  className,
 }: {
   isMenuOpen: boolean;
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +15,7 @@ export function MobileMenu({
     label: string;
     href: string;
   }[];
+  className?: string;
 }) {
   return (
     <motion.div
@@ -20,7 +23,10 @@ export function MobileMenu({
       animate={{ y: isMenuOpen ? "0%" : "-100%" }}
       exit={{ y: "-100%", transition: { duration: 0 } }}
       transition={{ type: "just" }}
-      className="fixed right-0 top-0 z-50 flex h-screen w-full overflow-hidden border-b bg-background/75 backdrop-blur-lg md:hidden"
+      className={cn(
+        "fixed right-0 top-0 z-50 flex h-screen w-full overflow-hidden bg-background/75 backdrop-blur-lg md:hidden",
+        className,
+      )}
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -45,7 +51,20 @@ export function MobileMenu({
           ))}
         </ul>
         <div className="flex items-center gap-4 p-6">
-          {/* Add something here */}
+          <Link
+            href="https://github.com/mariangle"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub className="text-white" />
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/maria-nguyen-le/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin className="text-white" />
+          </Link>
         </div>
       </motion.div>
     </motion.div>

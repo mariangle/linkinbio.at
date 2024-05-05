@@ -21,6 +21,7 @@ import {
   FormFooter,
   FormContent,
   FormSwitch,
+  FormActions,
 } from "@/components/dashboard/form";
 import {
   Form,
@@ -96,6 +97,10 @@ export function TitleForm({
 
   const onSubmit = async () => {
     await submit();
+  };
+
+  const onCancel = () => {
+    form.reset();
   };
 
   return (
@@ -180,9 +185,7 @@ export function TitleForm({
             </FormSwitch>
           </FormContent>
           <FormFooter>
-            <Button loading={loading} disabled={!dirty}>
-              Save Changes
-            </Button>
+            <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
           </FormFooter>
         </FormContainer>
       </form>

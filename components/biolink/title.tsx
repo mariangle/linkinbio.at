@@ -46,7 +46,9 @@ export function Title({
             className,
             font ?? "inter",
           )}
-          style={{ color: options?.color ? options.color : undefined }}
+          style={{
+            color: options?.color ? options.color : undefined,
+          }}
         >
           <TypewriterEffect words={title} />
         </div>
@@ -74,7 +76,9 @@ export function Title({
           !options?.color && whiteText ? "text-white" : "text-black",
           className,
         )}
-        style={{ color: options?.color ? options.color : undefined }}
+        style={{
+          color: options?.color ? options.color : undefined,
+        }}
       >
         {title}
       </h2>

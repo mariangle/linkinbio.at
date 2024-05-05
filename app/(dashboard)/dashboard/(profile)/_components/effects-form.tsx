@@ -8,13 +8,16 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormLabel,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
-import { FormHeading, FormSwitch } from "@/components/dashboard/form";
+import {
+  FormHeading,
+  FormSwitch,
+  FormActions,
+} from "@/components/dashboard/form";
 import {
   Select,
   SelectContent,
@@ -22,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Label } from "@/components/ui/label";
 import { WeatherEffect } from "@/lib/types";
@@ -80,9 +82,13 @@ export function EffectsForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.watch, biolink]);
 
-  async function onSubmit() {
+  const onSubmit = async () => {
     await submit();
-  }
+  };
+
+  const onCancel = () => {
+    form.reset();
+  };
 
   return (
     <Form {...form}>
@@ -171,9 +177,9 @@ export function EffectsForm({
             </FormItem>
           )}
         />
-        <Button loading={loading} disabled={!dirty}>
-          Save Changes
-        </Button>
+        <div className="flex justify-end">
+          <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
+        </div>
       </form>
     </Form>
   );

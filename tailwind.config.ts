@@ -29,7 +29,7 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: "#312A86",
+        primary: "#324191",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -97,7 +97,11 @@ const config = {
         gradient: "animatedgradient 6s ease infinite alternate",
       },
       backgroundSize: {
-        "300%": "300%",
+        "size-200": "200% 200%",
+      },
+      backgroundPosition: {
+        "pos-0": "0% 0%",
+        "pos-100": "100% 100%",
       },
     },
   },

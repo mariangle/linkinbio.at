@@ -64,7 +64,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         shadow: {
           solid: user.button?.shadowSolid ?? false,
           spreadRadius: user.button?.shadowSpreadRadius ?? 0,
-          color: user.button?.shadowColor ?? "#000000",
+          color: user.button?.shadowColor ?? "#FFFFFF",
         },
         text: {
           color: user.button?.textColor ?? "#ffffff",

@@ -3,6 +3,145 @@ import BackgroundImage from "@/public/background.png";
 import { InfiniteMovingHighlights } from "@/components/landing/infinite-moving-highlights";
 import { Container } from "@/components/ui/container";
 import { ClaimLink } from "@/components/landing/claim-link";
+import { PhoneMockup } from "@/components/phone-mockup";
+import {
+  Biolink,
+  ContentType,
+  Font,
+  Layout,
+  TopIconStyle,
+  WeatherEffect,
+} from "@/lib/types";
+
+const dummyUser: Biolink = {
+  user: {
+    username: "johndoe",
+    title: "John Doe",
+    image:
+      "https://i.pinimg.com/originals/48/05/52/48055289925e3cbc76016f986aa5b401.jpg",
+    occupation: "Google",
+    location: "USA",
+    bio: "Software engineer at Google.",
+    premium: true,
+  },
+  config: {
+    profile: {
+      customized: true,
+      title: {
+        font: Font.Roboto,
+        color: "#FFFFFF",
+      },
+      font: Font.Inter,
+      layout: Layout.Standard,
+      hideUsername: false,
+      invertTextColor: false,
+    },
+    button: {
+      shadow: {
+        solid: true,
+        spreadRadius: 5,
+        color: "#000000",
+      },
+      text: {
+        color: "#ffffff",
+        hidden: false,
+      },
+      border: {
+        color: "#000000",
+        radius: 5,
+        width: 0,
+      },
+      background: {
+        color: "#000000",
+        opacity: 0.25,
+        blur: 50,
+        socialColor: false,
+      },
+      icon: {
+        hidden: false,
+        shadow: true,
+        socialColor: true,
+      },
+      customized: true,
+    },
+
+    background: {
+      customized: true,
+      color: "#141315",
+      url: "https://i.pinimg.com/originals/57/81/ce/5781cefdb7a976f2f24b7abd255513c1.jpg",
+      gradient: {
+        startColor: "#FF512F",
+        endColor: "#DD2476",
+      },
+    },
+
+    topIcon: {
+      shadow: false,
+      style: TopIconStyle.SocialBackgroundWhiteColor,
+      customized: true,
+    },
+    effects: {
+      customized: true,
+      titleTypewriter: true,
+      bioTypewriter: false,
+      titleSparkles: false,
+      weatherEffect: WeatherEffect.Thunder,
+    },
+  },
+  links: [
+    {
+      id: "example_link_id",
+      order: 0,
+      title: "Spotify",
+      url: "https://spotify.com/username",
+      isTopIcon: true,
+    },
+    {
+      id: "example_link_id",
+      order: 0,
+      title: "GitHub",
+      url: "https://github.com/username",
+      isTopIcon: true,
+    },
+    {
+      id: "example_link_id",
+      order: 0,
+      title: "Facebook",
+      url: "https://facebook.com/username",
+      isTopIcon: true,
+    },
+    {
+      id: "example_link_id",
+      order: 0,
+      title: "Twitter",
+      url: "https://twitter.com/username",
+      isTopIcon: false,
+    },
+    {
+      id: "example_link_id",
+      order: 0,
+      title: "Youtube",
+      url: "https://youtube.com/username",
+      isTopIcon: false,
+    },
+    {
+      id: "example_link_id",
+      order: 0,
+      title: "Website",
+      url: "https://website.com/username",
+      isTopIcon: false,
+    },
+  ],
+  modules: {
+    spotify: {
+      enabled: true,
+      compactLayout: true,
+      darkBackground: true,
+      contentId: "6FED8aeieEnUWwQqAO9zT1",
+      type: ContentType.Album,
+    },
+  },
+};
 
 export default function Page() {
   return (
@@ -10,10 +149,10 @@ export default function Page() {
       <Image
         src={BackgroundImage}
         alt="abstract background image"
-        className="fixed inset-0 h-full w-full scale-110 object-cover blur-md brightness-[50%] hue-rotate-[10deg]"
+        className="fixed inset-0 h-full w-full scale-110 object-cover blur-md brightness-[50%] hue-rotate-[5deg]"
       />
       <Container
-        className="relative flex min-h-screen flex-col gap-12 py-24 md:pt-32 lg:flex-row"
+        className="relative flex min-h-screen flex-col gap-24 py-24 md:pt-32 lg:flex-row"
         variant="landing"
       >
         <div className="relative flex flex-1 flex-col items-start justify-start gap-6 md:justify-center">
@@ -27,7 +166,9 @@ export default function Page() {
           <ClaimLink />
           <InfiniteMovingHighlights speed="slow" />
         </div>
-        <div className="hidden flex-1 items-center justify-center md:justify-center xl:flex"></div>
+        <div className="flex flex-1 items-center justify-center lg:justify-start">
+          <PhoneMockup scale={false} hero biolink={dummyUser} />
+        </div>
       </Container>
     </div>
   );

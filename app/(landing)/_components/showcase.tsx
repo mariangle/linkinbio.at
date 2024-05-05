@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { CardSpotlightEffect } from "@/components/ui/card";
 
 export function ShowcaseContainer({
   children,
@@ -11,21 +11,14 @@ export function ShowcaseContainer({
   className?: string;
 }) {
   return (
-    <div
+    <CardSpotlightEffect
       className={cn(
-        "border-showcase relative overflow-hidden rounded-[1.8rem] border bg-[#030010] bg-gradient-to-br from-indigo-900/10 via-[#030010] to-indigo-900/25",
+        "border-showcase relative overflow-hidden rounded-[1.8rem] border bg-[#030010] bg-gradient-to-b from-transparent to-indigo-800/10 p-0 duration-300 hover:border-[#393b58]",
         className,
       )}
     >
-      <Image
-        src="/showcase-card.webp"
-        width={500}
-        height={500}
-        alt="Background"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 opacity-15"
-      />
       <div className={cn("relative p-6 md:p-10", className)}>{children}</div>
-    </div>
+    </CardSpotlightEffect>
   );
 }
 
@@ -75,7 +68,7 @@ export function ShowcaseDescription({
   className?: string;
 }) {
   return (
-    <div className={cn("mt-2 text-sm text-slate-300", className)}>
+    <div className={cn("mt-2 text-base text-slate-300", className)}>
       {children}
     </div>
   );

@@ -10,9 +10,9 @@ import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ImagePicker } from "@/components/image-picker";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
+import { FormActions } from "@/components/dashboard/form";
 import {
   Form,
   FormControl,
@@ -35,7 +35,6 @@ export function ProfileForm({
   };
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(ProfileFormSchema),
@@ -77,6 +76,10 @@ export function ProfileForm({
     await submit();
   }
 
+  function onCancel() {
+    form.reset();
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -87,8 +90,6 @@ export function ProfileForm({
             setUrl={(url) => {
               form.setValue("image", url || "");
             }}
-            open={dialogOpen}
-            setOpen={setDialogOpen}
           >
             <button className="absolute bottom-0 right-0 grid place-content-center rounded-full bg-primary p-1.5">
               <Pencil className="size-3 text-white" />
@@ -122,35 +123,37 @@ export function ProfileForm({
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="occupation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Occupation</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your occupation" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Location</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your location" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={!dirty} loading={loading}>
-            Save Changes
-          </Button>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="occupation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Occupation</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Your occupation" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Location</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Your location" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex justify-end">
+            <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
+          </div>
         </div>
       </form>
     </Form>

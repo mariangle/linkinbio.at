@@ -6,13 +6,13 @@ import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex disabled:cursor-not-allowed items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50",
+  "inline-flex disabled:cursor-not-allowed items-center border duration-300 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50",
   {
     variants: {
       variant: {
         solid: "bg-white text-black hover:opacity-90",
         default:
-          "bg-gradient-to-r from-primary to-primary/75 text-white shadow hover:opacity-90",
+          "border-indigo-800 from-indigo-900/80 to-indigo-950 shadow-indigo-950/10 bg-gradient-to-r text-white shadow hover:opacity-90 border-primary/75",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
@@ -20,7 +20,7 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         foreground:
-          "bg-foreground text-white dark:text-black shadow-sm hover:bg-foreground/80",
+          "bg-foreground text-white border-transparent dark:text-black shadow-sm hover:bg-foreground/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },

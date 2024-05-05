@@ -13,6 +13,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
+    --primary: 245% 52% 35%;
+    --primary-foreground: 245% 52% 35%;
+
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
 
@@ -42,11 +45,14 @@
     --popover: 221 39% 4%;
     --popover-foreground: 0 0% 98%;
 
-    --secondary: 221 39% 8%;
+    --primary: 245% 52% 35%;
+    --primary-foreground: 245% 52% 35%;
+
+    --secondary: 221 39% 9%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 221 39% 16%;
-    --muted-foreground: 215 39% 75%;
+    --muted-foreground: 215 39% 85%;
 
     --accent: 221 39% 14%;
     --accent-foreground: 0 0% 98%;
@@ -54,7 +60,7 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 221 39% 14%;
+    --border: 221 39% 10%;
     --input: 221 39% 14%;
     --ring: 0 0% 83.1%;
   }
@@ -157,9 +163,17 @@
       0 0 0 14px #3a3a3a,
       8px 6px 0 20px #111;
     transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg);
+  }
 
-    @media screen and (min-width: 1240px) {
+  @media screen and (min-width: 640px) {
+    .iphone-x-featured {
       transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg) scale(1.25);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .iphone-x-featured {
+      transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg) scale(1.5);
     }
   }
 
@@ -200,6 +214,40 @@
   }
 
   .border-showcase {
-    @apply border-[rgba(63,81,116,0.5)];
+    @apply border-[#24263A];
+  }
+
+  .border-rotate {
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .border-rotate::before {
+    overflow: hidden;
+    content: "";
+    background-image: conic-gradient(
+      transparent 0deg,
+      transparent 320deg,
+      #454870 360deg
+    );
+
+    width: 250%;
+    height: 250%;
+    position: absolute;
+    animation: rotate 6s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }

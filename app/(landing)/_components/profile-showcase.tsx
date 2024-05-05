@@ -89,7 +89,7 @@ export function ProfileCustomizer() {
           <div className="text-xs text-white">Hide Username</div>
           <Checkbox
             checked={profileOptions.hideUsername}
-            className="border-none data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-neutral-700"
+            className="border-none data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
             onCheckedChange={() =>
               setProfileOptions({
                 ...profileOptions,
@@ -103,7 +103,7 @@ export function ProfileCustomizer() {
         <ShowcaseItemContainer className="flex items-center justify-between">
           <div className="text-sm">Typewriter</div>
           <Switch
-            className="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-neutral-700"
+            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
             checked={profileOptions.typewriter}
             onCheckedChange={() =>
               setProfileOptions({
@@ -117,7 +117,7 @@ export function ProfileCustomizer() {
           <div className="text-sm">Sparkles</div>
           <Switch
             checked={profileOptions.sparkles}
-            className="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-neutral-700"
+            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
             onCheckedChange={() =>
               setProfileOptions({
                 ...profileOptions,

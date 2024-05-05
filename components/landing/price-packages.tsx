@@ -1,10 +1,8 @@
 import { Container } from "../ui/container";
 import { CardSpotlightEffect } from "@/components/ui/card";
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "../ui/badge";
 
 const prices = [
   {

@@ -13,7 +13,7 @@ import { Share2, Copy } from "lucide-react";
 export function SharePopover({ username = "" }) {
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`https://biolink.at/${username}`);
+      await navigator.clipboard.writeText(`https://linkinbio.at/${username}`);
       toast.success("Link copied to clipboard");
     } catch (error) {
       console.error("Failed to copy:", error);
@@ -31,7 +31,7 @@ export function SharePopover({ username = "" }) {
       <PopoverContent className="w-80 space-y-4">
         <Label>Share your biolink</Label>
         <div className="flex items-center gap-2">
-          <Input value={`https://biolink.at/${username}`} readOnly />
+          <Input value={`https://linkinbio.at/${username}`} readOnly />
           <Button variant="outline" onClick={copyToClipboard}>
             <Copy className="size-4" />
           </Button>

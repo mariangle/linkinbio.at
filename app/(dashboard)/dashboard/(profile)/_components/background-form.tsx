@@ -13,10 +13,10 @@ import { ColorPicker } from "@/components/color-picker";
 import {
   FormHeading,
   FormContainer,
-  FormFooter,
   FormContent,
+  FormFooter,
+  FormActions,
 } from "@/components/dashboard/form";
-import { Button } from "@/components/ui/button";
 import { ImagePicker } from "@/components/image-picker";
 import { BackgroundFormSchema, BackgroundFormValues } from "@/lib/validations";
 import { Form } from "@/components/ui/form";
@@ -32,7 +32,6 @@ export function BackgroundForm({
   modified?: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreview();
-  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const form = useForm<BackgroundFormValues>({
     resolver: zodResolver(BackgroundFormSchema),
@@ -42,7 +41,12 @@ export function BackgroundForm({
     },
   });
 
-  const { loading, dirty, submit } = useFormSubmit<BackgroundFormValues>({
+  const {
+    loading,
+    dirty,
+    submit,
+    cancel: clear,
+  } = useFormSubmit<BackgroundFormValues>({
     initialData: data,
     formValues: form.getValues(),
     endpoint: "/api/manage/background",
@@ -71,6 +75,11 @@ export function BackgroundForm({
     await submit();
   };
 
+  const onCancel = () => {
+    form.reset();
+    clear();
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -83,8 +92,6 @@ export function BackgroundForm({
                 setUrl={(url) => {
                   form.setValue("url", url || "");
                 }}
-                open={dialogOpen}
-                setOpen={setDialogOpen}
               >
                 <button className="flex w-full items-center gap-2 rounded-lg border bg-input px-2 py-3">
                   <ImageIcon className="size-5 text-muted-foreground" />
@@ -107,9 +114,7 @@ export function BackgroundForm({
             </div>
           </FormContent>
           <FormFooter>
-            <Button loading={loading} disabled={!dirty}>
-              Save
-            </Button>
+            <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
           </FormFooter>
         </FormContainer>
       </form>

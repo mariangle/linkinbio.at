@@ -13,6 +13,7 @@ export const siteConfig = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://linkinbio.at"),
   title: {
     default: `${siteConfig.name}`,
     template: `%s \u00b7 ${siteConfig.name}`,
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/redux.svg",
-        href: "/redux.svg",
+        url: "/icon.svg",
+        href: "/icon.svg",
       },
     ],
   },
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://simple-carry.com/cdn/shop/files/RadiantRankBoosting_550x.png",
+        url: "/landing.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "https://simple-carry.com/cdn/shop/files/RadiantRankBoosting_550x.png",
+        url: "/landing.png",
         type: "image/png",
         width: 1200,
         height: 630,

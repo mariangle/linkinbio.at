@@ -35,28 +35,33 @@ export async function getBiolinkServer() {
 }
 
 export async function getBiolinkByUsername(username: string) {
-  const user = await db.user.findFirst({
-    where: {
-      username: username,
-    },
-    include: {
-      background: true,
-      button: true,
-      links: true,
-      profile: true,
-      topIcon: true,
-      effect: true,
-      spotify: true,
-      youtube: true,
-      soundcloud: true,
-    },
-  });
+  try {
+    const user = await db.user.findFirst({
+      where: {
+        username: username,
+      },
+      include: {
+        background: true,
+        button: true,
+        links: true,
+        profile: true,
+        topIcon: true,
+        effect: true,
+        spotify: true,
+        youtube: true,
+        soundcloud: true,
+      },
+    });
 
-  if (!user) return null;
+    if (!user) return null;
 
-  const biolink = constructBiolink({
-    user: user as ExtendedUser,
-  });
+    const biolink = constructBiolink({
+      user: user as ExtendedUser,
+    });
 
-  return biolink;
+    return biolink;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 }

@@ -107,7 +107,7 @@ export function SpotifyForm({
   };
 
   return (
-    <div className="rounded-lg bg-green-950 bg-gradient-to-r from-green-500/20 p-4 text-white">
+    <div className="rounded-lg bg-neutral-900 bg-gradient-to-r from-green-500/50 to-neutral-900 p-4 text-white">
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex w-full items-center justify-between"

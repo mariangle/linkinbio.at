@@ -19,16 +19,12 @@ import { isValidImage } from "@/lib/utils/media-validation";
 export function ImagePicker({
   url,
   setUrl,
-  open,
-  setOpen,
   children,
   title,
   description,
 }: {
   url?: string;
   setUrl: (url?: string) => void;
-  open: boolean;
-  setOpen: (open: boolean) => void;
   children: React.ReactNode;
   title?: string;
   description?: string;
@@ -36,6 +32,7 @@ export function ImagePicker({
   const [isImageValid, setIsImageValid] = React.useState(true);
   const [localUrl, setLocalUrl] = React.useState(url);
   const [validUrl, setValidUrl] = React.useState(url);
+  const [open, setOpen] = React.useState(false);
 
   const confirm = () => {
     if (isImageValid) {

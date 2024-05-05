@@ -6,7 +6,6 @@ import NextTopLoader from "nextjs-toploader";
 import { metadata as configMetadata } from "@/lib/metadata";
 
 import { Toaster } from "@/components/ui/sonner";
-import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = configMetadata;
 
@@ -15,8 +14,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = auth();
-
   return (
     <html lang="en">
       <body className={inter.className}>

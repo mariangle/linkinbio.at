@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 
+import { Button } from "@/components/ui/button";
+
 export function FormHeading({ children }: { children: React.ReactNode }) {
   return <h4 className="text-lg font-semibold">{children}</h4>;
 }
@@ -18,7 +20,7 @@ export function FormContainer({
   return (
     <div
       className={cn(
-        "relative space-y-4 rounded-lg border bg-background",
+        "relative space-y-4 rounded-lg border bg-background/25 backdrop-blur-xl",
         className,
       )}
     >
@@ -39,7 +41,7 @@ export function FormContent({
 
 export function FormFooter({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-end gap-4 rounded-b-lg border-t bg-secondary p-4">
+    <div className="flex items-center justify-end gap-4 rounded-b-lg border-t bg-secondary/50 p-4 backdrop-blur-lg">
       {children}
     </div>
   );
@@ -55,7 +57,7 @@ export function FormSwitch({
   description?: string;
 }) {
   return (
-    <div className="flex flex-col gap-4 rounded-lg border bg-background p-4 dark:bg-secondary md:flex-row md:items-center md:justify-between">
+    <div className="flex flex-col gap-4 rounded-lg border bg-background/75 p-4 backdrop-blur-lg dark:bg-secondary/50 md:flex-row md:items-center md:justify-between">
       <div className="space-y-1">
         <div className="text-sm font-semibold">{title}</div>
         {description && (
@@ -63,6 +65,29 @@ export function FormSwitch({
         )}
       </div>
       {children}
+    </div>
+  );
+}
+
+export function FormActions({
+  dirty,
+  cancel,
+  loading,
+}: {
+  dirty: boolean;
+  cancel: () => void;
+  loading: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-4">
+      {dirty && (
+        <Button type="button" variant="secondary" onClick={cancel}>
+          Cancel
+        </Button>
+      )}
+      <Button loading={loading} disabled={!dirty}>
+        Save
+      </Button>
     </div>
   );
 }

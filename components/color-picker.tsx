@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React from "react";
 import {
   Popover,
   PopoverContent,
@@ -30,12 +29,16 @@ export function ColorPicker({
   small?: boolean;
   className?: string;
 }) {
-  const [colorValue, setColorValue] = useState(color);
+  const [colorValue, setColorValue] = React.useState(color);
+
   const colorFallback = "#FFFFFF";
+
   const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const color = event.target.value;
-    setColor(isValidHexColor(color) ? color : colorFallback);
-    setColorValue(color);
+    setColorValue(event.target.value);
+  };
+
+  const handleColorBlur = () => {
+    setColor(colorValue);
   };
 
   return (
@@ -48,14 +51,14 @@ export function ColorPicker({
         )}
       >
         <div
-          className="size-6 rounded-full"
+          className="size-4 rounded-md border"
           style={{
             backgroundColor: isValidHexColor(colorValue)
               ? colorValue
               : colorFallback,
           }}
         />
-        {!small && <div>{color}</div>}
+        {!small && <div className="text-sm">{color}</div>}
       </PopoverTrigger>
       <PopoverContent className="bg-secondary">
         <div className="grid grid-cols-8 gap-2">
@@ -74,8 +77,9 @@ export function ColorPicker({
         <div className="mt-4 flex items-center gap-2">
           <Input
             type="color"
-            value={color}
+            value={colorValue}
             onChange={handleColorChange}
+            onBlur={handleColorBlur} // Call handleColorBlur on blur event
             className="w-10 bg-none p-0"
           />
           <Input

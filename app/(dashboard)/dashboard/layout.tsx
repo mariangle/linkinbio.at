@@ -1,5 +1,8 @@
-import { Sidebar } from "@/components/dashboard/sidebar";
-import { Navbar } from "@/components/dashboard/navbar";
+import Image from "next/image";
+import BackgroundImage from "@/public/background.png";
+import BackgroundWhiteImage from "@/public/background-white.png";
+
+import { Sidebar } from "@/components/dashboard/navigation";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import type { User } from "@prisma/client";
@@ -24,12 +27,21 @@ export default async function Layout({
       enableSystem
       disableTransitionOnChange
     >
-      <UsernameDialog isOpen={!user.username} />
-      <div className="relative flex flex-col overflow-hidden bg-background dark:bg-secondary md:flex-row">
-        <Sidebar />
-        <div className="h-screen w-full bg-secondary dark:bg-background">
-          <Navbar user={user} />
-          {children}
+      <div className="relative bg-white dark:bg-transparent">
+        <Image
+          src={BackgroundImage}
+          alt="abstract background image"
+          className="fixed inset-0 hidden h-full w-full scale-110 object-cover blur-2xl brightness-[35%] hue-rotate-[5deg] dark:block"
+        />
+        <Image
+          src={BackgroundWhiteImage}
+          alt="abstract background image"
+          className="fixed inset-0 h-full w-full object-cover opacity-50 blur-2xl dark:hidden"
+        />
+        <UsernameDialog isOpen={!user.username} />
+        <div className="relative flex flex-col overflow-hidden md:flex-row">
+          <Sidebar user={user} />
+          <div className="h-screen w-full">{children}</div>
         </div>
       </div>
     </ThemeProvider>

@@ -15,6 +15,7 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
   modified?: boolean;
 }) => {
   const [loading, setLoading] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const [modified, setModified] = React.useState(customized);
   const [newValues, setNewValues] = React.useState<T>();
 
@@ -81,10 +82,17 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
     }
   };
 
+  const cancel = () => {
+    setOpen(false);
+  };
+
   return {
     loading,
     submit,
     remove,
+    cancel,
     dirty,
+    open,
+    setOpen,
   };
 };
