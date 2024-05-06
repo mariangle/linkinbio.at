@@ -10,6 +10,10 @@ export const navLinks = [
     label: "Pricing",
     href: "/pricing",
   },
+  {
+    label: "About",
+    href: "/about",
+  },
 ];
 
 export const dashboardLinks = [

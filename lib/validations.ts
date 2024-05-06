@@ -74,10 +74,8 @@ export const ButtonsFormSchema = z.object({
 export type ButtonsFormValues = z.infer<typeof ButtonsFormSchema>;
 
 export const EffectsFormSchema = z.object({
-  titleSparkles: z.boolean().default(false),
-  titleTypewriter: z.boolean().default(false),
-  bioTypewriter: z.boolean().default(false),
-  weatherEffect: z.string().optional().optional(),
+  title: z.string().optional(),
+  weather: z.string().optional(),
 });
 
 export type EffectsFormValues = z.infer<typeof EffectsFormSchema>;

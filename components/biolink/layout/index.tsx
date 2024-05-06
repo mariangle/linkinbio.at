@@ -105,7 +105,7 @@ export function LayoutWrapper({
 }) {
   return (
     <div className="absolute inset-0">
-      <WeatherEffect preview={preview} variant={effects.weatherEffect} />
+      <WeatherEffect preview={preview} variant={effects.weather} />
       {children}
     </div>
   );

@@ -1,5 +1,6 @@
 import { SoundcloudTrack } from "@/components/biolink/modules/soundcloud";
 import { SpotifyTrack } from "@/components/biolink/modules/spotify";
+import { YoutubeVideo } from "@/components/biolink/modules/youtube";
 import {
   ShowcaseContainer,
   ShowcaseDescription,
@@ -10,8 +11,8 @@ import { Layers3 } from "lucide-react";
 
 export function EmbedShowcase() {
   return (
-    <ShowcaseContainer>
-      <div>
+    <ShowcaseContainer className="p-0 md:p-0">
+      <div className="p-6 md:p-10">
         <ShowcaseIconContainer>
           <Layers3 className="size-5 text-white" />
         </ShowcaseIconContainer>
@@ -20,16 +21,10 @@ export function EmbedShowcase() {
           Add your favorite tracks, playlists, albums and videos.
         </ShowcaseDescription>
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-6">
-        <SoundcloudTrack options={{ enabled: true, trackId: "1396880899" }} />
-        <SpotifyTrack
-          options={{
-            enabled: true,
-            darkBackground: false,
-            compactLayout: true,
-            contentId: "0xaFw2zDYf1rIJWl2dXiSF",
-          }}
-        />
+      <div className="mt-6">
+        <div className="ml-8 h-[250px]">
+          <YoutubeVideo options={{ enabled: true, videoId: "JLd09jmEAYA" }} />
+        </div>{" "}
       </div>
     </ShowcaseContainer>
   );

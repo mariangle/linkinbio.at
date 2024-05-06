@@ -23,8 +23,8 @@ export function DashboardShowcase() {
       <div className="overflow-hidden pl-6 md:pl-10">
         <div className="bg-[#030010]">
           <Image
-            src="/dashboard.png"
-            alt="2132123"
+            src="/dashboard-light.png"
+            alt="dashboard"
             width={1000}
             height={1000}
             className="border-showcase h-full w-full rounded-tl-sm border-l border-t object-cover"

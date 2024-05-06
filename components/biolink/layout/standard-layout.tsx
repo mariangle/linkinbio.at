@@ -39,8 +39,7 @@ export function StandardLayout({
           <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
             options={{
-              typewriter: config.effects.titleTypewriter,
-              sparkles: config.effects.titleSparkles,
+              effect: config.effects.title,
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
@@ -54,7 +53,6 @@ export function StandardLayout({
             <Bio
               bio={user.bio}
               whiteText={backgroundDark}
-              typewriter={config.effects.bioTypewriter}
               className="text-center"
             />
           )}

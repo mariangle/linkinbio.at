@@ -8,28 +8,30 @@ const prices = [
   {
     title: "Basic",
     button: "Start for free",
-    description: "Basic features to get you started with your bio link",
+    description: "Essential features to get you started",
     included: "What's included",
     features: [
+      "All core features",
       "Up to 10 links",
-      "Customizable background",
-      "Basic analytics",
       "Fully customizable buttons",
+      "Top icon styles",
+      "SEO optimization",
     ],
   },
   {
     title: "Premium",
     button: "Get started with Premium",
-    description: "Advanced customization options and additional features",
+    description: "Unlock advanced features for your biolink page",
     price: 14.99,
     included: "Everything from Free, plus",
     features: [
       "Unlimited links",
-      "Customizable background",
-      "Advanced analytics",
+      "Analytics",
+      "Title Effects",
+      "Layout customization",
       "Weather Effects",
       ".GIF and video support",
-      "Embedding Spotify, SoundCloud, and YouTube content",
+      "Spotify, SoundCloud, and YouTube content",
     ],
   },
 ];
@@ -44,7 +46,7 @@ export function PricePackages() {
             <div
               key={index}
               className={cn(
-                "max-w-sm rounded-xl bg-[#030010] bg-gradient-to-br from-indigo-950/80 to-slate-900 p-px shadow-lg shadow-indigo-950/5 md:self-end",
+                "w-full max-w-sm rounded-xl bg-[#030010] bg-gradient-to-br from-indigo-950/80 to-slate-900 p-px shadow-lg shadow-indigo-950/5 md:self-end",
                 featured && "from-indigo-900 to-60%",
               )}
             >

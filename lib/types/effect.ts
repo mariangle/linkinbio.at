@@ -1,9 +1,7 @@
-import { WeatherEffect } from ".";
+import { WeatherEffect, TitleEffect } from ".";
 
 export interface EffectsOptions {
-  bioTypewriter: boolean;
-  titleTypewriter: boolean;
-  titleSparkles: boolean;
-  weatherEffect?: WeatherEffect;
+  title?: TitleEffect;
+  weather?: WeatherEffect;
   customized?: boolean;
 }

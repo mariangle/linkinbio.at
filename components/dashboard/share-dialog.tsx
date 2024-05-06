@@ -23,10 +23,10 @@ export function SharePopover({ username = "" }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="bg-transparent">
-          <Share2 className="mr-2 size-4" />
+        <button className="bg-glass border-glass flex items-center rounded-lg border px-3 py-1.5">
+          <Share2 className="mr-2.5 size-4" />
           Share
-        </Button>
+        </button>
       </PopoverTrigger>
       <PopoverContent className="w-80 space-y-4">
         <Label>Share your biolink</Label>

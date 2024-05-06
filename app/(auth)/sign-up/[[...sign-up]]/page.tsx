@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import BackgroundImage from "@/public/dashboard.png";
+import DashboardImage from "@/public/dashboard.png";
 import { AuthForm } from "../../auth-form";
 import { ChevronLeft } from "lucide-react";
 
@@ -22,7 +22,7 @@ export default function Page() {
           <div className="border-rotate rounded-2xl rounded-r-none">
             <div className="relative overflow-hidden rounded-2xl rounded-r-none border border-r-0 border-white/10 shadow-2xl shadow-indigo-950/25">
               <Image
-                src={BackgroundImage}
+                src={DashboardImage}
                 alt="abstract background image"
                 className="h-full w-full object-cover"
               />

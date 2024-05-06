@@ -12,7 +12,7 @@ export function SecondaryNav({
   const pathname = usePathname();
   return (
     <nav className="w-full">
-      <ul className="flex w-full overflow-y-auto border-b">
+      <ul className="border-glass flex w-full overflow-y-auto border-b">
         {items.map((item, index) => (
           <li key={index}>
             <Link

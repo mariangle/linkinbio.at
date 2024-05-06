@@ -51,8 +51,7 @@ export function ProfessionalLayout({
           </div>
           <Title
             options={{
-              typewriter: config.effects.titleTypewriter,
-              sparkles: config.effects.titleSparkles,
+              effect: config.effects.title,
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
@@ -62,13 +61,7 @@ export function ProfessionalLayout({
           {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
           )}
-          {user.bio && (
-            <Bio
-              bio={user.bio}
-              whiteText={backgroundDark}
-              typewriter={config.effects.bioTypewriter}
-            />
-          )}
+          {user.bio && <Bio bio={user.bio} whiteText={backgroundDark} />}
           <Details
             occupation={user.occupation}
             location={user.location}

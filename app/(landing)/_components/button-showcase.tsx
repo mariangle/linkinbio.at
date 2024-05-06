@@ -39,7 +39,7 @@ export function ButtonCustomizer() {
   });
 
   return (
-    <ShowcaseContainer className="h-full">
+    <ShowcaseContainer>
       <Form {...form}>
         <div className="flex h-full flex-col justify-between">
           <div className="mb-6">
@@ -51,7 +51,7 @@ export function ButtonCustomizer() {
               No templates, just customize yourself. Try it out below.
             </ShowcaseDescription>
             <ButtonCustomizerSheet form={form}>
-              <button className="border-showcase mt-4 block w-fit rounded-lg border bg-white/5 bg-gradient-to-r from-[#000010] to-blue-500/25 px-5 py-2.5 text-center text-sm text-white shadow-lg">
+              <button className="border-showcase mt-4 block w-fit rounded-lg border bg-white/5 bg-gradient-to-r from-[#000010] to-blue-950/25 px-5 py-2.5 text-center text-sm text-white shadow-lg">
                 <span
                   style={{
                     filter: `drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5))`,

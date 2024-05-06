@@ -3,11 +3,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { fonts } from "@/lib/constants/fonts";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
-import { Font, User } from "@/lib/types";
+import { Font, TitleEffect, User } from "@/lib/types";
 
 interface TitleOptions {
-  typewriter?: boolean;
-  sparkles?: boolean;
+  effect?: TitleEffect;
   font?: Font;
   color: string;
 }
@@ -25,20 +24,9 @@ export function Title({
 }) {
   const font = fonts.find((f) => f.value === options.font)?.display;
 
-  if (options.typewriter) {
+  if (options.effect === TitleEffect.Typewriter) {
     return (
       <div className="relative">
-        {options.sparkles && (
-          <Image
-            src="/sparkle.gif"
-            alt="logo"
-            unoptimized
-            width="0"
-            height="0"
-            sizes="100vw"
-            className="absolute h-full w-full object-cover"
-          />
-        )}
         <div
           className={cn(
             "text-xl font-semibold",
@@ -58,10 +46,21 @@ export function Title({
 
   return (
     <div className="relative w-fit">
-      {options.sparkles && (
+      {options.effect === TitleEffect.Sparkles && (
         <Image
           src="/sparkle.gif"
-          alt="logo"
+          alt="sparkle"
+          unoptimized
+          width="0"
+          height="0"
+          sizes="100vw"
+          className="absolute h-full w-full object-cover"
+        />
+      )}
+      {options.effect === TitleEffect.CherryBlossoms && (
+        <Image
+          src="/cherry-blossoms.gif"
+          alt="cherry blossoms"
           unoptimized
           width="0"
           height="0"

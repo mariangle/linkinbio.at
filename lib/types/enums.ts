@@ -16,6 +16,7 @@ export enum TitleEffect {
   Typewriter = "typewriter",
   Sparkles = "sparkles",
   Stars = "stars",
+  CherryBlossoms = "cherry-blossoms",
 }
 
 export enum WeatherEffect {

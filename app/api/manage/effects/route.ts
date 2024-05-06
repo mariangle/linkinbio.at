@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { convertToPrismaWeatherEffect } from "@/lib/utils/enum-mappings";
+import {
+  convertToPrismaWeatherEffect,
+  convertToTitleEffect,
+} from "@/lib/utils/enum-mappings";
 
 export async function PATCH(req: Request) {
   const session = await auth();
@@ -15,15 +18,15 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { titleSparkles, titleTypewriter, bioTypewriter, weatherEffect } =
-    await req.json();
+  const { title: TitleEffect, weather: weatherEffect } = await req.json();
 
   const effects = await db.effect.update({
     where: {
       userId: session.user.id,
     },
     data: {
-      weatherEffect: convertToPrismaWeatherEffect(weatherEffect), // TODO: Update this
+      titleEffect: convertToTitleEffect(TitleEffect),
+      weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
     },
   });
 
@@ -47,13 +50,13 @@ export async function POST(req: Request) {
     });
   }
 
-  const { titleSparkles, titleTypewriter, bioTypewriter, weatherEffect } =
-    await req.json();
+  const { title: TitleEffect, weather: weatherEffect } = await req.json();
 
   const effects = await db.effect.create({
     data: {
       userId: session.user.id,
-      weatherEffect: convertToPrismaWeatherEffect(weatherEffect), // TODO: Update this
+      titleEffect: convertToTitleEffect(TitleEffect),
+      weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
     },
   });
 

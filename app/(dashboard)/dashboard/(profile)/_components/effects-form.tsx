@@ -29,8 +29,8 @@ import {
 } from "@/components/ui/select";
 import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { Label } from "@/components/ui/label";
-import { WeatherEffect } from "@/lib/types";
-import { weatherEffects } from "@/lib/constants/weather-effects";
+import { WeatherEffect, TitleEffect } from "@/lib/types";
+import { weatherEffects, titleEffects } from "@/lib/constants/effects";
 import { EffectsFormValues, EffectsFormSchema } from "@/lib/validations";
 
 export function EffectsForm({
@@ -38,10 +38,8 @@ export function EffectsForm({
   modified,
 }: {
   data: {
-    titleSparkles: boolean;
-    titleTypewriter: boolean;
-    bioTypewriter: boolean;
-    weatherEffect?: WeatherEffect;
+    title?: TitleEffect;
+    weather?: WeatherEffect;
   };
   modified?: boolean;
 }) {
@@ -50,10 +48,8 @@ export function EffectsForm({
   const form = useForm<EffectsFormValues>({
     resolver: zodResolver(EffectsFormSchema),
     defaultValues: {
-      titleSparkles: data.titleSparkles,
-      titleTypewriter: data.titleTypewriter,
-      bioTypewriter: data.bioTypewriter,
-      weatherEffect: data.weatherEffect,
+      title: data.title,
+      weather: data.weather,
     },
   });
 
@@ -72,10 +68,8 @@ export function EffectsForm({
           config: {
             ...biolink.config,
             effects: {
-              titleSparkles: value.titleSparkles ?? false,
-              titleTypewriter: value.titleTypewriter ?? false,
-              bioTypewriter: value.bioTypewriter ?? false,
-              weatherEffect: value.weatherEffect as WeatherEffect,
+              title: value.title as TitleEffect,
+              weather: value.weather as WeatherEffect,
             },
           },
         });
@@ -97,59 +91,39 @@ export function EffectsForm({
       <FormContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="space-y-4">
-              <FormHeading>Effects</FormHeading>
-              <Label>Title</Label>
-              <FormSwitch title="Sparkles">
-                <FormField
-                  control={form.control}
-                  name="titleSparkles"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </FormSwitch>
-              <FormSwitch title="Typewriter">
-                <FormField
-                  control={form.control}
-                  name="titleTypewriter"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </FormSwitch>
-              <Label>Bio</Label>
-              <FormSwitch title="Typewriter">
-                <FormField
-                  control={form.control}
-                  name="bioTypewriter"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </FormSwitch>
+            <div>
+              <FormHeading>Title Animation</FormHeading>
+              <div className="mt-2 text-sm text-muted-foreground">
+                Select a title effect.
+              </div>
             </div>
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a title animation" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {titleEffects.map((item, index) => (
+                        <SelectItem key={index} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="none">None</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div>
               <FormHeading>Background Effect</FormHeading>
               <div className="mt-2 text-sm text-muted-foreground">
@@ -159,7 +133,7 @@ export function EffectsForm({
             </div>
             <FormField
               control={form.control}
-              name="weatherEffect"
+              name="weather"
               render={({ field }) => (
                 <FormItem>
                   <Select

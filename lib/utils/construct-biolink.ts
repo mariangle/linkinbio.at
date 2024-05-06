@@ -4,6 +4,7 @@ import {
   convertToWeatherEffect,
   convertToLayout,
   convertToContentType,
+  convertToTitleEffect,
 } from "@/lib/utils/enum-mappings";
 import {
   constructLinkFromWebsite,
@@ -109,10 +110,8 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       },
       effects: {
         customized: user.effect ? true : false,
-        titleTypewriter: false, // TODO: Update this
-        bioTypewriter: false,
-        titleSparkles: false,
-        weatherEffect: convertToWeatherEffect(user.effect?.weatherEffect),
+        title: convertToTitleEffect(user.effect?.titleEffect),
+        weather: convertToWeatherEffect(user.effect?.weatherEffect),
       },
     },
     links: {

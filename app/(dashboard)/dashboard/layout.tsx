@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
-import BackgroundImage from "@/public/background.png";
-import BackgroundWhiteImage from "@/public/background-white.png";
+import DashboardBackgroundDark from "@/public/dashboard-background-dark.jpg";
+import DashboardBackgroundLight from "@/public/dashboard-background-light.jpg";
 
 import { Navigation } from "@/components/dashboard/navigation";
 import { auth } from "@/lib/auth";
@@ -29,13 +28,17 @@ export default async function Layout({
       disableTransitionOnChange
     >
       <div className="relative bg-white dark:bg-transparent">
-        <img
-          src="https://i.pinimg.com/736x/b2/fb/21/b2fb21f206c56acc2007ed7e587d9770.jpg"
+        <Image
+          src={DashboardBackgroundDark}
+          width={1000}
+          height={1000}
           alt="abstract background image"
-          className="fixed inset-0 hidden h-full w-full scale-110 object-cover blur-2xl brightness-[75%] hue-rotate-[340deg] dark:block"
+          className="fixed inset-0 hidden h-full w-full scale-110 object-cover blur-2xl brightness-[60%] hue-rotate-[340deg] dark:block"
         />
-        <img
-          src="https://images6.alphacoders.com/514/514564.jpg"
+        <Image
+          src={DashboardBackgroundLight}
+          width={1000}
+          height={1000}
           alt="abstract background image"
           className="fixed inset-0 block h-full w-full scale-110 object-cover blur-2xl dark:hidden"
         />

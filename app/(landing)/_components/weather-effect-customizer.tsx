@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { weatherEffects } from "@/lib/constants/weather-effects";
+import { weatherEffects } from "@/lib/constants/effects";
 import { Sparkles } from "lucide-react";
 
 export function WeatherEffectCustomizer() {
@@ -64,7 +64,7 @@ export function WeatherEffectCustomizer() {
             <div className="text-sm">Enable</div>
             <Switch
               checked={enabled}
-              className="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-neutral-700"
+              className="border-none data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
               onCheckedChange={() => setEnabled(!enabled)}
             />
           </ShowcaseItemContainer>

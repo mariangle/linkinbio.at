@@ -3,6 +3,7 @@ import {
   TopIconStyle,
   WeatherEffect,
   ContentType,
+  TitleEffect,
 } from "@/lib/types/enums";
 import {
   TopIconStyle as PrismaTopIconStyle,
@@ -132,5 +133,20 @@ export function convertToPrismaContentType(contentType: string | undefined) {
       return PrismaContentType.Track;
     default:
       return null;
+  }
+}
+
+export function convertToTitleEffect(
+  titleEffect?: string | null,
+): TitleEffect | undefined {
+  switch (titleEffect) {
+    case TitleEffect.Typewriter:
+      return TitleEffect.Typewriter;
+    case TitleEffect.Sparkles:
+      return TitleEffect.Sparkles;
+    case TitleEffect.Stars:
+      return TitleEffect.Stars;
+    default:
+      return;
   }
 }

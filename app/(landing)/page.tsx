@@ -9,6 +9,7 @@ import {
   ContentType,
   Font,
   Layout,
+  TitleEffect,
   TopIconStyle,
   WeatherEffect,
 } from "@/lib/types";
@@ -82,10 +83,8 @@ const dummyUser: Biolink = {
     },
     effects: {
       customized: true,
-      titleTypewriter: true,
-      bioTypewriter: false,
-      titleSparkles: false,
-      weatherEffect: WeatherEffect.Thunder,
+      title: TitleEffect.Typewriter,
+      weather: WeatherEffect.Thunder,
     },
   },
   links: {
@@ -171,7 +170,7 @@ export default function Page() {
       <Image
         src={BackgroundImage}
         alt="abstract background image"
-        className="fixed inset-0 h-full w-full scale-110 object-cover blur-md brightness-[50%] hue-rotate-[5deg]"
+        className="fixed inset-0 h-full w-full scale-110 object-cover blur-md brightness-[65%] hue-rotate-[10deg]"
       />
       <Container
         className="relative flex min-h-screen flex-col gap-24 py-24 md:pt-32 lg:flex-row"
@@ -182,8 +181,8 @@ export default function Page() {
             Connect all your links with one single link.
           </div>
           <div className="max-w-2xl text-base text-slate-300 sm:text-xl lg:text-left">
-            linkinbio.at is your modern, customizable, and free solution for
-            connecting with your audience.
+            Your modern, customizable, and free solution for connecting with
+            your audience.
           </div>
           <ClaimLink />
           <InfiniteMovingHighlights speed="slow" />

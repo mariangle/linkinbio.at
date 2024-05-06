@@ -42,8 +42,7 @@ export function GlassmorphismLayout({
             <div className="h-12"></div>
             <Title
               options={{
-                typewriter: config.effects.titleTypewriter,
-                sparkles: config.effects.titleSparkles,
+                effect: config.effects.title,
                 font: config.profile.title.font,
                 color: config.profile.title.color,
               }}
@@ -53,13 +52,7 @@ export function GlassmorphismLayout({
             {!config.profile.hideUsername && user.title && (
               <Username whiteText={true} username={user.username} />
             )}
-            {user.bio && (
-              <Bio
-                bio={user.bio}
-                whiteText={true}
-                typewriter={config.effects.bioTypewriter}
-              />
-            )}
+            {user.bio && <Bio bio={user.bio} whiteText={true} />}
             <Details occupation={user.occupation} location={user.location} />
           </div>
           <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">

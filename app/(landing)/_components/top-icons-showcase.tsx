@@ -17,9 +17,9 @@ export function TopIconShowcase() {
         <ShowcaseIconContainer>
           <PencilRuler className="size-5 text-white" />
         </ShowcaseIconContainer>
-        <ShowcaseHeader>Top Icons</ShowcaseHeader>
+        <ShowcaseHeader>Top Icon Styling</ShowcaseHeader>
         <ShowcaseDescription>
-          Make your links appear in the top of your biolink as icons.
+          Explore a range of styling options tailored to your preferences.
         </ShowcaseDescription>
       </div>
     </ShowcaseContainer>

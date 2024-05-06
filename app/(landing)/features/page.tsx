@@ -13,37 +13,36 @@ const features = [
   {
     title: "SEO Optimized",
     description:
-      "Boost your online presence with our SEO optimized bio link tool. Reach more people and increase your visibility on search engines.",
+      "Improve your search engine ranking and visibility with SEO optimized bio link pages.",
     icon: Search,
   },
   {
     title: "Icon Library",
     description:
-      "Access a vast library of icons to customize your bio link pages. Choose from a variety of icons to perfectly match your brand or personality.",
+      "Access a vast library of icons to customize your links to your liking.",
     icon: Heart,
   },
   {
     title: "GIF & Video Background",
     description:
-      "Make your bio link pages stand out with engaging GIF and video backgrounds. Capture your visitors' attention and leave a lasting impression.",
+      "Capture your visitors' attention and leave a lasting impression with GIF and video backgrounds.",
     icon: Video,
   },
   {
     title: "Layouts",
     description:
-      "Choose from a selection of beautifully designed layouts to showcase your content. Whether it's a grid, list, or carousel, we have the perfect layout for you.",
+      "Choose from a selection of beautifully designed layouts to fit your aesthetic.",
     icon: Layout,
   },
   {
     title: "Dark Mode",
-    description:
-      "Reduce eye strain and enhance user experience with our dark mode feature. Switch seamlessly between light and dark themes for optimal readability.",
+    description: "Reduce eye strain with dark mode feature.",
     icon: Moon,
   },
   {
     title: "Gradient Background",
     description:
-      "Add depth and dimension to your bio link pages with customizable gradient backgrounds. Create visually stunning effects that captivate your audience.",
+      "Add depth and dimension to your bio link pages with customizable gradient backgrounds.",
     icon: Layers,
   },
 ];
@@ -56,13 +55,12 @@ export default function Page() {
           Features
         </Heading>
         <p className="mx-auto mb-12 max-w-prose text-center text-slate-300">
-          Discover the powerful features that make linkinbio.at the best bio
-          link tool for personal and professional use.
+          All essential features you need to create a stunning bio link page.
         </p>
         <div className="mx-auto w-full max-w-screen-xl space-y-6">
           <div className="space-y-8 lg:grid lg:grid-cols-5 lg:gap-8 lg:space-y-0">
             <div className="col-span-3">
-              <ButtonCustomizer />
+              <EmbedShowcase />
             </div>
             <div className="col-span-2">
               <ProfileCustomizer />
@@ -70,7 +68,7 @@ export default function Page() {
           </div>
           <div className="w-full gap-6 space-y-8 lg:grid lg:grid-cols-5 lg:space-y-0">
             <div className="flex w-full flex-col gap-6 sm:flex-row lg:col-span-2 lg:flex-col">
-              <EmbedShowcase />
+              <ButtonCustomizer />
               <WeatherEffectCustomizer />
             </div>
             <div className="col-span-3 space-y-8">
@@ -89,7 +87,7 @@ export default function Page() {
                     {feature.title}
                   </h3>
                 </div>
-                <p className="mt-2 text-sm text-slate-300/80">
+                <p className="mt-2 text-sm text-slate-300/80 md:max-w-xs">
                   {feature.description}
                 </p>
               </div>

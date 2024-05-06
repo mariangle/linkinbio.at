@@ -14,10 +14,8 @@ export default async function page() {
       <SecondaryNav items={biolinkCustomizationLinks} />
       <EffectsForm
         data={{
-          titleSparkles: biolink.config?.effects?.titleSparkles,
-          titleTypewriter: biolink.config?.effects?.titleTypewriter,
-          bioTypewriter: biolink.config?.effects?.bioTypewriter,
-          weatherEffect: biolink.config?.effects?.weatherEffect,
+          title: biolink.config?.effects?.title,
+          weather: biolink.config?.effects?.weather,
         }}
         modified={biolink.config?.effects?.customized}
       />

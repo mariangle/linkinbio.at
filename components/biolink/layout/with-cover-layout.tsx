@@ -44,8 +44,7 @@ export function WithCoverLayout({
           <Title
             whiteText={backgroundDark}
             options={{
-              typewriter: config.effects.titleTypewriter,
-              sparkles: config.effects.titleSparkles,
+              effect: config.effects.title,
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
@@ -58,7 +57,6 @@ export function WithCoverLayout({
             <Bio
               bio={user.bio}
               whiteText={backgroundDark}
-              typewriter={config.effects.bioTypewriter}
               className="text-center"
             />
           )}

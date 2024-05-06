@@ -4,15 +4,13 @@ import * as React from "react";
 
 import { Title } from "@/components/biolink/title";
 import { Username } from "@/components/biolink/username";
-import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Font } from "@/lib/types";
+import { Font, TitleEffect } from "@/lib/types";
 import { ColorPicker } from "@/components/color-picker";
 import {
   ShowcaseContainer,
   ShowcaseHeader,
   ShowcaseDescription,
-  ShowcaseItemContainer,
   ShowcaseIconContainer,
 } from "./showcase";
 import {
@@ -24,10 +22,10 @@ import {
 } from "@/components/ui/select";
 import { fonts } from "@/lib/constants/fonts";
 import { Palette } from "lucide-react";
+import { titleEffects } from "@/lib/constants/effects";
 export function ProfileCustomizer() {
   const [profileOptions, setProfileOptions] = React.useState({
-    typewriter: false,
-    sparkles: false,
+    titleEffect: TitleEffect.CherryBlossoms,
     color: "#FFFFFF",
     hideUsername: false,
     font: Font.Inter,
@@ -46,8 +44,7 @@ export function ProfileCustomizer() {
           options={{
             color: profileOptions.color,
             font: profileOptions.font,
-            sparkles: profileOptions.sparkles,
-            typewriter: profileOptions.typewriter,
+            effect: profileOptions.titleEffect,
           }}
           user={{ title: "Maria", username: "maria" }}
         />
@@ -99,33 +96,28 @@ export function ProfileCustomizer() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <ShowcaseItemContainer className="flex items-center justify-between">
-          <div className="text-sm">Typewriter</div>
-          <Switch
-            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
-            checked={profileOptions.typewriter}
-            onCheckedChange={() =>
-              setProfileOptions({
-                ...profileOptions,
-                typewriter: !profileOptions.typewriter,
-              })
-            }
-          />
-        </ShowcaseItemContainer>
-        <ShowcaseItemContainer className="flex items-center justify-between">
-          <div className="text-sm">Sparkles</div>
-          <Switch
-            checked={profileOptions.sparkles}
-            className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
-            onCheckedChange={() =>
-              setProfileOptions({
-                ...profileOptions,
-                sparkles: !profileOptions.sparkles,
-              })
-            }
-          />
-        </ShowcaseItemContainer>
+      <div>
+        <div className="mb-2 text-sm text-white">Title Effect</div>
+        <Select
+          onValueChange={(value) => {
+            setProfileOptions({
+              ...profileOptions,
+              titleEffect: value as TitleEffect,
+            });
+          }}
+          defaultValue={profileOptions.titleEffect}
+        >
+          <SelectTrigger className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white">
+            <SelectValue placeholder="Select a top icon style" />
+          </SelectTrigger>
+          <SelectContent>
+            {titleEffects.map((item, index) => (
+              <SelectItem key={index} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </ShowcaseContainer>
   );

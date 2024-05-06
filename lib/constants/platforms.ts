@@ -36,7 +36,7 @@ export const platforms: Social[] = [
     name: "LinkedIn",
     url: "https://www.linkedin.com/in",
     color: "#0077B5",
-    domain: "linkedin.com",
+    domain: "linkedin.com/in",
   },
   {
     icon: FaDiscord,
