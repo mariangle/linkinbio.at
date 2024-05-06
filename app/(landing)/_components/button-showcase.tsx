@@ -67,8 +67,13 @@ export function ButtonCustomizer() {
             <div className="pointer-events-none mx-auto max-w-[200px]">
               <Button
                 item={{
+                  id: "1",
+                  url: "https://facebook.com",
+                  order: 0,
+                  archived: false,
                   title: "Facebook",
-                  url: "https://facebook.com/username",
+                  provider: "Facebook",
+                  username: "username",
                   isTopIcon: false,
                 }}
                 config={{

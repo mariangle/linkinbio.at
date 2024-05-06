@@ -1,10 +1,22 @@
+export interface LinkOptions {
+  website: WebsiteLink[];
+  platform: PlatformLink[];
+}
+
 export interface Link {
   id: string;
-  order: number;
-  title: string;
   url: string;
-  hidden?: boolean;
-  archived?: boolean;
+  title: string;
+  order: number;
+  archived: boolean;
+}
+
+export interface WebsiteLink extends Link {
+  iconId: number;
+}
+
+export interface PlatformLink extends Link {
+  provider: string;
+  username: string;
   isTopIcon: boolean;
-  iconId?: number | null;
 }

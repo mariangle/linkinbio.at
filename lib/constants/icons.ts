@@ -62,7 +62,7 @@ import {
 
 export const icons = [
   {
-    id: 0,
+    id: 0, // This is the default icon
     label: "Globe",
     value: FaGlobe,
   },

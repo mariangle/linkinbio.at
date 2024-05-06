@@ -1,10 +1,11 @@
-export function isValidUrl(url: string) {
-  return url.startsWith("https://");
+export function isValidURL(url: string) {
+  const urlRegex = /^(?:https?):\/\/[\w-]+(?:\.[\w-]+)+[\w.,@?^=%&:/~+#-]*$/;
+  return urlRegex.test(url);
 }
 
 export function isValidImage(url: string) {
   return (
-    isValidUrl(url) &&
+    isValidURL(url) &&
     (url.includes(".jpg") ||
       url.includes(".png") ||
       url.includes(".jpeg") ||

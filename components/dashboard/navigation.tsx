@@ -16,7 +16,7 @@ import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
 import { BurgerMenu } from "../burger-menu";
 import Image from "next/image";
 
-export function Sidebar({ user }: { user: UserType }) {
+export function Navigation({ user }: { user: UserType }) {
   const { setOpen, open } = useBiolinkPreview();
   const [isCollapsed, setIsCollapsed] = React.useState(true);
   return (
@@ -28,7 +28,7 @@ export function Sidebar({ user }: { user: UserType }) {
       <div className="flex h-full flex-col items-center justify-center gap-4">
         <div
           className={cn(
-            "relative flex gap-4 rounded-2xl border bg-white/50 p-3 backdrop-blur-2xl duration-300 dark:bg-gray-950/75",
+            "bg-glass border-glass relative flex gap-4 rounded-2xl border p-3 duration-300",
             "h-full flex-col justify-between md:w-auto",
             isCollapsed ? "md:w-[70px]" : "md:w-[190px]",
           )}
@@ -54,7 +54,7 @@ export function Sidebar({ user }: { user: UserType }) {
                     <li key={index} onClick={() => setIsCollapsed(true)}>
                       <Link
                         href={item.href}
-                        className="flex items-center gap-2 rounded-lg bg-neutral-100 px-3 py-2 dark:bg-white/5"
+                        className="bg-glass-secondary flex items-center gap-2 rounded-lg px-3 py-2"
                       >
                         <item.icon className="size-4" />
                         <span className="text-center text-xs text-muted-foreground">
@@ -63,23 +63,23 @@ export function Sidebar({ user }: { user: UserType }) {
                       </Link>
                     </li>
                   ))}
-                  <button className="flex items-center justify-center rounded-lg bg-neutral-100 px-3 py-1 dark:bg-white/5">
+                  <button className="bg-glass-secondary flex items-center justify-center rounded-lg px-3 py-1">
                     <ModeToggle />
                   </button>
                 </ul>
-                <div className="h-px w-full bg-border" />
+                <div className="bg-gradient-fade h-px w-full" />
               </motion.div>
             )}
           </AnimatePresence>
           <div className="flex h-full w-full flex-row justify-between gap-4 md:flex-col">
             <div>
-              <div className="p-2">
+              <div className="hidden p-2 md:block">
                 <Image
                   src="/icon.svg"
                   alt="logo"
                   width={50}
                   height={50}
-                  className="size-7 shrink-0 opacity-75 invert dark:opacity-90 dark:invert-0"
+                  className="size-7 shrink-0 opacity-75 invert-0"
                 />
               </div>
               <ul className="flex flex-row gap-2 md:my-2 md:flex-col">
@@ -89,7 +89,7 @@ export function Sidebar({ user }: { user: UserType }) {
                   </li>
                 ))}
               </ul>
-              <div className="hidden h-px w-full bg-border md:block" />
+              <div className="bg-gradient-fade hidden h-px w-full to-transparent md:block" />
               <ul className="my-2 hidden flex-col gap-2 md:flex">
                 {dashboardLinks.map((item, index) => (
                   <li key={index}>
@@ -99,12 +99,12 @@ export function Sidebar({ user }: { user: UserType }) {
               </ul>
             </div>
             <div className="flex flex-row items-center gap-4 md:flex-col md:gap-2">
-              <div className="h-full w-px bg-border md:h-px md:w-full" />
+              <div className="bg-gradient-fade h-full w-px md:h-px md:w-full" />
               <div className="flex flex-row items-center gap-3 md:mt-4 md:w-full md:flex-col">
                 <UserNav user={user} />
-                <button className="hidden w-full items-center justify-center rounded-xl border px-2.5 py-3 md:flex">
+                <div className="bg-glass-secondary hidden w-full items-center justify-center rounded-xl px-2.5 py-3 md:flex">
                   <ModeToggle />
-                </button>
+                </div>
                 <div className="md:w-full">
                   <BurgerMenu
                     isMenuOpen={!isCollapsed}
@@ -113,7 +113,7 @@ export function Sidebar({ user }: { user: UserType }) {
                   <button
                     onClick={() => setIsCollapsed(!isCollapsed)}
                     className={cn(
-                      "hidden w-full items-center justify-center gap-2 rounded-xl border px-2.5 py-3 text-sm md:flex",
+                      "bg-glass-secondary hidden w-full items-center justify-center gap-2 rounded-xl px-2.5 py-3 text-sm md:flex",
                     )}
                   >
                     <ChevronLeft

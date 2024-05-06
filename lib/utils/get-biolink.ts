@@ -15,7 +15,8 @@ export async function getBiolinkServer() {
     include: {
       background: true,
       button: true,
-      links: true,
+      websiteLinks: true,
+      platformLinks: true,
       profile: true,
       topIcon: true,
       effect: true,
@@ -43,7 +44,8 @@ export async function getBiolinkByUsername(username: string) {
       include: {
         background: true,
         button: true,
-        links: true,
+        websiteLinks: true,
+        platformLinks: true,
         profile: true,
         topIcon: true,
         effect: true,

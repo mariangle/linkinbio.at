@@ -20,7 +20,7 @@ export function FormContainer({
   return (
     <div
       className={cn(
-        "relative space-y-4 rounded-lg border bg-background/25 backdrop-blur-xl",
+        "bg-glass border-glass relative space-y-4 rounded-lg border",
         className,
       )}
     >
@@ -41,7 +41,7 @@ export function FormContent({
 
 export function FormFooter({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-end gap-4 rounded-b-lg border-t bg-secondary/50 p-4 backdrop-blur-lg">
+    <div className="flex items-center justify-end gap-4 rounded-b-lg p-4">
       {children}
     </div>
   );
@@ -57,7 +57,7 @@ export function FormSwitch({
   description?: string;
 }) {
   return (
-    <div className="flex flex-col gap-4 rounded-lg border bg-background/75 p-4 backdrop-blur-lg dark:bg-secondary/50 md:flex-row md:items-center md:justify-between">
+    <div className="border-glass flex flex-col gap-4 rounded-lg border bg-input/50 p-4 backdrop-blur-lg md:flex-row md:items-center md:justify-between">
       <div className="space-y-1">
         <div className="text-sm font-semibold">{title}</div>
         {description && (
@@ -79,13 +79,22 @@ export function FormActions({
   loading: boolean;
 }) {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex w-full items-center justify-end gap-4">
       {dirty && (
-        <Button type="button" variant="secondary" onClick={cancel}>
+        <Button
+          type="button"
+          className="rounded-full"
+          variant="secondary"
+          onClick={cancel}
+        >
           Cancel
         </Button>
       )}
-      <Button loading={loading} disabled={!dirty}>
+      <Button
+        loading={loading}
+        disabled={!dirty}
+        className="w-full max-w-[150px] rounded-full"
+      >
         Save
       </Button>
     </div>

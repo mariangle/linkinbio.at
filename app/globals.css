@@ -10,7 +10,6 @@
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
 
-    --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
     --primary: 245% 52% 35%;
@@ -42,7 +41,6 @@
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 221 39% 4%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 245% 52% 35%;
@@ -215,6 +213,26 @@
 
   .border-showcase {
     @apply border-[#24263A];
+  }
+
+  .bg-glass {
+    @apply bg-gradient-to-b from-white/15 to-white/20 backdrop-blur-3xl dark:from-gray-950/15 dark:to-gray-950/20;
+  }
+
+  .bg-popover {
+    @apply bg-gradient-to-b from-white/50 to-white/25 backdrop-blur-3xl dark:from-gray-950/50 dark:to-gray-950/25;
+  }
+
+  .bg-glass-secondary {
+    @apply bg-white/25 backdrop-blur-3xl dark:bg-black/15;
+  }
+
+  .border-glass {
+    @apply border-white/10 dark:border-white/5;
+  }
+
+  .bg-gradient-fade {
+    @apply bg-gradient-to-r from-transparent via-white/35 to-transparent dark:via-white/15;
   }
 
   .border-rotate {

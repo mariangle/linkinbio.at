@@ -12,7 +12,6 @@ import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
-import { determineBrightness } from "@/lib/utils/determine-brightness";
 import { LayoutProps } from ".";
 
 export function ProfessionalLayout({
@@ -21,17 +20,12 @@ export function ProfessionalLayout({
   links,
   modules,
   preview,
+  backgroundDark,
 }: LayoutProps) {
-  const backgroundDark = config.profile.invertTextColor
-    ? !determineBrightness(config.background.color)
-    : determineBrightness(config.background.color);
   return (
     <BackgroundContainer
       color={config.background.color}
-      className={cn(
-        "relative flex h-full flex-col items-center justify-between overflow-y-auto p-4",
-        !preview && "min-h-screen",
-      )}
+      className={cn(!preview && "min-h-screen", preview && "relative")}
     >
       <BackgroundMedia
         url={config.background.url}
@@ -45,7 +39,7 @@ export function ProfessionalLayout({
           <div className="flex w-full items-end justify-between">
             <ProfilePicture className="mb-4" src={user.image} />
             <div className="flex gap-4">
-              {links?.map((link, index) => (
+              {links.platform.map((link, index) => (
                 <TopIcon
                   options={config.topIcon}
                   key={index}
@@ -63,7 +57,7 @@ export function ProfessionalLayout({
               color: config.profile.title.color,
             }}
             whiteText={backgroundDark}
-            title={user.title || `@${user.username}`}
+            user={user}
           />
           {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
@@ -82,7 +76,10 @@ export function ProfessionalLayout({
           />
         </div>
         <div className="mt-8 w-full space-y-4">
-          {links?.map((link, index) => (
+          {links.website.map((link, index) => (
+            <Button key={index} item={link} config={config.button} />
+          ))}
+          {links.platform.map((link, index) => (
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>

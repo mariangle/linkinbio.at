@@ -1,8 +1,11 @@
-import type { Config, User, Link, Modules } from ".";
+import type { Config, User, Modules, WebsiteLink, PlatformLink } from ".";
 
 export interface Biolink {
   user: User;
   config: Config;
-  links: Link[];
+  links: {
+    website: WebsiteLink[];
+    platform: PlatformLink[];
+  };
   modules: Modules;
 }

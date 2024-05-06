@@ -23,10 +23,7 @@ export async function PATCH(req: Request) {
       userId: session.user.id,
     },
     data: {
-      titleSparkles: titleSparkles ?? false,
-      titleTypewriter: titleTypewriter ?? false,
-      bioTypewriter: bioTypewriter ?? false,
-      backgroundWeather: convertToPrismaWeatherEffect(weatherEffect),
+      weatherEffect: convertToPrismaWeatherEffect(weatherEffect), // TODO: Update this
     },
   });
 
@@ -56,10 +53,7 @@ export async function POST(req: Request) {
   const effects = await db.effect.create({
     data: {
       userId: session.user.id,
-      titleSparkles: titleSparkles ?? false,
-      titleTypewriter: titleTypewriter ?? false,
-      bioTypewriter: bioTypewriter ?? false,
-      backgroundWeather: convertToPrismaWeatherEffect(weatherEffect),
+      weatherEffect: convertToPrismaWeatherEffect(weatherEffect), // TODO: Update this
     },
   });
 

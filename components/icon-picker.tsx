@@ -23,7 +23,7 @@ export function IconPicker({
 
   React.useEffect(() => {
     hasRedundantIcon();
-  }, []);
+  }, []); // TODO: Remove this once i've added all the icons to the list
 
   return (
     <Popover>

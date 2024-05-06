@@ -7,11 +7,13 @@ import { TopIconStyle } from "@/lib/types";
 
 const spotifyLink = {
   title: "Spotify",
+  provider: "Spotify",
   url: "https://spotify.com/username",
   isTopIcon: true,
 };
 
 const discordLink = {
+  provider: "Discord",
   title: "Discord",
   url: "https://discord.com/username",
   isTopIcon: true,
@@ -19,17 +21,20 @@ const discordLink = {
 
 const twitchLink = {
   title: "Twitch",
+  provider: "Twitch",
   url: "https://twitch.tv/username",
   isTopIcon: true,
 };
 
 const instagramLink = {
   title: "Instagram",
+  provider: "Instagram",
   url: "https://instagram.com/username",
   isTopIcon: true,
 };
 
 const twitterLink = {
+  provider: "Twitter",
   title: "Twitter",
   url: "https://twitter.com/username",
   isTopIcon: true,
@@ -37,17 +42,20 @@ const twitterLink = {
 
 const websiteLink = {
   title: "Website",
+  provider: "Website",
   url: "https://website.com/username",
   isTopIcon: true,
 };
 
 const youtubeLink = {
   title: "Youtube",
+  provider: "Youtube",
   url: "https://youtube.com/username",
   isTopIcon: true,
 };
 
 const tiktokLink = {
+  provider: "Tiktok",
   title: "Tiktok",
   url: "https://tiktok.com/username",
   isTopIcon: true,

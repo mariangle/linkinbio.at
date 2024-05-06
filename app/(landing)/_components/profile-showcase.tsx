@@ -43,13 +43,13 @@ export function ProfileCustomizer() {
       </ShowcaseDescription>
       <div className="relative mx-4 mt-8 flex h-[60px] flex-col items-center justify-center">
         <Title
-          title="Maria"
           options={{
             color: profileOptions.color,
             font: profileOptions.font,
             sparkles: profileOptions.sparkles,
             typewriter: profileOptions.typewriter,
           }}
+          user={{ title: "Maria", username: "maria" }}
         />
         {!profileOptions.hideUsername && (
           <Username username="maria" whiteText />

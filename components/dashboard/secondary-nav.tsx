@@ -19,7 +19,7 @@ export function SecondaryNav({
               href={item.href}
               className={cn(
                 "flex items-center gap-2 whitespace-nowrap border-b-2 border-b-transparent px-3 py-4 text-sm text-muted-foreground",
-                pathname === item.href && "border-b-foreground text-foreground",
+                pathname === item.href && "border-b-primary text-foreground",
               )}
             >
               {item.label}

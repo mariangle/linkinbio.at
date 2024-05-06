@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 
+import { isValidURL } from "@/lib/utils/media-validation";
+
 export async function POST(req: Request) {
   const session = await auth();
 
@@ -14,30 +16,38 @@ export async function POST(req: Request) {
     });
   }
 
-  const { title, url, iconId, isTopIcon } = await req.json();
+  const { title, url, archived, iconId } = await req.json();
 
   if (!title || !url) {
     return NextResponse.json({
       status: 400,
       ok: false,
       data: null,
-      message: "Title and URL are required",
+      message: "A title and url is required",
     });
   }
 
-  const link = await db.link.create({
+  if (!isValidURL(url)) {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Invalid URL",
+    });
+  }
+
+  const link = await db.websiteLink.create({
     data: {
       title,
       url,
-      iconId: iconId ?? undefined,
-      isTopIcon,
+      archived,
+      iconId,
       user: {
         connect: {
           id: session.user.id,
         },
       },
       order: 0, // ! Setting order to 0 for now, will be updated later
-      archived: false,
     },
   });
 
@@ -45,6 +55,6 @@ export async function POST(req: Request) {
     status: 200,
     ok: true,
     data: link,
-    message: "Link created successfully",
+    message: "Website link created successfully",
   });
 }

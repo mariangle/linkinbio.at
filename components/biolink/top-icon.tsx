@@ -1,12 +1,12 @@
 import React from "react";
-import type { Link as LinkType, TopIconOptions } from "@/lib/types";
-import { Social, socials } from "@/lib/constants/social-links";
+import type { PlatformLink, TopIconOptions } from "@/lib/types";
+import { Social, platforms } from "@/lib/constants/platforms";
 import { cn, getDomain } from "@/lib/utils";
 import { TopIconStyle } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import Link from "next/link";
-import { icons } from "@/lib/constants/icons";
-import { FaGlobe } from "react-icons/fa";
+
+import { getIconByProvider } from "@/lib/utils/icon";
 
 export function TopIcon({
   item,
@@ -14,7 +14,7 @@ export function TopIcon({
   whiteText = true,
   size,
 }: {
-  item: Pick<LinkType, "isTopIcon" | "iconId" | "title" | "url">;
+  item: Pick<PlatformLink, "isTopIcon" | "provider" | "url" | "title">;
   options: TopIconOptions;
   className?: string;
   whiteText?: boolean;
@@ -22,14 +22,13 @@ export function TopIcon({
 }) {
   if (!item?.isTopIcon) return null;
 
-  const socialLink = socials.find((link) =>
+  const socialLink = platforms.find((link) =>
     item.url.includes(getDomain(link.url)),
   );
 
   const blackColor = "#000000";
   const whiteColor = "#FFFFFF";
   const defaultColor = whiteText ? whiteColor : blackColor;
-  const icon = icons.find((icon) => icon.id === item.iconId);
 
   const getDropShadow = (color: string) => {
     return options.shadow ? `drop-shadow(0 0 0.35rem ${color})` : undefined;
@@ -67,12 +66,6 @@ export function TopIcon({
       colorOnly: boolean;
     };
   }) {
-    const DisplayIcon = socialLink
-      ? socialLink.icon
-      : item.iconId && icon
-        ? icon.value
-        : FaGlobe;
-
     const shadowColor = socialLink ? socialLink.color : shadowOptions.color;
     const iconColor = socialLink ? socialLink.color : iconOptions.color;
 
@@ -86,6 +79,8 @@ export function TopIcon({
         : iconColor
       : iconOptions.color;
 
+    const DisplayIcon = getIconByProvider(item.provider);
+
     if (!backgroundOptions) {
       return (
         <TopIconLink
@@ -94,7 +89,7 @@ export function TopIcon({
             url: item.url,
           }}
         >
-          <DisplayIcon
+          <DisplayIcon // TODO: find icon by id
             style={{
               filter,
               color,
@@ -126,7 +121,7 @@ export function TopIcon({
             background,
           }}
         >
-          <DisplayIcon
+          <DisplayIcon // TODO: find icon by id
             style={{
               color,
             }}

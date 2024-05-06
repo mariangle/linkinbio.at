@@ -95,16 +95,24 @@ export const UserFormSchema = z.object({
 
 export type UserFormValues = z.infer<typeof UserFormSchema>;
 
-export const LinkFormSchema = z.object({
-  title: z.string().max(20, {
-    message: "Title must be at most 20 characters.",
-  }),
+export const WebsiteLinkFormSchema = z.object({
+  iconId: z.number().default(0),
+  archived: z.boolean().default(false),
+  title: z.string().min(1).max(20),
   url: z.string().url(),
-  isTopIcon: z.boolean().default(false),
-  iconId: z.number().optional(),
 });
 
-export type LinkFormValues = z.infer<typeof LinkFormSchema>;
+export type WebsiteLinkFormValues = z.infer<typeof WebsiteLinkFormSchema>;
+
+export const PlatformLinkFormSchema = z.object({
+  provider: z.string().optional(),
+  username: z.string().min(1).max(20),
+  archived: z.boolean().default(false),
+  title: z.string().optional(),
+  isTopIcon: z.boolean().default(false),
+});
+
+export type PlatformLinkFormValues = z.infer<typeof PlatformLinkFormSchema>;
 
 export const SpotifyFormSchema = z.object({
   contentId: z.string(),

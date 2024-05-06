@@ -93,8 +93,8 @@ export function BackgroundForm({
                   form.setValue("url", url || "");
                 }}
               >
-                <button className="flex w-full items-center gap-2 rounded-lg border bg-input px-2 py-3">
-                  <ImageIcon className="size-5 text-muted-foreground" />
+                <button className="border-glass flex w-full items-center gap-2 rounded-lg border bg-input/50 px-2 py-3">
+                  <ImageIcon className="size-4 text-muted-foreground" />
                   <div className="truncate whitespace-nowrap text-sm">
                     {form.getValues("url") || "Add a background image"}
                   </div>

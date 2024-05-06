@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { isValidURL } from "@/lib/utils/media-validation";
 
 export async function PATCH(
   req: Request,
@@ -26,18 +27,27 @@ export async function PATCH(
     });
   }
 
-  const { title, url, iconId, isTopIcon } = await req.json();
+  const { title, url, archived, iconId } = await req.json();
 
   if (!title || !url) {
     return NextResponse.json({
       status: 400,
       ok: false,
       data: null,
-      message: "Title and URL are required",
+      message: "A title and url is required",
     });
   }
 
-  const link = await db.link.update({
+  if (!isValidURL(url)) {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Invalid URL",
+    });
+  }
+
+  const link = await db.websiteLink.update({
     where: {
       id: params.id,
       userId: session.user.id,
@@ -45,8 +55,8 @@ export async function PATCH(
     data: {
       title,
       url,
-      iconId: iconId ?? undefined,
-      isTopIcon,
+      archived,
+      iconId,
     },
   });
 
@@ -54,7 +64,7 @@ export async function PATCH(
     status: 200,
     ok: true,
     data: link,
-    message: "Username updated successfully",
+    message: "Website link updated successfully",
   });
 }
 
@@ -82,7 +92,7 @@ export async function DELETE(
     });
   }
 
-  const deletedLink = await db.link.delete({
+  const deletedLink = await db.websiteLink.delete({
     where: {
       id: params.id,
       userId: session.user.id,
@@ -94,7 +104,7 @@ export async function DELETE(
       status: 404,
       ok: false,
       data: null,
-      message: "Link not found",
+      message: "Website link not found",
     });
   }
 
@@ -102,6 +112,6 @@ export async function DELETE(
     status: 200,
     ok: true,
     data: deletedLink,
-    message: "Link deleted successfully",
+    message: "Website link deleted successfully",
   });
 }

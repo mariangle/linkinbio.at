@@ -34,7 +34,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
 
   if (isDesktop) {
     return (
-      <div className="relative grid h-screen w-full max-w-2xl place-content-center overflow-y-auto border-l">
+      <div className="border-glass relative grid h-screen w-full max-w-2xl place-content-center overflow-y-auto border-l">
         <div className="absolute right-4 top-4">
           <SharePopover />
         </div>

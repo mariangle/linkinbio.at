@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useFormSubmit } from "@/hooks/use-form-submit";
 import { ModuleButton } from "@/components/dashboard/module-button";
+import { FormContainer, FormContent } from "@/components/dashboard/form";
 
 const tabs = [
   {
@@ -107,102 +108,79 @@ export function SpotifyForm({
   };
 
   return (
-    <div className="rounded-lg bg-neutral-900 bg-gradient-to-r from-green-500/50 to-neutral-900 p-4 text-white">
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between"
-      >
-        <div className="flex items-center gap-2 font-semibold">
-          <FaSpotify className="size-5 text-green-500" />
-          Spotify
-        </div>
-        <ChevronDown
-          className={cn(
-            "size-5  rotate-0 text-green-500 duration-300",
-            expanded && "rotate-180",
-          )}
-        />
-      </button>
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Form {...form}>
-              <form
-                className="mt-4 space-y-6"
-                onSubmit={form.handleSubmit(onSubmit)}
-              >
-                <div className="flex w-fit items-center gap-2 rounded-md bg-black/20 p-2">
-                  {tabs.map((item, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      className={cn(
-                        "px-3 text-sm text-green-600",
-                        item.name === tab.name &&
-                          "rounded-lg bg-white/5 py-1 text-white",
-                      )}
-                      onClick={() => {
-                        setTab(item);
-                        form.setValue("contentId", "");
-                      }}
-                    >
-                      {item.name}
-                    </button>
-                  ))}
-                </div>
-                <div className="h-px w-full bg-gradient-to-r from-green-300/20 to-neutral-600"></div>
-                <div className="space-y-2">
-                  <Label className="text-white">{tab.name} ID</Label>
-                  <FormField
-                    control={form.control}
-                    name="contentId"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
-                        <FormControl>
-                          <Input
-                            className="border-none bg-neutral-900 placeholder:text-neutral-400 focus-visible:ring-0"
-                            placeholder={`Enter ${tab.name} ID`}
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-neutral-300">
-                      Dark Background
-                    </div>
+    <FormContainer>
+      <FormContent>
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="flex w-full items-center justify-between"
+        >
+          <div className="flex items-center gap-2 font-semibold">
+            <FaSpotify className="size-5 text-green-500" />
+            Spotify
+          </div>
+          <ChevronDown
+            className={cn(
+              "size-5  rotate-0 duration-300",
+              expanded && "rotate-180",
+            )}
+          />
+        </button>
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Form {...form}>
+                <form
+                  className="mt-4 space-y-6"
+                  onSubmit={form.handleSubmit(onSubmit)}
+                >
+                  <div className="border-glass flex w-fit items-center gap-2 rounded-md border bg-input/50 p-1 text-muted-foreground/50">
+                    {tabs.map((item, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        className={cn(
+                          "px-3 py-1.5 text-sm",
+                          item.name === tab.name &&
+                            "bg-glass-secondary rounded-lg text-foreground",
+                        )}
+                        onClick={() => {
+                          setTab(item);
+                          form.setValue("contentId", "");
+                        }}
+                      >
+                        {item.name}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="h-px w-full bg-gradient-to-r from-green-300/20 to-neutral-600"></div>
+                  <div className="space-y-2">
+                    <Label className="text-white">{tab.name} ID</Label>
                     <FormField
                       control={form.control}
-                      name="darkBackground"
+                      name="contentId"
                       render={({ field }) => (
                         <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
                           <FormControl>
-                            <Checkbox
-                              className="border-green-500 data-[state=checked]:bg-green-500"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
+                            <Input
+                              placeholder={`Enter ${tab.name} ID`}
+                              {...field}
                             />
                           </FormControl>
                         </FormItem>
                       )}
                     />
                   </div>
-                  {tab.value !== ContentType.Track && (
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="text-sm text-neutral-300">
-                        Compact Layout
-                      </div>
+                      <div className="text-sm">Dark Background</div>
                       <FormField
                         control={form.control}
-                        name="compactLayout"
+                        name="darkBackground"
                         render={({ field }) => (
                           <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
                             <FormControl>
@@ -216,45 +194,65 @@ export function SpotifyForm({
                         )}
                       />
                     </div>
-                  )}
-                </div>
-                <div className="flex items-center justify-between gap-4 rounded-lg border border-green-500/5 bg-green-500/20 p-3">
-                  <div className="text-sm font-semibold">Enable</div>
-                  <FormField
-                    control={form.control}
-                    name="enabled"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
-                        <FormControl>
-                          <Switch
-                            className="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-neutral-700"
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                      </FormItem>
+                    {tab.value !== ContentType.Track && (
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm">Compact Layout</div>
+                        <FormField
+                          control={form.control}
+                          name="compactLayout"
+                          render={({ field }) => (
+                            <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
+                              <FormControl>
+                                <Checkbox
+                                  className="border-green-500 data-[state=checked]:bg-green-500"
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     )}
-                  />
-                </div>
-                <div className="flex items-center justify-end gap-4">
-                  {modified && (
-                    <ModuleButton onClick={onDelete} type="button">
-                      Delete
+                  </div>
+                  <div className="flex items-center justify-between gap-4 rounded-lg border border-green-500/5 bg-green-500/20 p-3">
+                    <div className="text-sm font-semibold">Enable</div>
+                    <FormField
+                      control={form.control}
+                      name="enabled"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
+                          <FormControl>
+                            <Switch
+                              className="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-neutral-700"
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex items-center justify-end gap-4">
+                    {modified && (
+                      <ModuleButton onClick={onDelete} type="button">
+                        Delete
+                      </ModuleButton>
+                    )}
+                    <ModuleButton
+                      loading={loading}
+                      variant="spotify"
+                      type="submit"
+                    >
+                      {modified ? "Update" : "Add"}
                     </ModuleButton>
-                  )}
-                  <ModuleButton
-                    loading={loading}
-                    variant="spotify"
-                    type="submit"
-                  >
-                    {modified ? "Update" : "Add"}
-                  </ModuleButton>
-                </div>
-              </form>
-            </Form>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+                  </div>
+                </form>
+              </Form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </FormContent>
+    </FormContainer>
   );
 }

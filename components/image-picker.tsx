@@ -56,7 +56,7 @@ export function ImagePicker({
           {title && <DialogTitle>{title}</DialogTitle>}
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        <div className="grid h-32 place-content-center overflow-hidden rounded-lg bg-secondary">
+        <div className="bg-glass-secondary grid h-32 place-content-center overflow-hidden rounded-lg">
           {validUrl ? (
             <Image
               width={500}
@@ -67,7 +67,7 @@ export function ImagePicker({
               className="h-full w-full object-cover"
             />
           ) : (
-            <ImageIcon className="size-8 text-muted" />
+            <ImageIcon className="size-8 text-muted-foreground" />
           )}
         </div>
         <div className="space-y-2">

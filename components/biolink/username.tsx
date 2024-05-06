@@ -6,7 +6,7 @@ export function Username({
   username,
 }: {
   className?: string;
-  whiteText: boolean;
+  whiteText?: boolean;
   username: string;
 }) {
   return (

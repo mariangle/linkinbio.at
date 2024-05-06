@@ -3,7 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { fonts } from "@/lib/constants/fonts";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
-import { Font } from "@/lib/types";
+import { Font, User } from "@/lib/types";
 
 interface TitleOptions {
   typewriter?: boolean;
@@ -16,12 +16,12 @@ export function Title({
   options,
   className,
   whiteText,
-  title,
+  user,
 }: {
   options: TitleOptions;
   className?: string;
   whiteText?: boolean;
-  title: string;
+  user: Pick<User, "title" | "username">;
 }) {
   const font = fonts.find((f) => f.value === options.font)?.display;
 
@@ -50,7 +50,7 @@ export function Title({
             color: options?.color ? options.color : undefined,
           }}
         >
-          <TypewriterEffect words={title} />
+          <TypewriterEffect words={user.title || `@${user.username}`} />
         </div>
       </div>
     );
@@ -80,7 +80,7 @@ export function Title({
           color: options?.color ? options.color : undefined,
         }}
       >
-        {title}
+        {user.title || `@${user.username}`}
       </h2>
     </div>
   );

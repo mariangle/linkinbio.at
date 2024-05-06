@@ -5,7 +5,10 @@ import {
   convertToLayout,
   convertToContentType,
 } from "@/lib/utils/enum-mappings";
-
+import {
+  constructLinkFromWebsite,
+  constructLinkFromPlatform,
+} from "@/lib/utils/construct-link";
 import { fonts } from "@/lib/constants/fonts";
 
 import type {
@@ -14,7 +17,8 @@ import type {
   Button,
   TopIcon,
   Effect,
-  Link,
+  WebsiteLink,
+  PlatformLink,
   Profile,
   Spotify,
   Soundcloud,
@@ -22,7 +26,8 @@ import type {
 } from "@prisma/client";
 
 export interface ExtendedUser extends User {
-  links?: Link[];
+  platformLinks?: PlatformLink[];
+  websiteLinks?: WebsiteLink[];
   background?: Background;
   button?: Button;
   topIcon?: TopIcon;
@@ -46,7 +51,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       occupation: user.occupation ?? undefined,
       location: user.location ?? undefined,
       bio: user.bio ?? undefined,
-      premium: true || false, // TODO: Also check if user is premium
+      premium: true,
     },
     config: {
       profile: {
@@ -104,13 +109,20 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       },
       effects: {
         customized: user.effect ? true : false,
-        titleTypewriter: user.effect?.titleTypewriter ?? false,
-        bioTypewriter: user.effect?.bioTypewriter ?? false,
-        titleSparkles: user.effect?.titleSparkles ?? false,
-        weatherEffect: convertToWeatherEffect(user.effect?.backgroundWeather),
+        titleTypewriter: false, // TODO: Update this
+        bioTypewriter: false,
+        titleSparkles: false,
+        weatherEffect: convertToWeatherEffect(user.effect?.weatherEffect),
       },
     },
-    links: user.links ?? [],
+    links: {
+      website: user.websiteLinks
+        ? user.websiteLinks?.map((link) => constructLinkFromWebsite(link))
+        : [],
+      platform: user.platformLinks
+        ? user.platformLinks?.map((link) => constructLinkFromPlatform(link))
+        : [],
+    },
     modules: {
       spotify: user.spotify && {
         enabled: user.spotify.enabled,

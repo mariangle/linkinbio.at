@@ -49,13 +49,15 @@ View more at: https://linkinbio.at/features
 ## Roadmap
 
 - [ ] Analytics - Clicks, CTA-ratio, views
-- [ ] Text Blossom effect
+- [ ] Cherry Blossom effect
 - [ ] Payment (Stripe) / Premium
 - [ ] Gradient background colors
 - [x] Add change shadow color
 - [ ] Change text font
-- [ ] Handle social media vs website links better (database model)
+- [ ] Add new layout and update glassmorpism layout
+- [x] Handle social media vs website links better
 - [ ] Refactoring and cleanup code
+- [x] Improved dashboard styling
 
 ## License
 

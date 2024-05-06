@@ -58,8 +58,8 @@ export const biolinkCustomizationLinks = [
     href: "/dashboard/appearance/layout",
   },
   {
-    label: "Visual Effects",
-    href: "/dashboard/appearance/visual-effects",
+    label: "Effects",
+    href: "/dashboard/appearance/effects",
   },
 ];
 

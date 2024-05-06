@@ -17,7 +17,7 @@ export function Bio({
     return (
       <div
         className={cn(
-          "mt-2 text-sm",
+          "mt-2 text-base",
           whiteText ? "text-white" : "text-black",
           className,
         )}

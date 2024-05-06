@@ -2,7 +2,7 @@ import type {
   Biolink,
   Config,
   EffectsOptions,
-  Link,
+  LinkOptions,
   Modules,
   User,
 } from "@/lib/types";
@@ -17,9 +17,10 @@ import { determineBrightness } from "@/lib/utils/determine-brightness";
 export interface LayoutProps {
   user: User;
   config: Config;
-  links: Link[];
+  links: LinkOptions;
   modules?: Modules;
   preview?: boolean;
+  backgroundDark?: boolean;
 }
 
 export function Layout({
@@ -31,8 +32,8 @@ export function Layout({
   preview?: boolean;
   layout?: LayoutEnum;
 }) {
-  const useDarkText = biolink.config.background.url
-    ? biolink.config.profile.invertTextColor
+  const backgroundDark = biolink.config.profile.invertTextColor
+    ? !determineBrightness(biolink.config.background.color)
     : determineBrightness(biolink.config.background.color);
 
   switch (layout ?? biolink.config.profile.layout) {
@@ -58,6 +59,7 @@ export function Layout({
             links={biolink.links}
             config={biolink.config}
             preview={preview}
+            backgroundDark={backgroundDark}
           />
         </LayoutWrapper>
       );
@@ -71,6 +73,7 @@ export function Layout({
             links={biolink.links}
             config={biolink.config}
             preview={preview}
+            backgroundDark={backgroundDark}
           />
         </LayoutWrapper>
       );
@@ -84,6 +87,7 @@ export function Layout({
             links={biolink.links}
             config={biolink.config}
             preview={preview}
+            backgroundDark={backgroundDark}
           />
         </LayoutWrapper>
       );

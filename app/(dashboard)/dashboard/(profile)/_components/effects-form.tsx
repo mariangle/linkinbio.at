@@ -17,6 +17,8 @@ import {
   FormHeading,
   FormSwitch,
   FormActions,
+  FormContent,
+  FormContainer,
 } from "@/components/dashboard/form";
 import {
   Select,
@@ -91,96 +93,103 @@ export function EffectsForm({
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="space-y-4">
-          <FormHeading>Effects</FormHeading>
-          <Label>Title</Label>
-          <FormSwitch title="Sparkles">
+    <FormContainer>
+      <FormContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="space-y-4">
+              <FormHeading>Effects</FormHeading>
+              <Label>Title</Label>
+              <FormSwitch title="Sparkles">
+                <FormField
+                  control={form.control}
+                  name="titleSparkles"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </FormSwitch>
+              <FormSwitch title="Typewriter">
+                <FormField
+                  control={form.control}
+                  name="titleTypewriter"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </FormSwitch>
+              <Label>Bio</Label>
+              <FormSwitch title="Typewriter">
+                <FormField
+                  control={form.control}
+                  name="bioTypewriter"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </FormSwitch>
+            </div>
+            <div>
+              <FormHeading>Background Effect</FormHeading>
+              <div className="mt-2 text-sm text-muted-foreground">
+                Select a weather effect to enhance your profile. It complements
+                darker backgrounds.
+              </div>
+            </div>
             <FormField
               control={form.control}
-              name="titleSparkles"
+              name="weatherEffect"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a background weather effect" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {weatherEffects.map((item, index) => (
+                        <SelectItem key={index} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="none">None</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-          </FormSwitch>
-          <FormSwitch title="Typewriter">
-            <FormField
-              control={form.control}
-              name="titleTypewriter"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </FormSwitch>
-          <Label>Bio</Label>
-          <FormSwitch title="Typewriter">
-            <FormField
-              control={form.control}
-              name="bioTypewriter"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </FormSwitch>
-        </div>
-        <div>
-          <FormHeading>Background Effect</FormHeading>
-          <div className="mt-2 text-sm text-muted-foreground">
-            Select a weather effect to enhance your profile. It complements
-            darker backgrounds.
-          </div>
-        </div>
-        <FormField
-          control={form.control}
-          name="weatherEffect"
-          render={({ field }) => (
-            <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a background weather effect" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {weatherEffects.map((item, index) => (
-                    <SelectItem key={index} value={item.value}>
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                  <SelectItem value="none">None</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex justify-end">
-          <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
-        </div>
-      </form>
-    </Form>
+            <div className="flex justify-end">
+              <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
+            </div>
+          </form>
+        </Form>
+      </FormContent>
+    </FormContainer>
   );
 }

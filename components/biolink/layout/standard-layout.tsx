@@ -12,10 +12,9 @@ import {
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { cn } from "@/lib/utils";
-import { determineBrightness } from "@/lib/utils/determine-brightness";
-import { SoundcloudTrack } from "../modules/soundcloud";
-import { Spotify } from "../modules/spotify";
-import { YoutubeVideo } from "../modules/youtube";
+import { SoundcloudTrack } from "@/components/biolink/modules/soundcloud";
+import { Spotify } from "@/components/biolink/modules/spotify";
+import { YoutubeVideo } from "@/components/biolink/modules/youtube";
 import { LayoutProps } from ".";
 
 export function StandardLayout({
@@ -24,20 +23,12 @@ export function StandardLayout({
   modules,
   links,
   preview,
+  backgroundDark,
 }: LayoutProps) {
-  const backgroundDark = config.profile.invertTextColor
-    ? !determineBrightness(config.background.color)
-    : determineBrightness(config.background.color);
-
-  // TODO: fix redundant classes in ContentContainer and BackgroundContainer
-
   return (
     <BackgroundContainer
       color={config.background.color}
-      className={cn(
-        "fixed inset-0 flex h-screen flex-col items-center justify-between overflow-y-auto p-4",
-        preview && "relative h-full",
-      )}
+      className={cn(preview && "relative h-full")}
     >
       <BackgroundMedia
         url={config.background.url}
@@ -54,7 +45,7 @@ export function StandardLayout({
               color: config.profile.title.color,
             }}
             whiteText={backgroundDark}
-            title={user.title || `@${user.username}`}
+            user={user}
           />
           {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
@@ -74,7 +65,7 @@ export function StandardLayout({
           />
         </div>
         <div className="mt-6 flex gap-4">
-          {links.map((link, index) => (
+          {links.platform.map((link, index) => (
             <TopIcon
               whiteText={backgroundDark}
               options={config.topIcon}
@@ -84,7 +75,10 @@ export function StandardLayout({
           ))}
         </div>
         <div className="my-8 w-full space-y-4">
-          {links.map((link, index) => (
+          {links.website.map((link, index) => (
+            <Button key={index} item={link} config={config.button} />
+          ))}
+          {links.platform.map((link, index) => (
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>

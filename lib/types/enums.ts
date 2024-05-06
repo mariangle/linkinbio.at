@@ -12,11 +12,18 @@ export enum Font {
   DancingScript = "dancing-script",
 }
 
+export enum TitleEffect {
+  Typewriter = "typewriter",
+  Sparkles = "sparkles",
+  Stars = "stars",
+}
+
 export enum WeatherEffect {
   Rain = "rain",
   Snow = "snow",
   Thunder = "thunder",
   LightningBugs = "lightning-bugs",
+  Staras = "stars",
 }
 
 export enum TopIconStyle {

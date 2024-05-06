@@ -57,23 +57,25 @@ model User {
   location            String?
   invertTextColor     Boolean?  @map("invert_text_color")
   hideUsername        Boolean?  @map("hide_username")
+  views               Int?      @default(0)
   font                String?
   premium             Boolean?  @default(false)
   layout              Layout?   @default(Standard)
   createdAt           DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 
-  accounts   Account[]
-  sessions   Session[]
-  links      Link[]
-  profile    Profile?
-  background Background?
-  button     Button?
-  topIcon    TopIcon?
-  effect     Effect?
-  spotify    Spotify?
-  youtube    Youtube?
-  soundcloud Soundcloud?
+  accounts      Account[]
+  sessions      Session[]
+  websiteLinks  WebsiteLink[]
+  platformLinks PlatformLink[]
+  profile       Profile?
+  background    Background?
+  button        Button?
+  topIcon       TopIcon?
+  effect        Effect?
+  spotify       Spotify?
+  youtube       Youtube?
+  soundcloud    Soundcloud?
 
   @@map("users")
 }
@@ -83,22 +85,38 @@ enum Layout {
   Professional
   Glassmorphism
   WithCover
+  Bold
 }
 
-model Link {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String  @map("user_id") @db.ObjectId
-  url       String
-  isTopIcon Boolean @default(false) @map("is_top_icon")
-  archived  Boolean
-  title     String
-  order     Int
-  iconId    Int?    @map("icon_id")
+model WebsiteLink {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String  @map("user_id") @db.ObjectId
+  url      String
+  archived Boolean
+  title    String
+  order    Int
+  iconId   Int     @default(0) @map("icon_id")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, id])
-  @@map("links")
+  @@map("website_links")
+}
+
+model PlatformLink {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String  @map("user_id") @db.ObjectId
+  provider  String  @map("provider")
+  username  String  @map("username")
+  isTopIcon Boolean @default(false) @map("is_top_icon")
+  archived  Boolean
+  title     String
+  order     Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, id])
+  @@map("platform_links")
 }
 
 model Background {
@@ -181,15 +199,14 @@ enum WeatherEffect {
   Rain
   Thunder
   LightningBugs
+  Stars
 }
 
 model Effect {
-  id                String         @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String         @unique @map("user_id") @db.ObjectId
-  titleTypewriter   Boolean        @default(false) @map("title_typewriter")
-  titleSparkles     Boolean        @default(false) @map("title_sparkles")
-  bioTypewriter     Boolean        @default(false) @map("bio_typewriter")
-  backgroundWeather WeatherEffect? @map("background_weather")
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String         @unique @map("user_id") @db.ObjectId
+  titleEffect   String?        @map("title_effect")
+  weatherEffect WeatherEffect? @map("background_weather")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

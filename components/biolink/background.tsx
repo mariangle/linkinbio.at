@@ -5,16 +5,22 @@ import { isValidImage, isValidVideo } from "@/lib/utils/media-validation";
 import { BackgroundVideo } from "@/components/biolink/background-video";
 
 export function BackgroundContainer({
-  color = "#000000",
+  color,
   children,
   className,
 }: {
-  color?: string;
+  color: string;
   children?: React.ReactNode;
   className?: string;
 }) {
   return (
-    <div className={cn(className)} style={{ backgroundColor: color }}>
+    <div
+      className={cn(
+        "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
+        className,
+      )}
+      style={{ backgroundColor: color }}
+    >
       {children}
     </div>
   );

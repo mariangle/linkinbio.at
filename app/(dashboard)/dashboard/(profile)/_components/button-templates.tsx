@@ -195,8 +195,13 @@ export function ButtonTemplates({
                 key={index}
                 config={button}
                 item={{
+                  id: "1",
+                  url: "https://facebook.com",
+                  order: 0,
+                  archived: false,
                   title: "Facebook",
-                  url: "https://facebook.com/username",
+                  provider: "Facebook",
+                  username: "username",
                   isTopIcon: false,
                 }}
               />

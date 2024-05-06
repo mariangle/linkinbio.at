@@ -3,18 +3,16 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import {
   FormHeading,
   FormContainer,
-  FormFooter,
   FormContent,
   FormDescription,
 } from "@/components/dashboard/form";
 
 export function AppearanceForm() {
-  const { setTheme, resolvedTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <FormContainer>

@@ -1,30 +1,46 @@
 import Link from "next/link";
-import { socials } from "@/lib/constants/social-links";
-import { hexToRgb, getDomain, cn } from "@/lib/utils";
-import { icons } from "@/lib/constants/icons";
+import { hexToRgb, cn } from "@/lib/utils";
 
-import type { Link as LinkType } from "@/lib/types";
+import type { WebsiteLink, PlatformLink } from "@/lib/types";
 import type { ButtonOptions } from "@/lib/types";
-import { FaGlobe } from "react-icons/fa";
+
+import { getIconById, getIconByProvider } from "@/lib/utils/icon";
+import { getPlatformByProvider } from "@/lib/utils/platform";
+
+function getIcon(item: PlatformLink | WebsiteLink) {
+  if ("provider" in item) {
+    return {
+      icon: getIconByProvider(item.provider),
+      platformLink: getPlatformByProvider(item.provider),
+      display: !item.isTopIcon,
+    };
+  } else {
+    return {
+      icon: getIconById(item.iconId),
+      platformLink: null,
+      display: true,
+    };
+  }
+}
 
 export function Button({
   item,
   config,
   size,
 }: {
-  item: Pick<LinkType, "title" | "url" | "iconId" | "isTopIcon">;
+  item: WebsiteLink | PlatformLink;
   config: ButtonOptions;
   size?: "sm";
 }) {
-  if (item.isTopIcon) {
-    return null;
-  }
+  const {
+    icon: DisplayIcon,
+    platformLink: socialLink,
+    display,
+  } = getIcon(item);
 
-  const socialLink = socials.find((link) =>
-    item.url.includes(getDomain(link.url)),
-  );
+  if (item.archived) return null;
 
-  const icon = icons.find((icon) => icon.id === item.iconId);
+  if (!display) return null;
 
   const textColor = config.background.socialColor
     ? "#FFFFFF"
@@ -43,6 +59,16 @@ export function Button({
       ? `linear-gradient(to right, ${socialLink?.gradientColors.join(", ")})`
       : undefined;
 
+  const backgroundColor = backgroundColorRgb
+    ? `rgba(${backgroundColorRgb.r}, ${backgroundColorRgb.g}, ${backgroundColorRgb.b}, ${config.background.opacity})`
+    : gradientBackground;
+
+  const backgroundImage = config.background.socialColor
+    ? gradientBackground
+    : undefined;
+
+  const border = `${config.border.width}px solid ${config.border.color}`;
+
   const boxShadow = config.shadow.solid
     ? `${config.shadow.spreadRadius}px ${config.shadow.spreadRadius}px 0px 0px rgba(${shadowColorRgb?.r}, ${shadowColorRgb?.g}, ${shadowColorRgb?.b}, 1)`
     : config.shadow.spreadRadius > 0
@@ -53,6 +79,16 @@ export function Button({
     config.background.blur > 0
       ? `blur(${config.background.blur}px)`
       : undefined;
+
+  const iconColor = config.icon.socialColor
+    ? socialLink?.color
+    : config.text.color;
+
+  const filter = config.icon.shadow
+    ? `drop-shadow(0 0 0.5rem ${
+        config.icon.socialColor ? socialLink?.color : config.text.color
+      })`
+    : undefined;
 
   return (
     <Link
@@ -66,59 +102,22 @@ export function Button({
       style={{
         color: textColor,
         borderRadius: config.border.radius,
-        border: `${config.border.width}px solid ${config.border.color}`,
-        backgroundImage: config.background.socialColor
-          ? gradientBackground
-          : undefined,
-        backgroundColor: backgroundColorRgb
-          ? `rgba(${backgroundColorRgb.r}, ${backgroundColorRgb.g}, ${backgroundColorRgb.b}, ${config.background.opacity})`
-          : gradientBackground,
+        border: border,
+        backgroundImage: backgroundImage,
+        backgroundColor: backgroundColor,
         boxShadow,
         backdropFilter,
       }}
     >
       {!config.icon.hidden && (
-        <>
-          {socialLink ? (
-            <socialLink.icon
-              style={{
-                color: config.icon.socialColor
-                  ? socialLink.color
-                  : config.text.color,
-                filter: config.icon.shadow
-                  ? `drop-shadow(0 0 0.5rem ${
-                      config.icon.socialColor
-                        ? socialLink.color
-                        : config.text.color
-                    })`
-                  : undefined,
-              }}
-              className={cn("size-5", size === "sm" && "size-4")}
-            />
-          ) : icon ? (
-            <icon.value
-              style={{
-                color: config.text.color,
-                filter: config.icon.shadow
-                  ? `drop-shadow(0 0 0.5rem ${config.text.color})`
-                  : undefined,
-              }}
-              className={cn("size-5", size === "sm" && "size-4")}
-            />
-          ) : (
-            <FaGlobe
-              style={{
-                color: config.text.color,
-                filter: config.icon.shadow
-                  ? `drop-shadow(0 0 0.5rem ${config.text.color})`
-                  : undefined,
-              }}
-              className={cn("size-5", size === "sm" && "size-4")}
-            />
-          )}
-        </>
+        <DisplayIcon
+          style={{
+            color: iconColor,
+            filter: filter,
+          }}
+          className={cn("size-5", size === "sm" && "size-4")}
+        />
       )}
-
       {!config.text.hidden && <span>{item.title}</span>}
     </Link>
   );

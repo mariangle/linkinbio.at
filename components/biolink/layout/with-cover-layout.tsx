@@ -13,7 +13,6 @@ import { Details } from "@/components/biolink/details";
 
 import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
-import { determineBrightness } from "@/lib/utils/determine-brightness";
 import { LayoutProps } from ".";
 import { Spotify } from "../modules/spotify";
 
@@ -23,17 +22,12 @@ export function WithCoverLayout({
   modules,
   links,
   preview,
+  backgroundDark,
 }: LayoutProps) {
-  const backgroundDark = config.profile.invertTextColor
-    ? !determineBrightness(config.background.color)
-    : determineBrightness(config.background.color);
   return (
     <BackgroundContainer
       color={config.background.color}
-      className={cn(
-        "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
-        preview && "relative h-full",
-      )}
+      className={cn(preview && "relative h-full")}
     >
       <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">
         <BackgroundMedia
@@ -55,7 +49,7 @@ export function WithCoverLayout({
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
-            title={user.title || `@${user.username}`}
+            user={user}
           />
           {!config.profile.hideUsername && user.title && (
             <Username whiteText={backgroundDark} username={user.username} />
@@ -75,7 +69,7 @@ export function WithCoverLayout({
           />
         </div>
         <div className="mt-6 flex gap-4">
-          {links?.map((link, index) => (
+          {links.platform.map((link, index) => (
             <TopIcon
               whiteText={backgroundDark}
               options={config.topIcon}
@@ -85,7 +79,10 @@ export function WithCoverLayout({
           ))}
         </div>
         <div className="my-8 w-full space-y-4">
-          {links?.map((link, index) => (
+          {links.website.map((link, index) => (
+            <Button key={index} item={link} config={config.button} />
+          ))}
+          {links.platform.map((link, index) => (
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>
