@@ -26,7 +26,7 @@ export function WithCoverLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
-      color={config.background.color}
+      options={config.background}
       className={cn(preview && "relative h-full")}
     >
       <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">

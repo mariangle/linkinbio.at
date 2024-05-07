@@ -99,8 +99,9 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         color: user.background?.color ?? "#0055B3",
         url: user.background?.url ?? undefined,
         gradient: {
-          startColor: user.background?.startColor ?? "#FF512F",
-          endColor: user.background?.endColor ?? "#DD2476",
+          startColor: user.background?.gradientStartColor ?? undefined,
+          endColor: user.background?.gradientEndColor ?? undefined,
+          angle: user.background?.gradientAngle ?? 0,
         },
       },
       topIcon: {

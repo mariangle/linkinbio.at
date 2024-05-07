@@ -27,7 +27,7 @@ export function StandardLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
-      color={config.background.color}
+      options={config.background}
       className={cn(preview && "relative h-full")}
     >
       <BackgroundMedia

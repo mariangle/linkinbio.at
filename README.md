@@ -49,9 +49,9 @@ View more at: https://linkinbio.at/features
 ## Roadmap
 
 - [ ] Analytics - Clicks, CTA-ratio, views
-- [ ] Cherry Blossom effect
+- [x] Cherry Blossom effect
 - [ ] Payment (Stripe) / Premium
-- [ ] Gradient background colors
+- [x] Gradient background colors
 - [x] Add change shadow color
 - [ ] Change text font
 - [ ] Add new layout and update glassmorpism layout

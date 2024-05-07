@@ -20,7 +20,7 @@ export function FormContainer({
   return (
     <div
       className={cn(
-        "bg-glass border-glass relative space-y-4 rounded-lg border",
+        "bg-glass border-glass relative rounded-lg border",
         className,
       )}
     >

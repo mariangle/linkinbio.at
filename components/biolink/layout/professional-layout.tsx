@@ -24,7 +24,7 @@ export function ProfessionalLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
-      color={config.background.color}
+      options={config.background}
       className={cn(!preview && "min-h-screen", preview && "relative")}
     >
       <BackgroundMedia

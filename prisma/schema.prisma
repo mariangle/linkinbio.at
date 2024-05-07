@@ -120,12 +120,13 @@ model PlatformLink {
 }
 
 model Background {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String  @unique @map("user_id") @db.ObjectId
-  url        String?
-  color      String?
-  startColor String? @map("start_color")
-  endColor   String? @map("end_color")
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String  @unique @map("user_id") @db.ObjectId
+  url                String?
+  color              String?
+  gradientStartColor String? @map("gradient_start_color")
+  gradientEndColor   String? @map("gradient_end_color")
+  gradientAngle      Int?    @map("gradient_angle")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

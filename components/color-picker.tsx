@@ -24,7 +24,7 @@ export function ColorPicker({
   small = false,
   className,
 }: {
-  color: string;
+  color?: string;
   setColor: (color: string) => void;
   small?: boolean;
   className?: string;
@@ -38,7 +38,7 @@ export function ColorPicker({
   };
 
   const handleColorBlur = () => {
-    setColor(colorValue);
+    setColor(colorValue || colorFallback);
   };
 
   return (
@@ -53,7 +53,7 @@ export function ColorPicker({
         <div
           className="size-4 rounded-md border"
           style={{
-            backgroundColor: isValidHexColor(colorValue)
+            backgroundColor: isValidHexColor(colorValue || "")
               ? colorValue
               : colorFallback,
           }}
@@ -87,7 +87,7 @@ export function ColorPicker({
             onChange={handleColorChange}
             className={cn(
               "w-full",
-              !isValidHexColor(colorValue) &&
+              !isValidHexColor(colorValue || "") &&
                 "border-destructive focus-visible:ring-destructive",
             )}
           />

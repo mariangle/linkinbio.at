@@ -14,7 +14,8 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { color, url } = await req.json();
+  const { color, url, gradientStartColor, gradientEndColor, gradientAngle } =
+    await req.json();
 
   const background = await db.background.update({
     where: {
@@ -23,6 +24,9 @@ export async function PATCH(req: Request) {
     data: {
       color,
       url,
+      gradientStartColor,
+      gradientEndColor,
+      gradientAngle,
     },
   });
 
@@ -46,13 +50,17 @@ export async function POST(req: Request) {
     });
   }
 
-  const { color, url } = await req.json();
+  const { color, url, gradientStartColor, gradientEndColor, gradientAngle } =
+    await req.json();
 
   const background = await db.background.create({
     data: {
       userId: session.user.id,
       color,
       url,
+      gradientStartColor,
+      gradientEndColor,
+      gradientAngle,
     },
   });
 

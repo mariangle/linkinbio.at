@@ -1,25 +1,33 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { BackgroundOptions } from "@/lib/types";
 import { isValidImage, isValidVideo } from "@/lib/utils/media-validation";
 import { BackgroundVideo } from "@/components/biolink/background-video";
 
 export function BackgroundContainer({
-  color,
+  options,
   children,
   className,
 }: {
-  color: string;
+  options: BackgroundOptions;
   children?: React.ReactNode;
   className?: string;
 }) {
+  const backgroundStyle =
+    options.gradient?.endColor && options.gradient?.startColor
+      ? {
+          backgroundImage: `linear-gradient(${options.gradient.angle || 180}deg, ${options.gradient.startColor}, ${options.gradient.endColor})`,
+        }
+      : { backgroundColor: options.color };
+
   return (
     <div
       className={cn(
         "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
         className,
       )}
-      style={{ backgroundColor: color }}
+      style={backgroundStyle}
     >
       {children}
     </div>
