@@ -1,12 +1,12 @@
 import { SpotifyForm } from "./_components/spotify-form";
 import { SoundcloudForm } from "./_components/soundcloud-form";
 import { YoutubeForm } from "./_components/youtube-form";
-import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
 import { ContentType } from "@/lib/types";
 
 export default async function Modules() {
-  const biolink = await getBiolinkServer();
+  const biolink = await getCachedBiolink();
 
   if (!biolink) return null;
 

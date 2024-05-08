@@ -4,7 +4,7 @@ export interface LinkOptions {
 }
 
 export interface Link {
-  id: string;
+  id?: string;
   url: string;
   title: string;
   order: number;

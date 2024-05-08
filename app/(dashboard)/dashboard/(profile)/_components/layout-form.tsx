@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Layout } from "@/lib/types/enums";
 import { layouts } from "@/lib/constants/layouts";
 import { PhoneMockup } from "@/components/phone-mockup";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { useFormSubmit } from "@/hooks/use-form-submit";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +18,7 @@ export function LayoutForm({
   layout: Layout;
   modified?: boolean;
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [layout, setLayout] = React.useState<Layout>(defaultLayout);
 
   const { loading, dirty, submit } = useFormSubmit({

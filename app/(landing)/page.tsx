@@ -16,7 +16,9 @@ import {
 
 const dummyUser: Biolink = {
   user: {
+    id: "example_user_id",
     username: "johndoe",
+    email: "",
     title: "John Doe",
     image:
       "https://i.pinimg.com/originals/48/05/52/48055289925e3cbc76016f986aa5b401.jpg",

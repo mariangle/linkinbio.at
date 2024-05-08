@@ -1,6 +1,7 @@
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
-import { getBiolinkByUsername } from "@/lib/utils/get-biolink";
+import { getCachedBiolinkByUsername } from "@/lib/utils/get-biolink";
+import { ViewTracker } from "@/components/view-tracker";
 
 export async function generateMetadata({
   params,
@@ -10,19 +11,16 @@ export async function generateMetadata({
   };
 }) {
   try {
-    const biolink = await getBiolinkByUsername(params.username);
+    const biolink = await getCachedBiolinkByUsername(params.username);
 
     if (!biolink) return null;
 
     return await constructMetadata({
-      title: biolink.user.title
-        ? `${biolink.user.title} (@${biolink.user.username})`
-        : `${biolink.user.username}`,
+      title: biolink.user.title ? biolink.user.title : biolink.user.username,
       image: biolink.user.image ?? "",
       description: biolink.user.bio || "Connect with me on social media.",
     });
   } catch (e) {
-    console.log(e);
     return null;
   }
 }
@@ -34,9 +32,19 @@ export default async function Page({
     username: string;
   };
 }) {
-  const biolink = await getBiolinkByUsername(params.username);
+  const biolink = await getCachedBiolinkByUsername(params.username);
 
-  if (!biolink) return "not found";
+  if (!biolink)
+    return (
+      <div>
+        <h1>User not found</h1>
+      </div>
+    );
 
-  return <Layout biolink={biolink} />;
+  return (
+    <>
+      <ViewTracker userId={biolink.user.id} />
+      <Layout biolink={biolink} />
+    </>
+  );
 }

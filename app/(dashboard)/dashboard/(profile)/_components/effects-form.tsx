@@ -27,7 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Label } from "@/components/ui/label";
 import { WeatherEffect, TitleEffect } from "@/lib/types";
 import { weatherEffects, titleEffects } from "@/lib/constants/effects";
@@ -43,7 +43,7 @@ export function EffectsForm({
   };
   modified?: boolean;
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<EffectsFormValues>({
     resolver: zodResolver(EffectsFormSchema),

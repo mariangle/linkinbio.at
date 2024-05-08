@@ -8,16 +8,16 @@ import { ChevronLeft } from "lucide-react";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 import { ModeToggle } from "@/components/dashboard/mode-toggle";
-import type { User as UserType } from "@prisma/client";
 import { UserNav } from "./user-nav";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { BurgerMenu } from "../burger-menu";
 import Image from "next/image";
+import { User } from "@/lib/types";
 
-export function Navigation({ user }: { user: UserType }) {
-  const { setOpen, open } = useBiolinkPreview();
+export function Navigation({ user }: { user: User }) {
+  const { setOpen, open } = useBiolinkPreviewStore();
   const [isCollapsed, setIsCollapsed] = React.useState(true);
   return (
     <header

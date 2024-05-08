@@ -3,8 +3,7 @@
 import * as React from "react";
 import { signOut } from "next-auth/react";
 
-import { LogOut, Settings, LifeBuoy, CreditCard } from "lucide-react";
-import { BurgerMenu } from "@/components/burger-menu";
+import { LogOut, LifeBuoy, CreditCard } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,11 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { User as UserType } from "@prisma/client";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
 import Link from "next/link";
+import { User } from "@/lib/types";
 
-export function UserNav({ user }: { user: UserType }) {
+export function UserNav({ user }: { user: User }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

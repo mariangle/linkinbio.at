@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/form";
 import { TopIconStyle } from "@/lib/types";
 import { topIconStyles } from "@/lib/constants/top-icon-styles";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { TopIconsFormSchema, TopIconsFormValues } from "@/lib/validations";
 
 export function TopIconForm({
@@ -44,7 +44,7 @@ export function TopIconForm({
   };
   modified?: boolean;
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<TopIconsFormValues>({
     resolver: zodResolver(TopIconsFormSchema),

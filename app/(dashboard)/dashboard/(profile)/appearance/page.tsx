@@ -2,13 +2,13 @@ import { TopIconForm } from "../_components/top-icons-form";
 import { TitleForm } from "../_components/profile-form";
 import { BackgroundForm } from "../_components/background-form";
 import { ButtonsForm } from "../_components/buttons-form";
-import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
 import { SecondaryNav } from "@/components/dashboard/secondary-nav";
 import { biolinkCustomizationLinks } from "@/lib/constants/nav-links";
 
 export default async function Customization() {
-  const biolink = await getBiolinkServer();
+  const biolink = await getCachedBiolink();
 
   if (!biolink) return null;
 

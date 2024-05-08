@@ -57,7 +57,6 @@ model User {
   location            String?
   invertTextColor     Boolean?  @map("invert_text_color")
   hideUsername        Boolean?  @map("hide_username")
-  views               Int?      @default(0)
   font                String?
   premium             Boolean?  @default(false)
   layout              Layout?   @default(Standard)
@@ -76,6 +75,7 @@ model User {
   spotify       Spotify?
   youtube       Youtube?
   soundcloud    Soundcloud?
+  views         UserView[]
 
   @@map("users")
 }
@@ -97,7 +97,8 @@ model WebsiteLink {
   order    Int
   iconId   Int     @default(0) @map("icon_id")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clicks WebsiteClick[]
 
   @@unique([userId, id])
   @@map("website_links")
@@ -113,10 +114,46 @@ model PlatformLink {
   title     String
   order     Int
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clicks PlatformClick[]
 
   @@unique([userId, id])
   @@map("platform_links")
+}
+
+model UserView {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @map("user_id") @db.ObjectId
+  ipAddress String?
+  country   String?
+  timestamp DateTime @default(now())
+  referrer  String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("user_views")
+}
+
+model WebsiteClick {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  linkId    String   @map("link_id") @db.ObjectId
+  timestamp DateTime @default(now())
+  ipAddress String?  @map("ip_address")
+
+  websiteLink WebsiteLink @relation(fields: [linkId], references: [id])
+
+  @@map("website_clicks")
+}
+
+model PlatformClick {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  linkId    String   @map("link_id") @db.ObjectId
+  timestamp DateTime @default(now())
+  ipAddress String?  @map("ip_address")
+
+  platformLink PlatformLink @relation(fields: [linkId], references: [id])
+
+  @@map("platform_clicks")
 }
 
 model Background {

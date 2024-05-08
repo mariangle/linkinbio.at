@@ -1,11 +1,11 @@
 import { EffectsForm } from "../../_components/effects-form";
-import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
 import { SecondaryNav } from "@/components/dashboard/secondary-nav";
 import { biolinkCustomizationLinks } from "@/lib/constants/nav-links";
 
 export default async function page() {
-  const biolink = await getBiolinkServer();
+  const biolink = await getCachedBiolink();
 
   if (!biolink) return null;
 

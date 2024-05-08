@@ -3,22 +3,19 @@ import DashboardBackgroundDark from "@/public/dashboard-background-dark.jpg";
 import DashboardBackgroundLight from "@/public/dashboard-background-light.jpg";
 
 import { Navigation } from "@/components/dashboard/navigation";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import type { User } from "@prisma/client";
+import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { UsernameDialog } from "@/components/dashboard/username-modal";
 import { ThemeProvider } from "@/components/theme-provider";
+import { redirect } from "next/navigation";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const biolink = await getCachedBiolink();
 
-  if (!session?.user) redirect("/");
-
-  const user = session.user as User;
+  if (!biolink?.user) redirect("/");
 
   return (
     <ThemeProvider
@@ -42,9 +39,9 @@ export default async function Layout({
           alt="abstract background image"
           className="fixed inset-0 block h-full w-full scale-110 object-cover blur-2xl dark:hidden"
         />
-        <UsernameDialog isOpen={!user.username} />
+        <UsernameDialog isOpen={!biolink.user.username} />
         <div className="relative flex flex-col overflow-hidden md:flex-row">
-          <Navigation user={user} />
+          <Navigation user={biolink.user} />
           <div className="h-screen w-full">{children}</div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { FaSpotify } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ContentType } from "@/lib/types";
@@ -47,7 +47,7 @@ export function SpotifyForm({
   };
   modified?: boolean;
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
   const [tab, setTab] = React.useState(
     tabs.find((item) => item.value === data.type) ?? tabs[0],

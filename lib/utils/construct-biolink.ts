@@ -46,7 +46,9 @@ function getFont(titleFont: string | null | undefined): Font {
 export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
   return {
     user: {
+      id: user.id,
       username: user.username ?? "",
+      email: user.email ?? "",
       title: user.title ?? undefined,
       image: user.image ?? undefined,
       occupation: user.occupation ?? undefined,

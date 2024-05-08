@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { PhoneMockup } from "@/components/phone-mockup";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { EyeIcon, XIcon } from "lucide-react";
@@ -20,7 +20,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
     setBiolink,
     open,
     setOpen,
-  } = useBiolinkPreview();
+  } = useBiolinkPreviewStore();
 
   React.useEffect(() => {
     if (biolinkGlobalState) {
@@ -38,7 +38,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
         <div className="absolute right-4 top-4">
           <SharePopover />
         </div>
-        <PhoneMockup biolink={biolinkPreview} />
+        <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
       </div>
     );
   }
@@ -67,7 +67,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
           <XIcon className="size-4" />
           Close
         </button>
-        <PhoneMockup biolink={biolinkPreview} />
+        <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
       </div>
     </>
   );

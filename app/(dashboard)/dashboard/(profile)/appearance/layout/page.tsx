@@ -1,11 +1,11 @@
 import { LayoutForm } from "../../_components/layout-form";
 import { PageWithPreview } from "@/components/dashboard/page";
-import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { SecondaryNav } from "@/components/dashboard/secondary-nav";
 import { biolinkCustomizationLinks } from "@/lib/constants/nav-links";
 
 export default async function page() {
-  const biolink = await getBiolinkServer();
+  const biolink = await getCachedBiolink();
 
   if (!biolink) return null;
 

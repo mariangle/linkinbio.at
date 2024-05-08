@@ -1,11 +1,11 @@
-import { getBiolinkServer } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { WebsiteLinkForm } from "./website-link-form";
 import { NewLinkForm } from "./new-link-form";
 import { PlatformLinkForm } from "./platform-link-form";
 import { PageWithPreview } from "@/components/dashboard/page";
 
 export default async function Links() {
-  const biolink = await getBiolinkServer();
+  const biolink = await getCachedBiolink();
 
   if (!biolink) return null;
 

@@ -10,7 +10,7 @@ interface BiolinkPreview {
   setOpen: (open: boolean) => void;
 }
 
-export const useBiolinkPreview = create<BiolinkPreview>((set) => ({
+export const useBiolinkPreviewStore = create<BiolinkPreview>((set) => ({
   loading: true,
   open: false,
   setBiolink: (newBiolink) => {

@@ -6,7 +6,7 @@ import { Image as ImageIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useFormSubmit } from "@/hooks/use-form-submit";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/color-picker";
@@ -41,7 +41,7 @@ export function BackgroundForm({
   const [tab, setTab] = React.useState<Tab>(
     data.gradientStartColor && data.gradientEndColor ? "gradient" : "solid",
   );
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<BackgroundFormValues>({
     resolver: zodResolver(BackgroundFormSchema),

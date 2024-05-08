@@ -1,9 +1,10 @@
+import { cache } from "react";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { constructBiolink } from "@/lib/utils/construct-biolink";
 import { ExtendedUser } from "@/lib/utils/construct-biolink";
 
-export async function getBiolinkServer() {
+export async function getBiolink() {
   const session = await auth();
 
   if (!session?.user?.id) return null;
@@ -67,3 +68,6 @@ export async function getBiolinkByUsername(username: string) {
     return null;
   }
 }
+
+export const getCachedBiolinkByUsername = cache(getBiolinkByUsername);
+export const getCachedBiolink = cache(getBiolink);

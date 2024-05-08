@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { fonts } from "@/lib/constants/fonts";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Font } from "@/lib/types/enums";
 import {
   ProfileOptionsFormSchema,
@@ -52,7 +52,7 @@ export function TitleForm({
   };
   modified?: boolean;
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<ProfileOptionsFormValues>({
     resolver: zodResolver(ProfileOptionsFormSchema),

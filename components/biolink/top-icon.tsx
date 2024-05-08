@@ -1,11 +1,12 @@
+"use client";
+
 import React from "react";
 import type { PlatformLink, TopIconOptions } from "@/lib/types";
 import { Social, platforms } from "@/lib/constants/platforms";
 import { cn, getDomain } from "@/lib/utils";
 import { TopIconStyle } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
-import Link from "next/link";
-
+import { useTracking } from "@/hooks/use-tracking";
 import { getIconByProvider } from "@/lib/utils/icon";
 
 export function TopIcon({
@@ -14,7 +15,7 @@ export function TopIcon({
   whiteText = true,
   size,
 }: {
-  item: Pick<PlatformLink, "isTopIcon" | "provider" | "url" | "title">;
+  item: Pick<PlatformLink, "isTopIcon" | "provider" | "url" | "id" | "title">;
   options: TopIconOptions;
   className?: string;
   whiteText?: boolean;
@@ -85,11 +86,12 @@ export function TopIcon({
       return (
         <TopIconLink
           social={{
+            id: item.id,
             name: socialLink?.name || item.title,
             url: item.url,
           }}
         >
-          <DisplayIcon // TODO: find icon by id
+          <DisplayIcon
             style={{
               filter,
               color,
@@ -107,6 +109,7 @@ export function TopIcon({
     return (
       <TopIconLink
         social={{
+          id: item.id,
           name: socialLink?.name || item.title,
           url: item.url,
         }}
@@ -243,20 +246,26 @@ export function TopIconLink({
 }: {
   children: React.ReactNode;
   social: {
+    id?: string;
     url: string;
     name: string;
   };
 }) {
+  const { trackClick } = useTracking();
+
+  const redirect = async () => {
+    window.open(social.url, "_blank");
+
+    if (!social.id) return;
+
+    await trackClick(social.id, true);
+  };
+
   return (
     <Tooltip content={social.name} smallWidth>
-      <Link
-        target="_blank"
-        rel="noopener noreferrer"
-        href={social.url}
-        className="group relative block w-fit"
-      >
+      <button onClick={redirect} className="group relative block w-fit">
         {children}
-      </Link>
+      </button>
     </Tooltip>
   );
 }

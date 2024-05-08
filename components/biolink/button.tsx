@@ -1,11 +1,11 @@
-import Link from "next/link";
+"use client";
+
 import { hexToRgb, cn } from "@/lib/utils";
 
-import type { WebsiteLink, PlatformLink } from "@/lib/types";
-import type { ButtonOptions } from "@/lib/types";
-
+import type { WebsiteLink, PlatformLink, ButtonOptions } from "@/lib/types";
 import { getIconById, getIconByProvider } from "@/lib/utils/icon";
 import { getPlatformByProvider } from "@/lib/utils/platform";
+import { useTracking } from "@/hooks/use-tracking";
 
 function getIcon(item: PlatformLink | WebsiteLink) {
   if ("provider" in item) {
@@ -13,12 +13,14 @@ function getIcon(item: PlatformLink | WebsiteLink) {
       icon: getIconByProvider(item.provider),
       platformLink: getPlatformByProvider(item.provider),
       display: !item.isTopIcon,
+      isPlatform: true,
     };
   } else {
     return {
       icon: getIconById(item.iconId),
       platformLink: null,
       display: true,
+      isPlatform: false,
     };
   }
 }
@@ -36,7 +38,10 @@ export function Button({
     icon: DisplayIcon,
     platformLink: socialLink,
     display,
+    isPlatform,
   } = getIcon(item);
+
+  const { trackClick } = useTracking();
 
   if (item.archived) return null;
 
@@ -90,11 +95,17 @@ export function Button({
       })`
     : undefined;
 
+  const redirect = async () => {
+    window.open(item.url, "_blank");
+
+    if (!item.id) return;
+
+    await trackClick(item.id, isPlatform);
+  };
+
   return (
-    <Link
-      target="_blank"
-      rel="noopener noreferrer"
-      href={item.url}
+    <button
+      onClick={redirect}
       className={cn(
         "flex w-full items-center justify-center gap-3 whitespace-nowrap px-4 py-3 font-medium transition-all duration-200 hover:brightness-90",
         size === "sm" && "text-sm",
@@ -119,6 +130,6 @@ export function Button({
         />
       )}
       {!config.text.hidden && <span>{item.title}</span>}
-    </Link>
+    </button>
   );
 }

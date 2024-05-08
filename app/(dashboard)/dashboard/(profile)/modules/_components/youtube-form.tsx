@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Switch } from "@/components/ui/switch";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { YoutubeFormSchema, YoutubeFormValues } from "@/lib/validations";
@@ -27,7 +27,7 @@ export function YoutubeForm({
     enabled: boolean;
   };
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
 
   const form = useForm<YoutubeFormValues>({

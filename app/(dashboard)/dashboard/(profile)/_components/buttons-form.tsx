@@ -5,7 +5,7 @@ import React from "react";
 import { useFormSubmit } from "@/hooks/use-form-submit";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormReturn } from "react-hook-form";
-import { useBiolinkPreview } from "@/hooks/use-biolink-preview";
+import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import {
   FormHeading,
   FormContainer,
@@ -44,7 +44,7 @@ export function ButtonsForm({
   };
   modified?: boolean;
 }) {
-  const { biolink, setBiolink } = useBiolinkPreview();
+  const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<ButtonsFormValues>({
     resolver: zodResolver(ButtonsFormSchema),
