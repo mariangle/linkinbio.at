@@ -84,6 +84,7 @@ const dummyUser: Biolink = {
       shadow: false,
       style: TopIconStyle.SocialBackgroundWhiteColor,
       customized: true,
+      color: "#FFFFFF",
     },
     effects: {
       customized: true,

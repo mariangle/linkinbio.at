@@ -139,65 +139,65 @@ export const InfiniteMovingIcons = ({
         )}
       >
         <TopIcon
-          whiteText
           options={{
             shadow: true,
             style: TopIconStyle.NoBackgroundSocialColor,
+            color: "#FFFFFFF",
           }}
           item={spotifyLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: true,
             style: TopIconStyle.SocialBackgroundWhiteColor,
+            color: "#FFFFFFF",
           }}
           item={discordLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: false,
             style: TopIconStyle.SocialBackgroundWhiteColor,
+            color: "#FFFFFFF",
           }}
           item={instagramLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: true,
+            color: "#FFFFFFF",
           }}
           item={websiteLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: false,
             style: TopIconStyle.WhiteBackgroundSocialColor,
+            color: "#FFFFFFF",
           }}
           item={twitchLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: false,
             style: TopIconStyle.WhiteBackgroundBlackColor,
+            color: "#FFFFFFF",
           }}
           item={youtubeLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: true,
             style: TopIconStyle.BlackBackgroundWhiteColor,
+            color: "#FFFFFFF",
           }}
           item={tiktokLink}
         />
         <TopIcon
-          whiteText
           options={{
             shadow: true,
             style: TopIconStyle.WhiteBackgroundSocialColor,
+            color: "#FFFFFFF",
           }}
           item={twitterLink}
         />

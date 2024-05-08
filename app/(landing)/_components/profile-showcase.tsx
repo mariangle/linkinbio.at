@@ -48,9 +48,7 @@ export function ProfileCustomizer() {
           }}
           user={{ title: "Maria", username: "maria" }}
         />
-        {!profileOptions.hideUsername && (
-          <Username username="maria" whiteText />
-        )}
+        {!profileOptions.hideUsername && <Username username="maria" />}
       </div>
       <div className="mt-8">
         <div className="flex items-center gap-2">
