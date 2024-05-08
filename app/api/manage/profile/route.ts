@@ -14,13 +14,14 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { titleColor, titleFont, invertTextColor, hideUsername } =
+  const { titleColor, titleFont, textColor, textFont, hideUsername } =
     await req.json();
 
   if (
     titleColor === undefined ||
     titleFont === undefined ||
-    invertTextColor === undefined ||
+    textColor === undefined ||
+    textFont === undefined ||
     hideUsername === undefined
   ) {
     return NextResponse.json({
@@ -38,7 +39,8 @@ export async function PATCH(req: Request) {
     data: {
       titleColor,
       titleFont,
-      invertTextColor,
+      textColor,
+      textFont,
       hideUsername,
     },
   });
@@ -63,13 +65,14 @@ export async function POST(req: Request) {
     });
   }
 
-  const { titleColor, titleFont, invertTextColor, hideUsername } =
+  const { titleColor, titleFont, textColor, textFont, hideUsername } =
     await req.json();
 
   if (
     titleColor === undefined ||
     titleFont === undefined ||
-    invertTextColor === undefined ||
+    textColor === undefined ||
+    textFont === undefined ||
     hideUsername === undefined
   ) {
     return NextResponse.json({
@@ -85,7 +88,8 @@ export async function POST(req: Request) {
       userId: session.user.id,
       titleColor,
       titleFont,
-      invertTextColor,
+      textColor,
+      textFont,
       hideUsername,
     },
   });

@@ -129,7 +129,7 @@ model UserView {
   timestamp DateTime @default(now())
   referrer  String?
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_views")
 }
@@ -140,7 +140,7 @@ model WebsiteClick {
   timestamp DateTime @default(now())
   ipAddress String?  @map("ip_address")
 
-  websiteLink WebsiteLink @relation(fields: [linkId], references: [id])
+  websiteLink WebsiteLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
 
   @@map("website_clicks")
 }
@@ -151,7 +151,7 @@ model PlatformClick {
   timestamp DateTime @default(now())
   ipAddress String?  @map("ip_address")
 
-  platformLink PlatformLink @relation(fields: [linkId], references: [id])
+  platformLink PlatformLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
 
   @@map("platform_clicks")
 }
@@ -197,14 +197,14 @@ model Button {
 }
 
 model Profile {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId          String   @unique @map("user_id") @db.ObjectId
-  titleFont       String?  @map("title_font")
-  titleColor      String?  @map("title_color")
-  invertTextColor Boolean? @map("invert_text_color")
-  hideUsername    Boolean? @map("hide_username")
-  textFont        String?  @map("text_font")
-  layout          Layout?  @default(Standard)
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @unique @map("user_id") @db.ObjectId
+  titleFont    String?  @map("title_font")
+  titleColor   String?  @map("title_color")
+  textColor    String?  @map("text_color")
+  textFont     String?  @map("text_font")
+  hideUsername Boolean? @map("hide_username")
+  layout       Layout?  @default(Standard)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -225,6 +225,7 @@ model TopIcon {
   userId String        @unique @map("user_id") @db.ObjectId
   shadow Boolean?
   style  TopIconStyle?
+  color  String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

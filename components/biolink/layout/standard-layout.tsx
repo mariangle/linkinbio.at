@@ -23,7 +23,6 @@ export function StandardLayout({
   modules,
   links,
   preview,
-  backgroundDark,
 }: LayoutProps) {
   return (
     <BackgroundContainer
@@ -43,33 +42,39 @@ export function StandardLayout({
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
-            whiteText={backgroundDark}
             user={user}
           />
           {!config.profile.hideUsername && user.title && (
-            <Username whiteText={backgroundDark} username={user.username} />
+            <Username
+              username={user.username}
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
+            />
           )}
           {user.bio && (
             <Bio
               bio={user.bio}
-              whiteText={backgroundDark}
               className="text-center"
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
             />
           )}
           <Details
             occupation={user.occupation}
             location={user.location}
-            whiteText={backgroundDark}
+            options={{
+              font: config.profile.text.font,
+              color: config.profile.text.color,
+            }}
           />
         </div>
         <div className="mt-6 flex gap-4">
           {links.platform.map((link, index) => (
-            <TopIcon
-              whiteText={backgroundDark}
-              options={config.topIcon}
-              key={index}
-              item={link}
-            />
+            <TopIcon options={config.topIcon} key={index} item={link} />
           ))}
         </div>
         <div className="my-8 w-full space-y-4">
@@ -86,7 +91,7 @@ export function StandardLayout({
           <YoutubeVideo options={modules?.youtube} />
         </div>
       </ContentContainer>
-      <Footer textDark={!backgroundDark} />
+      <Footer color={config.profile.text.color} />
     </BackgroundContainer>
   );
 }

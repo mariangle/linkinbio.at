@@ -25,7 +25,7 @@ export function convertToPrismaTopIconStyle(iconStyle: string) {
     case TopIconStyle.WhiteBackgroundSocialColor:
       return PrismaTopIconStyle.WhiteBackgroundSocialColor;
     default:
-      return undefined;
+      return null;
   }
 }
 

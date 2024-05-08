@@ -5,9 +5,13 @@ export interface ProfileOptions {
     font: Font;
     color: string;
   };
+  text: TextOptions;
   layout: Layout;
-  font: Font;
   hideUsername: boolean;
-  invertTextColor: boolean;
   customized?: boolean;
+}
+
+export interface TextOptions {
+  color: string;
+  font: Font;
 }

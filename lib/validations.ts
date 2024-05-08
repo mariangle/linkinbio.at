@@ -13,6 +13,7 @@ export type BackgroundFormValues = z.infer<typeof BackgroundFormSchema>;
 export const TopIconsFormSchema = z.object({
   shadow: z.boolean().default(false),
   style: z.string().optional(),
+  color: z.string().optional(),
 });
 
 export type TopIconsFormValues = z.infer<typeof TopIconsFormSchema>;
@@ -47,14 +48,15 @@ export const ProfileFormSchema = z.object({
 
 export type ProfileFormValues = z.infer<typeof ProfileFormSchema>;
 
-export const ProfileOptionsFormSchema = z.object({
+export const TypographyFormSchema = z.object({
   titleColor: z.string(),
   titleFont: z.string(),
-  invertTextColor: z.boolean().default(false),
+  textColor: z.string(),
+  textFont: z.string(),
   hideUsername: z.boolean().default(false),
 });
 
-export type ProfileOptionsFormValues = z.infer<typeof ProfileOptionsFormSchema>;
+export type TypographyFormValues = z.infer<typeof TypographyFormSchema>;
 
 export const ButtonsFormSchema = z.object({
   shadowSolid: z.boolean(),

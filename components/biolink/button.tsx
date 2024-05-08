@@ -7,7 +7,7 @@ import { getIconById, getIconByProvider } from "@/lib/utils/icon";
 import { getPlatformByProvider } from "@/lib/utils/platform";
 import { useTracking } from "@/hooks/use-tracking";
 
-function getIcon(item: PlatformLink | WebsiteLink) {
+function getButtonProps(item: PlatformLink | WebsiteLink) {
   if ("provider" in item) {
     return {
       icon: getIconByProvider(item.provider),
@@ -39,7 +39,7 @@ export function Button({
     platformLink: socialLink,
     display,
     isPlatform,
-  } = getIcon(item);
+  } = getButtonProps(item);
 
   const { trackClick } = useTracking();
 

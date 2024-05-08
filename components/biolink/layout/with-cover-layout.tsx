@@ -22,7 +22,6 @@ export function WithCoverLayout({
   modules,
   links,
   preview,
-  backgroundDark,
 }: LayoutProps) {
   return (
     <BackgroundContainer
@@ -42,7 +41,6 @@ export function WithCoverLayout({
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
-            whiteText={backgroundDark}
             options={{
               effect: config.effects.title,
               font: config.profile.title.font,
@@ -51,29 +49,36 @@ export function WithCoverLayout({
             user={user}
           />
           {!config.profile.hideUsername && user.title && (
-            <Username whiteText={backgroundDark} username={user.username} />
+            <Username
+              username={user.username}
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
+            />
           )}
           {user.bio && (
             <Bio
               bio={user.bio}
-              whiteText={backgroundDark}
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
               className="text-center"
             />
           )}
           <Details
             occupation={user.occupation}
             location={user.location}
-            whiteText={backgroundDark}
+            options={{
+              font: config.profile.text.font,
+              color: config.profile.text.color,
+            }}
           />
         </div>
         <div className="mt-6 flex gap-4">
           {links.platform.map((link, index) => (
-            <TopIcon
-              whiteText={backgroundDark}
-              options={config.topIcon}
-              key={index}
-              item={link}
-            />
+            <TopIcon options={config.topIcon} key={index} item={link} />
           ))}
         </div>
         <div className="my-8 w-full space-y-4">
@@ -88,7 +93,7 @@ export function WithCoverLayout({
           <Spotify options={modules?.spotify} />
         </div>
       </ContentContainer>
-      <Footer textDark={!backgroundDark} />
+      <Footer color={config.profile.text.color} />
     </BackgroundContainer>
   );
 }

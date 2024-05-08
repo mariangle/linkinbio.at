@@ -53,10 +53,11 @@ View more at: https://linkinbio.at/features
 - [ ] Payment (Stripe) / Premium
 - [x] Gradient background colors
 - [x] Add change shadow color
-- [ ] Change text font and add more fonts
+- [x] Change text color and font
+- [x] Customize top icons color
+- [ ] Add more fonts
 - [ ] Add new layout and update glassmorpism layout
 - [x] Handle social media vs website links better
-- [ ] Refactoring and cleanup code
 - [x] Improved dashboard styling
 
 ## License

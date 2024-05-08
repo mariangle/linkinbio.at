@@ -1,21 +1,20 @@
 import { cn } from "@/lib/utils";
+import { TextOptions } from "@/lib/types";
+import { getFontDisplay } from "@/lib/utils/get-font";
 
 export function Bio({
   bio,
   className,
-  whiteText,
+  options,
 }: {
   bio: string;
   className?: string;
-  whiteText?: boolean;
+  options?: TextOptions;
 }) {
   return (
     <p
-      className={cn(
-        "mt-2 text-base",
-        whiteText ? "text-white" : "text-black",
-        className,
-      )}
+      className={cn("mt-2 text-base", className, getFontDisplay(options?.font))}
+      style={{ color: options?.color }}
     >
       {bio}
     </p>

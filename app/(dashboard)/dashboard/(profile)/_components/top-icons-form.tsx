@@ -33,6 +33,8 @@ import { TopIconStyle } from "@/lib/types";
 import { topIconStyles } from "@/lib/constants/top-icon-styles";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { TopIconsFormSchema, TopIconsFormValues } from "@/lib/validations";
+import { Label } from "@/components/ui/label";
+import { ColorPicker } from "@/components/color-picker";
 
 export function TopIconForm({
   data,
@@ -41,6 +43,7 @@ export function TopIconForm({
   data: {
     shadow: boolean;
     style?: string;
+    color: string;
   };
   modified?: boolean;
 }) {
@@ -51,6 +54,7 @@ export function TopIconForm({
     defaultValues: {
       shadow: data.shadow,
       style: data.style,
+      color: data.color,
     },
   });
 
@@ -64,6 +68,7 @@ export function TopIconForm({
             topIcon: {
               shadow: value.shadow ?? data.shadow,
               style: value.style as TopIconStyle | undefined,
+              color: value.color ?? data.color,
             },
           },
         });
@@ -112,6 +117,15 @@ export function TopIconForm({
                 )}
               />
             </FormSwitch>
+            <div className="space-y-2">
+              <Label>Icon Color</Label>
+              <ColorPicker
+                color={form.getValues("color")}
+                setColor={(color) => {
+                  form.setValue("color", color);
+                }}
+              />
+            </div>
             <FormField
               control={form.control}
               name="style"

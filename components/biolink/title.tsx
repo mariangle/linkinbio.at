@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { fonts } from "@/lib/constants/fonts";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
 import { Font, TitleEffect, User } from "@/lib/types";
+import { getFontDisplay } from "@/lib/utils/get-font";
 
 interface TitleOptions {
   effect?: TitleEffect;
@@ -14,25 +14,20 @@ interface TitleOptions {
 export function Title({
   options,
   className,
-  whiteText,
   user,
 }: {
   options: TitleOptions;
   className?: string;
-  whiteText?: boolean;
   user: Pick<User, "title" | "username">;
 }) {
-  const font = fonts.find((f) => f.value === options.font)?.display;
-
   if (options.effect === TitleEffect.Typewriter) {
     return (
       <div className="relative">
         <div
           className={cn(
             "text-xl font-semibold",
-            !options?.color && whiteText ? "text-white" : "text-black",
             className,
-            font ?? "inter",
+            getFontDisplay(options?.font),
           )}
           style={{
             color: options?.color ? options.color : undefined,
@@ -71,12 +66,12 @@ export function Title({
       <h2
         className={cn(
           "relative w-fit text-xl font-semibold",
-          font ?? "inter",
-          !options?.color && whiteText ? "text-white" : "text-black",
           className,
+          getFontDisplay(options?.font),
         )}
         style={{
-          color: options?.color ? options.color : undefined,
+          color: options.color,
+          font: options.font,
         }}
       >
         {user.title || `@${user.username}`}

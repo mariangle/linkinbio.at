@@ -1,4 +1,4 @@
-import { Biolink, ContentType, Font } from "@/lib/types";
+import { Biolink, ContentType } from "@/lib/types";
 import {
   convertToTopIconStyle,
   convertToWeatherEffect,
@@ -10,7 +10,7 @@ import {
   constructLinkFromWebsite,
   constructLinkFromPlatform,
 } from "@/lib/utils/construct-link";
-import { fonts } from "@/lib/constants/fonts";
+import { getFont } from "@/lib/utils/get-font";
 
 import type {
   User,
@@ -39,10 +39,6 @@ export interface ExtendedUser extends User {
   youtube?: Youtube;
 }
 
-function getFont(titleFont: string | null | undefined): Font {
-  return fonts.find((f) => f.value === titleFont)?.value ?? Font.Inter;
-}
-
 export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
   return {
     user: {
@@ -63,10 +59,12 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
           color: user.profile?.titleColor ?? "#FFFFFF",
           font: getFont(user.profile?.titleFont),
         },
-        font: Font.Inter,
+        text: {
+          font: getFont(user.profile?.textFont),
+          color: user.profile?.textColor ?? "#FFFFFF",
+        },
         layout: convertToLayout(user.profile?.layout),
         hideUsername: user.profile?.hideUsername ?? false,
-        invertTextColor: user.profile?.invertTextColor ?? false,
       },
       button: {
         shadow: {
@@ -109,6 +107,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       topIcon: {
         shadow: user.topIcon?.shadow ?? false,
         style: convertToTopIconStyle(user.topIcon?.style),
+        color: user.topIcon?.color ?? "#FFFFFF",
         customized: user.topIcon ? true : false,
       },
       effects: {

@@ -1,5 +1,5 @@
 import { TopIconForm } from "../_components/top-icons-form";
-import { TitleForm } from "../_components/profile-form";
+import { TypographyForm } from "../_components/typography-form";
 import { BackgroundForm } from "../_components/background-form";
 import { ButtonsForm } from "../_components/buttons-form";
 import { getCachedBiolink } from "@/lib/utils/get-biolink";
@@ -19,14 +19,16 @@ export default async function Customization() {
         data={{
           shadow: biolink.config?.topIcon?.shadow,
           style: biolink.config?.topIcon?.style,
+          color: biolink.config?.topIcon?.color,
         }}
         modified={biolink.config?.topIcon?.customized}
       />
-      <TitleForm
+      <TypographyForm
         data={{
           titleColor: biolink.config?.profile?.title?.color,
           titleFont: biolink.config?.profile?.title?.font,
-          invertTextColor: biolink.config?.profile.invertTextColor,
+          textFont: biolink.config?.profile?.text.font,
+          textColor: biolink.config?.profile.text.color,
           hideUsername: biolink.config?.profile.hideUsername,
         }}
         modified={biolink.config?.profile?.customized}

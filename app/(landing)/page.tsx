@@ -34,10 +34,12 @@ const dummyUser: Biolink = {
         font: Font.Roboto,
         color: "#FFFFFF",
       },
-      font: Font.Inter,
+      text: {
+        color: "#FFFFFF",
+        font: Font.Roboto,
+      },
       layout: Layout.Standard,
       hideUsername: false,
-      invertTextColor: false,
     },
     button: {
       shadow: {

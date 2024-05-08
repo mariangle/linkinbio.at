@@ -12,13 +12,11 @@ import { getIconByProvider } from "@/lib/utils/icon";
 export function TopIcon({
   item,
   options,
-  whiteText = true,
   size,
 }: {
   item: Pick<PlatformLink, "isTopIcon" | "provider" | "url" | "id" | "title">;
   options: TopIconOptions;
   className?: string;
-  whiteText?: boolean;
   size?: "sm";
 }) {
   if (!item?.isTopIcon) return null;
@@ -26,10 +24,6 @@ export function TopIcon({
   const socialLink = platforms.find((link) =>
     item.url.includes(getDomain(link.url)),
   );
-
-  const blackColor = "#000000";
-  const whiteColor = "#FFFFFF";
-  const defaultColor = whiteText ? whiteColor : blackColor;
 
   const getDropShadow = (color: string) => {
     return options.shadow ? `drop-shadow(0 0 0.35rem ${color})` : undefined;
@@ -47,6 +41,9 @@ export function TopIcon({
   const getLinearGradient = (colors: string[]) => {
     return `linear-gradient(to right, ${colors.join(", ")})`;
   };
+
+  const blackColor = "#000000";
+  const whiteColor = "#FFFFFF";
 
   function TopIconDisplay({
     shadowOptions,
@@ -124,7 +121,7 @@ export function TopIcon({
             background,
           }}
         >
-          <DisplayIcon // TODO: find icon by id
+          <DisplayIcon
             style={{
               color,
             }}
@@ -215,11 +212,11 @@ export function TopIcon({
     return (
       <TopIconDisplay
         shadowOptions={{
-          color: defaultColor,
+          color: options.color,
           colorOnly: false,
         }}
         iconOptions={{
-          color: defaultColor,
+          color: options.color,
           colorOnly: false,
         }}
       />
@@ -229,11 +226,11 @@ export function TopIcon({
   return (
     <TopIconDisplay
       shadowOptions={{
-        color: defaultColor,
+        color: options.color,
         colorOnly: true,
       }}
       iconOptions={{
-        color: defaultColor,
+        color: options.color,
         colorOnly: true,
       }}
     />

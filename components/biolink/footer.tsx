@@ -3,10 +3,10 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function Footer({
-  textDark,
+  color = "#FFFFFF",
   className,
 }: {
-  textDark: boolean;
+  color?: string;
   className?: string;
 }) {
   return (
@@ -14,9 +14,7 @@ export function Footer({
       href="/"
       className={cn("flex flex-col items-center gap-2", className)}
     >
-      <div
-        className={cn("text-xs", !textDark ? "text-white/70" : "text-black/50")}
-      >
+      <div className="text-xs" style={{ color }}>
         Made with linkinbio.at
       </div>
     </Link>

@@ -12,7 +12,6 @@ import { StandardLayout } from "@/components/biolink/layout/standard-layout";
 import { WithCoverLayout } from "@/components/biolink/layout/with-cover-layout";
 import { ProfessionalLayout } from "./professional-layout";
 import { WeatherEffect } from "@/components/biolink/effects/weather-effect";
-import { determineBrightness } from "@/lib/utils/determine-brightness";
 
 export interface LayoutProps {
   user: User;
@@ -20,7 +19,6 @@ export interface LayoutProps {
   links: LinkOptions;
   modules?: Modules;
   preview?: boolean;
-  backgroundDark?: boolean;
 }
 
 export function Layout({
@@ -32,10 +30,6 @@ export function Layout({
   preview?: boolean;
   layout?: LayoutEnum;
 }) {
-  const backgroundDark = biolink.config.profile.invertTextColor
-    ? !determineBrightness(biolink.config.background.color)
-    : determineBrightness(biolink.config.background.color);
-
   switch (layout ?? biolink.config.profile.layout) {
     case LayoutEnum.Glassmorphism:
       return (
@@ -59,7 +53,6 @@ export function Layout({
             links={biolink.links}
             config={biolink.config}
             preview={preview}
-            backgroundDark={backgroundDark}
           />
         </LayoutWrapper>
       );
@@ -73,7 +66,6 @@ export function Layout({
             links={biolink.links}
             config={biolink.config}
             preview={preview}
-            backgroundDark={backgroundDark}
           />
         </LayoutWrapper>
       );
@@ -87,7 +79,6 @@ export function Layout({
             links={biolink.links}
             config={biolink.config}
             preview={preview}
-            backgroundDark={backgroundDark}
           />
         </LayoutWrapper>
       );

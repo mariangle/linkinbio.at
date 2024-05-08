@@ -46,13 +46,12 @@ export function GlassmorphismLayout({
                 font: config.profile.title.font,
                 color: config.profile.title.color,
               }}
-              whiteText={true}
               user={user}
             />
             {!config.profile.hideUsername && user.title && (
-              <Username whiteText={true} username={user.username} />
+              <Username username={user.username} />
             )}
-            {user.bio && <Bio bio={user.bio} whiteText={true} />}
+            {user.bio && <Bio bio={user.bio} />}
             <Details occupation={user.occupation} location={user.location} />
           </div>
           <div className="mt-4 flex gap-4 rounded-[2.4rem] border border-white/5 bg-white/5 px-3 py-2">
@@ -70,7 +69,7 @@ export function GlassmorphismLayout({
           </div>
         </ContentContainer>
       </div>
-      <Footer textDark={false} />
+      <Footer />
     </BackgroundContainer>
   );
 }

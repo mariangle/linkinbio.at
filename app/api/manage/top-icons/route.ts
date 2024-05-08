@@ -15,24 +15,25 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { shadow, style } = await req.json();
+  const { shadow, style, color } = await req.json();
 
   const prismaStyle = convertToPrismaTopIconStyle(style);
 
-  const background = await db.topIcon.update({
+  const topIcon = await db.topIcon.update({
     where: {
       userId: session.user.id,
     },
     data: {
       shadow,
       style: prismaStyle,
+      color,
     },
   });
 
   return NextResponse.json({
     status: 200,
     ok: true,
-    data: background,
+    data: topIcon,
     message: "Top icons updated successfully",
   });
 }
@@ -49,22 +50,23 @@ export async function POST(req: Request) {
     });
   }
 
-  const { shadow, style } = await req.json();
+  const { shadow, style, color } = await req.json();
 
   const prismaStyle = convertToPrismaTopIconStyle(style);
 
-  const background = await db.topIcon.create({
+  const topIcon = await db.topIcon.create({
     data: {
       userId: session.user.id,
       shadow,
       style: prismaStyle,
+      color,
     },
   });
 
   return NextResponse.json({
     status: 200,
     ok: true,
-    data: background,
+    data: topIcon,
     message: "Top icons updated successfully",
   });
 }

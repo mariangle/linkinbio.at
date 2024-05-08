@@ -20,7 +20,6 @@ export function ProfessionalLayout({
   links,
   modules,
   preview,
-  backgroundDark,
 }: LayoutProps) {
   return (
     <BackgroundContainer
@@ -40,12 +39,7 @@ export function ProfessionalLayout({
             <ProfilePicture className="mb-4" src={user.image} />
             <div className="flex gap-4">
               {links.platform.map((link, index) => (
-                <TopIcon
-                  options={config.topIcon}
-                  key={index}
-                  item={link}
-                  whiteText={backgroundDark}
-                />
+                <TopIcon options={config.topIcon} key={index} item={link} />
               ))}
             </div>
           </div>
@@ -55,17 +49,33 @@ export function ProfessionalLayout({
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
-            whiteText={backgroundDark}
             user={user}
           />
           {!config.profile.hideUsername && user.title && (
-            <Username whiteText={backgroundDark} username={user.username} />
+            <Username
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
+              username={user.username}
+            />
           )}
-          {user.bio && <Bio bio={user.bio} whiteText={backgroundDark} />}
+          {user.bio && (
+            <Bio
+              bio={user.bio}
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
+            />
+          )}
           <Details
             occupation={user.occupation}
             location={user.location}
-            whiteText={backgroundDark}
+            options={{
+              font: config.profile.text.font,
+              color: config.profile.text.color,
+            }}
           />
         </div>
         <div className="mt-8 w-full space-y-4">
@@ -77,7 +87,7 @@ export function ProfessionalLayout({
           ))}
         </div>
       </ContentContainer>
-      <Footer textDark={!backgroundDark} />
+      <Footer color={config.profile.text.color} />
     </BackgroundContainer>
   );
 }
