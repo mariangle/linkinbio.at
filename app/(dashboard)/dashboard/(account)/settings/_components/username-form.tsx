@@ -12,6 +12,7 @@ import {
   FormContainer,
   FormFooter,
   FormContent,
+  FormActions,
 } from "@/components/dashboard/form";
 import {
   Form,
@@ -46,6 +47,10 @@ export function UsernameForm({ username }: { username?: string }) {
     await submit();
   }
 
+  function cancel() {
+    form.reset();
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -65,7 +70,7 @@ export function UsernameForm({ username }: { username?: string }) {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Your username" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
@@ -76,9 +81,7 @@ export function UsernameForm({ username }: { username?: string }) {
             />
           </FormContent>
           <FormFooter>
-            <Button type="submit" disabled={!dirty} loading={loading}>
-              Save
-            </Button>
+            <FormActions cancel={cancel} loading={loading} dirty={dirty} />
           </FormFooter>
         </FormContainer>
       </form>

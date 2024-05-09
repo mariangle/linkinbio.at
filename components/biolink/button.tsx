@@ -118,6 +118,7 @@ export function Button({
         backgroundColor: backgroundColor,
         boxShadow,
         backdropFilter,
+        WebkitBackdropFilter: backdropFilter,
       }}
     >
       {!config.icon.hidden && (

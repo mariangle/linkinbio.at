@@ -29,10 +29,6 @@ export const titleEffects = [
     label: "Sparkles",
   },
   {
-    value: TitleEffect.Stars,
-    label: "Stars",
-  },
-  {
     value: TitleEffect.CherryBlossoms,
     label: "Cherry Blossoms",
   },

@@ -46,12 +46,15 @@ export function ColorPicker({
       <PopoverTrigger
         className={cn(
           "border-glass flex h-9 w-full items-center gap-2 rounded-lg border bg-input/50 p-2",
-          small && "w-9 justify-center border-none bg-transparent p-0",
+          small && "w-9 justify-center p-0",
           className,
         )}
       >
         <div
-          className="size-4 rounded-md border"
+          className={cn(
+            "size-4 rounded-md border",
+            small && "size-5 rounded-full",
+          )}
           style={{
             backgroundColor: isValidHexColor(colorValue || "")
               ? colorValue

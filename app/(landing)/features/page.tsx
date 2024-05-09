@@ -8,6 +8,7 @@ import { TopIconShowcase } from "../_components/top-icons-showcase";
 import { WeatherEffectCustomizer } from "../_components/weather-effect-customizer";
 import { DashboardShowcase } from "../_components/dashboard-showcase";
 import { Search, Heart, Video, Layout, Moon, Layers } from "lucide-react";
+import { EnableDarkTheme } from "../_components/enable-dark-theme";
 
 const features = [
   {
@@ -50,6 +51,7 @@ const features = [
 export default function Page() {
   return (
     <IndustrialBackground>
+      <EnableDarkTheme />
       <Container variant="landing" page>
         <Heading className="bg-gradient-to-b from-indigo-100 to-white bg-clip-text text-center text-transparent">
           Features

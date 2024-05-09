@@ -7,6 +7,7 @@ import { Username } from "@/components/biolink/username";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Font, TitleEffect } from "@/lib/types";
 import { ColorPicker } from "@/components/color-picker";
+import { FontPicker } from "@/components/font-picker";
 import {
   ShowcaseContainer,
   ShowcaseHeader,
@@ -58,27 +59,18 @@ export function ProfileCustomizer() {
             setColor={(color) => {
               setProfileOptions({ ...profileOptions, color });
             }}
+            className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white  "
           />
-          <Select
-            onValueChange={(value) => {
+          <FontPicker
+            font={profileOptions.font}
+            setFont={(font) => {
               setProfileOptions({
                 ...profileOptions,
-                font: value as Font,
+                font,
               });
             }}
-            defaultValue={profileOptions.font}
-          >
-            <SelectTrigger className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white">
-              <SelectValue placeholder="Select a top icon style" />
-            </SelectTrigger>
-            <SelectContent>
-              {fonts.map((item, index) => (
-                <SelectItem key={index} value={item.value}>
-                  {item.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white  "
+          />
         </div>
         <div className="my-4 flex items-center justify-between">
           <div className="text-xs text-white">Hide Username</div>

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/color-picker";
+import { FontPicker } from "@/components/font-picker";
 import {
   Select,
   SelectContent,
@@ -111,77 +112,53 @@ export function TypographyForm({
           <FormContent>
             <FormHeading>Typography</FormHeading>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="flex items-center gap-2">
-                <div className="space-y-2">
-                  <Label>Title Color</Label>
-                  <ColorPicker
-                    color={form.getValues("titleColor")}
-                    setColor={(color) => {
-                      form.setValue("titleColor", color);
-                    }}
-                  />
+              <div>
+                <div className="mb-2 font-semibold">Title</div>
+                <div className="flex items-end gap-2">
+                  <div className="space-y-2">
+                    <FormLabel>Color</FormLabel>
+                    <ColorPicker
+                      color={form.getValues("titleColor")}
+                      setColor={(color) => {
+                        form.setValue("titleColor", color);
+                      }}
+                      small
+                    />
+                  </div>
+                  <div className="w-full space-y-2">
+                    <FormLabel>Font</FormLabel>
+                    <FontPicker
+                      font={form.getValues("titleFont") as Font}
+                      setFont={(font) => {
+                        form.setValue("titleFont", font);
+                      }}
+                    />
+                  </div>
                 </div>
-                <FormField
-                  control={form.control}
-                  name="titleFont"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>Text Font</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a top icon style" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {fonts.map((item, index) => (
-                            <SelectItem key={index} value={item.value}>
-                              {item.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
               </div>
-              <div className="flex items-center gap-4">
-                <div className="space-y-2">
-                  <Label>Text Color</Label>
-                  <ColorPicker
-                    color={form.getValues("textColor")}
-                    setColor={(color) => {
-                      form.setValue("textColor", color);
-                    }}
-                  />
+              <div>
+                <div className="mb-2 font-semibold">Text</div>
+                <div className="flex items-end gap-2">
+                  <div className="space-y-2">
+                    <FormLabel>Color</FormLabel>
+                    <ColorPicker
+                      color={form.getValues("textColor")}
+                      setColor={(color) => {
+                        form.setValue("textColor", color);
+                      }}
+                      small
+                    />
+                  </div>
+                  <div className="w-full space-y-2">
+                    <FormLabel>Font</FormLabel>
+                    <FontPicker
+                      font={form.getValues("textFont") as Font}
+                      setFont={(font) => {
+                        form.setValue("textFont", font);
+                      }}
+                    />
+                  </div>
                 </div>
-                <FormField
-                  control={form.control}
-                  name="textFont"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>Text Font</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a top icon style" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {fonts.map((item, index) => (
-                            <SelectItem key={index} value={item.value}>
-                              {item.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
               </div>
             </div>
             <FormSwitch

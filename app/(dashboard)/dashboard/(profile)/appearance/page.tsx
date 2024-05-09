@@ -27,8 +27,8 @@ export default async function Customization() {
         data={{
           titleColor: biolink.config?.profile?.title?.color,
           titleFont: biolink.config?.profile?.title?.font,
-          textFont: biolink.config?.profile?.text.font,
           textColor: biolink.config?.profile.text.color,
+          textFont: biolink.config?.profile?.text.font,
           hideUsername: biolink.config?.profile.hideUsername,
         }}
         modified={biolink.config?.profile?.customized}

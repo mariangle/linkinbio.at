@@ -98,6 +98,44 @@ export function TopIconForm({
         <FormContainer>
           <FormContent>
             <FormHeading>Top Icons</FormHeading>
+            <div className="flex items-end gap-2">
+              <div className="space-y-2">
+                <Label>Color</Label>
+                <ColorPicker
+                  color={form.getValues("color")}
+                  setColor={(color) => {
+                    form.setValue("color", color);
+                  }}
+                  small
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="style"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Style</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a top icon style" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {topIconStyles.map((item, index) => (
+                          <SelectItem key={index} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                        <SelectItem value="none">None</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormSwitch
               title="Shadow"
               description="Add a drop shadow to the top icons."
@@ -117,41 +155,6 @@ export function TopIconForm({
                 )}
               />
             </FormSwitch>
-            <div className="space-y-2">
-              <Label>Icon Color</Label>
-              <ColorPicker
-                color={form.getValues("color")}
-                setColor={(color) => {
-                  form.setValue("color", color);
-                }}
-              />
-            </div>
-            <FormField
-              control={form.control}
-              name="style"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Style</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a top icon style" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {topIconStyles.map((item, index) => (
-                        <SelectItem key={index} value={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="none">None</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </FormContent>
           <FormFooter>
             <FormActions loading={loading} cancel={onCancel} dirty={dirty} />

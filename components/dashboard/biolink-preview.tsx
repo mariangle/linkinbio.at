@@ -36,7 +36,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
     return (
       <div className="border-glass relative grid h-screen w-full max-w-2xl place-content-center overflow-y-auto border-l">
         <div className="absolute right-4 top-4">
-          <SharePopover />
+          <SharePopover username={biolink.user.username} />
         </div>
         <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
       </div>

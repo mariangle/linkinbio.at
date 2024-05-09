@@ -11,6 +11,11 @@ export enum Font {
   Readex = "readex",
   Roboto = "roboto",
   DancingScript = "dancing-script",
+  Oswald = "oswald",
+  Raleway = "raleway",
+  PlayfairDisplay = "playfair-display",
+  Merienda = "merienda",
+  GreatVibes = "great-vibes",
 }
 
 export enum TitleEffect {

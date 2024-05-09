@@ -12,10 +12,8 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
 import {
   FormHeading,
-  FormSwitch,
   FormActions,
   FormContent,
   FormContainer,
@@ -28,7 +26,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
-import { Label } from "@/components/ui/label";
 import { WeatherEffect, TitleEffect } from "@/lib/types";
 import { weatherEffects, titleEffects } from "@/lib/constants/effects";
 import { EffectsFormValues, EffectsFormSchema } from "@/lib/validations";
@@ -91,73 +88,73 @@ export function EffectsForm({
       <FormContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div>
+            <div className="space-y-2">
               <FormHeading>Title Animation</FormHeading>
               <div className="mt-2 text-sm text-muted-foreground">
-                Select a title effect.
+                Select a animation effect for your title.
               </div>
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a title animation" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {titleEffects.map((item, index) => (
+                          <SelectItem key={index} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                        <SelectItem value="none">None</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a title animation" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {titleEffects.map((item, index) => (
-                        <SelectItem key={index} value={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="none">None</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div>
-              <FormHeading>Background Effect</FormHeading>
-              <div className="mt-2 text-sm text-muted-foreground">
-                Select a weather effect to enhance your profile. It complements
-                darker backgrounds.
+            <div className="space-y-2">
+              <FormHeading>Weather Effect</FormHeading>
+              <div className="text-sm text-muted-foreground">
+                Select a weather effect to enhance your profile. More visible
+                with darker images or backgrounds depending on the effect.
               </div>
+              <FormField
+                control={form.control}
+                name="weather"
+                render={({ field }) => (
+                  <FormItem>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a background weather effect" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {weatherEffects.map((item, index) => (
+                          <SelectItem key={index} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                        <SelectItem value="none">None</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <FormField
-              control={form.control}
-              name="weather"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a background weather effect" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {weatherEffects.map((item, index) => (
-                        <SelectItem key={index} value={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="none">None</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <div className="flex justify-end">
               <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
             </div>

@@ -35,7 +35,7 @@ export function Navigation({ user }: { user: User }) {
         >
           <button
             onClick={() => setOpen(!open)}
-            className="absolute left-1/2 flex w-fit -translate-x-1/2 -translate-y-[60px] items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl xl:hidden"
+            className="absolute left-1/2 flex w-fit -translate-x-1/2 -translate-y-[60px] items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl md:hidden"
           >
             <EyeIcon className="size-3" />
             Preview

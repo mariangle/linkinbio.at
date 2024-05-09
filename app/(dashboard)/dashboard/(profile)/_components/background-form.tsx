@@ -166,7 +166,7 @@ export function BackgroundForm({
                 </TabsList>
                 <TabsContent value="solid">
                   <div className="space-y-2">
-                    <Label>Background Color</Label>
+                    <Label>Color</Label>
                     <ColorPicker
                       color={form.getValues("color")}
                       setColor={(color) => form.setValue("color", color)}
@@ -175,23 +175,25 @@ export function BackgroundForm({
                 </TabsContent>
                 <TabsContent value="gradient">
                   <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label>Start Color</Label>
-                      <ColorPicker
-                        color={form.getValues("gradientStartColor")}
-                        setColor={(color) =>
-                          form.setValue("gradientStartColor", color)
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>End Color</Label>
-                      <ColorPicker
-                        color={form.getValues("gradientEndColor")}
-                        setColor={(color) =>
-                          form.setValue("gradientEndColor", color)
-                        }
-                      />
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="space-y-2">
+                        <Label>Start Color</Label>
+                        <ColorPicker
+                          color={form.getValues("gradientStartColor")}
+                          setColor={(color) =>
+                            form.setValue("gradientStartColor", color)
+                          }
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>End Color</Label>
+                        <ColorPicker
+                          color={form.getValues("gradientEndColor")}
+                          setColor={(color) =>
+                            form.setValue("gradientEndColor", color)
+                          }
+                        />
+                      </div>
                     </div>
                     <div>
                       <div className="space-y-4">
@@ -215,7 +217,7 @@ export function BackgroundForm({
                   </div>
                 </TabsContent>
               </Tabs>
-              <div className="bg-glass border-glass h-[150px] w-full rounded-lg border p-4 md:h-[250px]">
+              <div className="bg-glass border-glass h-[150px] w-full rounded-lg border p-4 md:h-[200px]">
                 <div
                   className="h-full w-full rounded-lg"
                   style={backgroundStyle}

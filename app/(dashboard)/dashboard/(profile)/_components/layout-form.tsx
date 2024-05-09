@@ -62,12 +62,16 @@ export function LayoutForm({
               role="button"
               key={index}
               className={cn(
-                "flex flex-col items-center justify-center border border-transparent p-2",
-                selected && "rounded-xl border-border bg-primary/5",
+                "flex flex-col items-center justify-center gap-2 p-2",
               )}
             >
               <div className="text-xl font-semibold">{item.name}</div>
-              <div className="my-8 w-fit">
+              <div
+                className={cn(
+                  "flex w-full justify-center border border-transparent px-4 py-4",
+                  selected && "rounded-xl border-border bg-primary/35",
+                )}
+              >
                 <LayoutPreview layout={item.value} />
               </div>
             </div>
