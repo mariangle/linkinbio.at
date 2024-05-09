@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { LayoutPreview } from "@/components/dashboard/layout-preview";
 
 import { Layout } from "@/lib/types/enums";
 import { layouts } from "@/lib/constants/layouts";
@@ -50,7 +51,7 @@ export function LayoutForm({
 
   return (
     <div>
-      <div className="mt-2 flex w-fit flex-wrap items-center justify-start gap-x-4 gap-y-6">
+      <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-3">
         {layouts.map((item, index) => {
           const selected = layout === item.value;
           return (
@@ -67,24 +68,22 @@ export function LayoutForm({
             >
               <div className="text-xl font-semibold">{item.name}</div>
               <div className="my-8 w-fit">
-                <PhoneMockup
-                  biolink={biolink}
-                  layout={item.value}
-                  scale={false}
-                  className="pointer-events-none"
-                />
+                <LayoutPreview layout={item.value} />
               </div>
             </div>
           );
         })}
       </div>
-      <Button
-        disabled={!dirty}
-        loading={loading}
-        onClick={async () => await submit()}
-      >
-        Select
-      </Button>
+      <div className="flex justify-end">
+        <Button
+          disabled={!dirty}
+          loading={loading}
+          onClick={async () => await submit()}
+          className="w-full max-w-[200px] rounded-full"
+        >
+          Save
+        </Button>
+      </div>
     </div>
   );
 }

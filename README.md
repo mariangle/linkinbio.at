@@ -56,7 +56,7 @@ View more at: https://linkinbio.at/features
 - [x] Change text color and font
 - [x] Customize top icons color
 - [ ] Add more fonts
-- [ ] Add new layout and update glassmorpism layout
+- [x] Add new layout and update glassmorpism layout
 - [x] Handle social media vs website links better
 - [x] Improved dashboard styling
 

@@ -55,7 +55,10 @@ export function BackgroundMedia({
         alt="background image"
         width={1920}
         height={1080}
-        className={cn("h-full w-full object-cover", className)}
+        className={cn(
+          "pointer-events-none h-full w-full object-cover",
+          className,
+        )}
       />
     );
   }

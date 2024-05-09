@@ -13,7 +13,11 @@ export function Username({
 }) {
   return (
     <div
-      className={cn("mt-1 text-sm", className, getFontDisplay(options?.font))}
+      className={cn(
+        "mt-1 text-sm opacity-80",
+        className,
+        getFontDisplay(options?.font),
+      )}
       style={{ color: options?.color }}
     >
       @{username}

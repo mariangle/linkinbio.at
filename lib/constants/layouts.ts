@@ -17,4 +17,8 @@ export const layouts = [
     value: Layout.Glassmorphism,
     name: "Glassmorphism",
   },
+  {
+    value: Layout.Bold,
+    name: "Bold",
+  },
 ];

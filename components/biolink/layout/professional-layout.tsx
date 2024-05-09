@@ -12,6 +12,7 @@ import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
+import { Modules } from "@/components/biolink/modules";
 import { LayoutProps } from ".";
 
 export function ProfessionalLayout({
@@ -78,7 +79,7 @@ export function ProfessionalLayout({
             }}
           />
         </div>
-        <div className="mt-8 w-full space-y-4">
+        <div className="my-8 w-full space-y-4">
           {links.website.map((link, index) => (
             <Button key={index} item={link} config={config.button} />
           ))}
@@ -86,6 +87,7 @@ export function ProfessionalLayout({
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>
+        <Modules modules={modules} />
       </ContentContainer>
       <Footer color={config.profile.text.color} />
     </BackgroundContainer>

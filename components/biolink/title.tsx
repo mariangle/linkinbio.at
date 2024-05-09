@@ -25,7 +25,7 @@ export function Title({
       <div className="relative">
         <div
           className={cn(
-            "text-xl font-semibold",
+            "text-wrap break-all  text-xl font-semibold",
             className,
             getFontDisplay(options?.font),
           )}
@@ -65,7 +65,7 @@ export function Title({
       )}
       <h2
         className={cn(
-          "relative w-fit text-xl font-semibold",
+          "relative w-fit text-wrap break-all  text-xl font-semibold",
           className,
           getFontDisplay(options?.font),
         )}

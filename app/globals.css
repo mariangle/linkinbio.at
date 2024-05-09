@@ -135,7 +135,7 @@
   }
 
   .perspective {
-    --phone-scale: 0.5;
+    --phone-scale: 0.6;
     perspective-origin: 50%;
     perspective: 3000px;
     transform: translateZ(0) scale(var(--phone-scale));
@@ -146,8 +146,8 @@
 
   .iphone-x {
     position: relative;
-    width: 390px;
-    height: 844px;
+    width: 320px;
+    height: 675px;
     background-color: #7371ee;
     border-radius: 40px;
     box-shadow:

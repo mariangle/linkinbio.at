@@ -10,7 +10,8 @@ import { Layout as LayoutEnum } from "@/lib/types/enums";
 import { GlassmorphismLayout } from "@/components/biolink/layout/glassmorphism-layout";
 import { StandardLayout } from "@/components/biolink/layout/standard-layout";
 import { WithCoverLayout } from "@/components/biolink/layout/with-cover-layout";
-import { ProfessionalLayout } from "./professional-layout";
+import { ProfessionalLayout } from "@/components/biolink/layout/professional-layout";
+import { BoldLayout } from "@/components/biolink/layout/bold-layout";
 import { WeatherEffect } from "@/components/biolink/effects/weather-effect";
 
 export interface LayoutProps {
@@ -61,6 +62,19 @@ export function Layout({
       return (
         <LayoutWrapper preview={preview} effects={biolink.config.effects}>
           <ProfessionalLayout
+            modules={biolink.modules}
+            user={biolink.user}
+            links={biolink.links}
+            config={biolink.config}
+            preview={preview}
+          />
+        </LayoutWrapper>
+      );
+
+    case LayoutEnum.Bold:
+      return (
+        <LayoutWrapper preview={preview} effects={biolink.config.effects}>
+          <BoldLayout
             modules={biolink.modules}
             user={biolink.user}
             links={biolink.links}

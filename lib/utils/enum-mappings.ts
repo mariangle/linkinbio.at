@@ -56,6 +56,8 @@ export function convertToPrismaLayout(layout: string) {
       return PrismaLayout.Professional;
     case Layout.Glassmorphism:
       return PrismaLayout.Glassmorphism;
+    case Layout.Bold:
+      return PrismaLayout.Bold;
     default:
       return PrismaLayout.Standard;
   }
@@ -69,6 +71,8 @@ export function convertToLayout(layout: PrismaLayout | null | undefined) {
       return Layout.Professional;
     case PrismaLayout.Glassmorphism:
       return Layout.Glassmorphism;
+    case PrismaLayout.Bold:
+      return Layout.Bold;
     default:
       return Layout.Standard;
   }

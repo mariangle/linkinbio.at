@@ -12,9 +12,7 @@ import {
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { cn } from "@/lib/utils";
-import { SoundcloudTrack } from "@/components/biolink/modules/soundcloud";
-import { Spotify } from "@/components/biolink/modules/spotify";
-import { YoutubeVideo } from "@/components/biolink/modules/youtube";
+import { Modules } from "@/components/biolink/modules";
 import { LayoutProps } from ".";
 
 export function StandardLayout({
@@ -33,7 +31,7 @@ export function StandardLayout({
         url={config.background.url}
         className={cn("fixed inset-0", preview && "absolute h-full w-full")}
       />
-      <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-center py-32">
+      <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-center py-16">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
@@ -85,11 +83,7 @@ export function StandardLayout({
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>
-        <div className="w-full space-y-6">
-          <SoundcloudTrack options={modules?.soundcloud} />
-          <Spotify options={modules?.spotify} />
-          <YoutubeVideo options={modules?.youtube} />
-        </div>
+        <Modules modules={modules} />
       </ContentContainer>
       <Footer color={config.profile.text.color} />
     </BackgroundContainer>

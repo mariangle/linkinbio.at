@@ -3,6 +3,7 @@ export enum Layout {
   Professional = "professional",
   Glassmorphism = "glassmorphism",
   WithCover = "with-cover",
+  Bold = "bold",
 }
 
 export enum Font {

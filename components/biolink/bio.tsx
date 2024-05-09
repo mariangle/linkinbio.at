@@ -13,7 +13,11 @@ export function Bio({
 }) {
   return (
     <p
-      className={cn("mt-2 text-base", className, getFontDisplay(options?.font))}
+      className={cn(
+        "mt-1 whitespace-normal text-wrap break-all text-base",
+        className,
+        getFontDisplay(options?.font),
+      )}
       style={{ color: options?.color }}
     >
       {bio}
