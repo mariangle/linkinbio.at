@@ -4,6 +4,7 @@ import { YoutubeForm } from "./_components/youtube-form";
 import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
 import { ContentType } from "@/lib/types";
+import { UpgradeToPremiumBanner } from "@/components/dashboard/premium-feature";
 
 export default async function Modules() {
   const biolink = await getCachedBiolink();
@@ -12,6 +13,7 @@ export default async function Modules() {
 
   return (
     <PageWithPreview biolink={biolink}>
+      {!biolink.user.premium && <UpgradeToPremiumBanner />}
       <SpotifyForm
         data={{
           contentId: biolink.modules.spotify?.contentId ?? "",
@@ -21,6 +23,7 @@ export default async function Modules() {
           compactLayout: biolink.modules.spotify?.compactLayout ?? false,
         }}
         modified={!!biolink.modules.spotify}
+        premium={biolink.user.premium}
       />
       <SoundcloudForm
         data={{

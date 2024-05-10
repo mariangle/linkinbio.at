@@ -15,6 +15,7 @@ export default async function page() {
       <LayoutForm
         layout={biolink.config?.profile.layout}
         modified={biolink.config.profile.customized}
+        premium={biolink.user.premium}
       />
     </PageWithPreview>
   );

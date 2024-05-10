@@ -2,12 +2,13 @@
 
 import React from "react";
 import type { PlatformLink, TopIconOptions } from "@/lib/types";
-import { Social, platforms } from "@/lib/constants/platforms";
-import { cn, getDomain } from "@/lib/utils";
+import { Platform } from "@/lib/constants/platforms";
+import { cn } from "@/lib/utils";
 import { TopIconStyle } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import { useTracking } from "@/hooks/use-tracking";
 import { getIconByProvider } from "@/lib/utils/icon";
+import { getPlatformByProvider } from "@/lib/utils/platform";
 
 export function TopIcon({
   item,
@@ -21,21 +22,19 @@ export function TopIcon({
 }) {
   if (!item?.isTopIcon) return null;
 
-  const socialLink = platforms.find((link) =>
-    item.url.includes(getDomain(link.url)),
-  );
+  const platform = getPlatformByProvider(item.provider);
 
   const getDropShadow = (color: string) => {
     return options.shadow ? `drop-shadow(0 0 0.35rem ${color})` : undefined;
   };
 
-  const getGradientColors = (socialLink: Social) =>
-    socialLink.gradientColors
-      ? getLinearGradient(socialLink.gradientColors)
-      : socialLink.color;
+  const getGradientColors = (platform: Platform) =>
+    platform.gradientColors
+      ? getLinearGradient(platform.gradientColors)
+      : platform.color;
 
   const getBackground = (color: string) => {
-    return socialLink ? getGradientColors(socialLink) : color;
+    return platform ? getGradientColors(platform) : color;
   };
 
   const getLinearGradient = (colors: string[]) => {
@@ -64,16 +63,16 @@ export function TopIcon({
       colorOnly: boolean;
     };
   }) {
-    const shadowColor = socialLink ? socialLink.color : shadowOptions.color;
-    const iconColor = socialLink ? socialLink.color : iconOptions.color;
+    const shadowColor = platform ? platform.color : shadowOptions.color;
+    const iconColor = platform ? platform.color : iconOptions.color;
 
     const filter = !shadowOptions.colorOnly
       ? getDropShadow(shadowColor)
       : getDropShadow(shadowOptions.color);
 
     const color = !iconOptions.colorOnly
-      ? socialLink
-        ? socialLink.color
+      ? platform
+        ? platform.color
         : iconColor
       : iconOptions.color;
 
@@ -84,7 +83,7 @@ export function TopIcon({
         <TopIconLink
           social={{
             id: item.id,
-            name: socialLink?.name || item.title,
+            name: platform?.name || item.title,
             url: item.url,
           }}
         >
@@ -100,14 +99,14 @@ export function TopIcon({
     }
 
     const background = !backgroundOptions.colorOnly
-      ? getBackground(socialLink ? socialLink.color : backgroundOptions.color)
+      ? getBackground(platform ? platform.color : backgroundOptions.color)
       : backgroundOptions.color;
 
     return (
       <TopIconLink
         social={{
           id: item.id,
-          name: socialLink?.name || item.title,
+          name: platform?.name || item.title,
           url: item.url,
         }}
       >

@@ -7,8 +7,8 @@ export async function constructMetadata(data: {
     title: data.title,
     description: data.description,
     icons: {
-      icon: "/logo.png",
-      apple: "/logo.png",
+      icon: "/icon.svg",
+      apple: "/icon.svg",
     },
     openGraph: {
       title: data.title,

@@ -20,15 +20,18 @@ import {
 } from "@/components/ui/popover";
 import { fonts } from "@/lib/constants/fonts";
 import { Font } from "@/lib/types";
+import { LockedPremiumIcon } from "./dashboard/premium-feature";
 
 export function FontPicker({
   font,
   setFont,
   className,
+  premium = true,
 }: {
   font: Font;
   setFont: (font: Font) => void;
   className?: string;
+  premium?: boolean;
 }) {
   const [fontValue, setFontValue] = React.useState<Font>(font);
 
@@ -36,16 +39,20 @@ export function FontPicker({
     <Popover>
       <PopoverTrigger asChild>
         <button
+          disabled={!premium}
           type="button"
           className={cn(
-            "border-glass flex h-9 w-full items-center justify-between gap-2 whitespace-nowrap rounded-lg border bg-input/50 px-3 text-sm",
+            "border-glass flex h-9 w-full items-center justify-between whitespace-nowrap rounded-lg border bg-input/50 px-3 text-sm disabled:opacity-75",
             fontValue && "text-muted-foreground",
             className,
           )}
         >
-          {font
-            ? fonts.find((font) => font.value === fontValue)?.name
-            : "Select font"}
+          <div className="flex w-full items-center justify-between gap-2">
+            {font
+              ? fonts.find((font) => font.value === fontValue)?.name
+              : "Select font"}
+            {!premium && <LockedPremiumIcon />}
+          </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </button>
       </PopoverTrigger>

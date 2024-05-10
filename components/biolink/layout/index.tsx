@@ -31,86 +31,111 @@ export function Layout({
   preview?: boolean;
   layout?: LayoutEnum;
 }) {
-  switch (layout ?? biolink.config.profile.layout) {
-    case LayoutEnum.Glassmorphism:
-      return (
-        <LayoutWrapper preview={preview} effects={biolink.config.effects}>
-          <GlassmorphismLayout
-            modules={biolink.modules}
-            user={biolink.user}
-            links={biolink.links}
-            config={biolink.config}
+  if (biolink.user.premium) {
+    switch (layout ?? biolink.config.profile.layout) {
+      case LayoutEnum.Glassmorphism:
+        return (
+          <LayoutWrapper
+            premium={biolink.user.premium}
             preview={preview}
-          />
-        </LayoutWrapper>
-      );
+            effects={biolink.config.effects}
+          >
+            <GlassmorphismLayout
+              modules={biolink.modules}
+              user={biolink.user}
+              links={biolink.links}
+              config={biolink.config}
+              preview={preview}
+            />
+          </LayoutWrapper>
+        );
 
-    case LayoutEnum.WithCover:
-      return (
-        <LayoutWrapper preview={preview} effects={biolink.config.effects}>
-          <WithCoverLayout
-            modules={biolink.modules}
-            user={biolink.user}
-            links={biolink.links}
-            config={biolink.config}
+      case LayoutEnum.WithCover:
+        return (
+          <LayoutWrapper
+            premium={biolink.user.premium}
             preview={preview}
-          />
-        </LayoutWrapper>
-      );
+            effects={biolink.config.effects}
+          >
+            <WithCoverLayout
+              modules={biolink.modules}
+              user={biolink.user}
+              links={biolink.links}
+              config={biolink.config}
+              preview={preview}
+            />
+          </LayoutWrapper>
+        );
 
-    case LayoutEnum.Professional:
-      return (
-        <LayoutWrapper preview={preview} effects={biolink.config.effects}>
-          <ProfessionalLayout
-            modules={biolink.modules}
-            user={biolink.user}
-            links={biolink.links}
-            config={biolink.config}
+      case LayoutEnum.Professional:
+        return (
+          <LayoutWrapper
+            premium={biolink.user.premium}
             preview={preview}
-          />
-        </LayoutWrapper>
-      );
+            effects={biolink.config.effects}
+          >
+            <ProfessionalLayout
+              modules={biolink.modules}
+              user={biolink.user}
+              links={biolink.links}
+              config={biolink.config}
+              preview={preview}
+            />
+          </LayoutWrapper>
+        );
 
-    case LayoutEnum.Bold:
-      return (
-        <LayoutWrapper preview={preview} effects={biolink.config.effects}>
-          <BoldLayout
-            modules={biolink.modules}
-            user={biolink.user}
-            links={biolink.links}
-            config={biolink.config}
+      case LayoutEnum.Bold:
+        return (
+          <LayoutWrapper
+            premium={biolink.user.premium}
             preview={preview}
-          />
-        </LayoutWrapper>
-      );
+            effects={biolink.config.effects}
+          >
+            <BoldLayout
+              modules={biolink.modules}
+              user={biolink.user}
+              links={biolink.links}
+              config={biolink.config}
+              preview={preview}
+            />
+          </LayoutWrapper>
+        );
 
-    default:
-      return (
-        <LayoutWrapper preview={preview} effects={biolink.config.effects}>
-          <StandardLayout
-            modules={biolink.modules}
-            user={biolink.user}
-            links={biolink.links}
-            config={biolink.config}
-            preview={preview}
-          />
-        </LayoutWrapper>
-      );
+      default:
+        break;
+    }
   }
+  return (
+    <LayoutWrapper
+      premium={biolink.user.premium}
+      preview={preview}
+      effects={biolink.config.effects}
+    >
+      <StandardLayout
+        modules={biolink.modules}
+        user={biolink.user}
+        links={biolink.links}
+        config={biolink.config}
+        preview={preview}
+      />
+    </LayoutWrapper>
+  );
 }
 
 export function LayoutWrapper({
   children,
   effects,
   preview,
+  premium = true,
 }: {
   children: React.ReactNode;
   effects: EffectsOptions;
   preview?: boolean;
+  premium: boolean;
 }) {
   return (
-    <div className="absolute inset-0">
-      <WeatherEffect preview={preview} variant={effects.weather} />
+    <div>
+      {premium && <WeatherEffect preview={preview} variant={effects.weather} />}
       {children}
     </div>
   );

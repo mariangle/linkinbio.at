@@ -22,12 +22,14 @@ import { BackgroundFormSchema, BackgroundFormValues } from "@/lib/validations";
 import { Form } from "@/components/ui/form";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LockedPremiumIcon } from "@/components/dashboard/premium-feature";
 
 type Tab = "solid" | "gradient";
 
 export function BackgroundForm({
   data,
   modified,
+  premium,
 }: {
   data: {
     color: string;
@@ -37,9 +39,12 @@ export function BackgroundForm({
     url?: string;
   };
   modified?: boolean;
+  premium: boolean;
 }) {
   const [tab, setTab] = React.useState<Tab>(
-    data.gradientStartColor && data.gradientEndColor ? "gradient" : "solid",
+    data.gradientStartColor && data.gradientEndColor && premium
+      ? "gradient"
+      : "solid",
   );
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
@@ -112,7 +117,9 @@ export function BackgroundForm({
   }, [tab, form]);
 
   const backgroundStyle =
-    form.getValues("gradientStartColor") && form.getValues("gradientEndColor")
+    form.getValues("gradientStartColor") &&
+    form.getValues("gradientEndColor") &&
+    premium
       ? {
           backgroundImage: `linear-gradient(${form.getValues("gradientAngle")}deg, ${form.getValues("gradientStartColor")}, ${form.getValues("gradientEndColor")})`,
         }
@@ -156,12 +163,15 @@ export function BackgroundForm({
                     Solid Color
                   </TabsTrigger>
                   <TabsTrigger
+                    disabled={!premium}
                     value="gradient"
                     onClick={() => {
                       setTab("gradient");
                     }}
+                    className="gap-2"
                   >
                     Gradient Color
+                    {!premium && <LockedPremiumIcon />}
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="solid">

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-const prices = [
+export const prices = [
   {
     title: "Basic",
     button: "Start for free",

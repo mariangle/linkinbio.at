@@ -18,6 +18,7 @@ export default async function page() {
           weather: biolink.config?.effects?.weather,
         }}
         modified={biolink.config?.effects?.customized}
+        premium={biolink.user.premium}
       />
     </PageWithPreview>
   );

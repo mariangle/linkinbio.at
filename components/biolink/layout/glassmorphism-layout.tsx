@@ -24,6 +24,7 @@ export function GlassmorphismLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
+      premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
     >
@@ -89,7 +90,7 @@ export function GlassmorphismLayout({
             ))}
           </div>
         </ContentContainer>
-        <Modules modules={modules} />
+        <Modules modules={modules} premium={user.premium} />
       </div>
       <Footer />
     </BackgroundContainer>

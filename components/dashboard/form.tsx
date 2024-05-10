@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 
+import { LockedPremiumIcon } from "./premium-feature";
 import { Button } from "@/components/ui/button";
 
 export function FormHeading({ children }: { children: React.ReactNode }) {
@@ -13,18 +14,28 @@ export function FormDescription({ children }: { children: React.ReactNode }) {
 export function FormContainer({
   children,
   className,
+  disabled = false,
+  noBanner = false,
 }: {
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean;
+  noBanner?: boolean;
 }) {
   return (
     <div
       className={cn(
         "bg-glass border-glass relative rounded-lg border",
         className,
+        disabled && "opacity-75",
       )}
     >
-      {children}
+      {!noBanner && disabled && (
+        <div className="absolute right-4 top-4">
+          <LockedPremiumIcon />
+        </div>
+      )}
+      <div className={cn(disabled && "pointer-events-none ")}>{children}</div>
     </div>
   );
 }

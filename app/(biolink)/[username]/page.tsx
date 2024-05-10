@@ -1,7 +1,11 @@
+import * as React from "react";
+
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
 import { getCachedBiolinkByUsername } from "@/lib/utils/get-biolink";
 import { ViewTracker } from "@/components/view-tracker";
+import { NotFound } from "@/components/404";
+import { Loading } from "@/components/loading";
 
 export async function generateMetadata({
   params,
@@ -34,17 +38,12 @@ export default async function Page({
 }) {
   const biolink = await getCachedBiolinkByUsername(params.username);
 
-  if (!biolink)
-    return (
-      <div>
-        <h1>User not found</h1>
-      </div>
-    );
+  if (!biolink) return <NotFound />;
 
   return (
-    <>
+    <React.Suspense fallback={<Loading />}>
       <ViewTracker userId={biolink.user.id} />
       <Layout biolink={biolink} />
-    </>
+    </React.Suspense>
   );
 }

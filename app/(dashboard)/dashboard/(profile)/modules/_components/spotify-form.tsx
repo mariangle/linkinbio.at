@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useFormSubmit } from "@/hooks/use-form-submit";
 import { ModuleButton } from "@/components/dashboard/module-button";
 import { FormContainer, FormContent } from "@/components/dashboard/form";
+import { LockedPremiumIcon } from "@/components/dashboard/premium-feature";
 
 const tabs = [
   {
@@ -37,6 +38,7 @@ const tabs = [
 export function SpotifyForm({
   data,
   modified,
+  premium,
 }: {
   data: {
     contentId: string;
@@ -46,6 +48,7 @@ export function SpotifyForm({
     compactLayout: boolean;
   };
   modified?: boolean;
+  premium: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
@@ -108,23 +111,28 @@ export function SpotifyForm({
   };
 
   return (
-    <FormContainer>
+    <FormContainer disabled={!premium} noBanner>
       <FormContent>
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="flex w-full items-center justify-between"
-        >
-          <div className="flex items-center gap-2 font-semibold">
-            <FaSpotify className="size-5 text-green-500" />
-            Spotify
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center gap-2">
+            <button
+              className="flex items-center gap-2 font-semibold"
+              onClick={() => setExpanded(!expanded)}
+            >
+              <FaSpotify className="size-5 text-green-500" />
+              Spotify
+            </button>
+            {!premium && <LockedPremiumIcon />}
           </div>
-          <ChevronDown
-            className={cn(
-              "size-5  rotate-0 duration-300",
-              expanded && "rotate-180",
-            )}
-          />
-        </button>
+          <button onClick={() => setExpanded(!expanded)}>
+            <ChevronDown
+              className={cn(
+                "size-5  rotate-0 duration-300",
+                expanded && "rotate-180",
+              )}
+            />
+          </button>
+        </div>
         <AnimatePresence>
           {expanded && (
             <motion.div

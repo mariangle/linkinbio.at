@@ -6,6 +6,7 @@ import { getCachedBiolink } from "@/lib/utils/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
 import { SecondaryNav } from "@/components/dashboard/secondary-nav";
 import { biolinkCustomizationLinks } from "@/lib/constants/nav-links";
+import { UpgradeToPremiumBanner } from "@/components/dashboard/premium-trial-banner";
 
 export default async function Customization() {
   const biolink = await getCachedBiolink();
@@ -32,7 +33,9 @@ export default async function Customization() {
           hideUsername: biolink.config?.profile.hideUsername,
         }}
         modified={biolink.config?.profile?.customized}
+        premium={biolink.user.premium}
       />
+      {!biolink.user.premium && <UpgradeToPremiumBanner />}
       <BackgroundForm
         data={{
           color: biolink.config?.background?.color,
@@ -42,6 +45,7 @@ export default async function Customization() {
           url: biolink.config?.background?.url,
         }}
         modified={biolink.config?.background?.customized}
+        premium={biolink.user.premium}
       />
       <ButtonsForm
         data={{

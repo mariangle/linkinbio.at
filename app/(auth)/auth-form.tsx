@@ -47,11 +47,12 @@ export function AuthForm({ variant }: { variant: Variant }) {
         <Button
           onClick={login}
           disabled={true}
+          loading={isLoading}
           className="h-12 w-full"
           size="lg"
         >
           <FaGoogle className="mr-3 size-4" />
-          Continue with Google
+          {variant === "sign-in" ? "Continue" : "Sign up"} with Google
         </Button>
         <div className="mt-8 text-center text-xs text-slate-300">
           {variant === "sign-in"

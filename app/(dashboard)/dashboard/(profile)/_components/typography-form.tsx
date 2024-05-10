@@ -6,16 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormSubmit } from "@/hooks/use-form-submit";
 import { useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/color-picker";
 import { FontPicker } from "@/components/font-picker";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   FormHeading,
   FormContainer,
@@ -30,9 +22,7 @@ import {
   FormLabel,
   FormField,
   FormItem,
-  FormMessage,
 } from "@/components/ui/form";
-import { fonts } from "@/lib/constants/fonts";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Font } from "@/lib/types/enums";
 import { TypographyFormSchema, TypographyFormValues } from "@/lib/validations";
@@ -40,6 +30,7 @@ import { TypographyFormSchema, TypographyFormValues } from "@/lib/validations";
 export function TypographyForm({
   data,
   modified,
+  premium,
 }: {
   data: {
     titleColor: string;
@@ -49,6 +40,7 @@ export function TypographyForm({
     hideUsername: boolean;
   };
   modified?: boolean;
+  premium: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
@@ -132,6 +124,7 @@ export function TypographyForm({
                       setFont={(font) => {
                         form.setValue("titleFont", font);
                       }}
+                      premium={premium}
                     />
                   </div>
                 </div>
@@ -156,6 +149,7 @@ export function TypographyForm({
                       setFont={(font) => {
                         form.setValue("textFont", font);
                       }}
+                      premium={premium}
                     />
                   </div>
                 </div>

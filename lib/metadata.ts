@@ -9,7 +9,11 @@ export const siteConfig = {
   url:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://valorant-boosting.vercel.app",
+      : "https://linkinbio.at",
+  paymentLink:
+    process.env.NODE_ENV === "development"
+      ? "https://buy.stripe.com/test_8wMg2Y5rBdAjgA8aEE"
+      : "",
 };
 
 export const metadata: Metadata = {

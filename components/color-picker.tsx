@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 const colors = [
+  "#FFFFFF", // White
+  "#000000", // Black
   "#FF6347", // Tomato
   "#7FFFD4", // Aquamarine
   "#40E0D0", // Turquoise

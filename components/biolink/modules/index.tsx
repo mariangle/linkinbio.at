@@ -7,10 +7,14 @@ import { cn } from "@/lib/utils";
 export function Modules({
   modules,
   className,
+  premium = true,
 }: {
   modules?: ModulesType;
   className?: string;
+  premium?: boolean;
 }) {
+  if (!premium) return null;
+
   return (
     <div className={cn("w-full space-y-2", className)}>
       <SoundcloudTrack options={modules?.soundcloud} />

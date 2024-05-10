@@ -50,7 +50,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       occupation: user.occupation ?? undefined,
       location: user.location ?? undefined,
       bio: user.bio ?? undefined,
-      premium: true,
+      premium: user.premium ?? false,
     },
     config: {
       profile: {
@@ -99,7 +99,8 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         color: user.background?.color ?? "#0055B3",
         url: user.background?.url ?? undefined,
         gradient: {
-          startColor: user.background?.gradientStartColor ?? undefined,
+          startColor:
+            (true && user.background?.gradientStartColor) ?? undefined,
           endColor: user.background?.gradientEndColor ?? undefined,
           angle: user.background?.gradientAngle ?? 0,
         },

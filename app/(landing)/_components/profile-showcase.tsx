@@ -47,7 +47,7 @@ export function ProfileCustomizer() {
             font: profileOptions.font,
             effect: profileOptions.titleEffect,
           }}
-          user={{ title: "Maria", username: "maria" }}
+          user={{ title: "Maria", premium: true }}
         />
         {!profileOptions.hideUsername && <Username username="maria" />}
       </div>

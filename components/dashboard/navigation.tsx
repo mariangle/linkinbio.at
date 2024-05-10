@@ -4,11 +4,12 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Zap } from "lucide-react";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 import { ModeToggle } from "@/components/dashboard/mode-toggle";
 import { UserNav } from "./user-nav";
+import { PremiumDialog } from "./premium-dialog";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
@@ -22,10 +23,23 @@ export function Navigation({ user }: { user: User }) {
   return (
     <header
       className={cn(
-        "fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start",
+        "group/nav fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start ",
       )}
     >
-      <div className="flex h-full flex-col items-center justify-center gap-4">
+      <div className="relative flex h-full flex-col items-center justify-center gap-4">
+        <div className="absolute left-full top-0 hidden translate-x-4 p-4 pl-0 md:block">
+          <button
+            className="rounded-full bg-primary p-1.5 opacity-0 duration-100 group-hover/nav:opacity-100"
+            onClick={() => setIsCollapsed(!isCollapsed)}
+          >
+            <ChevronLeft
+              className={cn(
+                "size-0 text-white duration-300 group-hover/nav:size-5",
+                isCollapsed && "rotate-180",
+              )}
+            />
+          </button>
+        </div>
         <div
           className={cn(
             "bg-glass border-glass relative flex gap-4 rounded-2xl border p-3 duration-300",
@@ -101,6 +115,13 @@ export function Navigation({ user }: { user: User }) {
             <div className="flex flex-row items-center gap-4 md:flex-col md:gap-2">
               <div className="bg-gradient-fade h-full w-px md:h-px md:w-full" />
               <div className="flex flex-row items-center gap-3 md:mt-4 md:w-full md:flex-col">
+                <div className="hidden md:block">
+                  <PremiumDialog>
+                    <button className="rounded-full border border-primary/50 bg-primary/25 p-2">
+                      <Zap className="size-5 text-primary" />
+                    </button>
+                  </PremiumDialog>
+                </div>
                 <UserNav user={user} />
                 <div className="bg-glass-secondary hidden w-full items-center justify-center rounded-xl px-2.5 py-3 md:flex">
                   <ModeToggle />
@@ -110,19 +131,6 @@ export function Navigation({ user }: { user: User }) {
                     isMenuOpen={!isCollapsed}
                     setIsMenuOpen={() => setIsCollapsed(!isCollapsed)}
                   />
-                  <button
-                    onClick={() => setIsCollapsed(!isCollapsed)}
-                    className={cn(
-                      "bg-glass-secondary hidden w-full items-center justify-center gap-2 rounded-xl px-2.5 py-3 text-sm md:flex",
-                    )}
-                  >
-                    <ChevronLeft
-                      className={cn(
-                        "size-4 rotate-[270deg] duration-300 md:rotate-0",
-                        isCollapsed && "rotate-90 md:rotate-180",
-                      )}
-                    />
-                  </button>
                 </div>
               </div>
             </div>

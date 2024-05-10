@@ -9,13 +9,15 @@ export function BackgroundContainer({
   options,
   children,
   className,
+  premium = true,
 }: {
   options: BackgroundOptions;
   children?: React.ReactNode;
   className?: string;
+  premium?: boolean;
 }) {
   const backgroundStyle =
-    options.gradient?.endColor && options.gradient?.startColor
+    options.gradient?.endColor && options.gradient?.startColor && premium
       ? {
           backgroundImage: `linear-gradient(${options.gradient.angle || 180}deg, ${options.gradient.startColor}, ${options.gradient.endColor})`,
         }

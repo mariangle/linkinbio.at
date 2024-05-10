@@ -24,6 +24,7 @@ export function ProfessionalLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
+      premium={user.premium}
       options={config.background}
       className={cn(!preview && "min-h-screen", preview && "relative")}
     >
@@ -87,7 +88,7 @@ export function ProfessionalLayout({
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>
-        <Modules modules={modules} />
+        <Modules modules={modules} premium={user.premium} />
       </ContentContainer>
       <Footer color={config.profile.text.color} />
     </BackgroundContainer>

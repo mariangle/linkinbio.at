@@ -33,12 +33,14 @@ import { EffectsFormValues, EffectsFormSchema } from "@/lib/validations";
 export function EffectsForm({
   data,
   modified,
+  premium,
 }: {
   data: {
     title?: TitleEffect;
     weather?: WeatherEffect;
   };
   modified?: boolean;
+  premium: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
@@ -84,7 +86,7 @@ export function EffectsForm({
   };
 
   return (
-    <FormContainer>
+    <FormContainer disabled={!premium}>
       <FormContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

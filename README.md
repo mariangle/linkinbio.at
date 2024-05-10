@@ -50,7 +50,6 @@ View more at: https://linkinbio.at/features
 
 - [x] Analytics - Clicks, CTR, views, country
 - [x] Cherry Blossom effect
-- [ ] Payment (Stripe) / Premium
 - [x] Gradient background colors
 - [x] Add change shadow color
 - [x] Change text color and font
@@ -59,6 +58,10 @@ View more at: https://linkinbio.at/features
 - [x] Add new layout and update glassmorpism layout
 - [x] Handle social media vs website links better
 - [x] Improved dashboard styling
+- [ ] Payment (Stripe) / Premium
+- [ ] Contactforms
+- [ ] Newsletter
+- [ ] Customize page metadata (favicon, title, description, image, apple-icon)
 
 ## License
 

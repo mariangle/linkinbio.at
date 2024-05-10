@@ -24,8 +24,9 @@ export function StandardLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
+      premium={user.premium}
       options={config.background}
-      className={cn(preview && "relative h-full")}
+      className={cn(preview && "absolute inset-0")}
     >
       <BackgroundMedia
         url={config.background.url}
@@ -83,7 +84,7 @@ export function StandardLayout({
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>
-        <Modules modules={modules} />
+        <Modules modules={modules} premium={user.premium} />
       </ContentContainer>
       <Footer color={config.profile.text.color} />
     </BackgroundContainer>

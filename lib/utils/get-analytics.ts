@@ -44,36 +44,15 @@ export async function getAnalytics(): Promise<Analytics | null> {
       id: session.user.id,
     },
     include: {
-      views: {
-        where: {
-          timestamp: {
-            gte: currentStartDate,
-            lte: currentEndDate,
-          },
-        },
-      },
+      views: true,
       websiteLinks: {
         include: {
-          clicks: {
-            where: {
-              timestamp: {
-                gte: currentStartDate,
-                lte: currentEndDate,
-              },
-            },
-          },
+          clicks: true,
         },
       },
       platformLinks: {
         include: {
-          clicks: {
-            where: {
-              timestamp: {
-                gte: currentStartDate,
-                lte: currentEndDate,
-              },
-            },
-          },
+          clicks: true,
         },
       },
     },

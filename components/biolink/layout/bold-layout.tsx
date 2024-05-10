@@ -24,6 +24,7 @@ export function BoldLayout({
 }: LayoutProps) {
   return (
     <BackgroundContainer
+      premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
     >
@@ -88,7 +89,7 @@ export function BoldLayout({
             <Button key={index} item={link} config={config.button} />
           ))}
         </div>
-        <Modules modules={modules} />
+        <Modules modules={modules} premium={user.premium} />
       </ContentContainer>
       <Footer color={config.profile.text.color} />
     </BackgroundContainer>

@@ -18,9 +18,11 @@ export function Title({
 }: {
   options: TitleOptions;
   className?: string;
-  user: Pick<User, "title" | "username">;
+  user: Pick<User, "title" | "premium">;
 }) {
-  if (options.effect === TitleEffect.Typewriter) {
+  if (!user.title) return null;
+
+  if (user.premium && options.effect === TitleEffect.Typewriter) {
     return (
       <div className="relative">
         <div
@@ -33,7 +35,7 @@ export function Title({
             color: options?.color ? options.color : undefined,
           }}
         >
-          <TypewriterEffect words={user.title || `@${user.username}`} />
+          <TypewriterEffect words={user.title} />
         </div>
       </div>
     );
@@ -41,7 +43,7 @@ export function Title({
 
   return (
     <div className="relative w-fit">
-      {options.effect === TitleEffect.Sparkles && (
+      {user.premium && options.effect === TitleEffect.Sparkles && (
         <Image
           src="/sparkle.gif"
           alt="sparkle"
@@ -52,7 +54,7 @@ export function Title({
           className="absolute h-full w-full object-cover"
         />
       )}
-      {options.effect === TitleEffect.CherryBlossoms && (
+      {user.premium && options.effect === TitleEffect.CherryBlossoms && (
         <Image
           src="/cherry-blossoms.gif"
           alt="cherry blossoms"
@@ -74,7 +76,7 @@ export function Title({
           font: options.font,
         }}
       >
-        {user.title || `@${user.username}`}
+        {user.title}
       </h2>
     </div>
   );
