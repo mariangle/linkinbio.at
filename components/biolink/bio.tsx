@@ -7,10 +7,12 @@ export function Bio({
   className,
   options,
 }: {
-  bio: string;
+  bio?: string;
   className?: string;
   options?: TextOptions;
 }) {
+  if (!bio) return null;
+
   return (
     <p
       className={cn(

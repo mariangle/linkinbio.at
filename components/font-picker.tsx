@@ -21,6 +21,7 @@ import {
 import { fonts } from "@/lib/constants/fonts";
 import { Font } from "@/lib/types";
 import { LockedPremiumIcon } from "./dashboard/premium-feature";
+import { getFontDisplay } from "@/lib/utils/get-font";
 
 export function FontPicker({
   font,
@@ -70,6 +71,7 @@ export function FontPicker({
                     setFont(font.value as Font);
                     setFontValue(font.value as Font);
                   }}
+                  className={cn(getFontDisplay(font.value))}
                 >
                   <Check
                     className={cn(

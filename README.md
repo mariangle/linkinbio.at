@@ -59,8 +59,6 @@ View more at: https://linkinbio.at/features
 - [x] Handle social media vs website links better
 - [x] Improved dashboard styling
 - [ ] Payment (Stripe) / Premium
-- [ ] Contactforms
-- [ ] Newsletter
 - [ ] Customize page metadata (favicon, title, description, image, apple-icon)
 
 ## License

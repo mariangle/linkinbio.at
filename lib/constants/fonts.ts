@@ -6,6 +6,8 @@ import {
   Playfair_Display,
   Merienda,
   Great_Vibes,
+  Creepster,
+  Bangers,
 } from "next/font/google";
 import localFont from "next/font/local";
 import { Font as FontEnum } from "@/lib/types";
@@ -48,6 +50,18 @@ export const merienda = Merienda({
 });
 
 export const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+export const creepster = Creepster({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+export const bangers = Bangers({
   subsets: ["latin"],
   display: "swap",
   weight: "400",
@@ -98,5 +112,15 @@ export const fonts = [
     name: "Great Vibes",
     value: FontEnum.GreatVibes,
     display: greatVibes.className,
+  },
+  {
+    name: "Creepster",
+    value: FontEnum.Creepster,
+    display: creepster.className,
+  },
+  {
+    name: "Bangers",
+    value: FontEnum.Bangers,
+    display: bangers.className,
   },
 ];

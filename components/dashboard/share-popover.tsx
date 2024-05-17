@@ -8,9 +8,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Share2, Copy } from "lucide-react";
+import { Copy } from "lucide-react";
 
-export function SharePopover({ username = "" }) {
+export function SharePopover({
+  username = "",
+  children,
+}: {
+  username: string;
+  children: React.ReactNode;
+}) {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(`https://linkinbio.at/${username}`);
@@ -22,12 +28,7 @@ export function SharePopover({ username = "" }) {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <button className="bg-glass border-glass flex items-center rounded-lg border px-3 py-1.5">
-          <Share2 className="mr-2.5 size-4" />
-          Share
-        </button>
-      </PopoverTrigger>
+      <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent className="w-80 space-y-4">
         <Label>Share your biolink</Label>
         <div className="flex items-center gap-2">

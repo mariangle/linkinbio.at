@@ -47,9 +47,7 @@ export function Button({
 
   if (!display) return null;
 
-  const textColor = config.background.socialColor
-    ? "#FFFFFF"
-    : config.text.color;
+  const textColor = config.text.color;
 
   const backgroundColorRgb = hexToRgb(
     config.background.socialColor
@@ -130,7 +128,15 @@ export function Button({
           className={cn("size-5", size === "sm" && "size-4")}
         />
       )}
-      {!config.text.hidden && <span>{item.title}</span>}
+      {!config.text.hidden && (
+        <span
+          style={{
+            color: textColor,
+          }}
+        >
+          {item.title}
+        </span>
+      )}
     </button>
   );
 }

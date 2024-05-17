@@ -33,12 +33,6 @@ export async function getAnalytics(): Promise<Analytics | null> {
 
   if (!session?.user?.id) return null;
 
-  const currentStartDate = subDays(new Date(), 1);
-  const currentEndDate = new Date();
-
-  const previousStartDate = subDays(currentStartDate, 1);
-  const previousEndDate = subDays(currentEndDate, 1);
-
   const user = await db.user.findUnique({
     where: {
       id: session.user.id,
@@ -63,24 +57,20 @@ export async function getAnalytics(): Promise<Analytics | null> {
   const allLinks = [...user.websiteLinks, ...user.platformLinks];
 
   const totalClicksCurrent = allLinks
-    .filter((link) =>
+    /*.filter((link) =>
       link.clicks.some((click) => click.timestamp >= previousEndDate),
-    )
+    )*/
     .reduce((total, link) => total + link.clicks.length, 0);
 
   const totalClicksPrevious = allLinks
-    .filter((link) =>
+    /*.filter((link) =>
       link.clicks.some((click) => click.timestamp <= currentStartDate),
-    )
+    )*/
     .reduce((total, link) => total + link.clicks.length, 0);
 
-  const currentViews = user.views.filter((view) => {
-    return view.timestamp >= previousEndDate;
-  }).length;
+  const currentViews = user.views.length;
 
-  const previousViews = user.views.filter((view) => {
-    return view.timestamp <= previousStartDate;
-  }).length;
+  const previousViews = user.views.length;
   const currentCtr =
     currentViews !== 0
       ? Math.min((totalClicksCurrent / currentViews) * 100, 100)

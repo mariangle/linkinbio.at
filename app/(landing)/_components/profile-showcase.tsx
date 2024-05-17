@@ -1,114 +1,70 @@
 "use client";
 
+import Image from "next/image";
 import * as React from "react";
 
+import { Font, TitleEffect, WeatherEffect as Weather } from "@/lib/types";
+import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
 import { Username } from "@/components/biolink/username";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Font, TitleEffect } from "@/lib/types";
-import { ColorPicker } from "@/components/color-picker";
-import { FontPicker } from "@/components/font-picker";
-import {
-  ShowcaseContainer,
-  ShowcaseHeader,
-  ShowcaseDescription,
-  ShowcaseIconContainer,
-} from "./showcase";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { fonts } from "@/lib/constants/fonts";
-import { Palette } from "lucide-react";
-import { titleEffects } from "@/lib/constants/effects";
-export function ProfileCustomizer() {
-  const [profileOptions, setProfileOptions] = React.useState({
-    titleEffect: TitleEffect.CherryBlossoms,
-    color: "#FFFFFF",
-    hideUsername: false,
-    font: Font.Inter,
-  });
+import { ProfilePicture } from "@/components/biolink/profile-picture";
+import { dummyUser } from "@/lib/dummy";
+import { Details } from "@/components/biolink/details";
+import { WeatherEffect } from "@/components/biolink/effects/weather-effect";
+
+export function ProfileShowcase() {
   return (
-    <ShowcaseContainer className="h-full">
-      <ShowcaseIconContainer>
-        <Palette className="size-5 text-white" />
-      </ShowcaseIconContainer>
-      <ShowcaseHeader>Profile</ShowcaseHeader>
-      <ShowcaseDescription>
-        Customize your profile to make it stand out.
-      </ShowcaseDescription>
-      <div className="relative mx-4 mt-8 flex h-[60px] flex-col items-center justify-center">
-        <Title
-          options={{
-            color: profileOptions.color,
-            font: profileOptions.font,
-            effect: profileOptions.titleEffect,
-          }}
-          user={{ title: "Maria", premium: true }}
-        />
-        {!profileOptions.hideUsername && <Username username="maria" />}
-      </div>
-      <div className="mt-8">
-        <div className="flex items-center gap-2">
-          <ColorPicker
-            small
-            color={profileOptions.color}
-            setColor={(color) => {
-              setProfileOptions({ ...profileOptions, color });
-            }}
-            className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white  "
+    <div className="relative w-[240px]">
+      <WeatherEffect variant={Weather.Thunder} preview />
+      <div className="relative w-fit overflow-hidden rounded-2xl p-4">
+        {dummyUser.config.background.url && (
+          <Image
+            src="/background.jpg"
+            className="absolute inset-0 h-full w-full object-cover"
+            alt="background image"
+            width={500}
+            height={500}
+            unoptimized
           />
-          <FontPicker
-            font={profileOptions.font}
-            setFont={(font) => {
-              setProfileOptions({
-                ...profileOptions,
-                font,
-              });
-            }}
-            className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white  "
+        )}
+        <div className="relative mx-auto flex max-w-md flex-col items-start justify-center">
+          <ProfilePicture
+            src={dummyUser.user.image}
+            nullable
+            className="mb-4 rounded-[1.2rem]"
           />
-        </div>
-        <div className="my-4 flex items-center justify-between">
-          <div className="text-xs text-white">Hide Username</div>
-          <Checkbox
-            checked={profileOptions.hideUsername}
-            className="border-none data-[state=checked]:bg-primary data-[state=unchecked]:bg-neutral-700"
-            onCheckedChange={() =>
-              setProfileOptions({
-                ...profileOptions,
-                hideUsername: !profileOptions.hideUsername,
-              })
-            }
+          <Title
+            options={{
+              color: "#0cbb18",
+              effect: TitleEffect.Typewriter,
+              font: Font.Creepster,
+            }}
+            user={dummyUser.user}
+          />
+          <Username
+            username={dummyUser.user.username}
+            options={{
+              font: dummyUser.config.profile.text.font,
+              color: dummyUser.config.profile.text.color,
+            }}
+          />
+          <Bio
+            bio={dummyUser.user.bio}
+            options={{
+              font: dummyUser.config.profile.text.font,
+              color: dummyUser.config.profile.text.color,
+            }}
+          />
+          <Details
+            occupation={dummyUser.user.occupation}
+            location={dummyUser.user.location}
+            options={{
+              font: dummyUser.config.profile.text.font,
+              color: dummyUser.config.profile.text.color,
+            }}
           />
         </div>
       </div>
-      <div>
-        <div className="mb-2 text-sm text-white">Title Effect</div>
-        <Select
-          onValueChange={(value) => {
-            setProfileOptions({
-              ...profileOptions,
-              titleEffect: value as TitleEffect,
-            });
-          }}
-          defaultValue={profileOptions.titleEffect}
-        >
-          <SelectTrigger className="border border-[rgba(63,81,116,0.5)] bg-white/5 text-white">
-            <SelectValue placeholder="Select a top icon style" />
-          </SelectTrigger>
-          <SelectContent>
-            {titleEffects.map((item, index) => (
-              <SelectItem key={index} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-    </ShowcaseContainer>
+    </div>
   );
 }

@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 215 28% 25%;
+    --foreground: 0 0% 6%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -19,7 +19,7 @@
     --secondary-foreground: 0 0% 9%;
 
     --muted: 0 0% 90.1%;
-    --muted-foreground: 215 28% 25%;
+    --muted-foreground: 0 0% 25%;
 
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
@@ -35,8 +35,8 @@
   }
 
   .dark {
-    --background: 221 39% 6%;
-    --foreground: 228 96% 95%;
+    --background: 0 0% 6%;
+    --foreground: 0 0% 100%;
 
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -46,20 +46,20 @@
     --primary: 245% 52% 35%;
     --primary-foreground: 245% 52% 35%;
 
-    --secondary: 221 39% 9%;
+    --secondary: 0 0% 9%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 221 39% 16%;
-    --muted-foreground: 215 39% 85%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 85%;
 
-    --accent: 221 39% 14%;
+    --accent: 0 0% 14%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 221 39% 10%;
-    --input: 221 39% 14%;
+    --border: 0 0% 10%;
+    --input: 0 0% 14%;
     --ring: 0 0% 83.1%;
   }
 }
@@ -69,7 +69,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#e0e8ff] text-foreground dark:bg-background;
+    @apply bg-background text-foreground;
   }
   .card {
     @apply absolute flex h-[26rem] w-[44rem] flex-row justify-between rounded-lg border border-neutral-600 bg-neutral-800 stroke-[0.1] p-8 hover:stroke-[0.15];
@@ -101,14 +101,6 @@
     100% {
       background-position: 0% 50%;
     }
-  }
-
-  .vertical-line {
-    @apply h-full w-px bg-gradient-to-b from-primary/10 to-transparent;
-  }
-
-  .horizontal-line {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-primary/25 to-transparent;
   }
 
   @keyframes float {
@@ -155,26 +147,6 @@
       0 0 0 14px #3a3a3a;
   }
 
-  .iphone-x-featured {
-    box-shadow:
-      0 0 0 8px #212121,
-      0 0 0 14px #3a3a3a,
-      8px 6px 0 20px #111;
-    transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg);
-  }
-
-  @media screen and (min-width: 640px) {
-    .iphone-x-featured {
-      transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg) scale(1.25);
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    .iphone-x-featured {
-      transform: rotateY(-10deg) rotateX(20deg) rotateZ(10deg) scale(1.5);
-    }
-  }
-
   .iphone-x:before,
   .iphone-x:after {
     content: "";
@@ -209,10 +181,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
-
-  .border-showcase {
-    @apply border-[#24263A];
   }
 
   .bg-glass {
@@ -251,11 +219,11 @@
     background-image: conic-gradient(
       transparent 0deg,
       transparent 320deg,
-      #454870 360deg
+      #ffee58 360deg
     );
 
-    width: 250%;
-    height: 250%;
+    width: 400%;
+    height: 400%;
     position: absolute;
     animation: rotate 6s linear infinite;
   }

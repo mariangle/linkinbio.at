@@ -26,14 +26,14 @@ export function Title({
     return (
       <div className="relative">
         <div
+          style={{
+            color: options?.color ? options.color : undefined,
+          }}
           className={cn(
             "text-wrap break-all  text-xl font-semibold",
             className,
             getFontDisplay(options?.font),
           )}
-          style={{
-            color: options?.color ? options.color : undefined,
-          }}
         >
           <TypewriterEffect words={user.title} />
         </div>
@@ -66,15 +66,15 @@ export function Title({
         />
       )}
       <h2
+        style={{
+          color: options.color,
+          font: options.font,
+        }}
         className={cn(
           "relative w-fit text-wrap break-all  text-xl font-semibold",
           className,
           getFontDisplay(options?.font),
         )}
-        style={{
-          color: options.color,
-          font: options.font,
-        }}
       >
         {user.title}
       </h2>

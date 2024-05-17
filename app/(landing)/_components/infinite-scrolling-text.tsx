@@ -2,17 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
+import { Martian_Mono, Prata, Righteous } from "next/font/google";
 
-import {
-  CloudLightning,
-  Gem,
-  LayoutPanelLeft,
-  Paintbrush,
-  Palette,
-  Sparkles,
-  Type,
-  Video,
-} from "lucide-react";
+const kumarOneOutline = Prata({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
 
 export const InfiniteMovingHighlights = ({
   direction = "left",
@@ -78,52 +74,42 @@ export const InfiniteMovingHighlights = ({
   return (
     <div
       ref={containerRef}
-      className={cn(
-        "scroller relative z-20  max-w-xs overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className,
-      )}
+      className={cn("scroller relative z-20 overflow-hidden", className)}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          " flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4 text-white",
+          " flex w-max min-w-full shrink-0 flex-nowrap gap-8 py-3 md:py-4",
           start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
-        <div className="flex items-center gap-3">
-          <Paintbrush className="size-4" />
-          Customizable buttons
-        </div>
-        <div className="flex items-center gap-3">
-          <CloudLightning className="size-4" />
-          Weather Effects
-        </div>
-        <div className="flex items-center gap-3">
-          <LayoutPanelLeft className="size-4" />
-          Multiple Layouts
-        </div>
-        <div className="flex items-center gap-3">
-          <Sparkles className="size-4" />
-          Text Effects
-        </div>
-        <div className="flex items-center gap-3">
-          <Video className="size-4" />
-          Background Video
-        </div>
-        <div className="flex items-center gap-3">
-          <Gem className="size-4" />
-          Background Gif
-        </div>
-        <div className="flex items-center gap-3">
-          <Type className="size-4" />
-          Custom Fonts
-        </div>
-        <div className="flex items-center gap-3">
-          <Palette className="size-4" />
-          Unlimited Colors
-        </div>
+        {features.map((feature, index) => (
+          <li
+            key={index}
+            className={cn(
+              "text-shadow flex items-center gap-8 text-sm font-medium uppercase text-background text-black md:text-base",
+            )}
+          >
+            <span>{feature}</span>
+            <div>✦</div>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
+
+const features = [
+  "Fully customizable buttons",
+  "Weather Effects",
+  "Embeddable Widgets",
+  "Multiple Layouts",
+  "Text Effects",
+  "Video and GIF Support",
+  "Custom Fonts",
+  "Unlimited Colors",
+  "Gradient Backgrounds",
+  "SEO Optimized",
+  "Analytics",
+];

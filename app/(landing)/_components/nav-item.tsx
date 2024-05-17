@@ -15,7 +15,7 @@ export function NavItem({
   className?: string;
 }) {
   return (
-    <Link href={item.href} className={cn("text-sm", className)}>
+    <Link href={item.href} className={cn("text-base", className)}>
       {item.label}
     </Link>
   );

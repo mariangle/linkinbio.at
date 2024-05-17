@@ -1,15 +1,16 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { EyeIcon, XIcon } from "lucide-react";
+import { EyeIcon, XIcon, Share2, ExternalLink } from "lucide-react";
 import { useMounted } from "@/hooks/use-mounted";
-import { SharePopover } from "@/components/dashboard/share-dialog";
+import { SharePopover } from "@/components/dashboard/share-popover";
 
 export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
   const isMounted = useMounted();
@@ -35,9 +36,10 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
   if (isDesktop) {
     return (
       <div className="border-glass relative grid h-screen w-full max-w-2xl place-content-center overflow-y-auto border-l">
-        <div className="absolute right-4 top-4">
-          <SharePopover username={biolink.user.username} />
-        </div>
+        <BiolinkOptions
+          className="absolute right-4 top-4"
+          username={biolink.user.username}
+        />
         <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
       </div>
     );
@@ -67,8 +69,40 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
           <XIcon className="size-4" />
           Close
         </button>
+        <BiolinkOptions
+          className="fixed left-4 top-4"
+          username={biolink.user.username}
+        />
         <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
       </div>
     </>
+  );
+}
+
+function BiolinkOptions({
+  username,
+  className,
+}: {
+  username: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex items-center gap-2", className)}>
+      <SharePopover username={username}>
+        <button className="bg-glass border-glass flex items-center rounded-lg border px-3.5 py-2 text-sm text-white duration-300 hover:opacity-80">
+          <Share2 className="mr-2.5 size-4" />
+          Share
+        </button>
+      </SharePopover>
+      <Link
+        href={`/${username}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-glass border-glass flex items-center rounded-lg border px-3.5 py-2 text-sm text-white duration-300 hover:opacity-80"
+      >
+        <ExternalLink className="mr-2.5 size-4" />
+        View live
+      </Link>
+    </div>
   );
 }

@@ -173,42 +173,32 @@ export function ButtonTemplates({
   onSelect: (button: ButtonOptions) => void;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl">
-      <Image
-        src="/background.png"
-        unoptimized
-        alt="awddwa"
-        width={500}
-        height={100}
-        className="absolute inset-x-0 h-full w-full object-cover"
-      ></Image>
-      <div className="relative grid grid-cols-1 gap-8 p-4 sm:grid-cols-2 lg:grid-cols-3">
-        {buttonTemplates.map((button, index) => (
-          <div
-            onClick={() => onSelect(button)}
-            role="button"
-            key={index}
-            className="self-center"
-          >
-            <div className="pointer-events-none">
-              <Button
-                key={index}
-                config={button}
-                item={{
-                  id: "1",
-                  url: "https://facebook.com",
-                  order: 0,
-                  archived: false,
-                  title: "Facebook",
-                  provider: "Facebook",
-                  username: "username",
-                  isTopIcon: false,
-                }}
-              />
-            </div>
+    <div className="grid grid-cols-1 gap-8 p-4 sm:grid-cols-2 lg:grid-cols-3">
+      {buttonTemplates.map((button, index) => (
+        <div
+          onClick={() => onSelect(button)}
+          role="button"
+          key={index}
+          className="self-center"
+        >
+          <div className="pointer-events-none">
+            <Button
+              key={index}
+              config={button}
+              item={{
+                id: "1",
+                url: "https://facebook.com",
+                order: 0,
+                archived: false,
+                title: "Facebook",
+                provider: "Facebook",
+                username: "username",
+                isTopIcon: false,
+              }}
+            />
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

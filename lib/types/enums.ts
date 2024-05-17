@@ -16,6 +16,8 @@ export enum Font {
   PlayfairDisplay = "playfair-display",
   Merienda = "merienda",
   GreatVibes = "great-vibes",
+  Creepster = "creepster",
+  Bangers = "bangers",
 }
 
 export enum TitleEffect {

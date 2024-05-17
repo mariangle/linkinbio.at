@@ -19,18 +19,18 @@ export default async function Layout({
   return (
     <div className="relative bg-white dark:bg-transparent">
       <Image
-        src={DashboardBackgroundDark}
+        src="/background.jpg"
         width={1000}
         height={1000}
         alt="abstract background image"
-        className="fixed inset-0 hidden h-full w-full scale-110 object-cover blur-2xl brightness-[60%] hue-rotate-[340deg] dark:block"
+        className="fixed inset-0 hidden h-full w-full scale-110 object-cover blur-lg brightness-[60%] hue-rotate-[90deg] dark:block"
       />
       <Image
         src={DashboardBackgroundLight}
         width={1000}
         height={1000}
         alt="abstract background image"
-        className="fixed inset-0 block h-full w-full scale-110 object-cover blur-2xl dark:hidden"
+        className="fixed inset-0 block h-full w-full scale-110 object-cover blur-2xl saturate-50 dark:hidden"
       />
       <UsernameDialog isOpen={!biolink.user.username} />
       <div className="relative flex flex-col overflow-hidden md:flex-row">

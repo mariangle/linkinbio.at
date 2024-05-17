@@ -1,5 +1,5 @@
 import {
-  FaLinkedin,
+  FaLinkedinIn,
   FaDiscord,
   FaFacebook,
   FaGithub,
@@ -9,7 +9,7 @@ import {
   FaTwitter,
   FaInstagram,
   FaTwitch,
-  FaSnapchat,
+  FaSnapchatGhost,
   FaStackOverflow,
   FaSpotify,
   FaSoundcloud,
@@ -31,7 +31,7 @@ export interface Platform {
 
 export const platforms: Platform[] = [
   {
-    icon: FaLinkedin,
+    icon: FaLinkedinIn,
     name: "LinkedIn",
     color: "#0077B5",
     domain: "linkedin.com/in",
@@ -70,7 +70,6 @@ export const platforms: Platform[] = [
     icon: FaTiktok,
     name: "TikTok",
     color: "#000000",
-    gradientColors: ["#69C9D0", "#F7E9F7"],
     domain: "tiktok.com",
   },
   {
@@ -93,7 +92,7 @@ export const platforms: Platform[] = [
     domain: "twitch.tv",
   },
   {
-    icon: FaSnapchat,
+    icon: FaSnapchatGhost,
     name: "Snapchat",
     color: "#FFFC00",
     domain: "snapchat.com",

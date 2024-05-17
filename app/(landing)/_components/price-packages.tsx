@@ -1,4 +1,4 @@
-import { Container } from "../ui/container";
+import { Container } from "../../../components/ui/container";
 import { CardSpotlightEffect } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
@@ -46,14 +46,14 @@ export function PricePackages() {
             <div
               key={index}
               className={cn(
-                "w-full max-w-sm rounded-xl bg-[#030010] bg-gradient-to-br from-indigo-950/80 to-slate-900 p-px shadow-lg shadow-indigo-950/5 md:self-end",
-                featured && "from-indigo-900 to-60%",
+                "bg-transoarent w-full max-w-sm rounded-xl bg-gradient-to-br from-white/10 to-white/50 p-px shadow-lg shadow-indigo-950/5 md:self-end",
+                featured && "from-neutral-700/80 to-60%",
               )}
             >
               <CardSpotlightEffect
                 className={cn(
-                  "overflow-hidden border-none bg-[#030010] bg-gradient-to-br from-indigo-900/10 via-[#030010] to-indigo-900/5 text-white",
-                  featured && "from-indigo-900/25 to-white/5",
+                  "overflow-hidden border-none bg-neutral-900 bg-gradient-to-b from-neutral-900/50 to-neutral-950/75 text-white",
+                  featured && "from-white/5",
                 )}
               >
                 {featured && (
@@ -65,9 +65,9 @@ export function PricePackages() {
                   <div className="mb-2 text-xl font-medium text-indigo-50">
                     {item.title}
                   </div>
-                  <p className="text-sm text-slate-400">{item.description}</p>
+                  <p className="text-sm text-neutral-400">{item.description}</p>
                 </div>
-                <div className="my-4 h-1 border-t border-dashed border-indigo-950/80"></div>
+                <div className="my-4 h-1 border-t border-dashed border-neutral-700/80"></div>
                 <div>
                   <div className="space-y-1">
                     <div
@@ -78,7 +78,7 @@ export function PricePackages() {
                     >
                       {item.price ? `€${item.price}` : "Free"}
                     </div>
-                    <div className="text-xs text-slate-400">
+                    <div className="text-xs text-neutral-400">
                       {item.price ? "Lifetime" : "Forever"}
                     </div>
                   </div>
@@ -87,7 +87,7 @@ export function PricePackages() {
                   <Link
                     href="/sign-in"
                     className={cn(
-                      "block w-full rounded-lg border border-indigo-950 bg-white/5 bg-gradient-to-r from-[#030010] to-primary/10 px-5 py-2.5 text-center text-sm shadow-lg",
+                      "block w-full rounded-lg border border-neutral-800 bg-white/5 bg-gradient-to-r to-white/10 px-5 py-2.5 text-center text-sm shadow-lg",
                       featured &&
                         "border-indigo-800 from-indigo-900/80 to-indigo-950 shadow-indigo-950/10",
                     )}
@@ -102,14 +102,14 @@ export function PricePackages() {
                   </Link>
                 </div>
                 <div className="mt-4">
-                  <div className="mb-4 bg-gradient-to-b from-slate-300 to-indigo-50 bg-clip-text text-sm font-bold text-transparent">
+                  <div className="mb-4 bg-gradient-to-b from-neutral-300 to-indigo-50 bg-clip-text text-sm font-bold text-transparent">
                     {item.included}
                   </div>
                   <ul className="mb-4 space-y-2">
                     {item.features.map((item, index) => (
                       <li key={index} className="flex items-baseline gap-2">
                         <Check className="size-3 shrink-0" />
-                        <span className="text-sm text-slate-400">{item}</span>
+                        <span className="text-sm text-neutral-400">{item}</span>
                       </li>
                     ))}
                   </ul>

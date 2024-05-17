@@ -1,20 +1,23 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-import { ChevronLeft, Zap } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
-import { ModeToggle } from "@/components/dashboard/mode-toggle";
+import {
+  DashboardModeToggle,
+  ModeToggle,
+} from "@/components/dashboard/mode-toggle";
 import { UserNav } from "./user-nav";
-import { PremiumDialog } from "./premium-dialog";
 import { EyeIcon } from "lucide-react";
-import Link from "next/link";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
 import { BurgerMenu } from "../burger-menu";
-import Image from "next/image";
 import { User } from "@/lib/types";
 
 export function Navigation({ user }: { user: User }) {
@@ -115,16 +118,9 @@ export function Navigation({ user }: { user: User }) {
             <div className="flex flex-row items-center gap-4 md:flex-col md:gap-2">
               <div className="bg-gradient-fade h-full w-px md:h-px md:w-full" />
               <div className="flex flex-row items-center gap-3 md:mt-4 md:w-full md:flex-col">
-                <div className="hidden md:block">
-                  <PremiumDialog>
-                    <button className="rounded-full border border-primary/50 bg-primary/25 p-2">
-                      <Zap className="size-5 text-primary" />
-                    </button>
-                  </PremiumDialog>
-                </div>
                 <UserNav user={user} />
-                <div className="bg-glass-secondary hidden w-full items-center justify-center rounded-xl px-2.5 py-3 md:flex">
-                  <ModeToggle />
+                <div className="hidden md:block">
+                  <DashboardModeToggle />
                 </div>
                 <div className="md:w-full">
                   <BurgerMenu

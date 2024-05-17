@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "../../../components/ui/button";
 
 export function ClaimLink() {
   const [link, setLink] = React.useState("");
@@ -13,7 +13,7 @@ export function ClaimLink() {
   return (
     <div
       className={cn(
-        "flex items-center rounded-md bg-black/50 p-1 pl-3 text-white",
+        "flex items-center rounded-md bg-neutral-300 p-1 pl-3 dark:bg-neutral-900",
         isFocused && "bg-black/30 ring-1 ring-primary",
       )}
     >
@@ -24,12 +24,12 @@ export function ClaimLink() {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder="username"
-        className="focus-visible:ring-none border-none bg-transparent px-0 text-base placeholder:text-gray-400 focus-visible:ring-transparent"
+        className="focus-visible:ring-none border-none bg-transparent px-0 text-base text-white placeholder:text-neutral-400 focus-visible:ring-transparent"
         maxLength={20}
       />
       <Link
         href="/sign-up"
-        className={cn(buttonVariants({ variant: "foreground" }))}
+        className="whitespace-nowrap rounded-md bg-white px-3 py-2 text-sm font-semibold text-neutral-800"
       >
         Claim your link
       </Link>

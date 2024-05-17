@@ -50,7 +50,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       occupation: user.occupation ?? undefined,
       location: user.location ?? undefined,
       bio: user.bio ?? undefined,
-      premium: user.premium ?? false,
+      premium: true ?? false, // default to false
     },
     config: {
       profile: {

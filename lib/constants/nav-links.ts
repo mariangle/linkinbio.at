@@ -1,21 +1,6 @@
 import { Settings, LineChart } from "lucide-react";
 import { FaLink, FaPalette, FaLayerGroup, FaUser } from "react-icons/fa";
 
-export const navLinks = [
-  {
-    label: "Features",
-    href: "/features",
-  },
-  {
-    label: "Pricing",
-    href: "/pricing",
-  },
-  {
-    label: "About",
-    href: "/about",
-  },
-];
-
 export const dashboardLinks = [
   {
     label: "Analytics",

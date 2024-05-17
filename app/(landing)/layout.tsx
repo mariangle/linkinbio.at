@@ -1,4 +1,4 @@
-import { Navbar as Header } from "@/components/landing/header";
+import { Header } from "./_components/header";
 
 export default function WebsiteLayout({
   children,
@@ -6,7 +6,7 @@ export default function WebsiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="bg-white text-black dark:bg-neutral-950 dark:text-white">
       <Header />
       {children}
     </div>

@@ -36,31 +36,29 @@ export function AuthForm({ variant }: { variant: Variant }) {
           height={50}
           className="size-10"
         />
-        <h1 className="mt-4 text-2xl font-bold text-white">
+        <h1 className="mt-4 text-2xl font-bold">
           {variant === "sign-in" ? "Sign In" : "Sign Up"}
         </h1>
-        <p className="mt-2 text-sm text-slate-300">
+        <p className="mt-2 text-sm">
           Get started for free. No credit card required.
         </p>
       </div>
-      <div className="mt-4">
-        <Button
+      <div className="pointer-events-auto mt-4">
+        <button
           onClick={login}
           disabled={true}
-          loading={isLoading}
-          className="h-12 w-full"
-          size="lg"
+          className="flex h-12 w-full cursor-not-allowed items-center gap-2 rounded-full bg-foreground px-4 font-medium text-background disabled:opacity-70"
         >
-          <FaGoogle className="mr-3 size-4" />
+          <FaGoogle className="size-4" />
           {variant === "sign-in" ? "Continue" : "Sign up"} with Google
-        </Button>
-        <div className="mt-8 text-center text-xs text-slate-300">
+        </button>
+        <div className="mt-8 text-center text-xs">
           {variant === "sign-in"
             ? "Don't have an account?"
             : "Already have an account?"}{" "}
           <Link
-            className="text-white"
             href={variant === "sign-in" ? "/sign-up" : "/sign-in"}
+            className="underline"
           >
             {variant === "sign-in" ? "Sign Up" : "Sign In"}
           </Link>
