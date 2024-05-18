@@ -22,18 +22,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ProfileFormSchema, ProfileFormValues } from "@/lib/validations";
+import type { User as UserData } from "@/lib/types";
 
-export function ProfileForm({
-  data,
-}: {
-  data: {
-    title?: string;
-    bio?: string;
-    image?: string;
-    occupation?: string;
-    location?: string;
-  };
-}) {
+export function ProfileForm({ data }: { data: UserData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<ProfileFormValues>({

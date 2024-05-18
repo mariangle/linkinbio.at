@@ -11,7 +11,7 @@ import {
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
-import { Modules } from "@/components/biolink/modules";
+import { Widgets } from "@/components/biolink/widgets";
 import { cn } from "@/lib/utils";
 import { LayoutProps } from ".";
 
@@ -19,9 +19,11 @@ export function GlassmorphismLayout({
   user,
   config,
   links,
-  modules,
+  widgets,
   preview,
 }: LayoutProps) {
+  const topIconLinks = links.platform.filter((link) => link.isTopIcon);
+
   return (
     <BackgroundContainer
       premium={user.premium}
@@ -42,7 +44,7 @@ export function GlassmorphismLayout({
             />
             <Title
               options={{
-                effect: config.effects.title,
+                effect: config.effects?.title,
                 font: config.profile.title.font,
                 color: config.profile.title.color,
               }}
@@ -58,15 +60,13 @@ export function GlassmorphismLayout({
                 }}
               />
             )}
-            {user.bio && (
-              <Bio
-                bio={user.bio}
-                options={{
-                  font: config.profile.text.font,
-                  color: config.profile.text.color,
-                }}
-              />
-            )}
+            <Bio
+              bio={user.bio}
+              options={{
+                font: config.profile.text.font,
+                color: config.profile.text.color,
+              }}
+            />
             <Details
               occupation={user.occupation}
               location={user.location}
@@ -76,21 +76,23 @@ export function GlassmorphismLayout({
               }}
             />
           </div>
-          <div className="mt-4 flex w-full justify-start gap-4">
-            {links.platform.map((link, index) => (
-              <TopIcon options={config.topIcon} key={index} item={link} />
-            ))}
-          </div>
+          {topIconLinks.length > 0 && (
+            <div className="mt-4 flex w-full justify-start gap-4">
+              {topIconLinks.map((link, index) => (
+                <TopIcon options={config.icons} key={index} item={link} />
+              ))}
+            </div>
+          )}
           <div className="my-6 w-full space-y-4">
             {links.website.map((link, index) => (
-              <Button key={index} item={link} config={config.button} />
+              <Button key={index} item={link} config={config.buttons} />
             ))}
             {links.platform.map((link, index) => (
-              <Button key={index} item={link} config={config.button} />
+              <Button key={index} item={link} config={config.buttons} />
             ))}
           </div>
         </ContentContainer>
-        <Modules modules={modules} premium={user.premium} />
+        <Widgets widgets={widgets} premium={user.premium} />
       </div>
       <Footer />
     </BackgroundContainer>

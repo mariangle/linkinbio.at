@@ -1,4 +1,4 @@
-import type { Config, User, Modules, WebsiteLink, PlatformLink } from ".";
+import type { Config, User, Widgets, WebsiteLink, PlatformLink } from ".";
 
 export interface Biolink {
   user: User;
@@ -7,5 +7,5 @@ export interface Biolink {
     website: WebsiteLink[];
     platform: PlatformLink[];
   };
-  modules: Modules;
+  widgets: Widgets;
 }

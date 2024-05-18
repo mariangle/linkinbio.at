@@ -9,11 +9,11 @@ export default function Page() {
     <div className="relative overflow-x-hidden">
       <BackgroundCellCore />
       <Container
-        className="pointer-events-none relative z-50 flex min-h-screen flex-col gap-24 py-24 md:pt-32 2xl:flex-row"
+        className="pointer-events-none relative z-50 flex min-h-screen flex-col gap-12 py-24 md:pt-32 2xl:flex-row"
         variant="landing"
       >
         <div className="relative flex flex-1 flex-col items-start justify-start gap-6 md:justify-center">
-          <div className="max-w-5xl pb-2 text-5xl font-semibold md:text-6xl lg:text-7xl">
+          <div className="max-w-5xl pb-2 text-5xl font-semibold md:text-6xl lg:text-6xl">
             Connect all your links with one single link.
           </div>
           <div className="max-w-2xl text-base text-muted-foreground sm:text-xl lg:text-left">

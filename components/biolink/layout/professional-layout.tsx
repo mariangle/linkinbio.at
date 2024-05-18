@@ -12,16 +12,18 @@ import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
-import { Modules } from "@/components/biolink/modules";
+import { Widgets } from "@/components/biolink/widgets";
 import { LayoutProps } from ".";
 
 export function ProfessionalLayout({
   user,
   config,
   links,
-  modules,
+  widgets,
   preview,
 }: LayoutProps) {
+  const topIconLinks = links.platform.filter((link) => link.isTopIcon);
+
   return (
     <BackgroundContainer
       premium={user.premium}
@@ -39,15 +41,17 @@ export function ProfessionalLayout({
         <div className="flex w-full flex-col items-start justify-center">
           <div className="flex w-full items-end justify-between">
             <ProfilePicture className="mb-4" src={user.image} />
-            <div className="flex gap-4">
-              {links.platform.map((link, index) => (
-                <TopIcon options={config.topIcon} key={index} item={link} />
-              ))}
-            </div>
+            {topIconLinks.length > 0 && (
+              <div className="flex gap-4">
+                {topIconLinks.map((link, index) => (
+                  <TopIcon options={config.icons} key={index} item={link} />
+                ))}
+              </div>
+            )}
           </div>
           <Title
             options={{
-              effect: config.effects.title,
+              effect: config.effects?.title,
               font: config.profile.title.font,
               color: config.profile.title.color,
             }}
@@ -62,15 +66,13 @@ export function ProfessionalLayout({
               username={user.username}
             />
           )}
-          {user.bio && (
-            <Bio
-              bio={user.bio}
-              options={{
-                font: config.profile.text.font,
-                color: config.profile.text.color,
-              }}
-            />
-          )}
+          <Bio
+            bio={user.bio}
+            options={{
+              font: config.profile.text.font,
+              color: config.profile.text.color,
+            }}
+          />
           <Details
             occupation={user.occupation}
             location={user.location}
@@ -82,13 +84,13 @@ export function ProfessionalLayout({
         </div>
         <div className="my-8 w-full space-y-4">
           {links.website.map((link, index) => (
-            <Button key={index} item={link} config={config.button} />
+            <Button key={index} item={link} config={config.buttons} />
           ))}
           {links.platform.map((link, index) => (
-            <Button key={index} item={link} config={config.button} />
+            <Button key={index} item={link} config={config.buttons} />
           ))}
         </div>
-        <Modules modules={modules} premium={user.premium} />
+        <Widgets widgets={widgets} premium={user.premium} />
       </ContentContainer>
       <Footer color={config.profile.text.color} />
     </BackgroundContainer>

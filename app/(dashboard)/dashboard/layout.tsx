@@ -30,7 +30,7 @@ export default async function Layout({
         width={1000}
         height={1000}
         alt="abstract background image"
-        className="fixed inset-0 block h-full w-full scale-110 object-cover blur-2xl saturate-50 dark:hidden"
+        className="fixed inset-0 block h-full w-full scale-110 object-cover blur-3xl saturate-50 dark:hidden"
       />
       <UsernameDialog isOpen={!biolink.user.username} />
       <div className="relative flex flex-col overflow-hidden md:flex-row">

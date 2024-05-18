@@ -3,7 +3,7 @@
 import * as React from "react";
 import { signOut } from "next-auth/react";
 
-import { LogOut, LifeBuoy, CreditCard } from "lucide-react";
+import { LogOut, Palette, CreditCard, Sun, Moon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,12 +11,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuPortal,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
 import Link from "next/link";
 import { User } from "@/lib/types";
+import { useTheme } from "next-themes";
 
 export function UserNav({ user }: { user: User }) {
+  const { setTheme } = useTheme();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -34,12 +42,26 @@ export function UserNav({ user }: { user: User }) {
             Premium
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild disabled>
-          <Link href="/dashboard/settings" className="flex items-center">
-            <LifeBuoy className="mr-2 size-4" />
-            Support
-          </Link>
-        </DropdownMenuItem>
+        <DropdownMenuGroup>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <Palette className="mr-2 h-4 w-4" />
+              <span>Appearance</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem onClick={() => setTheme("light")}>
+                  <Sun className="mr-2 h-4 w-4" />
+                  <span>Light Mode</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                  <Moon className="mr-2 h-4 w-4" />
+                  <span>Dark Mode</span>
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <button

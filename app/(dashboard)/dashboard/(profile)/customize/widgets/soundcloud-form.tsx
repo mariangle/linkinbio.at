@@ -42,7 +42,7 @@ export function SoundcloudForm({
     useFormSubmit<SoundcloudFormValues>({
       initialData: data,
       formValues: form.getValues(),
-      endpoint: "/api/manage/modules/soundcloud",
+      endpoint: "/api/manage/widgets/soundcloud",
       modified,
     });
 
@@ -51,8 +51,8 @@ export function SoundcloudForm({
       if (biolink) {
         setBiolink({
           ...biolink,
-          modules: {
-            ...biolink.modules,
+          widgets: {
+            ...biolink.widgets,
             soundcloud: {
               enabled: value.enabled ?? false,
               trackId: value.trackId || "",

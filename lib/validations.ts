@@ -11,7 +11,7 @@ export const BackgroundFormSchema = z.object({
 export type BackgroundFormValues = z.infer<typeof BackgroundFormSchema>;
 
 export const TopIconsFormSchema = z.object({
-  shadow: z.boolean().default(false),
+  shadow: z.boolean().default(false).optional(),
   style: z.string().optional(),
   color: z.string().optional(),
 });

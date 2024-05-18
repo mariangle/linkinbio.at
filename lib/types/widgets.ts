@@ -1,6 +1,6 @@
 import { ContentType } from ".";
 
-export interface Modules {
+export interface Widgets {
   spotify?: SpotifyOptions;
   youtube?: YoutubeOptions;
   soundcloud?: SoundcloudOptions;

@@ -3,8 +3,8 @@ import type {
   Config,
   EffectsOptions,
   LinkOptions,
-  Modules,
   User,
+  Widgets,
 } from "@/lib/types";
 import { Layout as LayoutEnum } from "@/lib/types/enums";
 import { GlassmorphismLayout } from "@/components/biolink/layout/glassmorphism-layout";
@@ -18,7 +18,7 @@ export interface LayoutProps {
   user: User;
   config: Config;
   links: LinkOptions;
-  modules?: Modules;
+  widgets?: Widgets;
   preview?: boolean;
 }
 
@@ -41,7 +41,7 @@ export function Layout({
             effects={biolink.config.effects}
           >
             <GlassmorphismLayout
-              modules={biolink.modules}
+              widgets={biolink.widgets}
               user={biolink.user}
               links={biolink.links}
               config={biolink.config}
@@ -58,7 +58,7 @@ export function Layout({
             effects={biolink.config.effects}
           >
             <WithCoverLayout
-              modules={biolink.modules}
+              widgets={biolink.widgets}
               user={biolink.user}
               links={biolink.links}
               config={biolink.config}
@@ -75,7 +75,7 @@ export function Layout({
             effects={biolink.config.effects}
           >
             <ProfessionalLayout
-              modules={biolink.modules}
+              widgets={biolink.widgets}
               user={biolink.user}
               links={biolink.links}
               config={biolink.config}
@@ -92,7 +92,7 @@ export function Layout({
             effects={biolink.config.effects}
           >
             <BoldLayout
-              modules={biolink.modules}
+              widgets={biolink.widgets}
               user={biolink.user}
               links={biolink.links}
               config={biolink.config}
@@ -112,7 +112,7 @@ export function Layout({
       effects={biolink.config.effects}
     >
       <StandardLayout
-        modules={biolink.modules}
+        widgets={biolink.widgets}
         user={biolink.user}
         links={biolink.links}
         config={biolink.config}
@@ -129,13 +129,15 @@ export function LayoutWrapper({
   premium = true,
 }: {
   children: React.ReactNode;
-  effects: EffectsOptions;
+  effects?: EffectsOptions;
   preview?: boolean;
   premium: boolean;
 }) {
   return (
     <div>
-      {premium && <WeatherEffect preview={preview} variant={effects.weather} />}
+      {premium && (
+        <WeatherEffect preview={preview} variant={effects?.weather} />
+      )}
       {children}
     </div>
   );

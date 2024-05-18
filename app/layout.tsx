@@ -25,7 +25,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster position="top-right" richColors closeButton />
-          <NextTopLoader color="#3F51B5" showSpinner={false} />
+          <NextTopLoader color="#3F51B5" height={4} showSpinner={false} />
           {children}
         </ThemeProvider>
       </body>

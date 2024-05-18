@@ -35,7 +35,7 @@ export enum WeatherEffect {
   Staras = "stars",
 }
 
-export enum TopIconStyle {
+export enum IconStyle {
   SocialBackgroundWhiteColor = "social-background-white-color",
   BlackBackgroundWhiteColor = "black-background-white-color",
   WhiteBackgroundBlackColor = "white-background-black-color",

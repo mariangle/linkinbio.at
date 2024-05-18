@@ -66,7 +66,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         layout: convertToLayout(user.profile?.layout),
         hideUsername: user.profile?.hideUsername ?? false,
       },
-      button: {
+      buttons: {
         shadow: {
           solid: user.button?.shadowSolid ?? false,
           spreadRadius: user.button?.shadowSpreadRadius ?? 0,
@@ -99,20 +99,17 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         color: user.background?.color ?? "#0055B3",
         url: user.background?.url ?? undefined,
         gradient: {
-          startColor:
-            (true && user.background?.gradientStartColor) ?? undefined,
+          startColor: user.background?.gradientStartColor ?? undefined,
           endColor: user.background?.gradientEndColor ?? undefined,
           angle: user.background?.gradientAngle ?? 0,
         },
       },
-      topIcon: {
-        shadow: user.topIcon?.shadow ?? false,
+      icons: user.topIcon && {
+        shadow: user.topIcon.shadow ?? undefined,
         style: convertToTopIconStyle(user.topIcon?.style),
-        color: user.topIcon?.color ?? "#FFFFFF",
-        customized: user.topIcon ? true : false,
+        color: user.topIcon.color ?? undefined,
       },
-      effects: {
-        customized: user.effect ? true : false,
+      effects: user.effect && {
         title: convertToTitleEffect(user.effect?.titleEffect),
         weather: convertToWeatherEffect(user.effect?.weatherEffect),
       },
@@ -125,7 +122,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         ? user.platformLinks?.map((link) => constructLinkFromPlatform(link))
         : [],
     },
-    modules: {
+    widgets: {
       spotify: user.spotify && {
         enabled: user.spotify.enabled,
         compactLayout: user.spotify.compactLayout,

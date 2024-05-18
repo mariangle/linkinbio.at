@@ -19,6 +19,7 @@ import { useFormSubmit } from "@/hooks/use-form-submit";
 import { ModuleButton } from "@/components/dashboard/module-button";
 import { FormContainer, FormContent } from "@/components/dashboard/form";
 import { LockedPremiumIcon } from "@/components/dashboard/premium-feature";
+import { SpotifyOptions as SpotifyData } from "@/lib/types";
 
 const tabs = [
   {
@@ -40,37 +41,37 @@ export function SpotifyForm({
   modified,
   premium,
 }: {
-  data: {
-    contentId: string;
-    type: ContentType;
-    enabled: boolean;
-    darkBackground: boolean;
-    compactLayout: boolean;
-  };
+  data?: SpotifyData;
   modified?: boolean;
   premium: boolean;
 }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
   const [tab, setTab] = React.useState(
-    tabs.find((item) => item.value === data.type) ?? tabs[0],
+    tabs.find((item) => item.value === data?.type) ?? tabs[0],
   );
 
   const form = useForm<SpotifyFormValues>({
     resolver: zodResolver(SpotifyFormSchema),
     defaultValues: {
-      contentId: data.contentId,
-      type: data.type,
-      enabled: data.enabled ?? true,
-      darkBackground: data.darkBackground,
-      compactLayout: data.compactLayout,
+      contentId: data?.contentId,
+      type: data?.type,
+      enabled: data?.enabled ?? true,
+      darkBackground: data?.darkBackground,
+      compactLayout: data?.compactLayout,
     },
   });
 
   const { loading, dirty, submit, remove } = useFormSubmit<SpotifyFormValues>({
-    initialData: data,
+    initialData: {
+      contentId: data?.contentId ?? "",
+      type: data?.type ?? ContentType.Track,
+      enabled: data?.enabled ?? true,
+      darkBackground: data?.darkBackground ?? false,
+      compactLayout: data?.compactLayout ?? false,
+    },
     formValues: { ...form.getValues(), type: tab.value },
-    endpoint: "/api/manage/modules/spotify",
+    endpoint: "/api/manage/widgets/spotify",
     modified,
   });
 
@@ -79,8 +80,8 @@ export function SpotifyForm({
       if (biolink) {
         setBiolink({
           ...biolink,
-          modules: {
-            ...biolink.modules,
+          widgets: {
+            ...biolink.widgets,
             spotify: {
               contentId: value.contentId ?? "",
               type: tab.value,

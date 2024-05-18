@@ -1,6 +1,6 @@
 import {
   Layout,
-  TopIconStyle,
+  IconStyle,
   WeatherEffect,
   ContentType,
   TitleEffect,
@@ -14,15 +14,15 @@ import {
 
 export function convertToPrismaTopIconStyle(iconStyle: string) {
   switch (iconStyle) {
-    case TopIconStyle.SocialBackgroundWhiteColor:
+    case IconStyle.SocialBackgroundWhiteColor:
       return PrismaTopIconStyle.SocialBackgroundWhiteColor;
-    case TopIconStyle.BlackBackgroundWhiteColor:
+    case IconStyle.BlackBackgroundWhiteColor:
       return PrismaTopIconStyle.BlackBackgroundWhiteColor;
-    case TopIconStyle.WhiteBackgroundBlackColor:
+    case IconStyle.WhiteBackgroundBlackColor:
       return PrismaTopIconStyle.WhiteBackgroundBlackColor;
-    case TopIconStyle.NoBackgroundSocialColor:
+    case IconStyle.NoBackgroundSocialColor:
       return PrismaTopIconStyle.NoBackgroundSocialColor;
-    case TopIconStyle.WhiteBackgroundSocialColor:
+    case IconStyle.WhiteBackgroundSocialColor:
       return PrismaTopIconStyle.WhiteBackgroundSocialColor;
     default:
       return null;
@@ -34,15 +34,15 @@ export function convertToTopIconStyle(
 ) {
   switch (prismaTopIconStyle) {
     case PrismaTopIconStyle.SocialBackgroundWhiteColor:
-      return TopIconStyle.SocialBackgroundWhiteColor;
+      return IconStyle.SocialBackgroundWhiteColor;
     case PrismaTopIconStyle.BlackBackgroundWhiteColor:
-      return TopIconStyle.BlackBackgroundWhiteColor;
+      return IconStyle.BlackBackgroundWhiteColor;
     case PrismaTopIconStyle.WhiteBackgroundBlackColor:
-      return TopIconStyle.WhiteBackgroundBlackColor;
+      return IconStyle.WhiteBackgroundBlackColor;
     case PrismaTopIconStyle.NoBackgroundSocialColor:
-      return TopIconStyle.NoBackgroundSocialColor;
+      return IconStyle.NoBackgroundSocialColor;
     case PrismaTopIconStyle.WhiteBackgroundSocialColor:
-      return TopIconStyle.WhiteBackgroundSocialColor;
+      return IconStyle.WhiteBackgroundSocialColor;
     default:
       return undefined;
   }

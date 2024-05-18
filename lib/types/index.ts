@@ -9,4 +9,4 @@ export * from "./effect";
 export * from "./icon";
 export * from "./enums";
 export * from "./profile";
-export * from "./modules";
+export * from "./widgets";

@@ -10,10 +10,6 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
 import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
-import {
-  DashboardModeToggle,
-  ModeToggle,
-} from "@/components/dashboard/mode-toggle";
 import { UserNav } from "./user-nav";
 import { EyeIcon } from "lucide-react";
 import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
@@ -23,6 +19,7 @@ import { User } from "@/lib/types";
 export function Navigation({ user }: { user: User }) {
   const { setOpen, open } = useBiolinkPreviewStore();
   const [isCollapsed, setIsCollapsed] = React.useState(true);
+
   return (
     <header
       className={cn(
@@ -80,9 +77,6 @@ export function Navigation({ user }: { user: User }) {
                       </Link>
                     </li>
                   ))}
-                  <button className="bg-glass-secondary flex items-center justify-center rounded-lg px-3 py-1">
-                    <ModeToggle />
-                  </button>
                 </ul>
                 <div className="bg-gradient-fade h-px w-full" />
               </motion.div>
@@ -96,7 +90,7 @@ export function Navigation({ user }: { user: User }) {
                   alt="logo"
                   width={50}
                   height={50}
-                  className="size-7 shrink-0 opacity-75 invert-0"
+                  className="size-7 shrink-0 invert-0"
                 />
               </div>
               <ul className="flex flex-row gap-2 md:my-2 md:flex-col">
@@ -119,9 +113,6 @@ export function Navigation({ user }: { user: User }) {
               <div className="bg-gradient-fade h-full w-px md:h-px md:w-full" />
               <div className="flex flex-row items-center gap-3 md:mt-4 md:w-full md:flex-col">
                 <UserNav user={user} />
-                <div className="hidden md:block">
-                  <DashboardModeToggle />
-                </div>
                 <div className="md:w-full">
                   <BurgerMenu
                     isMenuOpen={!isCollapsed}

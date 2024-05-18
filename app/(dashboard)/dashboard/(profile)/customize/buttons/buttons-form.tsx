@@ -81,7 +81,7 @@ export function ButtonsForm({
           ...biolink,
           config: {
             ...biolink.config,
-            button: {
+            buttons: {
               shadow: {
                 solid: value.shadowSolid ?? data.shadowSolid,
                 spreadRadius:

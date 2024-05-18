@@ -4,7 +4,7 @@ import {
   Font,
   Layout,
   TitleEffect,
-  TopIconStyle,
+  IconStyle,
   WeatherEffect,
 } from "@/lib/types";
 
@@ -35,7 +35,7 @@ export const dummyUser: Biolink = {
       layout: Layout.Standard,
       hideUsername: false,
     },
-    button: {
+    buttons: {
       shadow: {
         solid: false,
         spreadRadius: 5,
@@ -72,15 +72,12 @@ export const dummyUser: Biolink = {
         endColor: "#DD2476",
       },
     },
-
-    topIcon: {
+    icons: {
       shadow: false,
-      style: TopIconStyle.SocialBackgroundWhiteColor,
-      customized: true,
+      style: IconStyle.SocialBackgroundWhiteColor,
       color: "#FFFFFF",
     },
     effects: {
-      customized: true,
       title: TitleEffect.Typewriter,
       weather: WeatherEffect.Rain,
     },
@@ -151,7 +148,7 @@ export const dummyUser: Biolink = {
       },
     ],
   },
-  modules: {
+  widgets: {
     spotify: {
       enabled: true,
       compactLayout: true,

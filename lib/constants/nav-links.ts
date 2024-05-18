@@ -1,16 +1,17 @@
-import { Settings, LineChart } from "lucide-react";
-import { FaLink, FaPalette, FaLayerGroup, FaUser } from "react-icons/fa";
+import {
+  FaLink,
+  FaUser,
+  FaPencilRuler,
+  FaChartBar,
+  FaCog,
+  FaChartPie,
+} from "react-icons/fa";
 
 export const dashboardLinks = [
   {
-    label: "Analytics",
-    href: "/dashboard/analytics",
-    icon: LineChart,
-  },
-  {
     label: "Settings",
     href: "/dashboard/settings",
-    icon: Settings,
+    icon: FaCog,
   },
 ];
 
@@ -26,14 +27,14 @@ export const biolinkLinks = [
     icon: FaLink,
   },
   {
-    label: "Appearance",
-    href: "/dashboard/appearance",
-    icon: FaPalette,
+    label: "Customize",
+    href: "/dashboard/customize/typography",
+    icon: FaPencilRuler,
   },
   {
-    label: "Modules",
-    href: "/dashboard/modules",
-    icon: FaLayerGroup,
+    label: "Analytics",
+    href: "/dashboard/analytics",
+    icon: FaChartPie,
   },
 ];
 

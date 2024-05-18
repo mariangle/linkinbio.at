@@ -41,7 +41,7 @@ export function YoutubeForm({
   const { loading, dirty, submit, remove } = useFormSubmit<YoutubeFormValues>({
     initialData: data,
     formValues: form.getValues(),
-    endpoint: "/api/manage/modules/youtube",
+    endpoint: "/api/manage/widgets/youtube",
     modified,
   });
 
@@ -50,8 +50,8 @@ export function YoutubeForm({
       if (biolink) {
         setBiolink({
           ...biolink,
-          modules: {
-            ...biolink.modules,
+          widgets: {
+            ...biolink.widgets,
             youtube: {
               enabled: value.enabled ?? false,
               videoId: value.videoId || "",

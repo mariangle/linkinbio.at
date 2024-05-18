@@ -34,7 +34,7 @@ export async function PATCH(req: Request) {
     status: 200,
     ok: true,
     data: topIcon,
-    message: "Top icons updated successfully",
+    message: "Icons updated successfully",
   });
 }
 
@@ -67,6 +67,6 @@ export async function POST(req: Request) {
     status: 200,
     ok: true,
     data: topIcon,
-    message: "Top icons updated successfully",
+    message: "Icons updated successfully",
   });
 }

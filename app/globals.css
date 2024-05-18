@@ -27,7 +27,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 85.8%;
+    --border: 0 0% 90.8%;
     --input: 0 0% 99.5%;
     --ring: 0 0% 3.9%;
 
@@ -58,7 +58,7 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 10%;
+    --border: 0 0% 20%;
     --input: 0 0% 14%;
     --ring: 0 0% 83.1%;
   }
@@ -144,7 +144,7 @@
     border-radius: 40px;
     box-shadow:
       0 0 0 8px #212121,
-      0 0 0 14px #3a3a3a;
+      0 0 0 9px #3f51b5;
   }
 
   .iphone-x:before,
@@ -184,19 +184,15 @@
   }
 
   .bg-glass {
-    @apply bg-gradient-to-b from-white/15 to-white/20 backdrop-blur-3xl dark:from-gray-950/15 dark:to-gray-950/20;
-  }
-
-  .bg-popover {
-    @apply bg-gradient-to-b from-white/50 to-white/25 backdrop-blur-3xl dark:from-gray-950/50 dark:to-gray-950/25;
+    @apply bg-gradient-to-b from-white/15 to-white/20 backdrop-blur-3xl dark:from-neutral-800/50 dark:to-neutral-900/50;
   }
 
   .bg-glass-secondary {
-    @apply bg-white/25 backdrop-blur-3xl dark:bg-black/15;
+    @apply bg-white/25 backdrop-blur-3xl dark:bg-neutral-700/50;
   }
 
   .border-glass {
-    @apply border-white/10 dark:border-white/5;
+    @apply border-white/10 dark:border-white/15;
   }
 
   .bg-gradient-fade {

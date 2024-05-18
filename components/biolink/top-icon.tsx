@@ -1,28 +1,41 @@
 "use client";
 
 import React from "react";
-import type { PlatformLink, TopIconOptions } from "@/lib/types";
+import type { IconOptions } from "@/lib/types";
 import { Platform } from "@/lib/constants/platforms";
 import { cn } from "@/lib/utils";
-import { TopIconStyle } from "@/lib/types";
+import { IconStyle } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import { useTracking } from "@/hooks/use-tracking";
 import { getIconByProvider } from "@/lib/utils/icon";
 import { getPlatformByProvider } from "@/lib/utils/platform";
 
-export function TopIcon({
-  item,
-  options,
-  size,
-}: {
-  item: Pick<PlatformLink, "isTopIcon" | "provider" | "url" | "id" | "title">;
-  options: TopIconOptions;
+interface TopIconProps {
+  item: {
+    provider: string;
+    url?: string;
+    id?: string;
+  };
+  options?: IconOptions;
   className?: string;
-  size?: "sm";
-}) {
-  if (!item?.isTopIcon) return null;
+  size?: "sm" | "md" | "lg";
+}
 
+export function TopIcon({
+  item = {
+    provider: "",
+    url: "",
+    id: "",
+  },
+  options = {
+    shadow: false,
+    color: "#FFFFFF",
+  },
+  size = "md",
+}: TopIconProps) {
   const platform = getPlatformByProvider(item.provider);
+
+  if (!platform) return null;
 
   const getDropShadow = (color: string) => {
     return options.shadow ? `drop-shadow(0 0 0.35rem ${color})` : undefined;
@@ -81,9 +94,9 @@ export function TopIcon({
     if (!backgroundOptions) {
       return (
         <TopIconLink
-          social={{
+          link={{
             id: item.id,
-            name: platform?.name || item.title,
+            name: platform?.name!,
             url: item.url,
           }}
         >
@@ -92,7 +105,11 @@ export function TopIcon({
               filter,
               color,
             }}
-            className={cn("size-6", size === "sm" && "size-5")}
+            className={cn(
+              "size-6",
+              size === "sm" && "size-5",
+              size === "lg" && "size-7",
+            )}
           />
         </TopIconLink>
       );
@@ -104,9 +121,9 @@ export function TopIcon({
 
     return (
       <TopIconLink
-        social={{
+        link={{
           id: item.id,
-          name: platform?.name || item.title,
+          name: platform?.name!,
           url: item.url,
         }}
       >
@@ -114,6 +131,7 @@ export function TopIcon({
           className={cn(
             "grid size-8 place-content-center rounded-full",
             size === "sm" && "size-7",
+            size === "lg" && "size-9",
           )}
           style={{
             filter,
@@ -124,14 +142,18 @@ export function TopIcon({
             style={{
               color,
             }}
-            className={cn("size-[18px]", size === "sm" && "size-4")}
+            className={cn(
+              "size-[18px]",
+              size === "sm" && "size-4",
+              size === "lg" && "size-5",
+            )}
           />
         </div>
       </TopIconLink>
     );
   }
 
-  if (options.style === TopIconStyle.SocialBackgroundWhiteColor) {
+  if (options.style === IconStyle.SocialBackgroundWhiteColor) {
     return (
       <TopIconDisplay
         shadowOptions={{
@@ -150,7 +172,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.BlackBackgroundWhiteColor) {
+  if (options.style === IconStyle.BlackBackgroundWhiteColor) {
     return (
       <TopIconDisplay
         shadowOptions={{
@@ -169,7 +191,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.WhiteBackgroundBlackColor) {
+  if (options.style === IconStyle.WhiteBackgroundBlackColor) {
     return (
       <TopIconDisplay
         shadowOptions={{
@@ -188,7 +210,7 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.WhiteBackgroundSocialColor) {
+  if (options.style === IconStyle.WhiteBackgroundSocialColor) {
     return (
       <TopIconDisplay
         shadowOptions={{
@@ -207,15 +229,15 @@ export function TopIcon({
     );
   }
 
-  if (options.style === TopIconStyle.NoBackgroundSocialColor) {
+  if (options.style === IconStyle.NoBackgroundSocialColor) {
     return (
       <TopIconDisplay
         shadowOptions={{
-          color: options.color,
+          color: options.color ?? blackColor,
           colorOnly: false,
         }}
         iconOptions={{
-          color: options.color,
+          color: options.color ?? blackColor,
           colorOnly: false,
         }}
       />
@@ -225,11 +247,11 @@ export function TopIcon({
   return (
     <TopIconDisplay
       shadowOptions={{
-        color: options.color,
+        color: options.color ?? whiteColor,
         colorOnly: true,
       }}
       iconOptions={{
-        color: options.color,
+        color: options.color ?? whiteColor,
         colorOnly: true,
       }}
     />
@@ -238,28 +260,36 @@ export function TopIcon({
 
 export function TopIconLink({
   children,
-  social,
+  link,
 }: {
   children: React.ReactNode;
-  social: {
+  link: {
     id?: string;
-    url: string;
+    url?: string;
     name: string;
   };
 }) {
   const { trackClick } = useTracking();
 
+  const isPreview = !link.id || !link.url || !link.name;
+
   const redirect = async () => {
-    window.open(social.url, "_blank");
+    if (isPreview) return;
 
-    if (!social.id) return;
+    window.open(link.url, "_blank");
 
-    await trackClick(social.id, true);
+    await trackClick(link.id!, true);
   };
 
   return (
-    <Tooltip content={social.name} smallWidth>
-      <button onClick={redirect} className="group relative block w-fit">
+    <Tooltip content={link.name} smallWidth>
+      <button
+        onClick={redirect}
+        className={cn(
+          "group relative block w-fit",
+          isPreview && "cursor-default",
+        )}
+      >
         {children}
       </button>
     </Tooltip>

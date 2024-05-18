@@ -10,7 +10,7 @@ import { SoundcloudTrack } from "@/components/biolink/modules/soundcloud";
 import { PerspectiveContainer } from "./perspective-container";
 import { ButtonCustomizer } from "./button-showcase";
 import { ProfileShowcase } from "./profile-showcase";
-import { TopIconStyle } from "@/lib/types";
+import { IconStyle } from "@/lib/types";
 import { ProfileShowcaseSecondary } from "./profile-showcase-secondary";
 import { TopIcon } from "@/components/biolink/top-icon";
 import Link from "next/link";
@@ -30,12 +30,12 @@ export function HeroShowcase() {
             }}
           />
         </PerspectiveContainer>
-        <div className="pointer-events-none flex items-center gap-2 rounded-full border bg-white px-3 py-2 dark:bg-neutral-900">
+        <div className="flex items-center gap-2 rounded-full border bg-white px-3 py-2 dark:bg-neutral-900">
           {iconLinks.map((item, idx) => (
             <TopIcon
               options={{
                 color: "#000000",
-                style: TopIconStyle.SocialBackgroundWhiteColor,
+                style: IconStyle.SocialBackgroundWhiteColor,
                 shadow: true,
               }}
               key={idx}
@@ -73,7 +73,7 @@ export function HeroShowcase() {
           </PerspectiveContainer>
           <PerspectiveContainer className="ml-8">
             <Button
-              config={dummyUser.config.button}
+              config={dummyUser.config.buttons}
               item={dummyUser.links.platform[3]}
             />
           </PerspectiveContainer>
@@ -101,43 +101,15 @@ export function ViewLiveExample() {
 
 const iconLinks = [
   {
-    id: "example_link_id",
-    order: 0,
-    title: "Instagram",
-    url: "https://instagram.com/username",
-    isTopIcon: true,
     provider: "Instagram",
-    username: "username",
-    archived: false,
   },
   {
-    id: "example_link_id",
-    order: 0,
-    title: "Snapchat",
-    url: "https://snapchat.com/username",
-    isTopIcon: true,
     provider: "Snapchat",
-    username: "username",
-    archived: false,
   },
   {
-    id: "example_link_id",
-    order: 0,
-    title: "Tiktok",
-    url: "https://tiktok.com/username",
-    isTopIcon: true,
     provider: "Tiktok",
-    username: "username",
-    archived: false,
   },
   {
-    id: "example_link_id",
-    order: 0,
-    title: "LinkedIn",
-    url: "https://linkedin.com/in/username",
-    isTopIcon: true,
     provider: "LinkedIn",
-    username: "username",
-    archived: false,
   },
 ];

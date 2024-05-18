@@ -2,14 +2,14 @@ import type {
   BackgroundOptions,
   ButtonOptions,
   EffectsOptions,
-  TopIconOptions,
+  IconOptions,
   ProfileOptions,
 } from ".";
 
 export interface Config {
   profile: ProfileOptions;
   background: BackgroundOptions;
-  button: ButtonOptions;
-  topIcon: TopIconOptions;
-  effects: EffectsOptions;
+  buttons: ButtonOptions;
+  icons?: IconOptions;
+  effects?: EffectsOptions;
 }

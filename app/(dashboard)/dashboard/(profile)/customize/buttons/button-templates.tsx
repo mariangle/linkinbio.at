@@ -1,6 +1,5 @@
 import { ButtonOptions } from "@/lib/types";
 import { Button } from "@/components/biolink/button";
-import Image from "next/image";
 
 const buttonTemplates: ButtonOptions[] = [
   {

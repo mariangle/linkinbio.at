@@ -45,7 +45,7 @@ export function Title({
     <div className="relative w-fit">
       {user.premium && options.effect === TitleEffect.Sparkles && (
         <Image
-          src="/sparkle.gif"
+          src="/effects/sparkles.gif"
           alt="sparkle"
           unoptimized
           width="0"
@@ -56,7 +56,7 @@ export function Title({
       )}
       {user.premium && options.effect === TitleEffect.CherryBlossoms && (
         <Image
-          src="/cherry-blossoms.gif"
+          src="/effects/cherry-blossoms.gif"
           alt="cherry blossoms"
           unoptimized
           width="0"

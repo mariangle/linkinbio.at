@@ -1,8 +1,7 @@
-import type { TopIconStyle } from ".";
+import type { IconStyle } from ".";
 
-export interface TopIconOptions {
-  shadow: boolean;
-  style?: TopIconStyle;
-  color: string;
-  customized?: boolean;
+export interface IconOptions {
+  shadow?: boolean;
+  style?: IconStyle;
+  color?: string;
 }
