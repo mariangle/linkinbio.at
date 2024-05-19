@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { signIn } from "next-auth/react";
-import { Button } from "@/components/ui/button";
 import { FaGoogle } from "react-icons/fa";
 
 type Variant = "sign-in" | "sign-up";
@@ -46,7 +45,7 @@ export function AuthForm({ variant }: { variant: Variant }) {
       <div className="pointer-events-auto mt-4">
         <button
           onClick={login}
-          disabled={true}
+          disabled={false}
           className="flex h-12 w-full cursor-not-allowed items-center gap-2 rounded-full bg-foreground px-4 font-medium text-background disabled:opacity-70"
         >
           <FaGoogle className="size-4" />

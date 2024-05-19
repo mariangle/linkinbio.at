@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { FaSpotify } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ContentType } from "@/lib/types";
@@ -15,10 +15,9 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { SpotifyFormValues, SpotifyFormSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { ModuleButton } from "@/components/dashboard/module-button";
 import { FormContainer, FormContent } from "@/components/dashboard/form";
-import { LockedPremiumIcon } from "@/components/dashboard/premium-feature";
 import { SpotifyOptions as SpotifyData } from "@/lib/types";
 
 const tabs = [
@@ -36,15 +35,7 @@ const tabs = [
   },
 ];
 
-export function SpotifyForm({
-  data,
-  modified,
-  premium,
-}: {
-  data?: SpotifyData;
-  modified?: boolean;
-  premium: boolean;
-}) {
+export function SpotifyForm({ data }: { data?: SpotifyData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
   const [tab, setTab] = React.useState(
@@ -62,7 +53,7 @@ export function SpotifyForm({
     },
   });
 
-  const { loading, dirty, submit, remove } = useFormSubmit<SpotifyFormValues>({
+  const { loading, submit } = useFormSubmit<SpotifyFormValues>({
     initialData: {
       contentId: data?.contentId ?? "",
       type: data?.type ?? ContentType.Track,
@@ -72,7 +63,6 @@ export function SpotifyForm({
     },
     formValues: { ...form.getValues(), type: tab.value },
     endpoint: "/api/manage/widgets/spotify",
-    modified,
   });
 
   React.useEffect(() => {
@@ -100,19 +90,8 @@ export function SpotifyForm({
     await submit();
   };
 
-  const onDelete = async () => {
-    await remove();
-
-    form.reset({
-      contentId: "",
-      enabled: true,
-      darkBackground: false,
-      compactLayout: false,
-    });
-  };
-
   return (
-    <FormContainer disabled={!premium} noBanner>
+    <FormContainer>
       <FormContent>
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
@@ -123,7 +102,6 @@ export function SpotifyForm({
               <FaSpotify className="size-5 text-green-500" />
               Spotify
             </button>
-            {!premium && <LockedPremiumIcon />}
           </div>
           <button onClick={() => setExpanded(!expanded)}>
             <ChevronDown
@@ -243,17 +221,12 @@ export function SpotifyForm({
                     />
                   </div>
                   <div className="flex items-center justify-end gap-4">
-                    {modified && (
-                      <ModuleButton onClick={onDelete} type="button">
-                        Delete
-                      </ModuleButton>
-                    )}
                     <ModuleButton
                       loading={loading}
                       variant="spotify"
                       type="submit"
                     >
-                      {modified ? "Update" : "Add"}
+                      Update
                     </ModuleButton>
                   </div>
                 </form>

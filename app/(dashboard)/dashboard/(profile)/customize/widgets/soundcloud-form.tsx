@@ -7,34 +7,26 @@ import { ChevronDown } from "lucide-react";
 import { FaSoundcloud } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { Switch } from "@/components/ui/switch";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { SoundcloudFormSchema, SoundcloudFormValues } from "@/lib/validations";
+import { SoundcloudOptions as SoundcloudData } from "@/lib/types";
 import { useForm } from "react-hook-form";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModuleButton } from "@/components/dashboard/module-button";
 import { FormContainer, FormContent } from "@/components/dashboard/form";
 
-export function SoundcloudForm({
-  modified,
-  data,
-}: {
-  modified?: boolean;
-  data: {
-    trackId: string;
-    enabled: boolean;
-  };
-}) {
+export function SoundcloudForm({ data }: { data?: SoundcloudData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
 
   const form = useForm<SoundcloudFormValues>({
     resolver: zodResolver(SoundcloudFormSchema),
     defaultValues: {
-      trackId: data.trackId,
-      enabled: data.enabled,
+      trackId: data?.trackId,
+      enabled: data?.enabled,
     },
   });
 
@@ -43,7 +35,6 @@ export function SoundcloudForm({
       initialData: data,
       formValues: form.getValues(),
       endpoint: "/api/manage/widgets/soundcloud",
-      modified,
     });
 
   React.useEffect(() => {
@@ -143,17 +134,12 @@ export function SoundcloudForm({
                     />
                   </div>
                   <div className="flex items-center justify-end gap-4">
-                    {modified && (
-                      <ModuleButton onClick={onDelete} type="button">
-                        Delete
-                      </ModuleButton>
-                    )}
                     <ModuleButton
                       loading={loading}
                       variant="soundcloud"
                       type="submit"
                     >
-                      {modified ? "Update" : "Add"}
+                      Update
                     </ModuleButton>
                   </div>
                 </form>

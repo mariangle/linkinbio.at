@@ -3,7 +3,7 @@ import * as React from "react";
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
 import { Loading } from "@/components/loading";
-import { dummyUser } from "@/lib/dummy";
+import { dummyBiolink } from "@/lib/dummy";
 
 export async function generateMetadata({
   params,
@@ -14,7 +14,7 @@ export async function generateMetadata({
 }) {
   try {
     return await constructMetadata({
-      title: dummyUser.user.title ?? dummyUser.user.username,
+      title: dummyBiolink.user.title ?? dummyBiolink.user.username,
       image: "",
       description: "biolink.user.bio",
     });
@@ -32,7 +32,7 @@ export default async function Page({
 }) {
   return (
     <React.Suspense fallback={<Loading />}>
-      <Layout biolink={dummyUser} />
+      <Layout biolink={dummyBiolink} />
     </React.Suspense>
   );
 }

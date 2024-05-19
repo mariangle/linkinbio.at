@@ -7,22 +7,15 @@ import { LayoutPreview } from "@/components/dashboard/layout-preview";
 
 import { Layout } from "@/lib/types/enums";
 import { layouts } from "@/lib/constants/layouts";
-import { LockedPremiumIcon } from "@/components/dashboard/premium-feature";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useBiolinkPreviewStore } from "@/lib/store";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { Button } from "@/components/ui/button";
 
-export function LayoutForm({
-  layout: defaultLayout,
-  modified,
-  premium,
-}: {
-  layout: Layout;
-  modified?: boolean;
-  premium: boolean;
-}) {
+export function LayoutForm({ layout: defaultLayout }: { layout?: Layout }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
-  const [layout, setLayout] = React.useState<Layout>(defaultLayout);
+  const [layout, setLayout] = React.useState<Layout>(
+    defaultLayout ?? Layout.Standard,
+  );
 
   const { loading, dirty, submit } = useFormSubmit({
     initialData: {
@@ -32,7 +25,6 @@ export function LayoutForm({
       layout: layout,
     },
     endpoint: "/api/manage/layout",
-    modified,
   });
 
   React.useEffect(() => {
@@ -56,23 +48,18 @@ export function LayoutForm({
       <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-3">
         {layouts.map((item, index) => {
           const selected = layout === item.value;
-          const disabled = !premium && item.premium;
           return (
             <div
               onClick={async () => {
-                if (premium) setLayout(item.value);
+                setLayout(item.value);
               }}
               role="button"
               key={index}
               className={cn(
                 "flex flex-col items-center justify-center gap-2 p-2",
-                disabled && "opacity-70",
               )}
             >
-              <div className="flex items-center gap-2">
-                <div className="text-xl font-semibold">{item.name}</div>
-                {disabled && <LockedPremiumIcon />}
-              </div>
+              <div className="text-xl font-semibold">{item.name}</div>
               <div
                 className={cn(
                   "flex w-full justify-center border border-transparent px-4 py-4",

@@ -32,7 +32,7 @@ export function Layout({
   layout?: LayoutEnum;
 }) {
   if (biolink.user.premium) {
-    switch (layout ?? biolink.config.profile.layout) {
+    switch (layout ?? biolink.config.profile?.layout) {
       case LayoutEnum.Glassmorphism:
         return (
           <LayoutWrapper
@@ -134,7 +134,7 @@ export function LayoutWrapper({
   premium: boolean;
 }) {
   return (
-    <div>
+    <div className="h-full w-full">
       {premium && (
         <WeatherEffect preview={preview} variant={effects?.weather} />
       )}

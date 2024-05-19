@@ -10,24 +10,9 @@ export default async function Widgets() {
 
   return (
     <>
-      <SpotifyForm
-        data={biolink.widgets.spotify}
-        premium={biolink.user.premium}
-      />
-      <SoundcloudForm
-        data={{
-          trackId: biolink.widgets.soundcloud?.trackId ?? "",
-          enabled: biolink.widgets.soundcloud?.enabled ?? true,
-        }}
-        modified={!!biolink.widgets.soundcloud}
-      />
-      <YoutubeForm
-        data={{
-          videoId: biolink.widgets.youtube?.videoId ?? "",
-          enabled: biolink.widgets.youtube?.enabled ?? true,
-        }}
-        modified={!!biolink.widgets.youtube}
-      />
+      <SpotifyForm data={biolink.widgets.spotify} />
+      <SoundcloudForm data={biolink.widgets.soundcloud} />
+      <YoutubeForm data={biolink.widgets.youtube} />
     </>
   );
 }

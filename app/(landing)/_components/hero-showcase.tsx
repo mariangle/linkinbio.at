@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { dummyUser } from "@/lib/dummy";
+import { dummyBiolink } from "@/lib/dummy";
 
 import { Button } from "@/components/biolink/button";
 import { SpotifyTrack } from "@/components/biolink/modules/spotify";
@@ -12,7 +12,7 @@ import { ButtonCustomizer } from "./button-showcase";
 import { ProfileShowcase } from "./profile-showcase";
 import { IconStyle } from "@/lib/types";
 import { ProfileShowcaseSecondary } from "./profile-showcase-secondary";
-import { TopIcon } from "@/components/biolink/top-icon";
+import { TopIcon } from "@/components/biolink/icon";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -71,12 +71,16 @@ export function HeroShowcase() {
           <PerspectiveContainer className="mr-2">
             <ViewLiveExample />
           </PerspectiveContainer>
-          <PerspectiveContainer className="ml-8">
-            <Button
-              config={dummyUser.config.buttons}
-              item={dummyUser.links.platform[3]}
+          {/* Need to change this as button only takes in  websitelinks
+                      <PerspectiveContainer className="ml-8">
+
+             <Button
+              config={dummyBiolink.config.buttons}
+              item={dummyBiolink.links.platform[3]}
             />
-          </PerspectiveContainer>
+                      </PerspectiveContainer>
+
+            */}
         </div>
       </div>
     </div>

@@ -24,7 +24,6 @@ export interface Analytics {
   };
   popularLinks: {
     id: string;
-    title: string;
     url: string;
     clicks: number;
   }[];
@@ -120,7 +119,6 @@ async function getAnalytics(): Promise<Analytics | null> {
   const sortedLinks = allLinks
     .map((link) => ({
       id: link.id,
-      title: link.title,
       url:
         //@ts-ignore
         link.url ??
@@ -136,7 +134,6 @@ async function getAnalytics(): Promise<Analytics | null> {
 
   const popularLinks = sortedLinks.map((link) => ({
     id: link.id,
-    title: link.title,
     url: link.url,
     clicks: link.clicks,
   }));
@@ -224,7 +221,6 @@ export default async function Analytics() {
                 key={link.id}
                 className="bg-glass border-glass rounded-lg border p-2"
               >
-                <div className="text-xs font-medium">{link.title}</div>
                 <Link
                   href={link.url}
                   target="_blank"

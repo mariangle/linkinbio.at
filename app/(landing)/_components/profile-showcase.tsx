@@ -8,7 +8,7 @@ import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { dummyUser } from "@/lib/dummy";
+import { dummyBiolink } from "@/lib/dummy";
 import { Details } from "@/components/biolink/details";
 import { WeatherEffect } from "@/components/biolink/effects/weather-effect";
 
@@ -17,7 +17,7 @@ export function ProfileShowcase() {
     <div className="relative w-[240px]">
       <WeatherEffect variant={Weather.Thunder} preview />
       <div className="relative w-fit overflow-hidden rounded-2xl p-4">
-        {dummyUser.config.background.url && (
+        {dummyBiolink.config.background?.url && (
           <Image
             src="/background.jpg"
             className="absolute inset-0 h-full w-full object-cover"
@@ -29,39 +29,30 @@ export function ProfileShowcase() {
         )}
         <div className="relative mx-auto flex max-w-md flex-col items-start justify-center">
           <ProfilePicture
-            src={dummyUser.user.image}
+            src={dummyBiolink.user.image}
             nullable
             className="mb-4 rounded-[1.2rem]"
           />
           <Title
             options={{
               color: "#0cbb18",
-              effect: TitleEffect.Typewriter,
               font: Font.Creepster,
             }}
-            user={dummyUser.user}
+            effect={dummyBiolink.config.effects?.title}
+            user={dummyBiolink.user}
           />
           <Username
-            username={dummyUser.user.username}
-            options={{
-              font: dummyUser.config.profile.text.font,
-              color: dummyUser.config.profile.text.color,
-            }}
+            username={dummyBiolink.user.username}
+            options={dummyBiolink.config.profile?.text}
           />
           <Bio
-            bio={dummyUser.user.bio}
-            options={{
-              font: dummyUser.config.profile.text.font,
-              color: dummyUser.config.profile.text.color,
-            }}
+            bio={dummyBiolink.user.bio}
+            options={dummyBiolink.config.profile?.text}
           />
           <Details
-            occupation={dummyUser.user.occupation}
-            location={dummyUser.user.location}
-            options={{
-              font: dummyUser.config.profile.text.font,
-              color: dummyUser.config.profile.text.color,
-            }}
+            occupation={dummyBiolink.user.occupation}
+            location={dummyBiolink.user.location}
+            options={dummyBiolink.config.profile?.text}
           />
         </div>
       </div>

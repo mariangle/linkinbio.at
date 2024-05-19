@@ -8,7 +8,7 @@ import {
   WeatherEffect,
 } from "@/lib/types";
 
-export const dummyUser: Biolink = {
+export const dummyBiolink: Biolink = {
   user: {
     id: "example_user_id",
     username: "johndoe",
@@ -23,7 +23,6 @@ export const dummyUser: Biolink = {
   },
   config: {
     profile: {
-      customized: true,
       title: {
         font: Font.Roboto,
         color: "#FFFFFF",
@@ -42,8 +41,12 @@ export const dummyUser: Biolink = {
         color: "#000000",
       },
       text: {
-        color: "#ffffff",
         hidden: false,
+      },
+      font: {
+        family: Font.Roboto,
+        color: "#ffffff",
+        shadow: false,
       },
       border: {
         color: "#000000",
@@ -56,15 +59,8 @@ export const dummyUser: Biolink = {
         blur: 50,
         socialColor: true,
       },
-      icon: {
-        hidden: false,
-        shadow: true,
-        socialColor: false,
-      },
-      customized: true,
     },
     background: {
-      customized: true,
       color: "#141315",
       url: "https://wallpapers.com/images/featured/aesthetic-cloud-background-05bsl7m2e5bh01ki.jpg",
       gradient: {
@@ -86,62 +82,37 @@ export const dummyUser: Biolink = {
     website: [],
     platform: [
       {
-        id: "example_link_id",
-        order: 0,
         provider: "Spotify",
         username: "https://spotify.com/username",
-        isTopIcon: true,
         url: "https://spotify.com/username",
-        title: "Spotify",
         archived: false,
       },
       {
-        id: "example_link_id",
-        order: 0,
-        title: "GitHub",
         url: "https://github.com/username",
-        isTopIcon: true,
-
         provider: "GitHub",
         username: "username",
         archived: false,
       },
       {
-        id: "example_link_id",
-        order: 0,
-        title: "Facebook",
         url: "https://facebook.com/username",
-        isTopIcon: true,
         provider: "Facebook",
         username: "username",
         archived: false,
       },
       {
-        id: "example_link_id",
-        order: 0,
-        title: "Twitter",
         url: "https://twitter.com/username",
-        isTopIcon: false,
         provider: "Twitter",
         username: "username",
         archived: false,
       },
       {
-        id: "example_link_id",
-        order: 0,
-        title: "Youtube",
         url: "https://youtube.com/username",
-        isTopIcon: false,
         provider: "Youtube",
         username: "username",
         archived: false,
       },
       {
-        id: "example_link_id",
-        order: 0,
-        title: "Website",
         url: "https://website.com/username",
-        isTopIcon: false,
         provider: "Website",
         username: "username",
         archived: false,

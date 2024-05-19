@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NewPlatformLinkForm } from "./new-platform-form";
+import { NewPlatformLinkForm } from "./new-platform-link-form";
 import { NewWebsiteLinkForm } from "./new-website-link-form";
 
 export function NewLinkForm() {

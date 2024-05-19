@@ -69,8 +69,8 @@ model User {
   platformLinks PlatformLink[]
   profile       Profile?
   background    Background?
-  button        Button?
-  topIcon       TopIcon?
+  buttons       Buttons?
+  icons         Icons?
   effect        Effect?
   spotify       Spotify?
   youtube       Youtube?
@@ -92,10 +92,11 @@ model WebsiteLink {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   userId   String  @map("user_id") @db.ObjectId
   url      String
-  archived Boolean
+  archived Boolean @default(false)
   title    String
   order    Int
-  iconId   Int     @default(0) @map("icon_id")
+  imageUrl String? @map("image_url")
+  iconName String? @map("icon_name")
 
   user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   clicks WebsiteClick[]
@@ -105,14 +106,12 @@ model WebsiteLink {
 }
 
 model PlatformLink {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String  @map("user_id") @db.ObjectId
-  provider  String  @map("provider")
-  username  String  @map("username")
-  isTopIcon Boolean @default(false) @map("is_top_icon")
-  archived  Boolean
-  title     String
-  order     Int
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String  @map("user_id") @db.ObjectId
+  provider String  @map("provider")
+  username String  @map("username")
+  archived Boolean @default(false)
+  order    Int
 
   user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   clicks PlatformClick[]
@@ -171,24 +170,22 @@ model Background {
   @@map("backgrounds")
 }
 
-model Button {
-  id                    String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId                String  @unique @db.ObjectId
-  backgroundColor       String  @map("background_color")
-  backgroundBlur        Float   @map("background_blur")
-  backgroundOpacity     Float   @map("background_opacity")
-  backgroundSocialColor Boolean @map("background_social_icon")
-  shadowSolid           Boolean @map("shadow_solid")
-  shadowSpreadRadius    Int     @map("shadow_spread_radius")
-  shadowColor           String  @map("shadow_color")
-  borderRadius          Int     @map("border_radius")
-  borderWidth           Int     @map("border_width")
-  borderColor           String  @map("border_color")
-  textColor             String  @map("text_color")
-  textHidden            Boolean @map("text_hidden")
-  iconHidden            Boolean @map("icon_hidden")
-  iconShadow            Boolean @map("icon_shadow")
-  iconSocialColor       Boolean @map("icon_social_color")
+model Buttons {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @unique @db.ObjectId
+  backgroundColor       String?  @map("background_color")
+  backgroundBlur        Float?   @map("background_blur")
+  backgroundOpacity     Float?   @map("background_opacity")
+  backgroundSocialColor Boolean? @map("background_social_color")
+  shadowSolid           Boolean? @map("shadow_solid")
+  shadowSpreadRadius    Int?     @map("shadow_spread_radius")
+  shadowColor           String?  @map("shadow_color")
+  borderRadius          Int?     @map("border_radius")
+  borderWidth           Int?     @map("border_width")
+  borderColor           String?  @map("border_color")
+  fontColor             String?  @map("font_color")
+  fontShadow            Boolean? @map("font_shadow")
+  textHidden            Boolean? @map("text_hidden")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -212,7 +209,7 @@ model Profile {
   @@map("profiles")
 }
 
-enum TopIconStyle {
+enum IconsStyle {
   NoBackgroundSocialColor
   SocialBackgroundWhiteColor
   BlackBackgroundWhiteColor
@@ -220,12 +217,13 @@ enum TopIconStyle {
   WhiteBackgroundSocialColor
 }
 
-model TopIcon {
-  id     String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId String        @unique @map("user_id") @db.ObjectId
-  shadow Boolean?
-  style  TopIconStyle?
-  color  String?
+model Icons {
+  id       String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String      @unique @map("user_id") @db.ObjectId
+  shadow   Boolean?
+  style    IconsStyle?
+  color    String?
+  position String?     @default("top")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

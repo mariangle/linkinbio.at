@@ -1,4 +1,4 @@
-import { Biolink, ContentType } from "@/lib/types";
+import { Biolink, ContentType, Font } from "@/lib/types";
 import {
   convertToTopIconStyle,
   convertToWeatherEffect,
@@ -12,11 +12,20 @@ import {
 } from "@/lib/utils/construct-link";
 import { getFont } from "@/lib/utils/get-font";
 
+import {
+  defaultBackgroundOptions,
+  defaultButtonOptions,
+  defaultEffectsOptions,
+  defaultIconsOptions,
+  defaultProfileOptions,
+  defaultTextOptions,
+} from "@/lib/constants/defaults";
+
 import type {
   User,
   Background,
-  Button,
-  TopIcon,
+  Buttons,
+  Icons,
   Effect,
   WebsiteLink,
   PlatformLink,
@@ -30,8 +39,8 @@ export interface ExtendedUser extends User {
   platformLinks?: PlatformLink[];
   websiteLinks?: WebsiteLink[];
   background?: Background;
-  button?: Button;
-  topIcon?: TopIcon;
+  buttons?: Buttons;
+  icons?: Icons;
   effect?: Effect;
   profile?: Profile;
   spotify?: Spotify;
@@ -54,64 +63,82 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
     },
     config: {
       profile: {
-        customized: user.profile ? true : false,
         title: {
-          color: user.profile?.titleColor ?? "#FFFFFF",
+          color: user.profile?.titleColor ?? defaultTextOptions.color,
           font: getFont(user.profile?.titleFont),
         },
         text: {
           font: getFont(user.profile?.textFont),
-          color: user.profile?.textColor ?? "#FFFFFF",
+          color: user.profile?.textColor ?? defaultTextOptions.color,
         },
         layout: convertToLayout(user.profile?.layout),
-        hideUsername: user.profile?.hideUsername ?? false,
+        hideUsername:
+          user.profile?.hideUsername ?? defaultProfileOptions.hideUsername,
       },
       buttons: {
         shadow: {
-          solid: user.button?.shadowSolid ?? false,
-          spreadRadius: user.button?.shadowSpreadRadius ?? 0,
-          color: user.button?.shadowColor ?? "#FFFFFF",
+          solid: user.buttons?.shadowSolid ?? defaultButtonOptions.shadow.solid,
+          spreadRadius:
+            user.buttons?.shadowSpreadRadius ??
+            defaultButtonOptions.shadow.spreadRadius,
+          color: user.buttons?.shadowColor ?? defaultButtonOptions.shadow.color,
         },
         text: {
-          color: user.button?.textColor ?? "#ffffff",
-          hidden: user.button?.textHidden ?? false,
+          hidden: user.buttons?.textHidden ?? defaultButtonOptions.text.hidden,
+        },
+        font: {
+          color: user.buttons?.fontColor ?? defaultButtonOptions.font.color,
+          shadow: user.buttons?.fontShadow ?? defaultButtonOptions.font.shadow,
+          family: Font.Inter,
         },
         border: {
-          color: user.button?.borderColor ?? "#000000",
-          radius: user.button?.borderRadius ?? 0,
-          width: user.button?.borderWidth ?? 0,
+          color: user.buttons?.borderColor ?? defaultButtonOptions.border.color,
+          radius:
+            user.buttons?.borderRadius ?? defaultButtonOptions.border.radius,
+          width: user.buttons?.borderWidth ?? defaultButtonOptions.border.width,
         },
         background: {
-          color: user.button?.backgroundColor ?? "#000000",
-          opacity: user.button?.backgroundOpacity ?? 1,
-          blur: user.button?.backgroundBlur ?? 0,
-          socialColor: user.button?.backgroundSocialColor ?? false,
+          color:
+            user.buttons?.backgroundColor ??
+            defaultButtonOptions.background.color,
+          opacity:
+            user.buttons?.backgroundOpacity ??
+            defaultButtonOptions.background.opacity,
+          blur:
+            user.buttons?.backgroundBlur ??
+            defaultButtonOptions.background.blur,
+          socialColor:
+            user.buttons?.backgroundSocialColor ??
+            defaultButtonOptions.background.socialColor,
         },
-        icon: {
-          hidden: user.button?.iconHidden ?? false,
-          shadow: user.button?.iconShadow ?? false,
-          socialColor: user.button?.iconSocialColor ?? false,
-        },
-        customized: user.button ? true : false,
       },
       background: {
-        customized: user.background ? true : false,
-        color: user.background?.color ?? "#0055B3",
-        url: user.background?.url ?? undefined,
+        color: user.background?.color ?? defaultBackgroundOptions.color,
+        url: user.background?.url ?? defaultBackgroundOptions.url,
         gradient: {
-          startColor: user.background?.gradientStartColor ?? undefined,
-          endColor: user.background?.gradientEndColor ?? undefined,
-          angle: user.background?.gradientAngle ?? 0,
+          startColor:
+            user.background?.gradientStartColor ??
+            defaultBackgroundOptions.gradient?.startColor,
+          endColor:
+            user.background?.gradientEndColor ??
+            defaultBackgroundOptions.gradient?.endColor,
+          angle:
+            user.background?.gradientAngle ??
+            defaultBackgroundOptions.gradient?.angle,
         },
       },
-      icons: user.topIcon && {
-        shadow: user.topIcon.shadow ?? undefined,
-        style: convertToTopIconStyle(user.topIcon?.style),
-        color: user.topIcon.color ?? undefined,
+      icons: {
+        shadow: user.icons?.shadow ?? defaultIconsOptions.shadow,
+        style: convertToTopIconStyle(user.icons?.style) ?? undefined,
+        color: user.icons?.color ?? defaultIconsOptions.color,
       },
-      effects: user.effect && {
-        title: convertToTitleEffect(user.effect?.titleEffect),
-        weather: convertToWeatherEffect(user.effect?.weatherEffect),
+      effects: {
+        title:
+          convertToTitleEffect(user.effect?.titleEffect) ??
+          defaultEffectsOptions.title,
+        weather:
+          convertToWeatherEffect(user.effect?.weatherEffect) ??
+          defaultEffectsOptions.weather,
       },
     },
     links: {

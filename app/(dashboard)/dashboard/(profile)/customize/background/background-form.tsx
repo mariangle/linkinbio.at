@@ -5,8 +5,8 @@ import { Image as ImageIcon } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useFormSubmit } from "@/hooks/use-form-submit";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useFormSubmit } from "@/hooks/use-form-action";
+import { useBiolinkPreviewStore } from "@/lib/store";
 
 import { Label } from "@/components/ui/label";
 import { ColorPicker } from "@/components/color-picker";
@@ -22,27 +22,13 @@ import { BackgroundFormSchema, BackgroundFormValues } from "@/lib/validations";
 import { Form } from "@/components/ui/form";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LockedPremiumIcon } from "@/components/dashboard/premium-feature";
+import { BackgroundOptions as BackgroundData } from "@/lib/types";
 
 type Tab = "solid" | "gradient";
 
-export function BackgroundForm({
-  data,
-  modified,
-  premium,
-}: {
-  data: {
-    color: string;
-    gradientStartColor?: string;
-    gradientEndColor?: string;
-    gradientAngle?: number;
-    url?: string;
-  };
-  modified?: boolean;
-  premium: boolean;
-}) {
+export function BackgroundForm({ data }: { data?: BackgroundData }) {
   const [tab, setTab] = React.useState<Tab>(
-    data.gradientStartColor && data.gradientEndColor && premium
+    data?.gradient?.startColor && data?.gradient.endColor
       ? "gradient"
       : "solid",
   );
@@ -51,30 +37,22 @@ export function BackgroundForm({
   const form = useForm<BackgroundFormValues>({
     resolver: zodResolver(BackgroundFormSchema),
     defaultValues: {
-      color: data.color,
-      url: data.url,
-      gradientStartColor: data.gradientStartColor,
-      gradientEndColor: data.gradientEndColor,
-      gradientAngle: data.gradientAngle || 0,
+      color: data?.color,
+      url: data?.url,
+      gradientStartColor: data?.gradient?.startColor,
+      gradientEndColor: data?.gradient?.endColor,
+      gradientAngle: data?.gradient?.angle,
     },
   });
 
   const {
     loading,
-    dirty,
     submit,
     cancel: clear,
   } = useFormSubmit<BackgroundFormValues>({
-    initialData: {
-      color: data.color,
-      url: data.url,
-      gradientStartColor: data.gradientStartColor,
-      gradientEndColor: data.gradientEndColor,
-      gradientAngle: data.gradientAngle || 0,
-    },
+    initialData: data,
     formValues: form.getValues(),
     endpoint: "/api/manage/background",
-    modified,
   });
 
   React.useEffect(() => {
@@ -85,12 +63,12 @@ export function BackgroundForm({
           config: {
             ...biolink.config,
             background: {
-              color: value.color || data.color,
+              color: value.color,
               url: value.url,
               gradient: {
                 startColor: value.gradientStartColor,
                 endColor: value.gradientEndColor,
-                angle: value.gradientAngle || 180,
+                angle: value.gradientAngle,
               },
             },
           },
@@ -117,9 +95,7 @@ export function BackgroundForm({
   }, [tab, form]);
 
   const backgroundStyle =
-    form.getValues("gradientStartColor") &&
-    form.getValues("gradientEndColor") &&
-    premium
+    form.getValues("gradientStartColor") && form.getValues("gradientEndColor")
       ? {
           backgroundImage: `linear-gradient(${form.getValues("gradientAngle")}deg, ${form.getValues("gradientStartColor")}, ${form.getValues("gradientEndColor")})`,
         }
@@ -163,7 +139,6 @@ export function BackgroundForm({
                     Solid Color
                   </TabsTrigger>
                   <TabsTrigger
-                    disabled={!premium}
                     value="gradient"
                     onClick={() => {
                       setTab("gradient");
@@ -171,7 +146,6 @@ export function BackgroundForm({
                     className="gap-2"
                   >
                     Gradient Color
-                    {!premium && <LockedPremiumIcon />}
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="solid">
@@ -217,7 +191,7 @@ export function BackgroundForm({
                           min={0}
                           max={180}
                           step={10}
-                          defaultValue={[form.getValues("gradientAngle")]}
+                          defaultValue={[form.getValues("gradientAngle") ?? 0]}
                           onValueChange={(angle) =>
                             form.setValue("gradientAngle", angle[0])
                           }
@@ -236,8 +210,9 @@ export function BackgroundForm({
             </div>
           </FormContent>
           <FormFooter>
-            <FormActions loading={loading} cancel={onCancel} dirty={dirty} />
+            <FormActions loading={loading} cancel={onCancel} dirty={true} />
           </FormFooter>
+          <div>{JSON.stringify(form.formState.dirtyFields)}</div>
         </FormContainer>
       </form>
     </Form>

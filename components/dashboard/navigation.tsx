@@ -12,7 +12,7 @@ import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 import { UserNav } from "./user-nav";
 import { EyeIcon } from "lucide-react";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { BurgerMenu } from "../burger-menu";
 import { User } from "@/lib/types";
 

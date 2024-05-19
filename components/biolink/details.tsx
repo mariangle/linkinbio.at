@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
-import { TextOptions } from "@/lib/types";
+import { Font, TextOptions } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/get-font";
 import { FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
+import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Details({
   occupation,
   location,
-  options,
+  options = defaultTextOptions,
   className,
 }: {
   occupation?: string;
@@ -21,9 +22,9 @@ export function Details({
       className={cn(
         "mt-2 flex flex-wrap items-center justify-center gap-2 text-sm",
         className,
-        getFontDisplay(options?.font),
+        getFontDisplay(options.font),
       )}
-      style={{ color: options?.color }}
+      style={{ color: options.color }}
     >
       {occupation && (
         <div className="flex items-center gap-2">

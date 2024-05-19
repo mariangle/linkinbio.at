@@ -7,42 +7,33 @@ import { ChevronDown } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { Switch } from "@/components/ui/switch";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { YoutubeFormSchema, YoutubeFormValues } from "@/lib/validations";
 import { useForm } from "react-hook-form";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModuleButton } from "@/components/dashboard/module-button";
 import { FormContainer, FormContent } from "@/components/dashboard/form";
+import { YoutubeOptions as YoutubeData } from "@/lib/types";
 
-export function YoutubeForm({
-  modified,
-  data,
-}: {
-  modified?: boolean;
-  data: {
-    videoId: string;
-    enabled: boolean;
-  };
-}) {
+export function YoutubeForm({ data }: { data?: YoutubeData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
   const [expanded, setExpanded] = React.useState(false);
 
   const form = useForm<YoutubeFormValues>({
     resolver: zodResolver(YoutubeFormSchema),
     defaultValues: {
-      videoId: data.videoId,
-      enabled: data.enabled,
+      videoId: data?.videoId,
+      enabled: data?.enabled,
     },
   });
 
-  const { loading, dirty, submit, remove } = useFormSubmit<YoutubeFormValues>({
+  const { loading, dirty, submit } = useFormSubmit<YoutubeFormValues>({
     initialData: data,
     formValues: form.getValues(),
     endpoint: "/api/manage/widgets/youtube",
-    modified,
   });
 
   React.useEffect(() => {
@@ -65,15 +56,6 @@ export function YoutubeForm({
 
   const onSubmit = async () => {
     await submit();
-  };
-
-  const onDelete = async () => {
-    await remove();
-
-    form.reset({
-      videoId: "",
-      enabled: true,
-    });
   };
 
   return (
@@ -142,17 +124,12 @@ export function YoutubeForm({
                     />
                   </div>
                   <div className="flex items-center justify-end gap-4">
-                    {modified && (
-                      <ModuleButton onClick={onDelete} type="button">
-                        Delete
-                      </ModuleButton>
-                    )}
                     <ModuleButton
                       loading={loading}
                       variant="youtube"
                       type="submit"
                     >
-                      {modified ? "Update" : "Add"}
+                      Update
                     </ModuleButton>
                   </div>
                 </form>

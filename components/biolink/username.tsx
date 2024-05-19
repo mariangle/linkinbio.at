@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils";
 import { TextOptions } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/get-font";
+import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Username({
   className,
-  options,
+  options = defaultTextOptions,
   username,
 }: {
   className?: string;
@@ -16,9 +17,9 @@ export function Username({
       className={cn(
         "mt-1 text-sm opacity-80",
         className,
-        getFontDisplay(options?.font),
+        getFontDisplay(options.font),
       )}
-      style={{ color: options?.color }}
+      style={{ color: options.color }}
     >
       @{username}
     </div>

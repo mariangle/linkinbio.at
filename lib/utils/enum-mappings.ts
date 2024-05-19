@@ -6,42 +6,42 @@ import {
   TitleEffect,
 } from "@/lib/types/enums";
 import {
-  TopIconStyle as PrismaTopIconStyle,
+  IconsStyle as PrismaIconsStyle,
   Layout as PrismaLayout,
   WeatherEffect as PrismaWeatherEffect,
   ContentType as PrismaContentType,
 } from "@prisma/client";
 
-export function convertToPrismaTopIconStyle(iconStyle: string) {
+export function convertToPrismaIconStyle(iconStyle: string) {
   switch (iconStyle) {
     case IconStyle.SocialBackgroundWhiteColor:
-      return PrismaTopIconStyle.SocialBackgroundWhiteColor;
+      return PrismaIconsStyle.SocialBackgroundWhiteColor;
     case IconStyle.BlackBackgroundWhiteColor:
-      return PrismaTopIconStyle.BlackBackgroundWhiteColor;
+      return PrismaIconsStyle.BlackBackgroundWhiteColor;
     case IconStyle.WhiteBackgroundBlackColor:
-      return PrismaTopIconStyle.WhiteBackgroundBlackColor;
+      return PrismaIconsStyle.WhiteBackgroundBlackColor;
     case IconStyle.NoBackgroundSocialColor:
-      return PrismaTopIconStyle.NoBackgroundSocialColor;
+      return PrismaIconsStyle.NoBackgroundSocialColor;
     case IconStyle.WhiteBackgroundSocialColor:
-      return PrismaTopIconStyle.WhiteBackgroundSocialColor;
+      return PrismaIconsStyle.WhiteBackgroundSocialColor;
     default:
       return null;
   }
 }
 
 export function convertToTopIconStyle(
-  prismaTopIconStyle?: PrismaTopIconStyle | null,
+  prismaTopIconStyle?: PrismaIconsStyle | null,
 ) {
   switch (prismaTopIconStyle) {
-    case PrismaTopIconStyle.SocialBackgroundWhiteColor:
+    case PrismaIconsStyle.SocialBackgroundWhiteColor:
       return IconStyle.SocialBackgroundWhiteColor;
-    case PrismaTopIconStyle.BlackBackgroundWhiteColor:
+    case PrismaIconsStyle.BlackBackgroundWhiteColor:
       return IconStyle.BlackBackgroundWhiteColor;
-    case PrismaTopIconStyle.WhiteBackgroundBlackColor:
+    case PrismaIconsStyle.WhiteBackgroundBlackColor:
       return IconStyle.WhiteBackgroundBlackColor;
-    case PrismaTopIconStyle.NoBackgroundSocialColor:
+    case PrismaIconsStyle.NoBackgroundSocialColor:
       return IconStyle.NoBackgroundSocialColor;
-    case PrismaTopIconStyle.WhiteBackgroundSocialColor:
+    case PrismaIconsStyle.WhiteBackgroundSocialColor:
       return IconStyle.WhiteBackgroundSocialColor;
     default:
       return undefined;

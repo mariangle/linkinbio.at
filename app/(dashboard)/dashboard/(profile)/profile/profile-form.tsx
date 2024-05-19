@@ -4,8 +4,8 @@ import * as React from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useFormSubmit } from "@/hooks/use-form-submit";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useFormSubmit } from "@/hooks/use-form-action";
+import { useBiolinkPreviewStore } from "@/lib/store";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";

@@ -22,11 +22,11 @@ export async function GET(
     },
     include: {
       background: true,
-      button: true,
+      buttons: true,
       websiteLinks: true,
       platformLinks: true,
       profile: true,
-      topIcon: true,
+      icons: true,
       effect: true,
       spotify: true,
       youtube: true,

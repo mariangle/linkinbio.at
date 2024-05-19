@@ -9,7 +9,7 @@ import {
 export async function PATCH(req: Request) {
   const session = await auth();
 
-  if (!session?.user) {
+  if (!session?.user || !session.user.id) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -18,47 +18,40 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { title: TitleEffect, weather: weatherEffect } = await req.json();
+  const { title: titleEffect, weather: weatherEffect } = await req.json();
 
-  const effects = await db.effect.update({
+  let effects;
+
+  console.log(titleEffect, weatherEffect);
+
+  // Check if the user already has effects
+  const existingEffects = await db.effect.findUnique({
     where: {
       userId: session.user.id,
     },
-    data: {
-      titleEffect: convertToTitleEffect(TitleEffect),
-      weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
-    },
   });
 
-  return NextResponse.json({
-    status: 200,
-    ok: true,
-    data: effects,
-    message: "Effects updated successfully",
-  });
-}
-
-export async function POST(req: Request) {
-  const session = await auth();
-
-  if (!session?.user?.id) {
-    return NextResponse.json({
-      status: 401,
-      ok: false,
-      data: null,
-      message: "Unauthorized",
+  if (existingEffects) {
+    // If effects exist, update them
+    effects = await db.effect.update({
+      where: {
+        userId: session.user.id,
+      },
+      data: {
+        titleEffect: convertToTitleEffect(titleEffect) ?? null,
+        weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
+      },
+    });
+  } else {
+    // If effects don't exist, create them
+    effects = await db.effect.create({
+      data: {
+        userId: session.user.id,
+        titleEffect: convertToTitleEffect(titleEffect) ?? null,
+        weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
+      },
     });
   }
-
-  const { title: TitleEffect, weather: weatherEffect } = await req.json();
-
-  const effects = await db.effect.create({
-    data: {
-      userId: session.user.id,
-      titleEffect: convertToTitleEffect(TitleEffect),
-      weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
-    },
-  });
 
   return NextResponse.json({
     status: 200,

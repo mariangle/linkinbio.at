@@ -5,9 +5,9 @@ import * as React from "react";
 import { Title } from "@/components/biolink/title";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { dummyUser } from "@/lib/dummy";
+import { dummyBiolink } from "@/lib/dummy";
 import { TitleEffect, Font } from "@/lib/types";
-import { TopIcon } from "@/components/biolink/top-icon";
+import { TopIcon } from "@/components/biolink/icon";
 
 export function ProfileShowcaseSecondary() {
   return (
@@ -27,9 +27,9 @@ export function ProfileShowcaseSecondary() {
           <Title
             options={{
               color: "#f178a1",
-              effect: TitleEffect.CherryBlossoms,
               font: Font.GreatVibes,
             }}
+            effect={TitleEffect.CherryBlossoms}
             user={{
               title: "Maria",
               premium: true,
@@ -42,7 +42,7 @@ export function ProfileShowcaseSecondary() {
                 color: "#f178a1",
                 shadow: false,
               }}
-              item={dummyUser.links.platform[0]}
+              item={dummyBiolink.links.platform[0]}
               size="sm"
             />
             <TopIcon
@@ -50,7 +50,7 @@ export function ProfileShowcaseSecondary() {
                 color: "#f178a1",
                 shadow: false,
               }}
-              item={dummyUser.links.platform[1]}
+              item={dummyBiolink.links.platform[1]}
               size="sm"
             />
             <TopIcon
@@ -58,7 +58,7 @@ export function ProfileShowcaseSecondary() {
                 color: "#f178a1",
                 shadow: false,
               }}
-              item={dummyUser.links.platform[2]}
+              item={dummyBiolink.links.platform[2]}
               size="sm"
             />
           </div>

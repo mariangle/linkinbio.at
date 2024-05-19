@@ -1,7 +1,13 @@
+import { Font } from ".";
+
 export interface ButtonOptions {
   text: {
-    color: string;
     hidden: boolean;
+  };
+  font: {
+    color: string;
+    shadow: boolean;
+    family: Font;
   };
   shadow: {
     solid: boolean;
@@ -19,10 +25,4 @@ export interface ButtonOptions {
     width: number;
     color: string;
   };
-  icon: {
-    hidden: boolean;
-    shadow: boolean;
-    socialColor: boolean;
-  };
-  customized?: boolean;
 }

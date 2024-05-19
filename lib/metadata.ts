@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "linkinbio",
+  name: "linkinbio.at",
   description:
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, amet.",
+    " Introducing your advanced, fully customizable, and no-cost solution for engaging with your audience.",
   url:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"

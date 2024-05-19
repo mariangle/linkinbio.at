@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     });
   }
 
-  const { title, url, archived, iconId } = await req.json();
+  const { title, url, archived, order, imageUrl, iconName } = await req.json();
 
   if (!title || !url) {
     return NextResponse.json({
@@ -41,7 +41,8 @@ export async function POST(req: Request) {
       title,
       url,
       archived,
-      iconId,
+      imageUrl: imageUrl || null,
+      iconName: iconName || null,
       user: {
         connect: {
           id: session.user.id,

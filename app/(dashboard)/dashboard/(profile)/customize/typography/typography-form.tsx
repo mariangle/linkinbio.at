@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { useForm } from "react-hook-form";
 import { Switch } from "@/components/ui/switch";
 import { ColorPicker } from "@/components/color-picker";
@@ -23,35 +23,22 @@ import {
   FormField,
   FormItem,
 } from "@/components/ui/form";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { Font } from "@/lib/types/enums";
 import { TypographyFormSchema, TypographyFormValues } from "@/lib/validations";
+import { ProfileOptions as TypographyData } from "@/lib/types";
 
-export function TypographyForm({
-  data,
-  modified,
-  premium,
-}: {
-  data: {
-    titleColor: string;
-    titleFont: Font;
-    textColor: string;
-    textFont: Font;
-    hideUsername: boolean;
-  };
-  modified?: boolean;
-  premium: boolean;
-}) {
+export function TypographyForm({ data }: { data: TypographyData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<TypographyFormValues>({
     resolver: zodResolver(TypographyFormSchema),
     defaultValues: {
-      titleColor: data.titleColor,
-      titleFont: data.titleFont,
-      textColor: data.textColor,
-      textFont: data.textFont,
-      hideUsername: data.hideUsername,
+      titleColor: data?.title?.color,
+      titleFont: data?.title?.font,
+      textColor: data?.text?.color,
+      textFont: data?.text?.font,
+      hideUsername: data?.hideUsername,
     },
   });
 
@@ -59,7 +46,6 @@ export function TypographyForm({
     initialData: data,
     formValues: form.getValues(),
     endpoint: "/api/manage/profile",
-    modified,
   });
 
   React.useEffect(() => {
@@ -73,14 +59,14 @@ export function TypographyForm({
             profile: {
               ...biolink.config.profile,
               title: {
-                color: value.titleColor ?? data.titleColor,
+                color: value.titleColor ?? data?.title.color,
                 font: value.titleFont as Font,
               },
               text: {
+                color: value.textColor ?? data?.text.color,
                 font: value.textFont as Font,
-                color: value.textColor ?? data.textColor,
               },
-              hideUsername: value.hideUsername ?? data.hideUsername,
+              hideUsername: value.hideUsername ?? data?.hideUsername,
             },
           },
         });
@@ -124,7 +110,6 @@ export function TypographyForm({
                       setFont={(font) => {
                         form.setValue("titleFont", font);
                       }}
-                      premium={premium}
                     />
                   </div>
                 </div>
@@ -149,7 +134,6 @@ export function TypographyForm({
                       setFont={(font) => {
                         form.setValue("textFont", font);
                       }}
-                      premium={premium}
                     />
                   </div>
                 </div>

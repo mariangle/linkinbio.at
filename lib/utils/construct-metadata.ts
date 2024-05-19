@@ -2,12 +2,13 @@ export async function constructMetadata(data: {
   title: string;
   description: string;
   image: string;
+  icon?: string;
 }) {
   return {
     title: data.title,
     description: data.description,
     icons: {
-      icon: "/icon.svg",
+      icon: data.icon ? data.icon : "/icon.svg",
       apple: "/icon.svg",
     },
     openGraph: {

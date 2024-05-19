@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import {
   WeatherEffect,
   TitleEffect,
@@ -33,13 +33,7 @@ import { Title } from "@/components/biolink/title";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
-export function EffectsForm({
-  data,
-  premium,
-}: {
-  data?: EffectsData;
-  premium: boolean;
-}) {
+export function EffectsForm({ data }: { data?: EffectsData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<EffectsFormValues>({
@@ -95,9 +89,12 @@ export function EffectsForm({
                 <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
                   <FormControl>
                     <Switch
-                      checked={field.value !== "none"}
+                      checked={field.value !== undefined}
                       onCheckedChange={(checked) => {
-                        form.setValue("title", checked ? "typewriter" : "none");
+                        form.setValue(
+                          "title",
+                          checked ? "typewriter" : undefined,
+                        );
                       }}
                     />
                   </FormControl>
@@ -120,10 +117,7 @@ export function EffectsForm({
                 )}
               >
                 <Title
-                  options={{
-                    effect: item.value as TitleEffect,
-                    color: "#fff",
-                  }}
+                  effect={item.value as TitleEffect}
                   className="!text-sm !text-foreground"
                   user={{ title: item.label, premium: true }}
                 />

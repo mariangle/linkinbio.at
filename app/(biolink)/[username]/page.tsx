@@ -23,6 +23,7 @@ export async function generateMetadata({
       title: biolink.user.title ? biolink.user.title : biolink.user.username,
       image: biolink.user.image ?? "",
       description: biolink.user.bio || "Connect with me on social media.",
+      icon: biolink.user.image,
     });
   } catch (e) {
     return null;

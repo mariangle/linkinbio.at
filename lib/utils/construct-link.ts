@@ -13,7 +13,8 @@ export function constructLinkFromWebsite(link: WebsiteLinkProps): WebsiteLink {
     title: link.title,
     url: link.url,
     archived: link.archived,
-    iconId: link.iconId,
+    imageUrl: link.imageUrl ?? undefined,
+    iconName: link.iconName ?? undefined,
   };
 }
 
@@ -37,13 +38,11 @@ export function constructLinkFromPlatform(
   return {
     id: link.id,
     order: link.order,
-    title: link.title,
     url: constructPlatformUrl({
       provider: link.provider,
       username: link.username,
     }),
-    archived: link.archived ?? false,
-    isTopIcon: link.isTopIcon,
+    archived: link.archived,
     provider: link.provider,
     username: link.username,
   };

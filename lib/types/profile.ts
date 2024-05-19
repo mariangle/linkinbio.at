@@ -1,17 +1,18 @@
 import type { Layout, Font } from ".";
 
-export interface ProfileOptions {
-  title: {
-    font: Font;
-    color: string;
-  };
-  text: TextOptions;
-  layout: Layout;
-  hideUsername: boolean;
-  customized?: boolean;
+export interface TitleOptions {
+  font: Font;
+  color: string;
 }
 
 export interface TextOptions {
   color: string;
   font: Font;
+}
+
+export interface ProfileOptions {
+  title: TitleOptions;
+  text: TextOptions;
+  layout: Layout;
+  hideUsername: boolean;
 }

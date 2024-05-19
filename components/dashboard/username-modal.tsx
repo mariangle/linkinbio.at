@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 
 import * as React from "react";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";

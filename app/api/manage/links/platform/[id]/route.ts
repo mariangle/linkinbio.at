@@ -27,7 +27,7 @@ export async function PATCH(
     });
   }
 
-  const { provider, username, isTopIcon, title, archived } = await req.json();
+  const { provider, username, archived } = await req.json();
 
   if (!provider || !username) {
     return NextResponse.json({
@@ -55,8 +55,6 @@ export async function PATCH(
       userId: session.user.id,
     },
     data: {
-      title: title,
-      isTopIcon,
       username: username,
       provider: validPlatform.name,
       order: 0, // ! Setting order to 0 for now, will be updated later

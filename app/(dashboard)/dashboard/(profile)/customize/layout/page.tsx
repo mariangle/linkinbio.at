@@ -6,11 +6,5 @@ export default async function Layout() {
 
   if (!biolink) return null;
 
-  return (
-    <LayoutForm
-      layout={biolink.config?.profile.layout}
-      modified={biolink.config.profile.customized}
-      premium={biolink.user.premium}
-    />
-  );
+  return <LayoutForm layout={biolink.config?.profile?.layout} />;
 }

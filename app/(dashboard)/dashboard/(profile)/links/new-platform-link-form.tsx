@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -18,13 +17,12 @@ import { platforms } from "@/lib/constants/platforms";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import {
   PlatformLinkFormSchema,
   PlatformLinkFormValues,
@@ -38,8 +36,6 @@ export function NewPlatformLinkForm({ close }: { close: () => void }) {
     defaultValues: {
       provider: "",
       username: "",
-      isTopIcon: false,
-      archived: false,
     },
   });
 
@@ -47,12 +43,10 @@ export function NewPlatformLinkForm({ close }: { close: () => void }) {
     initialData: {
       provider: "",
       username: "",
-      isTopIcon: false,
-      archived: false,
     },
     formValues: form.getValues(),
     endpoint: "/api/manage/links/platform",
-    modified: false,
+    method: "POST",
   });
 
   const onSubmit = async () => {
@@ -105,25 +99,6 @@ export function NewPlatformLinkForm({ close }: { close: () => void }) {
                   <Input placeholder="Username or name" {...field} />
                 </FormControl>
                 <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="isTopIcon"
-            render={({ field }) => (
-              <FormItem className="border-glass bg-glass flex flex-row items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormDescription>
-                    Display this link as a top icon?
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
               </FormItem>
             )}
           />

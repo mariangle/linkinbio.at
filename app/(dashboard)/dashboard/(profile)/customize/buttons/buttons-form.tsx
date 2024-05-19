@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, UseFormReturn } from "react-hook-form";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import {
   FormHeading,
   FormContainer,
@@ -21,57 +21,32 @@ import { ButtonOptions } from "@/lib/types";
 import { ButtonCustomizerSheet } from "@/components/button-customizer-sheet";
 import { Paintbrush } from "lucide-react";
 
-export function ButtonsForm({
-  data,
-  modified,
-}: {
-  data: {
-    shadowSolid: boolean;
-    shadowSpreadRadius: number;
-    shadowColor: string;
-    textColor: string;
-    textHidden: boolean;
-    borderColor: string;
-    borderRadius: number;
-    borderWidth: number;
-    backgroundColor: string;
-    backgroundOpacity: number;
-    backgroundBlur: number;
-    backgroundSocialColor: boolean;
-    iconHidden: boolean;
-    iconShadow: boolean;
-    iconSocialColor: boolean;
-  };
-  modified?: boolean;
-}) {
+export function ButtonsForm({ data }: { data: ButtonOptions }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
 
   const form = useForm<ButtonsFormValues>({
     resolver: zodResolver(ButtonsFormSchema),
     defaultValues: {
-      shadowSolid: data.shadowSolid,
-      shadowSpreadRadius: data.shadowSpreadRadius,
-      shadowColor: data.shadowColor,
-      textColor: data.textColor,
-      textHidden: data.textHidden,
-      borderColor: data.borderColor,
-      borderRadius: data.borderRadius,
-      borderWidth: data.borderWidth,
-      backgroundColor: data.backgroundColor,
-      backgroundOpacity: data.backgroundOpacity,
-      backgroundBlur: data.backgroundBlur,
-      backgroundSocialColor: data.backgroundSocialColor,
-      iconHidden: data.iconHidden,
-      iconShadow: data.iconShadow,
-      iconSocialColor: data.iconSocialColor,
+      shadowSolid: data?.shadow.solid,
+      shadowSpreadRadius: data?.shadow.spreadRadius,
+      shadowColor: data?.shadow.color,
+      fontColor: data?.font.color,
+      fontShadow: data?.font.shadow,
+      textHidden: data?.text.hidden,
+      borderColor: data?.border.color,
+      borderRadius: data?.border.radius,
+      borderWidth: data?.border.width,
+      backgroundColor: data?.background.color,
+      backgroundOpacity: data?.background.opacity,
+      backgroundBlur: data?.background.blur,
+      backgroundSocialColor: data?.background.socialColor,
     },
   });
 
   const { loading, dirty, submit } = useFormSubmit<ButtonsFormValues>({
     initialData: data,
     formValues: form.getValues(),
-    endpoint: "/api/manage/button",
-    modified,
+    endpoint: "/api/manage/buttons",
   });
 
   React.useEffect(() => {
@@ -83,31 +58,30 @@ export function ButtonsForm({
             ...biolink.config,
             buttons: {
               shadow: {
-                solid: value.shadowSolid ?? data.shadowSolid,
+                solid: value.shadowSolid ?? data?.shadow.solid,
                 spreadRadius:
-                  value.shadowSpreadRadius ?? data.shadowSpreadRadius,
-                color: value.shadowColor ?? data.shadowColor,
+                  value.shadowSpreadRadius ?? data?.shadow.spreadRadius,
+                color: value.shadowColor ?? data?.shadow.color,
+              },
+              font: {
+                family: data?.font.family,
+                color: value.fontColor ?? data?.font.color,
+                shadow: value.fontShadow ?? data?.font.shadow,
               },
               text: {
-                color: value.textColor ?? data.textColor,
-                hidden: value.textHidden ?? data.textHidden,
+                hidden: value.textHidden ?? data?.text.hidden,
               },
               border: {
-                color: value.borderColor ?? data.borderColor,
-                radius: value.borderRadius ?? data.borderRadius,
-                width: value.borderWidth ?? data.borderWidth,
+                color: value.borderColor ?? data?.border.color,
+                radius: value.borderRadius ?? data?.border.radius,
+                width: value.borderWidth ?? data?.border.width,
               },
               background: {
-                color: value.backgroundColor ?? data.backgroundColor,
-                opacity: value.backgroundOpacity ?? data.backgroundOpacity,
-                blur: value.backgroundBlur ?? data.backgroundBlur,
+                color: value.backgroundColor ?? data?.background.color,
+                opacity: value.backgroundOpacity ?? data?.background.opacity,
+                blur: value.backgroundBlur ?? data?.background.blur,
                 socialColor:
-                  value.backgroundSocialColor ?? data.backgroundSocialColor,
-              },
-              icon: {
-                hidden: value.iconHidden ?? data.iconHidden,
-                shadow: value.iconShadow ?? data.iconShadow,
-                socialColor: value.iconSocialColor ?? data.iconSocialColor,
+                  value.backgroundSocialColor ?? data?.background.socialColor,
               },
             },
           },
@@ -129,12 +103,13 @@ export function ButtonsForm({
     button: ButtonOptions,
     form: UseFormReturn<ButtonsFormValues>,
   ) => {
-    const { shadow, text, border, background, icon } = button;
+    const { shadow, text, border, background, font } = button;
 
     form.setValue("shadowSolid", shadow.solid);
     form.setValue("shadowSpreadRadius", shadow.spreadRadius);
     form.setValue("shadowColor", shadow.color);
-    form.setValue("textColor", text.color);
+    form.setValue("fontColor", font.color);
+    form.setValue("fontShadow", font.shadow);
     form.setValue("textHidden", text.hidden);
     form.setValue("borderColor", border.color);
     form.setValue("borderRadius", border.radius);
@@ -143,9 +118,6 @@ export function ButtonsForm({
     form.setValue("backgroundOpacity", background.opacity);
     form.setValue("backgroundBlur", background.blur);
     form.setValue("backgroundSocialColor", background.socialColor);
-    form.setValue("iconHidden", icon.hidden);
-    form.setValue("iconShadow", icon.shadow);
-    form.setValue("iconSocialColor", icon.socialColor);
   };
 
   return (

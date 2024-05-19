@@ -49,7 +49,6 @@ export default async function Analytics() {
                 key={link.id}
                 className="bg-glass border-glass rounded-lg border p-2"
               >
-                <div className="text-xs font-medium">{link.title}</div>
                 <Link
                   href={link.url}
                   target="_blank"

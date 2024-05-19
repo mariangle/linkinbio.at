@@ -30,8 +30,8 @@ export function ImagePicker({
   description?: string;
 }) {
   const [isImageValid, setIsImageValid] = React.useState(true);
-  const [localUrl, setLocalUrl] = React.useState(url);
-  const [validUrl, setValidUrl] = React.useState(url);
+  const [localUrl, setLocalUrl] = React.useState(url || "");
+  const [validUrl, setValidUrl] = React.useState(url || "");
   const [open, setOpen] = React.useState(false);
 
   const confirm = () => {
@@ -44,8 +44,8 @@ export function ImagePicker({
   const remove = () => {
     setOpen(false);
     setUrl(undefined);
-    setLocalUrl(undefined);
-    setValidUrl(undefined);
+    setLocalUrl("");
+    setValidUrl("");
   };
 
   return (

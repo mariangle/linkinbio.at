@@ -1,4 +1,4 @@
-import { ButtonOptions } from "@/lib/types";
+import { ButtonOptions, Font } from "@/lib/types";
 import { Button } from "@/components/biolink/button";
 
 const buttonTemplates: ButtonOptions[] = [
@@ -9,8 +9,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
     },
     text: {
+      hidden: false,
+    },
+    font: {
+      family: Font.Inter,
       color: "#FFFFFF",
-      hidden: true,
+      shadow: false,
     },
     border: {
       color: "#000000",
@@ -23,11 +27,6 @@ const buttonTemplates: ButtonOptions[] = [
       blur: 0,
       socialColor: true,
     },
-    icon: {
-      hidden: false,
-      shadow: false,
-      socialColor: false,
-    },
   },
   {
     shadow: {
@@ -36,8 +35,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
     },
     text: {
-      color: "#000000",
       hidden: false,
+    },
+    font: {
+      family: Font.Inter,
+      color: "#000000",
+      shadow: false,
     },
     border: {
       color: "#000000",
@@ -50,11 +53,6 @@ const buttonTemplates: ButtonOptions[] = [
       blur: 0,
       socialColor: false,
     },
-    icon: {
-      hidden: false,
-      shadow: false,
-      socialColor: false,
-    },
   },
   {
     shadow: {
@@ -63,8 +61,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
     },
     text: {
-      color: "#FFFFFF",
       hidden: false,
+    },
+    font: {
+      family: Font.Inter,
+      color: "#FFFFFF",
+      shadow: false,
     },
     border: {
       color: "#000000",
@@ -77,11 +79,6 @@ const buttonTemplates: ButtonOptions[] = [
       blur: 0,
       socialColor: false,
     },
-    icon: {
-      hidden: true,
-      shadow: false,
-      socialColor: false,
-    },
   },
   {
     shadow: {
@@ -90,8 +87,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
     },
     text: {
-      color: "#FFFFFF",
       hidden: false,
+    },
+    font: {
+      family: Font.Inter,
+      color: "#FFFFFF",
+      shadow: false,
     },
     border: {
       color: "#FFFFFF",
@@ -104,11 +105,6 @@ const buttonTemplates: ButtonOptions[] = [
       blur: 0,
       socialColor: false,
     },
-    icon: {
-      hidden: false,
-      shadow: false,
-      socialColor: false,
-    },
   },
   {
     shadow: {
@@ -117,8 +113,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
     },
     text: {
+      hidden: false,
+    },
+    font: {
+      family: Font.Inter,
       color: "#FFFFFF",
-      hidden: true,
+      shadow: false,
     },
     border: {
       color: "#000000",
@@ -131,11 +131,6 @@ const buttonTemplates: ButtonOptions[] = [
       blur: 50,
       socialColor: false,
     },
-    icon: {
-      hidden: false,
-      shadow: false,
-      socialColor: false,
-    },
   },
   {
     shadow: {
@@ -144,8 +139,12 @@ const buttonTemplates: ButtonOptions[] = [
       color: "#000000",
     },
     text: {
+      hidden: false,
+    },
+    font: {
+      family: Font.Inter,
       color: "#FFFFFF",
-      hidden: true,
+      shadow: false,
     },
     border: {
       color: "#000000",
@@ -157,11 +156,6 @@ const buttonTemplates: ButtonOptions[] = [
       opacity: 0.5,
       blur: 50,
       socialColor: false,
-    },
-    icon: {
-      hidden: false,
-      shadow: false,
-      socialColor: true,
     },
   },
 ];
@@ -185,14 +179,9 @@ export function ButtonTemplates({
               key={index}
               config={button}
               item={{
-                id: "1",
                 url: "https://facebook.com",
-                order: 0,
                 archived: false,
                 title: "Facebook",
-                provider: "Facebook",
-                username: "username",
-                isTopIcon: false,
               }}
             />
           </div>

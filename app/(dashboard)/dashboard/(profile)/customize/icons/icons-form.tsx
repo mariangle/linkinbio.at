@@ -14,10 +14,10 @@ import {
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { IconOptions as IconData, IconStyle } from "@/lib/types";
 import { iconStyles } from "@/lib/constants/icon-styles";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { TopIconsFormSchema, TopIconsFormValues } from "@/lib/validations";
 import { ColorPicker } from "@/components/color-picker";
-import { TopIcon } from "@/components/biolink/top-icon";
+import { TopIcon } from "@/components/biolink/icon";
 import { cn } from "@/lib/utils";
 
 export function IconsForm({ data }: { data?: IconData }) {

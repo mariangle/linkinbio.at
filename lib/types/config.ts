@@ -10,6 +10,6 @@ export interface Config {
   profile: ProfileOptions;
   background: BackgroundOptions;
   buttons: ButtonOptions;
-  icons?: IconOptions;
-  effects?: EffectsOptions;
+  icons: IconOptions;
+  effects: EffectsOptions;
 }

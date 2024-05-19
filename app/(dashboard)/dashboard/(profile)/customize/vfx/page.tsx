@@ -6,7 +6,5 @@ export default async function Effects() {
 
   if (!biolink) return null;
 
-  return (
-    <EffectsForm data={biolink.config.effects} premium={biolink.user.premium} />
-  );
+  return <EffectsForm data={biolink.config.effects} />;
 }

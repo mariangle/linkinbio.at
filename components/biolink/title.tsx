@@ -2,37 +2,36 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
-import { Font, TitleEffect, User } from "@/lib/types";
+import { TitleOptions, TitleEffect, User } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/get-font";
-
-interface TitleOptions {
-  effect?: TitleEffect;
-  font?: Font;
-  color: string;
-}
+import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Title({
   options,
+  effect,
   className,
   user,
 }: {
-  options: TitleOptions;
+  options?: TitleOptions;
+  effect?: TitleEffect;
   className?: string;
   user: Pick<User, "title" | "premium">;
 }) {
+  const mergedOptions = options || defaultTextOptions;
+
   if (!user.title) return null;
 
-  if (user.premium && options.effect === TitleEffect.Typewriter) {
+  if (user.premium && effect === TitleEffect.Typewriter) {
     return (
       <div className="relative">
         <div
           style={{
-            color: options?.color ? options.color : undefined,
+            color: mergedOptions.color,
           }}
           className={cn(
             "text-wrap break-all  text-xl font-semibold",
             className,
-            getFontDisplay(options?.font),
+            getFontDisplay(mergedOptions.font),
           )}
         >
           <TypewriterEffect words={user.title} />
@@ -43,7 +42,7 @@ export function Title({
 
   return (
     <div className="relative w-fit">
-      {user.premium && options.effect === TitleEffect.Sparkles && (
+      {user.premium && effect === TitleEffect.Sparkles && (
         <Image
           src="/effects/sparkles.gif"
           alt="sparkle"
@@ -54,7 +53,7 @@ export function Title({
           className="absolute h-full w-full object-cover"
         />
       )}
-      {user.premium && options.effect === TitleEffect.CherryBlossoms && (
+      {user.premium && effect === TitleEffect.CherryBlossoms && (
         <Image
           src="/effects/cherry-blossoms.gif"
           alt="cherry blossoms"
@@ -67,13 +66,13 @@ export function Title({
       )}
       <h2
         style={{
-          color: options.color,
-          font: options.font,
+          color: mergedOptions.color,
+          font: mergedOptions.font,
         }}
         className={cn(
           "relative w-fit text-wrap break-all  text-xl font-semibold",
           className,
-          getFontDisplay(options?.font),
+          getFontDisplay(mergedOptions.font),
         )}
       >
         {user.title}

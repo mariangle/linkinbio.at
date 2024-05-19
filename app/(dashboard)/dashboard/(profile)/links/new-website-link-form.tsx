@@ -19,7 +19,7 @@ import {
   WebsiteLinkFormSchema,
   WebsiteLinkFormValues,
 } from "@/lib/validations";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 
 export function NewWebsiteLinkForm({ close }: { close: () => void }) {
   const router = useRouter();
@@ -30,7 +30,6 @@ export function NewWebsiteLinkForm({ close }: { close: () => void }) {
       title: "",
       url: "",
       archived: false,
-      iconId: 0,
     },
   });
 
@@ -39,11 +38,10 @@ export function NewWebsiteLinkForm({ close }: { close: () => void }) {
       title: "",
       url: "",
       archived: false,
-      iconId: 0,
     },
     formValues: form.getValues(),
     endpoint: "/api/manage/links/website",
-    modified: false,
+    method: "POST",
   });
 
   const onSubmit = async () => {

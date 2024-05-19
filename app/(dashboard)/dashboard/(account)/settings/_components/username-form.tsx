@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { UserFormSchema, UserFormValues } from "@/lib/validations";
-import { useFormSubmit } from "@/hooks/use-form-submit";
+import { useFormSubmit } from "@/hooks/use-form-action";
 
 export function UsernameForm({ username }: { username?: string }) {
   const form = useForm<UserFormValues>({

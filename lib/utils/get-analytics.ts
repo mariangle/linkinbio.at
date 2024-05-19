@@ -1,6 +1,5 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { subDays } from "date-fns";
 import { constructPlatformUrl } from "@/lib/utils/construct-link";
 
 export interface Analytics {
@@ -18,7 +17,6 @@ export interface Analytics {
   };
   popularLinks: {
     id: string;
-    title: string;
     url: string;
     clicks: number;
   }[];
@@ -84,7 +82,6 @@ export async function getAnalytics(): Promise<Analytics | null> {
   const sortedLinks = allLinks
     .map((link) => ({
       id: link.id,
-      title: link.title,
       url:
         //@ts-ignore
         link.url ??
@@ -100,7 +97,6 @@ export async function getAnalytics(): Promise<Analytics | null> {
 
   const popularLinks = sortedLinks.map((link) => ({
     id: link.id,
-    title: link.title,
     url: link.url,
     clicks: link.clicks,
   }));

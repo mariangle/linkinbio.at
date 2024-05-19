@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
 import { TextOptions } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/get-font";
+import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Bio({
   bio,
   className,
-  options,
+  options = defaultTextOptions,
 }: {
   bio?: string;
   className?: string;
@@ -18,9 +19,9 @@ export function Bio({
       className={cn(
         "mt-1 whitespace-normal text-wrap break-all text-base",
         className,
-        getFontDisplay(options?.font),
+        getFontDisplay(options.font),
       )}
-      style={{ color: options?.color }}
+      style={{ color: options.color }}
     >
       {bio}
     </p>

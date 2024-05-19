@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { PhoneMockup } from "@/components/phone-mockup";
-import { useBiolinkPreviewStore } from "@/stores/biolink-preview-store";
+import { useBiolinkPreviewStore } from "@/lib/store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { EyeIcon, XIcon, Share2, ExternalLink } from "lucide-react";

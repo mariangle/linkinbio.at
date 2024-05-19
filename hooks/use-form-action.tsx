@@ -7,26 +7,24 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
   initialData,
   formValues,
   endpoint,
+  method = "PATCH",
 }: {
-  initialData?: T;
+  initialData?: any; // ! Sat to any for now as I use objects for initialData
   formValues: T;
   endpoint: string;
+  method?: "PATCH" | "POST";
 }) => {
   const [loading, setLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [existingData, setExistingData] = React.useState(!!initialData);
-  const [newValues, setNewValues] = React.useState<T>();
 
-  const dirty = newValues
-    ? JSON.stringify(newValues) !== JSON.stringify(formValues)
-    : JSON.stringify(initialData) !== JSON.stringify(formValues);
+  const dirty = true; // ! Set to true for now
 
   const submit = async () => {
     setLoading(true);
 
     try {
       const res = await fetch(endpoint, {
-        method: existingData ? "PATCH" : "POST",
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -36,8 +34,6 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
 
       if (ok) {
         toast.success(message);
-        setExistingData(true);
-        setNewValues(formValues);
       } else {
         toast.error(message);
       }

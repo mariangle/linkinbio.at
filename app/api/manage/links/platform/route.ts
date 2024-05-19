@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     });
   }
 
-  const { provider, username, isTopIcon, archived } = await req.json();
+  const { provider, username, archived, order } = await req.json();
 
   if (!provider || !username) {
     return NextResponse.json({
@@ -40,8 +40,6 @@ export async function POST(req: Request) {
 
   const link = await db.platformLink.create({
     data: {
-      title: validPlatform.name,
-      isTopIcon,
       username: username,
       provider: validPlatform.name,
       user: {
@@ -49,7 +47,7 @@ export async function POST(req: Request) {
           id: session.user.id,
         },
       },
-      order: 0, // ! Setting order to 0 for now, will be updated later
+      order: 0,
       archived: false,
     },
   });

@@ -8,6 +8,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/biolink/button";
 import { ButtonsFormSchema, ButtonsFormValues } from "@/lib/validations";
 import { ButtonCustomizerSheet } from "@/components/button-customizer-sheet";
+import { Font } from "@/lib/types";
 
 export function ButtonCustomizer() {
   const form = useForm<ButtonsFormValues>({
@@ -16,7 +17,8 @@ export function ButtonCustomizer() {
       shadowSolid: true,
       shadowSpreadRadius: 5,
       shadowColor: "#3730a3",
-      textColor: "#FFFFFF",
+      fontColor: "#FFFFFF",
+      fontShadow: true,
       textHidden: false,
       borderColor: "#4338ca",
       borderRadius: 0,
@@ -25,9 +27,6 @@ export function ButtonCustomizer() {
       backgroundOpacity: 1,
       backgroundBlur: 0,
       backgroundSocialColor: false,
-      iconHidden: false,
-      iconShadow: true,
-      iconSocialColor: false,
     },
   });
 
@@ -38,18 +37,18 @@ export function ButtonCustomizer() {
           <div className="pointer-events-none mx-auto max-w-[200px]">
             <Button
               item={{
-                id: "1",
                 url: "https://fake.com",
-                order: 0,
                 archived: false,
                 title: "Customize me",
-                isTopIcon: false,
-                iconId: 47,
               }}
               config={{
                 text: {
-                  color: form.watch("textColor"),
                   hidden: form.watch("textHidden"),
+                },
+                font: {
+                  family: Font.Inter,
+                  color: form.watch("fontColor"),
+                  shadow: form.watch("fontShadow"),
                 },
                 shadow: {
                   solid: form.watch("shadowSolid"),
@@ -66,11 +65,6 @@ export function ButtonCustomizer() {
                   radius: form.watch("borderRadius"),
                   width: form.watch("borderWidth"),
                   color: form.watch("borderColor"),
-                },
-                icon: {
-                  hidden: form.watch("iconHidden"),
-                  shadow: form.watch("iconShadow"),
-                  socialColor: form.watch("iconSocialColor"),
                 },
               }}
             />
