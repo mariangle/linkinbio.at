@@ -212,7 +212,6 @@ export function BackgroundForm({ data }: { data?: BackgroundData }) {
           <FormFooter>
             <FormActions loading={loading} cancel={onCancel} dirty={true} />
           </FormFooter>
-          <div>{JSON.stringify(form.formState.dirtyFields)}</div>
         </FormContainer>
       </form>
     </Form>

@@ -14,6 +14,8 @@ export function LayoutPreview({ layout }: { layout: LayoutEnum }) {
       return <GlassmorphismLayout />;
     case LayoutEnum.Bold:
       return <BoldLayoutPreview />;
+    case LayoutEnum.Modern:
+      return <ModernLayoutPreview />;
   }
 }
 
@@ -95,6 +97,19 @@ export function BoldLayoutPreview() {
   );
 }
 
+export function ModernLayoutPreview() {
+  return (
+    <LayoutPreviewWrapper className="bg-neutral-300 p-2 dark:bg-[#2a2c3a]">
+      <CoverPreview className="static inset-0 rounded-none" />
+      <div className="relative flex w-full flex-col items-center justify-start gap-2 rounded-lg bg-[#ecedef] p-4 pb-10 dark:bg-[#15161d]">
+        <TitlePreview />
+        <BioPreview />
+        <ButtonsPreview count={2} />
+      </div>
+    </LayoutPreviewWrapper>
+  );
+}
+
 export function TitlePreview({ className }: { className?: string }) {
   return (
     <div
@@ -155,12 +170,15 @@ export function ProfilePicturePreview({ className }: { className?: string }) {
   );
 }
 
-export function ButtonsPreview() {
+export function ButtonsPreview({ count = 3 }: { count?: number }) {
   return (
-    <div className="mt-4 flex flex-col items-center justify-center gap-3">
-      <div className="h-6 w-full rounded-lg bg-white shadow-sm dark:bg-[#1c1e29]" />
-      <div className="h-6 w-full rounded-lg bg-white shadow-sm dark:bg-[#1c1e29]" />
-      <div className="h-6 w-full rounded-lg bg-white shadow-sm dark:bg-[#1c1e29]" />
+    <div className="mt-4 flex w-full flex-col items-center justify-center gap-3">
+      {Array.from({ length: count }).map((_, index) => (
+        <div
+          key={index}
+          className="h-6 w-full rounded-lg bg-white shadow-sm dark:bg-[#1c1e29]"
+        />
+      ))}
     </div>
   );
 }

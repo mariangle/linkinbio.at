@@ -86,6 +86,7 @@ enum Layout {
   Glassmorphism
   WithCover
   Bold
+  Modern
 }
 
 model WebsiteLink {
@@ -94,6 +95,7 @@ model WebsiteLink {
   url      String
   archived Boolean @default(false)
   title    String
+  featured Boolean @default(false)
   order    Int
   imageUrl String? @map("image_url")
   iconName String? @map("icon_name")

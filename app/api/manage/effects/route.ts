@@ -22,8 +22,6 @@ export async function PATCH(req: Request) {
 
   let effects;
 
-  console.log(titleEffect, weatherEffect);
-
   // Check if the user already has effects
   const existingEffects = await db.effect.findUnique({
     where: {

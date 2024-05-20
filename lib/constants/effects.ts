@@ -32,4 +32,12 @@ export const titleEffects = [
     value: TitleEffect.CherryBlossoms,
     label: "Cherry Blossoms",
   },
+  {
+    value: TitleEffect.Shake,
+    label: "Shake",
+  },
+  {
+    value: TitleEffect.Glitch,
+    label: "Glitch",
+  },
 ];

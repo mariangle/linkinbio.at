@@ -7,7 +7,7 @@ import * as HiIcons from "react-icons/hi";
 import { cn } from "@/lib/utils";
 
 interface CustomIconOptions {
-  shadow: boolean;
+  filter?: string;
   color: string;
 }
 
@@ -41,15 +41,11 @@ export function CustomIcon({
       return null;
     }
 
-    const filter = options?.shadow
-      ? `drop-shadow(0 0 0.5rem ${options?.color})`
-      : undefined;
-
     return (
       <IconComponent
         style={{
           color: options?.color,
-          filter,
+          filter: options?.filter,
         }}
         className={cn(
           "absolute left-4 top-1/2 size-5 -translate-y-1/2",

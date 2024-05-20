@@ -102,7 +102,7 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
               )}
             />
           </div>
-          <div className="grid grid-cols-3 gap-4 rounded-2xl bg-secondary p-2">
+          <div className="grid grid-cols-1 gap-4 rounded-2xl bg-secondary p-2">
             {titleEffects.map((item, idx) => (
               <button
                 type="button"
@@ -111,7 +111,7 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
                   form.setValue("title", item.value);
                 }}
                 className={cn(
-                  "flex justify-center rounded-lg border-2 border-border p-3",
+                  "flex h-[50px] justify-center rounded-lg border-2 border-border p-3",
                   form.getValues("title") === item.value &&
                     "border-foreground/50",
                 )}

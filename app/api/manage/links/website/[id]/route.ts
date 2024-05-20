@@ -27,7 +27,8 @@ export async function PATCH(
     });
   }
 
-  const { title, url, archived, order, imageUrl, iconName } = await req.json();
+  const { title, url, archived, order, imageUrl, iconName, featured } =
+    await req.json();
 
   if (!title || !url) {
     return NextResponse.json({
@@ -56,6 +57,7 @@ export async function PATCH(
       title,
       url,
       archived,
+      featured,
       imageUrl: imageUrl || null,
       iconName: iconName || null,
       order: 0, // ! Setting order to 0 for now, will be updated later

@@ -13,7 +13,12 @@ export default async function Links() {
     <PageWithPreview biolink={biolink}>
       <NewLinkForm />
       <div>
-        <h3 className="text-lg font-semibold">Platform Links</h3>
+        <h3 className="text-lg font-semibold">
+          Platform Links{" "}
+          <span className="text-xs font-normal text-muted-foreground">
+            (displayed as icons)
+          </span>
+        </h3>
       </div>
       <ul className="mt-4 space-y-4">
         {biolink.links.platform.map((item, index) => (

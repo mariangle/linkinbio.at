@@ -13,6 +13,7 @@ import { WithCoverLayout } from "@/components/biolink/layout/with-cover-layout";
 import { ProfessionalLayout } from "@/components/biolink/layout/professional-layout";
 import { BoldLayout } from "@/components/biolink/layout/bold-layout";
 import { WeatherEffect } from "@/components/biolink/effects/weather-effect";
+import { ModernLayout } from "@/components/biolink/layout/modern-layout";
 
 export interface LayoutProps {
   user: User;
@@ -101,6 +102,22 @@ export function Layout({
           </LayoutWrapper>
         );
 
+      case LayoutEnum.Modern:
+        return (
+          <LayoutWrapper
+            premium={biolink.user.premium}
+            preview={preview}
+            effects={biolink.config.effects}
+          >
+            <ModernLayout
+              widgets={biolink.widgets}
+              user={biolink.user}
+              links={biolink.links}
+              config={biolink.config}
+              preview={preview}
+            />
+          </LayoutWrapper>
+        );
       default:
         break;
     }

@@ -58,6 +58,8 @@ export function convertToPrismaLayout(layout: string) {
       return PrismaLayout.Glassmorphism;
     case Layout.Bold:
       return PrismaLayout.Bold;
+    case Layout.Modern:
+      return PrismaLayout.Modern;
     default:
       return PrismaLayout.Standard;
   }
@@ -73,6 +75,8 @@ export function convertToLayout(layout: PrismaLayout | null | undefined) {
       return Layout.Glassmorphism;
     case PrismaLayout.Bold:
       return Layout.Bold;
+    case PrismaLayout.Modern:
+      return Layout.Modern;
     default:
       return Layout.Standard;
   }
@@ -148,8 +152,17 @@ export function convertToTitleEffect(
       return TitleEffect.Typewriter;
     case TitleEffect.Sparkles:
       return TitleEffect.Sparkles;
-    case TitleEffect.Stars:
-      return TitleEffect.Stars;
+    case TitleEffect.Shake:
+      return TitleEffect.Shake;
+    case TitleEffect.Glow:
+      return TitleEffect.Glow;
+    case TitleEffect.Glitch:
+      return TitleEffect.Glitch;
+    case TitleEffect.Hearts:
+      return TitleEffect.Hearts;
+    case TitleEffect.CherryBlossoms:
+      return TitleEffect.CherryBlossoms;
+
     default:
       return;
   }

@@ -51,7 +51,6 @@ export function TypographyForm({ data }: { data: TypographyData }) {
   React.useEffect(() => {
     form.watch((value) => {
       if (biolink) {
-        console.log(value.hideUsername);
         setBiolink({
           ...biolink,
           config: {

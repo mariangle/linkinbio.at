@@ -62,7 +62,7 @@ export function StandardLayout({
           </div>
         )}
         {links.website.length > 0 && (
-          <div className="my-8 w-full space-y-4">
+          <div className="mt-8 w-full space-y-4">
             {links.website.map((link, index) => (
               <Button key={index} item={link} config={config.buttons} />
             ))}

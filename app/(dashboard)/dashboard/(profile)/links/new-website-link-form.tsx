@@ -27,17 +27,13 @@ export function NewWebsiteLinkForm({ close }: { close: () => void }) {
   const form = useForm<WebsiteLinkFormValues>({
     resolver: zodResolver(WebsiteLinkFormSchema),
     defaultValues: {
-      title: "",
       url: "",
-      archived: false,
     },
   });
 
   const { loading, dirty, submit } = useFormSubmit<WebsiteLinkFormValues>({
     initialData: {
-      title: "",
       url: "",
-      archived: false,
     },
     formValues: form.getValues(),
     endpoint: "/api/manage/links/website",
@@ -59,18 +55,6 @@ export function NewWebsiteLinkForm({ close }: { close: () => void }) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Title" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="url"

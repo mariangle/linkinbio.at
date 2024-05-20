@@ -15,8 +15,10 @@ export function Widgets({
 }) {
   if (!premium) return null;
 
+  if (!widgets?.soundcloud || !widgets.spotify || !widgets.youtube) return null;
+
   return (
-    <div className={cn("w-full space-y-2", className)}>
+    <div className={cn("mt-6 w-full space-y-2", className)}>
       <SoundcloudTrack options={widgets?.soundcloud} />
       <Spotify options={widgets?.spotify} />
       <YoutubeVideo options={widgets?.youtube} />

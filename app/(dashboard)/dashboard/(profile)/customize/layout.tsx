@@ -9,8 +9,6 @@ export default async function CustomizeLayout({
 }) {
   const biolink = await getCachedBiolink();
 
-  console.log("hello");
-
   if (!biolink) return null;
   return (
     <div>

@@ -4,6 +4,7 @@ export enum Layout {
   Glassmorphism = "glassmorphism",
   WithCover = "with-cover",
   Bold = "bold",
+  Modern = "modern",
 }
 
 export enum Font {
@@ -23,8 +24,11 @@ export enum Font {
 export enum TitleEffect {
   Typewriter = "typewriter",
   Sparkles = "sparkles",
-  Stars = "stars",
   CherryBlossoms = "cherry-blossoms",
+  Shake = "shake",
+  Glow = "glow",
+  Glitch = "glitch",
+  Hearts = "hearts",
 }
 
 export enum WeatherEffect {

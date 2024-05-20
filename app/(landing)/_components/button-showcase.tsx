@@ -33,42 +33,40 @@ export function ButtonCustomizer() {
   return (
     <Form {...form}>
       <ButtonCustomizerSheet form={form}>
-        <div className="cursor-pointer">
-          <div className="pointer-events-none mx-auto max-w-[200px]">
-            <Button
-              item={{
-                url: "https://fake.com",
-                archived: false,
-                title: "Customize me",
-              }}
-              config={{
-                text: {
-                  hidden: form.watch("textHidden"),
-                },
-                font: {
-                  family: Font.Inter,
-                  color: form.watch("fontColor"),
-                  shadow: form.watch("fontShadow"),
-                },
-                shadow: {
-                  solid: form.watch("shadowSolid"),
-                  spreadRadius: form.watch("shadowSpreadRadius"),
-                  color: form.watch("shadowColor"),
-                },
-                background: {
-                  color: form.watch("backgroundColor"),
-                  opacity: form.watch("backgroundOpacity"),
-                  blur: form.watch("backgroundBlur"),
-                  socialColor: form.watch("backgroundSocialColor"),
-                },
-                border: {
-                  radius: form.watch("borderRadius"),
-                  width: form.watch("borderWidth"),
-                  color: form.watch("borderColor"),
-                },
-              }}
-            />
-          </div>
+        <div className="mx-auto max-w-[200px]">
+          <Button
+            item={{
+              url: "https://fake.com",
+              archived: false,
+              title: "Customize me",
+            }}
+            config={{
+              text: {
+                hidden: form.watch("textHidden"),
+              },
+              font: {
+                family: Font.Inter,
+                color: form.watch("fontColor"),
+                shadow: form.watch("fontShadow"),
+              },
+              shadow: {
+                solid: form.watch("shadowSolid"),
+                spreadRadius: form.watch("shadowSpreadRadius"),
+                color: form.watch("shadowColor"),
+              },
+              background: {
+                color: form.watch("backgroundColor"),
+                opacity: form.watch("backgroundOpacity"),
+                blur: form.watch("backgroundBlur"),
+                socialColor: form.watch("backgroundSocialColor"),
+              },
+              border: {
+                radius: form.watch("borderRadius"),
+                width: form.watch("borderWidth"),
+                color: form.watch("borderColor"),
+              },
+            }}
+          />
         </div>
       </ButtonCustomizerSheet>
     </Form>

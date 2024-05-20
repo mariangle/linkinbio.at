@@ -5,8 +5,7 @@ import * as React from "react";
 import { WebsiteLink } from "@/lib/types";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UseFormReturn, useForm, useController } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { UseFormReturn, useForm } from "react-hook-form";
 import {
   EyeIcon,
   PencilIcon,
@@ -15,6 +14,7 @@ import {
   X,
   CheckIcon,
   Image as ImageIcon,
+  StarIcon,
 } from "lucide-react";
 
 import {
@@ -42,30 +42,18 @@ export function WebsiteLinkForm({ item }: { item: WebsiteLink }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isEditingThumbnail, setIsEditingThumbnail] = React.useState(false);
   const [isDeleted, setIsDeleted] = React.useState(false);
-  const [data, setData] = React.useState<WebsiteLink>(item);
+  const [data, setData] = React.useState<Partial<WebsiteLink>>(item);
 
   const closeEditingThumbnail = () => setIsEditingThumbnail(false);
 
   const form = useForm<WebsiteLinkFormValues>({
     resolver: zodResolver(WebsiteLinkFormSchema),
-    defaultValues: {
-      title: data.title,
-      url: data.url,
-      archived: data.archived,
-      imageUrl: data.imageUrl,
-      iconName: data.iconName,
-    },
+    defaultValues: data,
   });
 
   const { loading, dirty, submit, remove } =
     useFormSubmit<WebsiteLinkFormValues>({
-      initialData: {
-        title: data.title,
-        url: data.url,
-        archived: data.archived,
-        imageUrl: data.imageUrl,
-        iconName: data.iconName,
-      },
+      initialData: data,
       formValues: form.getValues(),
       endpoint: `/api/manage/links/website/${data.id}`,
     });
@@ -145,9 +133,22 @@ export function WebsiteLinkForm({ item }: { item: WebsiteLink }) {
                     >
                       <ImageIcon
                         className={cn(
-                          "size-4 !text-muted-foreground",
+                          "size-4 text-muted-foreground",
                           form.getValues("iconName") && "!text-primary",
                           form.getValues("imageUrl") && "!text-primary",
+                        )}
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        form.setValue("featured", !form.getValues("featured"));
+                      }}
+                    >
+                      <StarIcon
+                        className={cn(
+                          "size-4 text-muted-foreground",
+                          form.watch("featured") === true && "!text-primary",
                         )}
                       />
                     </button>

@@ -12,6 +12,7 @@ export function constructLinkFromWebsite(link: WebsiteLinkProps): WebsiteLink {
     order: link.order,
     title: link.title,
     url: link.url,
+    featured: link.featured,
     archived: link.archived,
     imageUrl: link.imageUrl ?? undefined,
     iconName: link.iconName ?? undefined,

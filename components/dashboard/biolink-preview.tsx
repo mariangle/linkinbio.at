@@ -40,7 +40,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
           className="absolute right-4 top-4"
           username={biolink.user.username}
         />
-        <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
+        <PhoneMockup biolink={biolinkPreview} />
       </div>
     );
   }

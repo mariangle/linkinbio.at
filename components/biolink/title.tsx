@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
 import { TitleOptions, TitleEffect, User } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/get-font";
-import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Title({
   options,
@@ -17,8 +16,6 @@ export function Title({
   className?: string;
   user: Pick<User, "title" | "premium">;
 }) {
-  const mergedOptions = options || defaultTextOptions;
-
   if (!user.title) return null;
 
   if (user.premium && effect === TitleEffect.Typewriter) {
@@ -26,12 +23,12 @@ export function Title({
       <div className="relative">
         <div
           style={{
-            color: mergedOptions.color,
+            color: options?.color,
           }}
           className={cn(
             "text-wrap break-all  text-xl font-semibold",
             className,
-            getFontDisplay(mergedOptions.font),
+            getFontDisplay(options?.font),
           )}
         >
           <TypewriterEffect words={user.title} />
@@ -66,14 +63,17 @@ export function Title({
       )}
       <h2
         style={{
-          color: mergedOptions.color,
-          font: mergedOptions.font,
+          color: options?.color,
+          font: options?.font,
         }}
         className={cn(
-          "relative w-fit text-wrap break-all  text-xl font-semibold",
+          "relative w-fit text-wrap break-all bg-transparent text-xl font-semibold",
           className,
-          getFontDisplay(mergedOptions.font),
+          effect === TitleEffect.Glitch && "glitch-effect",
+          effect === TitleEffect.Shake && "shake-effect",
+          getFontDisplay(options?.font),
         )}
+        data-text={user.title}
       >
         {user.title}
       </h2>

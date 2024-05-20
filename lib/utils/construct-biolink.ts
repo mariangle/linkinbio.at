@@ -1,4 +1,4 @@
-import { Biolink, ContentType, Font } from "@/lib/types";
+import { Biolink, ContentType, Font, Position } from "@/lib/types";
 import {
   convertToTopIconStyle,
   convertToWeatherEffect,
@@ -131,6 +131,8 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         shadow: user.icons?.shadow ?? defaultIconsOptions.shadow,
         style: convertToTopIconStyle(user.icons?.style) ?? undefined,
         color: user.icons?.color ?? defaultIconsOptions.color,
+        position:
+          (user.icons?.position as Position) ?? defaultIconsOptions.position,
       },
       effects: {
         title:

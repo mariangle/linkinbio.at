@@ -26,4 +26,9 @@ export const layouts = [
     name: "Bold",
     premium: true,
   },
+  {
+    value: Layout.Modern,
+    name: "Modern",
+    premium: true,
+  },
 ];

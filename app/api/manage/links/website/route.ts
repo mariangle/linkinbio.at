@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 
 import { isValidURL } from "@/lib/utils/media-validation";
+import { scrapeMetadata } from "@/server/actions/scrape-metadata";
 
 export async function POST(req: Request) {
   const session = await auth();
@@ -16,14 +17,14 @@ export async function POST(req: Request) {
     });
   }
 
-  const { title, url, archived, order, imageUrl, iconName } = await req.json();
+  const { url } = await req.json();
 
-  if (!title || !url) {
+  if (!url) {
     return NextResponse.json({
       status: 400,
       ok: false,
       data: null,
-      message: "A title and url is required",
+      message: "A url is required",
     });
   }
 
@@ -36,13 +37,14 @@ export async function POST(req: Request) {
     });
   }
 
+  const { title, image } = await scrapeMetadata(url);
+
   const link = await db.websiteLink.create({
     data: {
-      title,
+      title: title || "Untitled",
       url,
-      archived,
-      imageUrl: imageUrl || null,
-      iconName: iconName || null,
+      archived: false,
+      imageUrl: image || null,
       user: {
         connect: {
           id: session.user.id,

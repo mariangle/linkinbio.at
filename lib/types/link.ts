@@ -10,6 +10,7 @@ export interface WebsiteLink extends Link {
   url: string;
   title: string;
   order?: number;
+  featured?: boolean;
   archived?: boolean;
   imageUrl?: string;
   iconName?: string;

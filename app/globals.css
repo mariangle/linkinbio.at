@@ -122,10 +122,6 @@
     animation: float 3s ease-in infinite;
   }
 
-  .box-shadow {
-    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-  }
-
   .perspective {
     --phone-scale: 0.6;
     perspective-origin: 50%;
@@ -231,5 +227,201 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .glitch-effect {
+    position: relative;
+    padding: 10px 0;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  .glitch-effect:before,
+  .glitch-effect:after {
+    padding: 10px 0;
+    content: attr(data-text);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    letter-spacing: 5px;
+    overflow: hidden;
+    top: 0;
+  }
+  .glitch-effect:before {
+    left: 2px;
+    text-shadow: -2px 0 #284bff;
+    animation: glitch-1 2s linear infinite reverse;
+  }
+  .glitch-effect:after {
+    left: -2px;
+    text-shadow: -2px 0 #ff6c63;
+    animation: glitch-2 2s linear infinite reverse;
+  }
+  @keyframes glitch-1 {
+    0% {
+      clip: rect(132px, 500px, 101px, 0px);
+    }
+    5% {
+      clip: rect(17px, 500px, 94px, 0px);
+    }
+    10% {
+      clip: rect(40px, 500px, 66px, 0px);
+    }
+    15% {
+      clip: rect(87px, 500px, 82px, 0px);
+    }
+    20% {
+      clip: rect(137px, 500px, 61px, 0px);
+    }
+    25% {
+      clip: rect(34px, 500px, 14px, 0px);
+    }
+    30% {
+      clip: rect(133px, 500px, 74px, 0px);
+    }
+    35% {
+      clip: rect(76px, 500px, 107px, 0px);
+    }
+    40% {
+      clip: rect(59px, 500px, 130px, 0px);
+    }
+    45% {
+      clip: rect(29px, 500px, 84px, 0px);
+    }
+    50% {
+      clip: rect(22px, 500px, 67px, 0px);
+    }
+    55% {
+      clip: rect(67px, 500px, 62px, 0px);
+    }
+    60% {
+      clip: rect(10px, 500px, 105px, 0px);
+    }
+    65% {
+      clip: rect(78px, 500px, 115px, 0px);
+    }
+    70% {
+      clip: rect(105px, 500px, 13px, 0px);
+    }
+    75% {
+      clip: rect(15px, 500px, 75px, 0px);
+    }
+    80% {
+      clip: rect(66px, 500px, 39px, 0px);
+    }
+    85% {
+      clip: rect(133px, 500px, 73px, 0px);
+    }
+    90% {
+      clip: rect(36px, 500px, 128px, 0px);
+    }
+    95% {
+      clip: rect(68px, 500px, 103px, 0px);
+    }
+    100% {
+      clip: rect(14px, 500px, 100px, 0px);
+    }
+  }
+  @keyframes glitch-2 {
+    0% {
+      clip: rect(129px, 500px, 36px, 0px);
+    }
+    5% {
+      clip: rect(36px, 500px, 4px, 0px);
+    }
+    10% {
+      clip: rect(85px, 500px, 66px, 0px);
+    }
+    15% {
+      clip: rect(91px, 500px, 91px, 0px);
+    }
+    20% {
+      clip: rect(148px, 500px, 138px, 0px);
+    }
+    25% {
+      clip: rect(38px, 500px, 122px, 0px);
+    }
+    30% {
+      clip: rect(69px, 500px, 54px, 0px);
+    }
+    35% {
+      clip: rect(98px, 500px, 71px, 0px);
+    }
+    40% {
+      clip: rect(146px, 500px, 34px, 0px);
+    }
+    45% {
+      clip: rect(134px, 500px, 43px, 0px);
+    }
+    50% {
+      clip: rect(102px, 500px, 80px, 0px);
+    }
+    55% {
+      clip: rect(119px, 500px, 44px, 0px);
+    }
+    60% {
+      clip: rect(106px, 500px, 99px, 0px);
+    }
+    65% {
+      clip: rect(141px, 500px, 74px, 0px);
+    }
+    70% {
+      clip: rect(20px, 500px, 78px, 0px);
+    }
+    75% {
+      clip: rect(133px, 500px, 79px, 0px);
+    }
+    80% {
+      clip: rect(78px, 500px, 52px, 0px);
+    }
+    85% {
+      clip: rect(35px, 500px, 39px, 0px);
+    }
+    90% {
+      clip: rect(67px, 500px, 70px, 0px);
+    }
+    95% {
+      clip: rect(71px, 500px, 103px, 0px);
+    }
+    100% {
+      clip: rect(83px, 500px, 40px, 0px);
+    }
+  }
+
+  @keyframes shake-animation {
+    0% {
+      transform: translateX(0);
+    }
+    60% {
+      transform: translateX(0);
+    }
+    65% {
+      transform: translateX(3px);
+    }
+    70% {
+      transform: translateX(-3px);
+    }
+    75% {
+      transform: translateX(3px);
+    }
+    80% {
+      transform: translateX(-3px);
+    }
+    85% {
+      transform: translateX(3px);
+    }
+    90% {
+      transform: translateX(-3px);
+    }
+    95% {
+      transform: translateX(3px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .shake-effect {
+    animation: shake-animation 2.5s infinite;
   }
 }

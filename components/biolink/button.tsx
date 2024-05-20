@@ -2,6 +2,7 @@
 
 import { hexToRgb, cn } from "@/lib/utils";
 
+import { FeaturedLink } from "@/components/biolink/featured-link";
 import type { WebsiteLink, ButtonOptions } from "@/lib/types";
 import { useTracking } from "@/hooks/use-tracking";
 import { defaultButtonOptions } from "@/lib/constants/defaults";
@@ -21,6 +22,16 @@ export function Button({
   const { trackClick } = useTracking();
 
   if (item.archived) return null;
+
+  if (item.featured)
+    return (
+      <FeaturedLink
+        item={item}
+        config={{
+          borderRadius: config.border.radius,
+        }}
+      />
+    );
 
   const textColor = config.font.color;
 
@@ -65,9 +76,9 @@ export function Button({
     : undefined;
 
   const redirect = async () => {
-    window.open(item.url, "_blank");
-
     if (!item.id) return;
+
+    window.open(item.url, "_blank");
 
     await trackClick(item.id, false);
   };
@@ -101,7 +112,7 @@ export function Button({
         <CustomIcon
           name={item.iconName}
           options={{
-            shadow: config.font.shadow,
+            filter: filter,
             color: textColor,
           }}
         />

@@ -107,11 +107,11 @@ export function PlatformLinkForm({ item }: { item: PlatformLink }) {
                   </div>
                 ) : (
                   <div>
+                    <div className="text-sm font-medium">
+                      {form.getValues("provider")}
+                    </div>
                     <div className="text-xs text-muted-foreground">
-                      {constructPlatformUrl({
-                        provider: form.getValues("provider")!,
-                        username: form.getValues("username"),
-                      })}
+                      {form.getValues("username")}
                     </div>
                   </div>
                 )}

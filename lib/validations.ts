@@ -104,7 +104,8 @@ const validateIconName = (name: string | undefined) => {
 
 export const WebsiteLinkFormSchema = z.object({
   archived: z.boolean().default(false).optional(),
-  title: z.string().min(1).max(20),
+  featured: z.boolean().default(false).optional(),
+  title: z.string().min(1).max(50).optional(),
   url: z.string().url(),
   imageUrl: z.string().optional(),
   iconName: z.string().optional().refine(validateIconName, {
