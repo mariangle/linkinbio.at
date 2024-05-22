@@ -3,7 +3,7 @@ import DashboardBackgroundDark from "@/public/dashboard-background-dark.jpg";
 import DashboardBackgroundLight from "@/public/dashboard-background-light.jpg";
 
 import { Navigation } from "@/components/dashboard/navigation";
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { UsernameDialog } from "@/components/dashboard/username-modal";
 import { redirect } from "next/navigation";
 

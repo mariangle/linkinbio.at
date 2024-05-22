@@ -4,13 +4,7 @@ export function isValidURL(url: string) {
 }
 
 export function isValidImage(url: string) {
-  return (
-    isValidURL(url) &&
-    (url.includes(".jpg") ||
-      url.includes(".png") ||
-      url.includes(".jpeg") ||
-      url.endsWith(".gif"))
-  );
+  return isValidURL(url) && /\.(jpg|jpeg|png|gif|mp4)/i.test(url);
 }
 export function isValidVideo(url: string) {
   return url.endsWith(".mp4");

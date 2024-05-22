@@ -28,6 +28,7 @@ export const defaultProfileOptions: ProfileOptions = {
 export const defaultIconsOptions: IconOptions = {
   color: "#FFFFFF",
   position: "top",
+  size: "medium",
 };
 
 export const defaultEffectsOptions: EffectsOptions = {};

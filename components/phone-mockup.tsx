@@ -34,7 +34,6 @@ export function PhoneMockup({
             />
           )}
         </div>
-        <div className="absolute inset-0 h-full w-full origin-bottom rounded-[40px] opacity-50" />
       </div>
     </div>
   );

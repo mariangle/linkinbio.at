@@ -1,10 +1,16 @@
-import { Biolink, ContentType, Font, Position } from "@/lib/types";
 import {
-  convertToTopIconStyle,
+  Biolink,
+  ContentType,
+  Font,
+  IconStyle,
+  Position,
+  Size,
+  TitleEffect,
+} from "@/lib/types";
+import {
   convertToWeatherEffect,
   convertToLayout,
   convertToContentType,
-  convertToTitleEffect,
 } from "@/lib/utils/enum-mappings";
 import {
   constructLinkFromWebsite,
@@ -129,14 +135,15 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       },
       icons: {
         shadow: user.icons?.shadow ?? defaultIconsOptions.shadow,
-        style: convertToTopIconStyle(user.icons?.style) ?? undefined,
+        style: (user.icons?.style as IconStyle) ?? defaultIconsOptions.style,
         color: user.icons?.color ?? defaultIconsOptions.color,
         position:
           (user.icons?.position as Position) ?? defaultIconsOptions.position,
+        size: (user.icons?.size as Size) ?? defaultIconsOptions.size,
       },
       effects: {
         title:
-          convertToTitleEffect(user.effect?.titleEffect) ??
+          (user.effect?.titleEffect as TitleEffect) ??
           defaultEffectsOptions.title,
         weather:
           convertToWeatherEffect(user.effect?.weatherEffect) ??

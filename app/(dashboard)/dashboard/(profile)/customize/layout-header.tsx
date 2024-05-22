@@ -7,6 +7,10 @@ import { cn } from "@/lib/utils";
 
 const links = [
   {
+    title: "Profile",
+    href: "/profile",
+  },
+  {
     title: "Typography",
     href: "/typography",
   },
@@ -19,7 +23,7 @@ const links = [
     href: "/icons",
   },
   {
-    title: "Backgrounds",
+    title: "Background",
     href: "/background",
   },
   {

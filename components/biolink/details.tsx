@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Font, TextOptions } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/get-font";
-import { FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
+import { FaMapMarkerAlt, FaBriefcase, FaEnvelope } from "react-icons/fa";
 import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Details({

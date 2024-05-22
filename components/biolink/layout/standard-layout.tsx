@@ -1,14 +1,16 @@
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
-import { Button } from "@/components/biolink/button";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { TopIcon } from "@/components/biolink/icon";
 import { Footer } from "@/components/biolink/footer";
 import {
   BackgroundContainer,
   BackgroundMedia,
 } from "@/components/biolink/background";
+import {
+  PlatformIconLinks,
+  WebsiteButtonLinks,
+} from "@/components/biolink/links-list";
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { cn } from "@/lib/utils";
@@ -26,13 +28,11 @@ export function StandardLayout({
     <BackgroundContainer
       premium={user.premium}
       options={config.background}
-      className={cn(preview && "absolute inset-0")}
+      className={cn(preview && "absolute inset-0 p-0")}
+      preview={preview}
     >
-      <BackgroundMedia
-        url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute h-full w-full")}
-      />
-      <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-center py-16">
+      <BackgroundMedia url={config.background?.url} className="fixed inset-0" />
+      <ContentContainer className="h-fit py-16">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
@@ -54,21 +54,14 @@ export function StandardLayout({
             options={config.profile?.text}
           />
         </div>
-        {links.platform.length > 0 && (
-          <div className="mt-6 flex gap-4">
-            {links.platform.map((link, index) => (
-              <TopIcon options={config.icons} key={index} item={link} />
-            ))}
-          </div>
+        {config.icons.position !== "bottom" && (
+          <PlatformIconLinks links={links.platform} config={config.icons} />
         )}
-        {links.website.length > 0 && (
-          <div className="mt-8 w-full space-y-4">
-            {links.website.map((link, index) => (
-              <Button key={index} item={link} config={config.buttons} />
-            ))}
-          </div>
-        )}
+        <WebsiteButtonLinks links={links.website} config={config.buttons} />
         <Widgets widgets={widgets} premium={user.premium} />
+        {config.icons.position === "bottom" && (
+          <PlatformIconLinks links={links.platform} config={config.icons} />
+        )}
       </ContentContainer>
       <Footer color={config.profile?.text?.color} />
     </BackgroundContainer>

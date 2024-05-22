@@ -1,4 +1,4 @@
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { IconsForm } from "./icons-form";
 
 export default async function Icons() {

@@ -1,4 +1,4 @@
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { SpotifyForm } from "./spotify-form";
 import { SoundcloudForm } from "./soundcloud-form";
 import { YoutubeForm } from "./youtube-form";

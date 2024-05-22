@@ -1,13 +1,15 @@
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
-import { Button } from "@/components/biolink/button";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { TopIcon } from "@/components/biolink/icon";
 import {
   BackgroundContainer,
   BackgroundMedia,
 } from "@/components/biolink/background";
+import {
+  PlatformIconLinks,
+  WebsiteButtonLinks,
+} from "@/components/biolink/links-list";
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
@@ -27,12 +29,10 @@ export function GlassmorphismLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
+      preview={preview}
     >
-      <BackgroundMedia
-        url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute")}
-      />
-      <div className="my-12 flex w-full max-w-[350px] flex-col items-center justify-center gap-8 md:my-24">
+      <BackgroundMedia url={config.background?.url} className="fixed inset-0" />
+      <div className="my-12 flex w-full max-w-[350px] flex-col items-center justify-center gap-4 md:my-24">
         <ContentContainer className="relative flex h-fit w-full flex-col items-center rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-black/75 to-black/50 p-6 backdrop-blur-xl">
           <div className="flex w-full flex-col items-start justify-start">
             <ProfilePicture
@@ -58,19 +58,16 @@ export function GlassmorphismLayout({
               options={config.profile?.text}
             />
           </div>
-          {links.platform.length > 0 && (
-            <div className="mt-4 flex w-full justify-start gap-4">
-              {links.platform.map((link, index) => (
-                <TopIcon options={config.icons} key={index} item={link} />
-              ))}
-            </div>
+          {config.icons.position !== "bottom" && (
+            <PlatformIconLinks
+              links={links.platform}
+              config={config.icons}
+              className="justify-start"
+            />
           )}
-          {links.website.length > 0 && (
-            <div className="my-6 w-full space-y-4">
-              {links.website.map((link, index) => (
-                <Button key={index} item={link} config={config.buttons} />
-              ))}
-            </div>
+          <WebsiteButtonLinks links={links.website} config={config.buttons} />
+          {config.icons.position === "bottom" && (
+            <PlatformIconLinks links={links.platform} config={config.icons} />
           )}
         </ContentContainer>
         <Widgets widgets={widgets} premium={user.premium} />

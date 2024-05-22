@@ -1,7 +1,7 @@
 import { getCachedBiolink } from "@/server/actions/get-biolink";
-import { TypographyForm } from "./typography-form";
+import { ProfileForm } from "./profile-form";
 
-export default async function Typography() {
+export default async function Profile() {
   const biolink = await getCachedBiolink();
 
   if (!biolink) return null;
@@ -12,7 +12,7 @@ export default async function Typography() {
         <div className="whitespace-nowrap">Border</div>
         <div className="h-px w-full bg-border"></div>
       </div>
-      <TypographyForm data={biolink.config?.profile} />
+      <ProfileForm data={biolink.user} />
     </div>
   );
 }

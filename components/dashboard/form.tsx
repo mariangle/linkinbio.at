@@ -50,9 +50,20 @@ export function FormContent({
   return <div className={cn("space-y-4 p-4", className)}>{children}</div>;
 }
 
-export function FormFooter({ children }: { children: React.ReactNode }) {
+export function FormFooter({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="flex items-center justify-end gap-4 rounded-b-lg p-4">
+    <div
+      className={cn(
+        "flex items-center justify-end gap-4 rounded-b-lg p-4",
+        className,
+      )}
+    >
       {children}
     </div>
   );

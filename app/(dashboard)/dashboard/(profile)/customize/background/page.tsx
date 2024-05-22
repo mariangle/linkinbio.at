@@ -1,4 +1,4 @@
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { BackgroundForm } from "./background-form";
 
 export default async function Background() {

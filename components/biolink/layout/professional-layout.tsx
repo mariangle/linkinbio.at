@@ -1,13 +1,15 @@
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
-import { Button } from "@/components/biolink/button";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { TopIcon } from "@/components/biolink/icon";
 import {
   BackgroundContainer,
   BackgroundMedia,
 } from "@/components/biolink/background";
+import {
+  PlatformIconLinks,
+  WebsiteButtonLinks,
+} from "@/components/biolink/links-list";
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
@@ -27,6 +29,7 @@ export function ProfessionalLayout({
       premium={user.premium}
       options={config.background}
       className={cn(!preview && "min-h-screen", preview && "relative")}
+      preview={preview}
     >
       <BackgroundMedia
         url={config.background?.url}
@@ -35,16 +38,16 @@ export function ProfessionalLayout({
           preview && "rounded-b-none md:rounded-b-none",
         )}
       />
-      <ContentContainer className="relative mb-24 mt-40 flex w-full flex-col items-center">
+      <ContentContainer className="mb-24 mt-40 p-0">
         <div className="flex w-full flex-col items-start justify-center">
           <div className="flex w-full items-end justify-between">
             <ProfilePicture className="mb-4" src={user.image} />
-            {links.platform.length > 0 && (
-              <div className="flex gap-4">
-                {links.platform.map((link, index) => (
-                  <TopIcon options={config.icons} key={index} item={link} />
-                ))}
-              </div>
+            {config.icons.position !== "bottom" && (
+              <PlatformIconLinks
+                links={links.platform}
+                config={config.icons}
+                className="mt-0 justify-end gap-2"
+              />
             )}
           </div>
           <Title
@@ -62,14 +65,15 @@ export function ProfessionalLayout({
             options={config.profile?.text}
           />
         </div>
-        {links.website.length > 0 && (
-          <div className="my-8 w-full space-y-4">
-            {links.website.map((link, index) => (
-              <Button key={index} item={link} config={config.buttons} />
-            ))}
-          </div>
-        )}
+        <WebsiteButtonLinks links={links.website} config={config.buttons} />
         <Widgets widgets={widgets} premium={user.premium} />
+        {config.icons.position === "bottom" && (
+          <PlatformIconLinks
+            links={links.platform}
+            config={config.icons}
+            className="justify-start gap-2"
+          />
+        )}
       </ContentContainer>
       <Footer color={config.profile?.text?.color} />
     </BackgroundContainer>

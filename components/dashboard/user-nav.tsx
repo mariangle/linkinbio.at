@@ -28,7 +28,7 @@ export function UserNav({ user }: { user: User }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <ProfilePicture className="size-8" src={user.image} />
+        <ProfilePicture className="mb-1 size-8 md:size-9" src={user.image} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-[200px]">
         <DropdownMenuLabel className="truncate">{user.email}</DropdownMenuLabel>

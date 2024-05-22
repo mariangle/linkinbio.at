@@ -1,4 +1,4 @@
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { WebsiteLinkForm } from "./website-link-form";
 import { NewLinkForm } from "./new-link-form";
 import { PlatformLinkForm } from "./platform-link-form";

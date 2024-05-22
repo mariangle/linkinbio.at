@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { startOfDay, endOfDay } from "date-fns";
-import { getGeoData } from "@/lib/utils/get-geo-details";
+import { getGeoData } from "@/server/actions/get-geo-data";
 
 export async function POST(
   req: Request,

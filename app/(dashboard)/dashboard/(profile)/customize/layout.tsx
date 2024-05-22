@@ -1,4 +1,4 @@
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
 import { LayoutHeader } from "./layout-header";
 

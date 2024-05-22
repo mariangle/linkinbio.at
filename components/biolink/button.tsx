@@ -6,9 +6,19 @@ import { FeaturedLink } from "@/components/biolink/featured-link";
 import type { WebsiteLink, ButtonOptions } from "@/lib/types";
 import { useTracking } from "@/hooks/use-tracking";
 import { defaultButtonOptions } from "@/lib/constants/defaults";
-
+import { getFontDisplay } from "@/lib/utils/get-font";
+import { platforms, type Platform } from "@/lib/constants/platforms";
 import { ButtonImage } from "@/components/biolink/button-image";
 import { CustomIcon } from "@/components/biolink/custom-icon";
+
+function getPlatformFromUrl(url: string): Platform | null {
+  for (const platform of platforms) {
+    if (url.includes(platform.domain)) {
+      return platform;
+    }
+  }
+  return null;
+}
 
 export function Button({
   item,
@@ -35,20 +45,31 @@ export function Button({
 
   const textColor = config.font.color;
 
-  // TODO - Add social link support
+  const platform = getPlatformFromUrl(item.url);
 
   const backgroundColorRgb = hexToRgb(
     config.background.socialColor!
-      ? config.background.color!
+      ? platform
+        ? platform.color
+        : config.background.color!
       : config.background.color!,
-  ); // Assert that the color is not null
+  );
 
   const shadowColorRgb = hexToRgb(config.shadow.color!);
 
-  const gradientBackground = undefined; /*=
-    config.background.socialColor && socialLink?.gradientColors
-      ? `linear-gradient(to right, ${socialLink?.gradientColors.join(", ")})`
-      : undefined;*/
+  const addOpacityToColor = (color: string, opacity: number) => {
+    const rgb = hexToRgb(color);
+    return `rgba(${rgb?.r}, ${rgb?.g}, ${rgb?.b}, ${opacity})`;
+  };
+
+  const gradientColorsWithOpacity = platform?.gradientColors?.map((color) =>
+    addOpacityToColor(color, config.background.opacity),
+  );
+
+  const gradientBackground =
+    config.background.socialColor && gradientColorsWithOpacity
+      ? `linear-gradient(to right, ${gradientColorsWithOpacity.join(", ")})`
+      : undefined;
 
   const backgroundColor = backgroundColorRgb
     ? `rgba(${backgroundColorRgb.r}, ${backgroundColorRgb.g}, ${backgroundColorRgb.b}, ${config.background.opacity})`
@@ -76,9 +97,9 @@ export function Button({
     : undefined;
 
   const redirect = async () => {
-    if (!item.id) return;
-
     window.open(item.url, "_blank");
+
+    if (!item.id) return;
 
     await trackClick(item.id, false);
   };
@@ -106,6 +127,16 @@ export function Button({
           url={item.imageUrl}
           options={{
             radius: config.border.radius,
+            textHidden: config.text.hidden,
+          }}
+        />
+      ) : platform ? (
+        <CustomIcon
+          name={platform.iconName}
+          options={{
+            filter: filter,
+            color: textColor,
+            textHidden: config.text.hidden,
           }}
         />
       ) : item.iconName ? (
@@ -114,6 +145,7 @@ export function Button({
           options={{
             filter: filter,
             color: textColor,
+            textHidden: config.text.hidden,
           }}
         />
       ) : null}
@@ -123,6 +155,7 @@ export function Button({
             filter: filter,
             color: textColor,
           }}
+          className={getFontDisplay(config.font.family)}
         >
           {item.title}
         </span>

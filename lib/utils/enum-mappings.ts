@@ -1,85 +1,36 @@
+import { Layout, WeatherEffect, ContentType } from "@/lib/types/enums";
 import {
-  Layout,
-  IconStyle,
-  WeatherEffect,
-  ContentType,
-  TitleEffect,
-} from "@/lib/types/enums";
-import {
-  IconsStyle as PrismaIconsStyle,
   Layout as PrismaLayout,
   WeatherEffect as PrismaWeatherEffect,
   ContentType as PrismaContentType,
 } from "@prisma/client";
 
-export function convertToPrismaIconStyle(iconStyle: string) {
-  switch (iconStyle) {
-    case IconStyle.SocialBackgroundWhiteColor:
-      return PrismaIconsStyle.SocialBackgroundWhiteColor;
-    case IconStyle.BlackBackgroundWhiteColor:
-      return PrismaIconsStyle.BlackBackgroundWhiteColor;
-    case IconStyle.WhiteBackgroundBlackColor:
-      return PrismaIconsStyle.WhiteBackgroundBlackColor;
-    case IconStyle.NoBackgroundSocialColor:
-      return PrismaIconsStyle.NoBackgroundSocialColor;
-    case IconStyle.WhiteBackgroundSocialColor:
-      return PrismaIconsStyle.WhiteBackgroundSocialColor;
-    default:
-      return null;
-  }
+export function convertToPrismaLayout(layout: Layout): PrismaLayout {
+  const layoutMap: Record<Layout, PrismaLayout> = {
+    [Layout.WithCover]: PrismaLayout.WithCover,
+    [Layout.Professional]: PrismaLayout.Professional,
+    [Layout.Glassmorphism]: PrismaLayout.Glassmorphism,
+    [Layout.Bold]: PrismaLayout.Bold,
+    [Layout.Modern]: PrismaLayout.Modern,
+    [Layout.Standard]: PrismaLayout.Standard,
+  };
+
+  return layoutMap[layout] || PrismaLayout.Standard;
 }
 
-export function convertToTopIconStyle(
-  prismaTopIconStyle?: PrismaIconsStyle | null,
-) {
-  switch (prismaTopIconStyle) {
-    case PrismaIconsStyle.SocialBackgroundWhiteColor:
-      return IconStyle.SocialBackgroundWhiteColor;
-    case PrismaIconsStyle.BlackBackgroundWhiteColor:
-      return IconStyle.BlackBackgroundWhiteColor;
-    case PrismaIconsStyle.WhiteBackgroundBlackColor:
-      return IconStyle.WhiteBackgroundBlackColor;
-    case PrismaIconsStyle.NoBackgroundSocialColor:
-      return IconStyle.NoBackgroundSocialColor;
-    case PrismaIconsStyle.WhiteBackgroundSocialColor:
-      return IconStyle.WhiteBackgroundSocialColor;
-    default:
-      return undefined;
-  }
-}
+export function convertToLayout(
+  layout: PrismaLayout | null | undefined,
+): Layout {
+  const layoutMap: Record<PrismaLayout, Layout> = {
+    [PrismaLayout.WithCover]: Layout.WithCover,
+    [PrismaLayout.Professional]: Layout.Professional,
+    [PrismaLayout.Glassmorphism]: Layout.Glassmorphism,
+    [PrismaLayout.Bold]: Layout.Bold,
+    [PrismaLayout.Modern]: Layout.Modern,
+    [PrismaLayout.Standard]: Layout.Standard,
+  };
 
-export function convertToPrismaLayout(layout: string) {
-  switch (layout) {
-    case Layout.WithCover:
-      return PrismaLayout.WithCover;
-    case Layout.Professional:
-      return PrismaLayout.Professional;
-    case Layout.Glassmorphism:
-      return PrismaLayout.Glassmorphism;
-    case Layout.Bold:
-      return PrismaLayout.Bold;
-    case Layout.Modern:
-      return PrismaLayout.Modern;
-    default:
-      return PrismaLayout.Standard;
-  }
-}
-
-export function convertToLayout(layout: PrismaLayout | null | undefined) {
-  switch (layout) {
-    case PrismaLayout.WithCover:
-      return Layout.WithCover;
-    case PrismaLayout.Professional:
-      return Layout.Professional;
-    case PrismaLayout.Glassmorphism:
-      return Layout.Glassmorphism;
-    case PrismaLayout.Bold:
-      return Layout.Bold;
-    case PrismaLayout.Modern:
-      return Layout.Modern;
-    default:
-      return Layout.Standard;
-  }
+  return layoutMap[layout!] || Layout.Standard;
 }
 
 export function convertToWeatherEffect(
@@ -141,29 +92,5 @@ export function convertToPrismaContentType(contentType: string | undefined) {
       return PrismaContentType.Track;
     default:
       return null;
-  }
-}
-
-export function convertToTitleEffect(
-  titleEffect?: string | null,
-): TitleEffect | undefined {
-  switch (titleEffect) {
-    case TitleEffect.Typewriter:
-      return TitleEffect.Typewriter;
-    case TitleEffect.Sparkles:
-      return TitleEffect.Sparkles;
-    case TitleEffect.Shake:
-      return TitleEffect.Shake;
-    case TitleEffect.Glow:
-      return TitleEffect.Glow;
-    case TitleEffect.Glitch:
-      return TitleEffect.Glitch;
-    case TitleEffect.Hearts:
-      return TitleEffect.Hearts;
-    case TitleEffect.CherryBlossoms:
-      return TitleEffect.CherryBlossoms;
-
-    default:
-      return;
   }
 }

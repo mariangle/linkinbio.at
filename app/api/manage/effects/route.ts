@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import {
-  convertToPrismaWeatherEffect,
-  convertToTitleEffect,
-} from "@/lib/utils/enum-mappings";
+import { convertToPrismaWeatherEffect } from "@/lib/utils/enum-mappings";
 
 export async function PATCH(req: Request) {
   const session = await auth();
@@ -36,7 +33,7 @@ export async function PATCH(req: Request) {
         userId: session.user.id,
       },
       data: {
-        titleEffect: convertToTitleEffect(titleEffect) ?? null,
+        titleEffect: titleEffect ?? null,
         weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
       },
     });
@@ -45,7 +42,7 @@ export async function PATCH(req: Request) {
     effects = await db.effect.create({
       data: {
         userId: session.user.id,
-        titleEffect: convertToTitleEffect(titleEffect) ?? null,
+        titleEffect: titleEffect ?? null,
         weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
       },
     });

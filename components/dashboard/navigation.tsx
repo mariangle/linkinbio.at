@@ -1,19 +1,15 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import Image from "next/image";
-
-import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 import { ChevronLeft } from "lucide-react";
-import { dashboardLinks, biolinkLinks } from "@/lib/constants/nav-links";
+import { dashboardLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 import { UserNav } from "./user-nav";
 import { EyeIcon } from "lucide-react";
 import { useBiolinkPreviewStore } from "@/lib/store";
-import { BurgerMenu } from "../burger-menu";
 import { User } from "@/lib/types";
 
 export function Navigation({ user }: { user: User }) {
@@ -54,34 +50,6 @@ export function Navigation({ user }: { user: User }) {
             <EyeIcon className="size-3" />
             Preview
           </button>
-          <AnimatePresence>
-            {!isCollapsed && (
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: "auto" }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="md:hidden"
-              >
-                <ul className="my-4 flex flex-row gap-2 md:hidden">
-                  {dashboardLinks.map((item, index) => (
-                    <li key={index} onClick={() => setIsCollapsed(true)}>
-                      <Link
-                        href={item.href}
-                        className="bg-glass-secondary flex items-center gap-2 rounded-lg px-3 py-2"
-                      >
-                        <item.icon className="size-4" />
-                        <span className="text-center text-xs text-muted-foreground">
-                          {item.label}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <div className="bg-gradient-fade h-px w-full" />
-              </motion.div>
-            )}
-          </AnimatePresence>
           <div className="flex h-full w-full flex-row justify-between gap-4 md:flex-col">
             <div>
               <div className="hidden p-2 md:block">
@@ -94,14 +62,6 @@ export function Navigation({ user }: { user: User }) {
                 />
               </div>
               <ul className="flex flex-row gap-2 md:my-2 md:flex-col">
-                {biolinkLinks.map((item, index) => (
-                  <li key={index}>
-                    <NavItem item={item} collapsed={isCollapsed} />
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-gradient-fade hidden h-px w-full to-transparent md:block" />
-              <ul className="my-2 hidden flex-col gap-2 md:flex">
                 {dashboardLinks.map((item, index) => (
                   <li key={index}>
                     <NavItem item={item} collapsed={isCollapsed} />
@@ -109,17 +69,8 @@ export function Navigation({ user }: { user: User }) {
                 ))}
               </ul>
             </div>
-            <div className="flex flex-row items-center gap-4 md:flex-col md:gap-2">
-              <div className="bg-gradient-fade h-full w-px md:h-px md:w-full" />
-              <div className="flex flex-row items-center gap-3 md:mt-4 md:w-full md:flex-col">
-                <UserNav user={user} />
-                <div className="md:w-full">
-                  <BurgerMenu
-                    isMenuOpen={!isCollapsed}
-                    setIsMenuOpen={() => setIsCollapsed(!isCollapsed)}
-                  />
-                </div>
-              </div>
+            <div className="grid place-content-center">
+              <UserNav user={user} />
             </div>
           </div>
         </div>

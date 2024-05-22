@@ -1,9 +1,7 @@
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
-import { Button } from "@/components/biolink/button";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { TopIcon } from "@/components/biolink/icon";
 import {
   BackgroundContainer,
   BackgroundMedia,
@@ -14,6 +12,10 @@ import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
 import { cn } from "@/lib/utils";
 import { LayoutProps } from ".";
+import {
+  PlatformIconLinks,
+  WebsiteButtonLinks,
+} from "@/components/biolink/links-list";
 import { Widgets } from "@/components/biolink/widgets";
 
 export function WithCoverLayout({
@@ -28,6 +30,7 @@ export function WithCoverLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
+      preview={preview}
     >
       <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">
         <BackgroundMedia
@@ -38,7 +41,7 @@ export function WithCoverLayout({
           )}
         />
       </div>
-      <ContentContainer className="relative mb-24 mt-40 flex w-full flex-col items-center">
+      <ContentContainer className="mb-24 mt-40 p-0">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title
@@ -62,21 +65,14 @@ export function WithCoverLayout({
             options={config.profile?.text}
           />
         </div>
-        {links.platform.length > 0 && (
-          <div className="mt-6 flex gap-4">
-            {links.platform.map((link, index) => (
-              <TopIcon options={config.icons} key={index} item={link} />
-            ))}
-          </div>
+        {config.icons.position !== "bottom" && (
+          <PlatformIconLinks links={links.platform} config={config.icons} />
         )}
-        {links.website.length > 0 && (
-          <div className="my-8 w-full space-y-4">
-            {links.website.map((link, index) => (
-              <Button key={index} item={link} config={config.buttons} />
-            ))}
-          </div>
-        )}
+        <WebsiteButtonLinks links={links.website} config={config.buttons} />
         <Widgets widgets={widgets} premium={user.premium} />
+        {config.icons.position === "bottom" && (
+          <PlatformIconLinks links={links.platform} config={config.icons} />
+        )}
       </ContentContainer>
       <Footer color={config.profile?.text?.color} />
     </BackgroundContainer>

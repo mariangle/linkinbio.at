@@ -26,7 +26,7 @@ export function Title({
             color: options?.color,
           }}
           className={cn(
-            "text-wrap break-all  text-xl font-semibold",
+            "text-wrap break-all text-xl font-semibold tracking-wider",
             className,
             getFontDisplay(options?.font),
           )}
@@ -67,7 +67,7 @@ export function Title({
           font: options?.font,
         }}
         className={cn(
-          "relative w-fit text-wrap break-all bg-transparent text-xl font-semibold",
+          "relative w-fit text-wrap break-all bg-transparent text-xl font-semibold tracking-wider",
           className,
           effect === TitleEffect.Glitch && "glitch-effect",
           effect === TitleEffect.Shake && "shake-effect",

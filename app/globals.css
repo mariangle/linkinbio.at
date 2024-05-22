@@ -140,7 +140,7 @@
     border-radius: 40px;
     box-shadow:
       0 0 0 8px #212121,
-      0 0 0 9px #3f51b5;
+      0 0 0 10px #414141;
   }
 
   .iphone-x:before,
@@ -189,10 +189,6 @@
 
   .border-glass {
     @apply border-white/10 dark:border-white/15;
-  }
-
-  .bg-gradient-fade {
-    @apply bg-gradient-to-r from-transparent via-white/35 to-transparent dark:via-white/15;
   }
 
   .border-rotate {

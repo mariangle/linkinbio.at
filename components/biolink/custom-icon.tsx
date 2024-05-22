@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 interface CustomIconOptions {
   filter?: string;
   color: string;
+  textHidden?: boolean;
 }
 
 export function CustomIcon({
@@ -49,6 +50,7 @@ export function CustomIcon({
         }}
         className={cn(
           "absolute left-4 top-1/2 size-5 -translate-y-1/2",
+          options?.textHidden && "left-1/2 top-1/2 -translate-x-1/2",
           className,
         )}
       />

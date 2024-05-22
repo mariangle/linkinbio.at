@@ -8,7 +8,12 @@ export function ContentContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("z-20 mx-auto h-fit w-full max-w-xl p-4", className)}>
+    <div
+      className={cn(
+        "relative z-20 mx-auto flex h-fit w-full max-w-xl flex-col items-center p-4",
+        className,
+      )}
+    >
       {children}
     </div>
   );

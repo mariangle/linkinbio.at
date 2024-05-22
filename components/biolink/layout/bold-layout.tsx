@@ -9,6 +9,10 @@ import {
   BackgroundContainer,
   BackgroundMedia,
 } from "@/components/biolink/background";
+import {
+  PlatformIconLinks,
+  WebsiteButtonLinks,
+} from "@/components/biolink/links-list";
 import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { cn } from "@/lib/utils";
@@ -27,14 +31,16 @@ export function BoldLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
+      preview={preview}
     >
-      <BackgroundMedia
-        url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute h-full w-full")}
-      />
-      <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-start py-16">
+      <BackgroundMedia url={config.background?.url} className="fixed inset-0" />
+      <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-start p-0 py-16">
         <div className="flex w-full items-center justify-start gap-4 md:gap-6">
-          <ProfilePicture src={user.image} nullable className="md:size-32" />
+          <ProfilePicture
+            src={user.image}
+            nullable
+            className={cn("md:size-32", preview && "md:size-24")}
+          />
           <div>
             <Title
               options={config.profile?.title}
@@ -45,7 +51,7 @@ export function BoldLayout({
               <Username
                 username={user.username}
                 options={config.profile?.text}
-                className="mt-0 text-lg"
+                className="mt-0 text-base"
               />
             )}
           </div>
@@ -57,19 +63,20 @@ export function BoldLayout({
           options={config.profile?.text}
           className="justify-start"
         />
-        {links.platform.length > 0 && (
-          <div className="mt-6 flex w-full justify-start gap-4">
-            {links.platform.map((link, index) => (
-              <TopIcon options={config.icons} key={index} item={link} />
-            ))}
-          </div>
+        {config.icons.position !== "bottom" && (
+          <PlatformIconLinks
+            links={links.platform}
+            config={config.icons}
+            className="justify-start"
+          />
         )}
-        {links.website.length > 0 && (
-          <div className="my-8 w-full space-y-4">
-            {links.website.map((link, index) => (
-              <Button key={index} item={link} config={config.buttons} />
-            ))}
-          </div>
+        <WebsiteButtonLinks links={links.website} config={config.buttons} />
+        {config.icons.position === "bottom" && (
+          <PlatformIconLinks
+            links={links.platform}
+            config={config.icons}
+            className="justify-start"
+          />
         )}
         <Widgets widgets={widgets} premium={user.premium} />
       </ContentContainer>

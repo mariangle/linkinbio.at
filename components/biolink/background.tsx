@@ -11,11 +11,13 @@ export function BackgroundContainer({
   children,
   className,
   premium = true,
+  preview,
 }: {
   options?: BackgroundOptions;
   children?: React.ReactNode;
   className?: string;
   premium?: boolean;
+  preview?: boolean;
 }) {
   // Check if options or options.gradient is null before accessing properties
   const backgroundStyle =
@@ -28,7 +30,7 @@ export function BackgroundContainer({
   return (
     <div
       className={cn(
-        "fixed inset-0 flex h-full flex-col items-center justify-between overflow-y-auto p-4",
+        "fixed inset-0 flex h-full w-full flex-col items-center justify-between overflow-y-auto p-4",
         className,
       )}
       style={backgroundStyle}
@@ -47,11 +49,11 @@ export function BackgroundMedia({
 }) {
   if (!url) return null;
 
-  if (isValidUrl(url) && isValidVideo(url)) {
+  if (isValidVideo(url)) {
     return <BackgroundVideo url={url} className={className} />;
   }
 
-  if (isValidUrl(url) && isValidImage(url)) {
+  if (isValidImage(url)) {
     return (
       <Image
         src={url}
@@ -68,8 +70,4 @@ export function BackgroundMedia({
   }
 
   return null;
-}
-
-export function isValidUrl(url: string) {
-  return url.startsWith("https://");
 }

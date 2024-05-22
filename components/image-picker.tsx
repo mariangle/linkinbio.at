@@ -78,7 +78,6 @@ export function ImagePicker({
             onChange={(e) => {
               setLocalUrl(e.target.value);
               setIsImageValid(isValidImage(e.target.value));
-
               if (isValidImage(e.target.value)) {
                 setValidUrl(e.target.value);
               }

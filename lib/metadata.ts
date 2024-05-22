@@ -5,7 +5,7 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "linkinbio.at",
   description:
-    " Introducing your advanced, fully customizable, and no-cost solution for engaging with your audience.",
+    "Introducing your advanced, no-cost solution for engaging with your audience, offering full customization without any themes.",
   url:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"

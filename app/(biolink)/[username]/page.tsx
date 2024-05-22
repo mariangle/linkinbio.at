@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
-import { getCachedBiolinkByUsername } from "@/lib/utils/get-biolink";
+import { getCachedBiolinkByUsername } from "@/server/actions/get-biolink";
 import { ViewTracker } from "@/components/view-tracker";
 import { NotFound } from "@/components/404";
 import { Loading } from "@/components/loading";

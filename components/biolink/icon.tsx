@@ -18,7 +18,6 @@ interface TopIconProps {
   };
   options?: IconOptions;
   className?: string;
-  size?: "sm" | "md" | "lg";
 }
 
 export function TopIcon({
@@ -31,7 +30,6 @@ export function TopIcon({
     shadow: false,
     color: "#FFFFFF",
   },
-  size = "md",
 }: TopIconProps) {
   const platform = getPlatformByProvider(item.provider);
 
@@ -65,7 +63,7 @@ export function TopIcon({
     className?: string;
     shadowOptions: {
       color: string;
-      colorOnly: boolean;
+      colorOnly: boolean; // if true, provided color is used
     };
     backgroundOptions?: {
       color: string;
@@ -107,8 +105,8 @@ export function TopIcon({
             }}
             className={cn(
               "size-6",
-              size === "sm" && "size-5",
-              size === "lg" && "size-7",
+              options.size === "small" && "size-5",
+              options.size === "large" && "size-7",
             )}
           />
         </TopIconLink>
@@ -130,8 +128,8 @@ export function TopIcon({
         <div
           className={cn(
             "grid size-8 place-content-center rounded-full",
-            size === "sm" && "size-7",
-            size === "lg" && "size-9",
+            options.size === "small" && "size-7",
+            options.size === "large" && "size-9",
           )}
           style={{
             filter,
@@ -144,12 +142,50 @@ export function TopIcon({
             }}
             className={cn(
               "size-[18px]",
-              size === "sm" && "size-4",
-              size === "lg" && "size-5",
+              options.size === "small" && "size-4",
+              options.size === "large" && "size-5",
             )}
           />
         </div>
       </TopIconLink>
+    );
+  }
+
+  if (options.style === IconStyle.CustomBackgroundWhiteColor) {
+    return (
+      <TopIconDisplay
+        shadowOptions={{
+          color: options.color ?? blackColor,
+          colorOnly: true,
+        }}
+        backgroundOptions={{
+          color: options.color ?? whiteColor,
+          colorOnly: true,
+        }}
+        iconOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+      />
+    );
+  }
+
+  if (options.style === IconStyle.WhiteBackgroundCustomColor) {
+    return (
+      <TopIconDisplay
+        shadowOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+        backgroundOptions={{
+          color: whiteColor,
+          colorOnly: true,
+        }}
+        iconOptions={{
+          color: options.color ?? whiteColor,
+          colorOnly: true,
+        }}
+      />
     );
   }
 

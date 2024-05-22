@@ -2,7 +2,9 @@ import { InfiniteMovingHighlights } from "./_components/infinite-scrolling-text"
 import { Container } from "@/components/ui/container";
 import { ClaimLink } from "./_components/claim-link";
 import { BackgroundCellCore } from "./_components/background-ripple-effect";
+
 import { HeroShowcase } from "./_components/hero-showcase";
+import { PerspectiveContainer } from "./_components/perspective-container";
 
 export default function Page() {
   return (
@@ -17,8 +19,8 @@ export default function Page() {
             Connect all your links with one single link.
           </div>
           <div className="max-w-2xl text-base text-muted-foreground sm:text-xl lg:text-left">
-            Introducing your advanced, fully customizable, and no-cost solution
-            for engaging with your audience.
+            Introducing your advanced, no-cost solution for engaging with your
+            audience, offering full customization without any themes.
           </div>
           <div className="pointer-events-auto">
             <ClaimLink />
@@ -36,9 +38,11 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="flex flex-1 items-center justify-center lg:justify-start">
-          <div className="pointer-events-auto w-full">
-            <HeroShowcase />
+        <div className="flex flex-1 items-center justify-center">
+          <div className="pointer-events-auto hidden place-content-center 2xl:grid">
+            <PerspectiveContainer>
+              <HeroShowcase />
+            </PerspectiveContainer>
           </div>
         </div>
       </Container>

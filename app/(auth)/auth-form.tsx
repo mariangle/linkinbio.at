@@ -45,7 +45,7 @@ export function AuthForm({ variant }: { variant: Variant }) {
       <div className="pointer-events-auto mt-4">
         <button
           onClick={login}
-          disabled={true}
+          disabled
           className="flex h-12 w-full items-center gap-2 rounded-full bg-foreground px-4 font-medium text-background disabled:cursor-not-allowed disabled:opacity-70"
         >
           <FaGoogle className="size-4" />

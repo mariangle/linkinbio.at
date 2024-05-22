@@ -81,15 +81,15 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div>
           <div className="mb-6 flex items-center justify-between">
-            <div className="font-medium">Title Animation</div>
+            <FormHeading>Title Effect</FormHeading>
             <FormField
               control={form.control}
               name="title"
-              render={({ field }) => (
+              render={() => (
                 <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
                   <FormControl>
                     <Switch
-                      checked={field.value !== undefined}
+                      checked={!!form.watch("title")}
                       onCheckedChange={(checked) => {
                         form.setValue(
                           "title",
@@ -102,7 +102,7 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
               )}
             />
           </div>
-          <div className="grid grid-cols-1 gap-4 rounded-2xl bg-secondary p-2">
+          <div className="grid grid-cols-1 gap-4 rounded-2xl bg-primary/10 p-2">
             {titleEffects.map((item, idx) => (
               <button
                 type="button"
@@ -111,14 +111,13 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
                   form.setValue("title", item.value);
                 }}
                 className={cn(
-                  "flex h-[50px] justify-center rounded-lg border-2 border-border p-3",
-                  form.getValues("title") === item.value &&
-                    "border-foreground/50",
+                  "flex justify-center rounded-lg p-3",
+                  form.getValues("title") === item.value && "bg-primary/20",
                 )}
               >
                 <Title
                   effect={item.value as TitleEffect}
-                  className="!text-sm !text-foreground"
+                  className="!text-foreground"
                   user={{ title: item.label, premium: true }}
                 />
               </button>

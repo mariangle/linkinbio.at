@@ -1,5 +1,5 @@
 import { LayoutForm } from "./layout-form";
-import { getCachedBiolink } from "@/lib/utils/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 
 export default async function Layout() {
   const biolink = await getCachedBiolink();

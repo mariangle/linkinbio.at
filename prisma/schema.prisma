@@ -110,8 +110,8 @@ model WebsiteLink {
 model PlatformLink {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   userId   String  @map("user_id") @db.ObjectId
-  provider String  @map("provider")
-  username String  @map("username")
+  provider String
+  username String
   archived Boolean @default(false)
   order    Int
 
@@ -125,7 +125,7 @@ model PlatformLink {
 model UserView {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   userId    String   @map("user_id") @db.ObjectId
-  ipAddress String?
+  ipAddress String?  @map("ip_address")
   country   String?
   timestamp DateTime @default(now())
   referrer  String?
@@ -187,6 +187,7 @@ model Buttons {
   borderColor           String?  @map("border_color")
   fontColor             String?  @map("font_color")
   fontShadow            Boolean? @map("font_shadow")
+  fontFamily            String?  @map("font_family")
   textHidden            Boolean? @map("text_hidden")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -211,21 +212,14 @@ model Profile {
   @@map("profiles")
 }
 
-enum IconsStyle {
-  NoBackgroundSocialColor
-  SocialBackgroundWhiteColor
-  BlackBackgroundWhiteColor
-  WhiteBackgroundBlackColor
-  WhiteBackgroundSocialColor
-}
-
 model Icons {
-  id       String      @id @default(auto()) @map("_id") @db.ObjectId
-  userId   String      @unique @map("user_id") @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String   @unique @map("user_id") @db.ObjectId
   shadow   Boolean?
-  style    IconsStyle?
+  style    String?
   color    String?
-  position String?     @default("top")
+  size     String?
+  position String?  @default("top")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

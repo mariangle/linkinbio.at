@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { convertToPrismaIconStyle } from "@/lib/utils/enum-mappings";
 
 export async function PATCH(req: Request) {
   const session = await auth();
@@ -15,9 +14,27 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { shadow, style, color } = await req.json();
+  const { shadow, style, color, position, size } = await req.json();
 
-  const prismaStyle = convertToPrismaIconStyle(style);
+  console.log({ shadow, style, color, position, size });
+
+  if (position !== "top" && position !== "bottom") {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Position must be either 'top' or 'bottom'",
+    });
+  }
+
+  if (size !== "small" && size !== "medium" && size !== "large") {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Size must be either 'small', 'medium', or 'large'",
+    });
+  }
 
   let icons;
 
@@ -36,8 +53,9 @@ export async function PATCH(req: Request) {
       },
       data: {
         shadow: shadow ?? null,
-        style: prismaStyle,
+        style: style ?? null,
         color: color ?? null,
+        position: position ?? null,
       },
     });
   } else {
@@ -46,8 +64,9 @@ export async function PATCH(req: Request) {
       data: {
         userId: session.user.id,
         shadow: shadow ?? null,
-        style: prismaStyle,
+        style: style ?? null,
         color: color ?? null,
+        position: position ?? null,
       },
     });
   }

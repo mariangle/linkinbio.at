@@ -4,7 +4,7 @@ import { CardsMetric } from "./metrics";
 import { cn } from "@/lib/utils";
 import { MousePointerClick } from "lucide-react";
 import Link from "next/link";
-import { getAnalytics } from "@/lib/utils/get-analytics";
+import { getAnalytics } from "@/server/actions/get-analytics";
 
 export default async function Analytics() {
   const analytics = await getAnalytics();

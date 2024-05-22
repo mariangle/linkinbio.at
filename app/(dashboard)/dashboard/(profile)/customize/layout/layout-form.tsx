@@ -59,7 +59,7 @@ export function LayoutForm({ layout: defaultLayout }: { layout?: Layout }) {
                 "flex flex-col items-center justify-center gap-2 p-2",
               )}
             >
-              <div className="text-xl font-semibold">{item.name}</div>
+              <div className="text-lg font-semibold">{item.name}</div>
               <div
                 className={cn(
                   "flex w-full justify-center border border-transparent px-4 py-4",

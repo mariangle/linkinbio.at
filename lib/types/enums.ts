@@ -40,6 +40,8 @@ export enum WeatherEffect {
 }
 
 export enum IconStyle {
+  CustomBackgroundWhiteColor = "custom-background-white-color",
+  WhiteBackgroundCustomColor = "white-background-custom-color",
   SocialBackgroundWhiteColor = "social-background-white-color",
   BlackBackgroundWhiteColor = "black-background-white-color",
   WhiteBackgroundBlackColor = "white-background-black-color",

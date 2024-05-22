@@ -151,7 +151,7 @@ export function LayoutWrapper({
   premium: boolean;
 }) {
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full overflow-x-hidden">
       {premium && (
         <WeatherEffect preview={preview} variant={effects?.weather} />
       )}

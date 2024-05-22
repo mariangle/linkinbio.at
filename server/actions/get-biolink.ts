@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { constructBiolink } from "@/lib/utils/construct-biolink";
 import { ExtendedUser } from "@/lib/utils/construct-biolink";
 
+import { dummyBiolinks } from "@/lib/constants/dummy";
+
 export async function getBiolink() {
   const session = await auth();
 
@@ -37,6 +39,18 @@ export async function getBiolink() {
 }
 
 export async function getBiolinkByUsername(username: string) {
+  const dummyBiolinkUsernames = dummyBiolinks.map(
+    (biolink) => biolink.user.username,
+  );
+
+  if (dummyBiolinkUsernames.includes(username)) {
+    const biolink = dummyBiolinks.find(
+      (biolink) => biolink.user.username === username,
+    );
+
+    return biolink;
+  }
+
   try {
     const user = await db.user.findFirst({
       where: {

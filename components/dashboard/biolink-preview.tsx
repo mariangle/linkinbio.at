@@ -1,16 +1,16 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreviewStore } from "@/lib/store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { EyeIcon, XIcon, Share2, ExternalLink } from "lucide-react";
+import { EyeIcon, XIcon, Share2 } from "lucide-react";
 import { useMounted } from "@/hooks/use-mounted";
 import { SharePopover } from "@/components/dashboard/share-popover";
+import { Button } from "@/components/ui/button";
 
 export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
   const isMounted = useMounted();
@@ -89,20 +89,11 @@ function BiolinkOptions({
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <SharePopover username={username}>
-        <button className="bg-glass border-glass flex items-center rounded-lg border px-3.5 py-2 text-sm text-white duration-300 hover:opacity-80">
+        <Button variant="secondary">
           <Share2 className="mr-2.5 size-4" />
           Share
-        </button>
+        </Button>
       </SharePopover>
-      <Link
-        href={`/${username}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-glass border-glass flex items-center rounded-lg border px-3.5 py-2 text-sm text-white duration-300 hover:opacity-80"
-      >
-        <ExternalLink className="mr-2.5 size-4" />
-        View live
-      </Link>
     </div>
   );
 }

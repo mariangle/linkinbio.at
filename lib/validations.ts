@@ -14,6 +14,12 @@ export const TopIconsFormSchema = z.object({
   shadow: z.boolean().default(false).optional(),
   style: z.string().optional(),
   color: z.string().optional(),
+  position: z.enum(["bottom", "top"], {
+    required_error: "You need to select a position.",
+  }),
+  size: z.enum(["small", "medium", "large"], {
+    required_error: "You need to select a size.",
+  }),
 });
 
 export type TopIconsFormValues = z.infer<typeof TopIconsFormSchema>;
@@ -63,6 +69,7 @@ export const ButtonsFormSchema = z.object({
   shadowSpreadRadius: z.number(),
   shadowColor: z.string(),
   fontColor: z.string(),
+  fontFamily: z.string(),
   fontShadow: z.boolean(),
   textHidden: z.boolean(),
   borderColor: z.string(),
