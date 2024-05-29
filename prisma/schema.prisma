@@ -55,11 +55,7 @@ model User {
   image               String?
   occupation          String?
   location            String?
-  invertTextColor     Boolean?  @map("invert_text_color")
-  hideUsername        Boolean?  @map("hide_username")
-  font                String?
   premium             Boolean?  @default(false)
-  layout              Layout?   @default(Standard)
   createdAt           DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 

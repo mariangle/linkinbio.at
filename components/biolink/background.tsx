@@ -23,7 +23,7 @@ export function BackgroundContainer({
   const backgroundStyle =
     options?.gradient?.endColor && options?.gradient?.startColor && premium
       ? {
-          backgroundImage: `linear-gradient(${options.gradient.angle || 180}deg, ${options.gradient.startColor}, ${options.gradient.endColor})`,
+          backgroundImage: `linear-gradient(${options.gradient.angle || 0}deg, ${options.gradient.startColor}, ${options.gradient.endColor})`,
         }
       : { backgroundColor: options?.color }; // Provide default value for backgroundColor if options is null
 

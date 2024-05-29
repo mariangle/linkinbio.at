@@ -5,7 +5,6 @@ import { PlatformLink } from "@/lib/types";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { constructPlatformUrl } from "@/lib/utils/construct-link";
 
 import {
   PencilIcon,
@@ -28,7 +27,7 @@ import {
   PlatformLinkFormValues,
 } from "@/lib/validations";
 import { useFormSubmit } from "@/hooks/use-form-action";
-import { getIconByProvider } from "@/lib/utils/icon";
+import { getIconByProvider } from "@/lib/utils/getters";
 
 export function PlatformLinkForm({ item }: { item: PlatformLink }) {
   const [isEditing, setIsEditing] = React.useState(false);

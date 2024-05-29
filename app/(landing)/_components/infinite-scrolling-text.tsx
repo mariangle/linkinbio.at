@@ -2,12 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { Martian_Mono, Prata, Righteous } from "next/font/google";
+import { Syne } from "next/font/google";
 
-const kumarOneOutline = Prata({
+const kumarOneOutline = Syne({
   subsets: ["latin"],
   display: "swap",
-  weight: "400",
+  weight: "800",
 });
 
 export const InfiniteMovingHighlights = ({
@@ -15,11 +15,13 @@ export const InfiniteMovingHighlights = ({
   speed = "fast",
   pauseOnHover = true,
   className,
+  secondary,
 }: {
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
   className?: string;
+  secondary?: boolean;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
@@ -67,7 +69,7 @@ export const InfiniteMovingHighlights = ({
       } else if (speed === "normal") {
         containerRef.current.style.setProperty("--animation-duration", "40s");
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+        containerRef.current.style.setProperty("--animation-duration", "160s");
       }
     }
   };
@@ -84,17 +86,50 @@ export const InfiniteMovingHighlights = ({
           pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
-        {features.map((feature, index) => (
-          <li
-            key={index}
-            className={cn(
-              "text-shadow flex items-center gap-8 text-sm font-medium uppercase text-background text-black md:text-base",
-            )}
-          >
-            <span>{feature}</span>
-            <div>✦</div>
-          </li>
-        ))}
+        {features.map((feature, index) => {
+          const words = feature.split(" ");
+          const lastWord = words.pop();
+          const firstPart = words.join(" ");
+
+          return (
+            <li
+              key={index}
+              className={cn(
+                "text-shadow flex items-center gap-8 text-base font-medium uppercase text-background text-white dark:text-neutral-800 md:text-lg",
+                kumarOneOutline.className,
+              )}
+            >
+              <div className="flex items-center gap-4">
+                <span className={cn("text-black dark:text-neutral-200")}>
+                  {firstPart}
+                </span>
+                <span
+                  className="hidden dark:block"
+                  style={{
+                    WebkitTextStroke: "1px #CFFF04",
+                  }}
+                >
+                  {lastWord}
+                </span>
+                <span
+                  className="dark:hidden"
+                  style={{
+                    WebkitTextStroke: "1px #000000",
+                  }}
+                >
+                  {lastWord}
+                </span>
+              </div>
+              <div
+                className={cn(
+                  "rotate-[35deg] text-black dark:text-neutral-200",
+                )}
+              >
+                ✦
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

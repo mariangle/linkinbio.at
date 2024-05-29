@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/popover";
 import { fonts } from "@/lib/constants/fonts";
 import { Font } from "@/lib/types";
-import { LockedPremiumIcon } from "./dashboard/premium-feature";
-import { getFontDisplay } from "@/lib/utils/get-font";
+import { getFontDisplay } from "@/lib/utils/getters";
 
 export function FontPicker({
   font,
@@ -52,7 +51,6 @@ export function FontPicker({
             {font
               ? fonts.find((font) => font.value === fontValue)?.name
               : "Select font"}
-            {!premium && <LockedPremiumIcon />}
           </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </button>

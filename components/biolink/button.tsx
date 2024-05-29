@@ -6,7 +6,7 @@ import { FeaturedLink } from "@/components/biolink/featured-link";
 import type { WebsiteLink, ButtonOptions } from "@/lib/types";
 import { useTracking } from "@/hooks/use-tracking";
 import { defaultButtonOptions } from "@/lib/constants/defaults";
-import { getFontDisplay } from "@/lib/utils/get-font";
+import { getFontDisplay } from "@/lib/utils/getters";
 import { platforms, type Platform } from "@/lib/constants/platforms";
 import { ButtonImage } from "@/components/biolink/button-image";
 import { CustomIcon } from "@/components/biolink/custom-icon";

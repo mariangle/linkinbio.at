@@ -12,8 +12,10 @@ export function NavItem({
   collapsed?: boolean;
 }) {
   const pathname = usePathname();
-  const secondItemInHref = pathname.split("/")[1];
-  const active = pathname.includes(item.href) || secondItemInHref === item.href;
+  const customizePathanme = pathname.includes("customize");
+  const active =
+    pathname.includes(item.href) ||
+    (customizePathanme && item.href === "/dashboard/customize/profile");
 
   return (
     <motion.div

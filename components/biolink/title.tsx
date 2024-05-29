@@ -3,7 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
 import { TitleOptions, TitleEffect, User } from "@/lib/types";
-import { getFontDisplay } from "@/lib/utils/get-font";
+import { getFontDisplay } from "@/lib/utils/getters";
 
 export function Title({
   options,

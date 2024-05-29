@@ -8,7 +8,7 @@ export const dashboardLinks = [
   },
   {
     label: "Customize",
-    href: "/dashboard/customize/typography",
+    href: "/dashboard/customize/profile",
     icon: FaPencilRuler,
   },
   {

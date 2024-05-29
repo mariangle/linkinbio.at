@@ -59,17 +59,12 @@ export function SoundcloudForm({ data }: { data?: SoundcloudData }) {
     await submit();
   };
 
-  const onDelete = async () => {
-    await remove();
-
-    form.reset({
-      trackId: "",
-      enabled: true,
-    });
-  };
-
   return (
-    <FormContainer>
+    <FormContainer
+      className={cn(
+        data && !expanded && data.enabled && "bg-orange-600 text-white",
+      )}
+    >
       <FormContent>
         <div>
           <button
@@ -102,20 +97,20 @@ export function SoundcloudForm({ data }: { data?: SoundcloudData }) {
                   onSubmit={form.handleSubmit(onSubmit)}
                 >
                   <div className="space-y-2">
-                    <Label>Video ID</Label>
+                    <Label>Track ID</Label>
                     <FormField
                       control={form.control}
                       name="trackId"
                       render={({ field }) => (
                         <FormItem className="flex flex-row items-center gap-3 space-y-0 rounded-md">
                           <FormControl>
-                            <Input placeholder="Enter Video ID" {...field} />
+                            <Input placeholder="Enter Track ID" {...field} />
                           </FormControl>
                         </FormItem>
                       )}
                     />
                   </div>
-                  <div className="flex items-center justify-between gap-4 rounded-lg border border-orange-500/5 bg-orange-500/20 p-3">
+                  <div className="border-glass bg-glass flex items-center justify-between gap-4 rounded-lg border p-3">
                     <div className="text-sm font-semibold">Enable</div>
                     <FormField
                       control={form.control}

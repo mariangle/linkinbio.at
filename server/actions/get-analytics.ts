@@ -1,6 +1,6 @@
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { constructPlatformUrl } from "@/lib/utils/construct-link";
+import { auth } from "@/server/auth";
+import { db } from "@/server/db";
+import { constructPlatformUrl } from "@/server/utils/construct-link";
 
 export interface Analytics {
   views: {

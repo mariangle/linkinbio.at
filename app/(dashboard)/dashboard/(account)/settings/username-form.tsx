@@ -5,7 +5,6 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   FormHeading,
   FormDescription as Description,
@@ -22,12 +21,12 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { UserFormSchema, UserFormValues } from "@/lib/validations";
+import { UsernameFormSchema, UsernameFormValues } from "@/lib/validations";
 import { useFormSubmit } from "@/hooks/use-form-action";
 
 export function UsernameForm({ username }: { username?: string }) {
-  const form = useForm<UserFormValues>({
-    resolver: zodResolver(UserFormSchema),
+  const form = useForm<UsernameFormValues>({
+    resolver: zodResolver(UsernameFormSchema),
     defaultValues: {
       username: username ?? "",
     },

@@ -1,6 +1,6 @@
 import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { PageWithPreview } from "@/components/dashboard/page";
-import { LayoutHeader } from "./layout-header";
+import { CustomizeHeader } from "@/components/dashboard/customize-header";
 
 export default async function CustomizeLayout({
   children,
@@ -13,7 +13,7 @@ export default async function CustomizeLayout({
   return (
     <div>
       <PageWithPreview biolink={biolink}>
-        <LayoutHeader />
+        <CustomizeHeader />
         {children}
       </PageWithPreview>
     </div>

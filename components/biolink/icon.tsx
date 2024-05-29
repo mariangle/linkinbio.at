@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import type { IconOptions } from "@/lib/types";
 import { Platform } from "@/lib/constants/platforms";
 import { cn } from "@/lib/utils";
-import { IconStyle } from "@/lib/types";
+import { IconStyle, type IconOptions } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
 import { useTracking } from "@/hooks/use-tracking";
-import { getIconByProvider } from "@/lib/utils/icon";
-import { getPlatformByProvider } from "@/lib/utils/platform";
+import { getPlatformByProvider, getIconByProvider } from "@/lib/utils/getters";
 
 interface TopIconProps {
   item: {

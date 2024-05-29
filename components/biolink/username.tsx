@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { TextOptions } from "@/lib/types";
-import { getFontDisplay } from "@/lib/utils/get-font";
+import { getFontDisplay } from "@/lib/utils/getters";
 import { defaultTextOptions } from "@/lib/constants/defaults";
 
 export function Username({

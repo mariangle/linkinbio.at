@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { constructBiolink } from "@/lib/utils/construct-biolink";
-import { db } from "@/lib/db";
-import { ExtendedUser } from "@/lib/utils/construct-biolink";
+import { constructBiolink } from "@/server/utils/construct-biolink";
+import { db } from "@/server/db";
+import { ExtendedUser } from "@/server/utils/construct-biolink";
 
 export async function GET(
   req: Request,

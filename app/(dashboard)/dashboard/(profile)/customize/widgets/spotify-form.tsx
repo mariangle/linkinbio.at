@@ -45,11 +45,11 @@ export function SpotifyForm({ data }: { data?: SpotifyData }) {
   const form = useForm<SpotifyFormValues>({
     resolver: zodResolver(SpotifyFormSchema),
     defaultValues: {
-      contentId: data?.contentId,
-      type: data?.type,
+      contentId: data?.contentId ?? "",
+      type: data?.type ?? ContentType.Track,
       enabled: data?.enabled ?? true,
-      darkBackground: data?.darkBackground,
-      compactLayout: data?.compactLayout,
+      darkBackground: data?.darkBackground ?? false,
+      compactLayout: data?.compactLayout ?? false,
     },
   });
 
@@ -91,27 +91,31 @@ export function SpotifyForm({ data }: { data?: SpotifyData }) {
   };
 
   return (
-    <FormContainer>
+    <FormContainer
+      className={cn(
+        data && !expanded && data.enabled && "bg-green-600 text-white",
+      )}
+    >
       <FormContent>
-        <div className="flex w-full items-center justify-between">
+        <button
+          className="flex w-full items-center justify-between"
+          onClick={() => setExpanded(!expanded)}
+        >
           <div className="flex items-center gap-2">
-            <button
-              className="flex items-center gap-2 font-semibold"
-              onClick={() => setExpanded(!expanded)}
-            >
+            <div className="flex items-center gap-2 font-semibold">
               <FaSpotify className="size-5 text-green-500" />
               Spotify
-            </button>
+            </div>
           </div>
-          <button onClick={() => setExpanded(!expanded)}>
+          <div>
             <ChevronDown
               className={cn(
                 "size-5  rotate-0 duration-300",
                 expanded && "rotate-180",
               )}
             />
-          </button>
-        </div>
+          </div>
+        </button>
         <AnimatePresence>
           {expanded && (
             <motion.div
@@ -137,16 +141,16 @@ export function SpotifyForm({ data }: { data?: SpotifyData }) {
                         )}
                         onClick={() => {
                           setTab(item);
-                          form.setValue("contentId", "");
+                          form.setValue("type", item.value);
                         }}
                       >
                         {item.name}
                       </button>
                     ))}
                   </div>
-                  <div className="h-px w-full bg-gradient-to-r from-green-300/20 to-neutral-600"></div>
+                  <div className="bg-glass h-px w-full"></div>
                   <div className="space-y-2">
-                    <Label className="text-white">{tab.name} ID</Label>
+                    <Label>{tab.name} ID</Label>
                     <FormField
                       control={form.control}
                       name="contentId"
@@ -202,7 +206,7 @@ export function SpotifyForm({ data }: { data?: SpotifyData }) {
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center justify-between gap-4 rounded-lg border border-green-500/5 bg-green-500/20 p-3">
+                  <div className="border-glass bg-glass flex items-center justify-between gap-4 rounded-lg border p-3">
                     <div className="text-sm font-semibold">Enable</div>
                     <FormField
                       control={form.control}

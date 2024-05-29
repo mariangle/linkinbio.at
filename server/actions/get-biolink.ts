@@ -1,8 +1,8 @@
 import { cache } from "react";
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { constructBiolink } from "@/lib/utils/construct-biolink";
-import { ExtendedUser } from "@/lib/utils/construct-biolink";
+import { auth } from "@/server/auth";
+import { db } from "@/server/db";
+import { constructBiolink } from "@/server/utils/construct-biolink";
+import { ExtendedUser } from "@/server/utils/construct-biolink";
 
 import { dummyBiolinks } from "@/lib/constants/dummy";
 

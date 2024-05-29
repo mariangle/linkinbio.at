@@ -15,8 +15,8 @@ import {
 import {
   constructLinkFromWebsite,
   constructLinkFromPlatform,
-} from "@/lib/utils/construct-link";
-import { getFont } from "@/lib/utils/get-font";
+} from "@/server/utils/construct-link";
+import { getFont } from "@/lib/utils/getters";
 
 import {
   defaultBackgroundOptions,
@@ -65,7 +65,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       occupation: user.occupation ?? undefined,
       location: user.location ?? undefined,
       bio: user.bio ?? undefined,
-      premium: true ?? false, // default to false
+      premium: true ?? false,
     },
     config: {
       profile: {

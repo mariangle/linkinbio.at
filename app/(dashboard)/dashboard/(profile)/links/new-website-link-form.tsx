@@ -43,7 +43,6 @@ export function NewWebsiteLinkForm({ close }: { close: () => void }) {
   const onSubmit = async () => {
     await submit();
     close();
-    router.refresh();
   };
 
   const cancel = () => {

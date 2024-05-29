@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { db } from "@/server/db";
+import { auth } from "@/server/auth";
 
-import { getPlatformByProvider } from "@/lib/utils/platform";
+import { getPlatformByProvider } from "@/lib/utils/getters";
 
 export async function POST(req: Request) {
   const session = await auth();

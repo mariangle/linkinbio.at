@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
-import { stripe } from "@/lib/stripe";
-import { db } from "@/lib/db";
+import { stripe } from "@/server/stripe";
+import { db } from "@/server/db";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -26,9 +26,16 @@ export async function POST(req: NextRequest) {
 
     if (event.type === "charge.succeeded") {
       const userEmail = event.data.object.billing_details.email;
+
+      // @ts-ignore
+      const username = payload.data.object.custom_fields.find(
+        (field: { key: string; text: { value: string } }) =>
+          field.key === "username",
+      ).text.value;
+
       const user = await db.user.findFirst({
         where: {
-          email: userEmail,
+          username,
         },
       });
 

@@ -26,3 +26,11 @@ export function PageWithPreview({
     </div>
   );
 }
+
+export function PageHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h1 className="mb-3 whitespace-nowrap text-lg font-semibold tracking-wide">
+      {children}
+    </h1>
+  );
+}

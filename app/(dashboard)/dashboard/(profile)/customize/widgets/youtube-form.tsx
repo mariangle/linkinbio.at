@@ -25,8 +25,8 @@ export function YoutubeForm({ data }: { data?: YoutubeData }) {
   const form = useForm<YoutubeFormValues>({
     resolver: zodResolver(YoutubeFormSchema),
     defaultValues: {
-      videoId: data?.videoId,
-      enabled: data?.enabled,
+      videoId: data?.videoId || "",
+      enabled: data?.enabled || false,
     },
   });
 
@@ -59,7 +59,11 @@ export function YoutubeForm({ data }: { data?: YoutubeData }) {
   };
 
   return (
-    <FormContainer>
+    <FormContainer
+      className={cn(
+        data && !expanded && data.enabled && "bg-red-600 text-white",
+      )}
+    >
       <FormContent>
         <div>
           <button
@@ -105,7 +109,7 @@ export function YoutubeForm({ data }: { data?: YoutubeData }) {
                       )}
                     />
                   </div>
-                  <div className="flex items-center justify-between gap-4 rounded-lg border border-red-500/5 bg-red-500/20 p-3">
+                  <div className="border-glass bg-glass flex items-center justify-between gap-4 rounded-lg border p-3">
                     <div className="text-sm font-semibold">Enable</div>
                     <FormField
                       control={form.control}

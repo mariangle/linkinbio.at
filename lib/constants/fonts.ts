@@ -8,18 +8,26 @@ import {
   Great_Vibes,
   Creepster,
   Bangers,
+  Roboto,
+  Readex_Pro,
 } from "next/font/google";
-import localFont from "next/font/local";
 import { Font as FontEnum } from "@/lib/types";
 
 export const inter = Inter({ subsets: ["latin"] });
-export const readex = localFont({
-  src: "../../public/fonts/ReadexPro-Regular.ttf",
-});
-export const roboto = localFont({
-  src: "../../public/fonts/Roboto-Regular.ttf",
-});
+
 export const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+export const readex = Readex_Pro({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+export const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
   weight: "400",

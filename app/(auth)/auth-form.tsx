@@ -5,12 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { signIn } from "next-auth/react";
+import { SignInForm } from "./sign-in-form";
 import { FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 type Variant = "sign-in" | "sign-up";
 
 export function AuthForm({ variant }: { variant: Variant }) {
   const [isLoading, setIsLoading] = React.useState(false);
+  const router = useRouter();
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
 
   const login = () => {
     setIsLoading(true);
@@ -23,6 +30,16 @@ export function AuthForm({ variant }: { variant: Variant }) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const signInCreds = async () => {
+    const res = await signIn("credentials", {
+      email: formData.email,
+      password: formData.password,
+      callbackUrl: "/dashboard/links",
+    });
+
+    console.log(res);
   };
 
   return (
@@ -57,7 +74,7 @@ export function AuthForm({ variant }: { variant: Variant }) {
             : "Already have an account?"}{" "}
           <Link
             href={variant === "sign-in" ? "/sign-up" : "/sign-in"}
-            className="underline"
+            className="text-muted-foreground underline"
           >
             {variant === "sign-in" ? "Sign Up" : "Sign In"}
           </Link>

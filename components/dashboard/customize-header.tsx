@@ -40,7 +40,7 @@ const links = [
   },
 ];
 
-export function LayoutHeader() {
+export function CustomizeHeader() {
   const pathname = usePathname();
   const isActive = (href: string) => pathname.includes(href);
 

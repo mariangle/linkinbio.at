@@ -90,18 +90,24 @@ export const EffectsFormSchema = z.object({
 
 export type EffectsFormValues = z.infer<typeof EffectsFormSchema>;
 
-export const UserFormSchema = z.object({
+export const UsernameFormSchema = z.object({
   username: z
     .string()
     .min(1, {
-      message: "Username must be at least 1 characters.",
+      message: "Username must be at least 1 character.",
     })
     .max(20, {
       message: "Username must be at most 20 characters.",
+    })
+    .regex(/^[a-zA-Z0-9_]+$/, {
+      message: "Username can only contain letters, numbers, and underscores.",
+    })
+    .refine((val) => !val.startsWith("_") && !val.endsWith("_"), {
+      message: "Username cannot start or end with an underscore.",
     }),
 });
 
-export type UserFormValues = z.infer<typeof UserFormSchema>;
+export type UsernameFormValues = z.infer<typeof UsernameFormSchema>;
 
 const validateIconName = (name: string | undefined) => {
   if (!name) return true;

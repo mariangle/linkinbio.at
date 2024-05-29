@@ -92,18 +92,11 @@ export function BackgroundForm({ data }: { data?: BackgroundData }) {
     }
   }, [tab, form]);
 
-  const backgroundStyle =
-    form.getValues("gradientStartColor") && form.getValues("gradientEndColor")
-      ? {
-          backgroundImage: `linear-gradient(${form.getValues("gradientAngle")}deg, ${form.getValues("gradientStartColor")}, ${form.getValues("gradientEndColor")})`,
-        }
-      : { backgroundColor: form.getValues("color") };
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <FormHeading>Media</FormHeading>
+          <FormHeading>Background Media</FormHeading>
           <div className="space-y-2">
             <div className="relative h-[250px] overflow-hidden rounded-lg bg-primary/10">
               <BackgroundMedia
@@ -144,7 +137,7 @@ export function BackgroundForm({ data }: { data?: BackgroundData }) {
               background, depending on the layout you select.
             </div>
           </div>
-          <FormHeading>Background</FormHeading>
+          <FormHeading>Background Color</FormHeading>
           <div className="flex flex-col rounded-lg bg-primary/10 p-4">
             <Tabs defaultValue={tab}>
               <TabsList className="mb-4">
@@ -178,7 +171,9 @@ export function BackgroundForm({ data }: { data?: BackgroundData }) {
                 <div className="space-y-4">
                   <div
                     className="grid h-[80px] place-content-center rounded-lg"
-                    style={backgroundStyle}
+                    style={{
+                      backgroundImage: `linear-gradient(${form.getValues("gradientAngle")}deg, ${form.getValues("gradientStartColor")}, ${form.getValues("gradientEndColor")})`,
+                    }}
                   >
                     <div className="flex items-center gap-4">
                       <ColorPicker

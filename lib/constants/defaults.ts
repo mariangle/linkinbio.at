@@ -16,6 +16,9 @@ export const defaultTextOptions: TextOptions = {
 
 export const defaultBackgroundOptions: BackgroundOptions = {
   color: "#000000",
+  gradient: {
+    angle: 0,
+  },
 };
 
 export const defaultProfileOptions: ProfileOptions = {

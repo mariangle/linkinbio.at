@@ -6,5 +6,9 @@ export default async function Background() {
 
   if (!biolink) return null;
 
-  return <BackgroundForm data={biolink.config?.background} />;
+  return (
+    <>
+      <BackgroundForm data={biolink.config?.background} />
+    </>
+  );
 }

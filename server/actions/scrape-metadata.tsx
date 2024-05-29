@@ -1,5 +1,7 @@
 import urlMetadata from "url-metadata";
 
+import { isValidURL } from "@/lib/utils/media-validation";
+
 interface FavIcon {
   rel: string;
   type?: string;
@@ -44,6 +46,10 @@ function getLargestFavicon(favicons: FavIcon[]): string {
 }
 
 export async function scrapeMetadata(url: string) {
+  if (!isValidURL(url)) {
+    return {};
+  }
+
   try {
     const res = await urlMetadata(url);
 

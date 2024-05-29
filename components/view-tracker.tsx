@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { db } from "@/server/db";
 import { startOfDay, endOfDay } from "date-fns";
 import { getGeoData } from "@/server/actions/get-geo-data";
 

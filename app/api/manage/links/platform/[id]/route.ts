@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
-import { getPlatformByProvider } from "@/lib/utils/platform";
+import { db } from "@/server/db";
+import { auth } from "@/server/auth";
+import { getPlatformByProvider } from "@/lib/utils/getters";
 
 export async function PATCH(
   req: Request,

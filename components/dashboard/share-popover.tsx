@@ -17,13 +17,9 @@ export function SharePopover({
   username: string;
   children: React.ReactNode;
 }) {
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(`https://linkinbio.at/${username}`);
-      toast.success("Link copied to clipboard");
-    } catch (error) {
-      console.error("Failed to copy:", error);
-    }
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`https://linkinbio.at/${username}`);
+    toast.success("Link copied to clipboard");
   };
 
   return (

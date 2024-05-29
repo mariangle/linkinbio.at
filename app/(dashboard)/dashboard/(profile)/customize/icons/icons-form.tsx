@@ -87,7 +87,7 @@ export function IconsForm({ data }: { data?: IconData }) {
         key={key}
         onClick={() => form.setValue("style", style?.value)}
         className={cn(
-          "relative grid cursor-pointer place-content-center rounded-lg px-4 py-8",
+          "relative grid h-24 w-full cursor-pointer place-content-center rounded-lg p-4",
           !style?.value && !form.getValues("style") && " bg-primary/20",
           selected && "bg-primary/20",
         )}
@@ -98,6 +98,7 @@ export function IconsForm({ data }: { data?: IconData }) {
             color: form.getValues("color")!,
             shadow: form.getValues("shadow"),
             position: form.getValues("position"),
+            size: form.getValues("size"),
           }}
           item={{
             provider: "twitter",

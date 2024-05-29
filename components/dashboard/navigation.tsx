@@ -14,7 +14,7 @@ import { User } from "@/lib/types";
 
 export function Navigation({ user }: { user: User }) {
   const { setOpen, open } = useBiolinkPreviewStore();
-  const [isCollapsed, setIsCollapsed] = React.useState(true);
+  const [collapsed, setCollapsed] = React.useState(true);
 
   return (
     <header
@@ -25,13 +25,13 @@ export function Navigation({ user }: { user: User }) {
       <div className="relative flex h-full flex-col items-center justify-center gap-4">
         <div className="absolute left-full top-0 hidden translate-x-4 p-4 pl-0 md:block">
           <button
-            className="rounded-full bg-primary p-1.5 opacity-0 duration-100 group-hover/nav:opacity-100"
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="rounded-full bg-primary/50 p-1.5 opacity-0 backdrop-blur-xl duration-100 group-hover/nav:opacity-100"
+            onClick={() => setCollapsed(!collapsed)}
           >
             <ChevronLeft
               className={cn(
                 "size-0 text-white duration-300 group-hover/nav:size-5",
-                isCollapsed && "rotate-180",
+                collapsed && "rotate-180",
               )}
             />
           </button>
@@ -40,7 +40,7 @@ export function Navigation({ user }: { user: User }) {
           className={cn(
             "bg-glass border-glass relative flex gap-4 rounded-2xl border p-3 duration-300",
             "h-full flex-col justify-between md:w-auto",
-            isCollapsed ? "md:w-[70px]" : "md:w-[190px]",
+            collapsed ? "md:w-[70px]" : "md:w-[190px]",
           )}
         >
           <button
@@ -64,7 +64,7 @@ export function Navigation({ user }: { user: User }) {
               <ul className="flex flex-row gap-2 md:my-2 md:flex-col">
                 {dashboardLinks.map((item, index) => (
                   <li key={index}>
-                    <NavItem item={item} collapsed={isCollapsed} />
+                    <NavItem item={item} collapsed={collapsed} />
                   </li>
                 ))}
               </ul>

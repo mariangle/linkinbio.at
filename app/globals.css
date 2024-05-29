@@ -80,10 +80,6 @@
     syntax: "<angle>";
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-foreground/75 to-foreground bg-clip-text text-transparent dark:from-indigo-200 dark:to-foreground;
-  }
-
   .animate-gradient {
     background-size: 300%;
     -webkit-animation: animatedgradient 6s ease infinite alternate;
@@ -188,41 +184,7 @@
   }
 
   .border-glass {
-    @apply border-white/10 dark:border-white/15;
-  }
-
-  .border-rotate {
-    overflow: hidden;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .border-rotate::before {
-    overflow: hidden;
-    content: "";
-    background-image: conic-gradient(
-      transparent 0deg,
-      transparent 320deg,
-      #ffee58 360deg
-    );
-
-    width: 400%;
-    height: 400%;
-    position: absolute;
-    animation: rotate 6s linear infinite;
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    @apply border-white/10 dark:border-white/5;
   }
 
   .glitch-effect {

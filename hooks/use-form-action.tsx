@@ -20,32 +20,44 @@ export const useFormSubmit = <T extends any | Record<string, any>>({
   const dirty = true; // ! Set to true for now
 
   const submit = async () => {
-    setLoading(true);
+    toast.promise(
+      new Promise(async (resolve, reject) => {
+        setLoading(true);
 
-    try {
-      const res = await fetch(endpoint, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
+        try {
+          const res = await fetch(endpoint, {
+            method,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formValues),
+          });
+
+          const { message, ok, data } = await res.json();
+
+          if (ok) {
+            resolve(message);
+          } else {
+            reject(new Error(message));
+          }
+        } catch (e) {
+          reject(e);
+        } finally {
+          setLoading(false);
+        }
+      }),
+      {
+        loading: "Loading...",
+        success: (message) => {
+          setLoading(false);
+          return `${message}`;
         },
-        body: JSON.stringify(formValues),
-      });
-      const { message, ok, data } = await res.json();
-
-      if (ok) {
-        toast.success(message);
-      } else {
-        toast.error(message);
-      }
-
-      return data;
-    } catch (e) {
-      if (e instanceof Error) {
-        console.error(e);
-      }
-    } finally {
-      setLoading(false);
-    }
+        error: (err) => {
+          setLoading(false);
+          return err.message || "Something went wrong!";
+        },
+      },
+    );
   };
 
   const remove = async () => {

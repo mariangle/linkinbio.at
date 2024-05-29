@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 
-import { LockedPremiumIcon } from "./premium-feature";
 import { Button } from "@/components/ui/button";
 
 export function FormHeading({ children }: { children: React.ReactNode }) {
@@ -30,11 +29,6 @@ export function FormContainer({
         disabled && "opacity-75",
       )}
     >
-      {!noBanner && disabled && (
-        <div className="absolute right-4 top-4">
-          <LockedPremiumIcon />
-        </div>
-      )}
       <div className={cn(disabled && "pointer-events-none ")}>{children}</div>
     </div>
   );

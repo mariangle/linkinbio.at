@@ -19,6 +19,7 @@ import {
   FaSkype,
   FaQuora,
 } from "react-icons/fa";
+import { FaThreads } from "react-icons/fa6";
 import { IconType } from "react-icons/lib";
 
 export interface Platform {
