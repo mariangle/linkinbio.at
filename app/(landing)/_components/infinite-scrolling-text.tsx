@@ -15,13 +15,11 @@ export const InfiniteMovingHighlights = ({
   speed = "fast",
   pauseOnHover = true,
   className,
-  secondary,
 }: {
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
   className?: string;
-  secondary?: boolean;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
@@ -76,7 +74,10 @@ export const InfiniteMovingHighlights = ({
   return (
     <div
       ref={containerRef}
-      className={cn("scroller relative z-20 overflow-hidden", className)}
+      className={cn(
+        "scroller relative z-20 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        className,
+      )}
     >
       <ul
         ref={scrollerRef}
@@ -95,38 +96,21 @@ export const InfiniteMovingHighlights = ({
             <li
               key={index}
               className={cn(
-                "text-shadow flex items-center gap-8 text-base font-medium uppercase text-background text-white dark:text-neutral-800 md:text-lg",
+                "text-shadow flex items-center gap-8 text-base font-medium uppercase text-[#0B363C] md:text-lg",
                 kumarOneOutline.className,
               )}
             >
               <div className="flex items-center gap-4">
-                <span className={cn("text-black dark:text-neutral-200")}>
-                  {firstPart}
-                </span>
+                <span className={cn("text-[#E3FFCC]")}>{firstPart}</span>
                 <span
-                  className="hidden dark:block"
                   style={{
-                    WebkitTextStroke: "1px #CFFF04",
-                  }}
-                >
-                  {lastWord}
-                </span>
-                <span
-                  className="dark:hidden"
-                  style={{
-                    WebkitTextStroke: "1px #000000",
+                    WebkitTextStroke: "1.5px #17A57A",
                   }}
                 >
                   {lastWord}
                 </span>
               </div>
-              <div
-                className={cn(
-                  "rotate-[35deg] text-black dark:text-neutral-200",
-                )}
-              >
-                ✦
-              </div>
+              <div className={cn("rotate-[35deg] text-[#17A57A]")}>✦</div>
             </li>
           );
         })}

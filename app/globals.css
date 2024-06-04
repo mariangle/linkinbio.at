@@ -80,6 +80,14 @@
     syntax: "<angle>";
   }
 
+  .landing-text {
+    @apply text-[#B8CEC1];
+  }
+
+  .landing-background {
+    @apply bg-[#0B363C];
+  }
+
   .animate-gradient {
     background-size: 300%;
     -webkit-animation: animatedgradient 6s ease infinite alternate;

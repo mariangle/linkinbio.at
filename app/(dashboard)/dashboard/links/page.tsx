@@ -2,7 +2,6 @@ import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { WebsiteLinkForm } from "./website-link-form";
 import { NewLinkForm } from "./new-link-form";
 import { PlatformLinkForm } from "./platform-link-form";
-import { PageWithPreview } from "@/components/dashboard/page";
 
 export default async function Links() {
   const biolink = await getCachedBiolink();
@@ -10,7 +9,7 @@ export default async function Links() {
   if (!biolink) return null;
 
   return (
-    <PageWithPreview biolink={biolink}>
+    <>
       <NewLinkForm />
       <div>
         <h3 className="text-lg font-semibold">
@@ -37,6 +36,6 @@ export default async function Links() {
           </li>
         ))}
       </ul>
-    </PageWithPreview>
+    </>
   );
 }

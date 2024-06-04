@@ -38,7 +38,7 @@ export const prices = [
 
 export function PricePackages() {
   return (
-    <Container className="max-w-screen-md">
+    <Container>
       <div className="flex flex-col items-center justify-center gap-8 md:flex-row">
         {prices.map((item, index) => {
           const featured = index === 1;

@@ -28,10 +28,13 @@ export function StandardLayout({
     <BackgroundContainer
       premium={user.premium}
       options={config.background}
-      className={cn(preview && "absolute inset-0 p-0")}
+      className={cn(preview && "relative p-0")}
       preview={preview}
     >
-      <BackgroundMedia url={config.background?.url} className="fixed inset-0" />
+      <BackgroundMedia
+        url={config.background?.url}
+        className={cn("fixed inset-0", preview && "absolute")}
+      />
       <ContentContainer className="h-fit py-16">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={user.image} nullable />

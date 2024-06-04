@@ -1,21 +1,8 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-export const BackgroundCellAnimation = () => {
-  return (
-    <div className="relative flex h-screen justify-center overflow-hidden">
-      <BackgroundCellCore />
-      <div className="pointer-events-none relative z-50 mt-40 select-none">
-        <h1 className="pointer-events-none bg-gradient-to-b from-neutral-100 to-neutral-400 bg-clip-text text-center font-medium text-transparent md:text-2xl lg:text-7xl">
-          Background cell animation <br />
-          with framer motion
-        </h1>
-      </div>
-    </div>
-  );
-};
 
 export const BackgroundCellCore = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -38,7 +25,7 @@ export const BackgroundCellCore = () => {
       className="absolute inset-0 h-full"
     >
       <div className="absolute inset-y-0 h-[20rem]  overflow-hidden">
-        <div className="pointer-events-none absolute -bottom-2 z-40 h-full w-full bg-white [mask-image:linear-gradient(to_bottom,transparent,black)] dark:bg-neutral-950"></div>
+        <div className="pointer-events-none absolute -bottom-2 z-40 h-full w-full bg-[#0B363C] [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
         <div
           className="absolute inset-0 z-20 bg-transparent"
           style={{
@@ -60,12 +47,9 @@ export const BackgroundCellCore = () => {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          <Pattern cellClassName="border-black dark:border-white relative z-[100]" />
+          <Pattern cellClassName="border-[#E3FFCC] relative z-[100]" />
         </div>
-        <Pattern
-          className="opacity-[0.5]"
-          cellClassName="border-neutral-200 dark:border-neutral-700"
-        />
+        <Pattern className="opacity-[0.5]" cellClassName="border-teal-800" />
       </div>
     </div>
   );
@@ -106,13 +90,14 @@ const Pattern = ({
                   transition: { duration: distance * 0.2 },
                 });
               }
-            }, [colIdx, controls]);
+              // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, [clickedCell]);
 
             return (
               <div
                 key={`matrix-col-${colIdx}`}
                 className={cn(
-                  "border-b border-l border-neutral-600 bg-transparent",
+                  "border-b border-l border-red-500 bg-transparent",
                   cellClassName,
                 )}
                 onClick={() => setClickedCell([rowIdx, colIdx])}
@@ -129,7 +114,7 @@ const Pattern = ({
                     ease: "backOut",
                   }}
                   animate={controls}
-                  className="h-12 w-12 bg-neutral-300 dark:bg-neutral-700" //  rgba(14, 165, 233, 0.15) for a more subtle effect
+                  className="h-12 w-12 bg-teal-500/50" //  rgba(14, 165, 233, 0.15) for a more subtle effect
                 ></motion.div>
               </div>
             );

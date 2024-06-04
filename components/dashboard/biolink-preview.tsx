@@ -3,7 +3,6 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { PhoneMockup } from "@/components/phone-mockup";
 import { useBiolinkPreviewStore } from "@/lib/store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -11,6 +10,7 @@ import { EyeIcon, XIcon, Share2 } from "lucide-react";
 import { useMounted } from "@/hooks/use-mounted";
 import { SharePopover } from "@/components/dashboard/share-popover";
 import { Button } from "@/components/ui/button";
+import { Layout } from "@/components/biolink/layout";
 
 export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
   const isMounted = useMounted();
@@ -35,12 +35,14 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
 
   if (isDesktop) {
     return (
-      <div className="border-glass relative grid h-screen w-full max-w-2xl place-content-center overflow-y-auto border-l">
-        <BiolinkOptions
-          className="absolute right-4 top-4"
-          username={biolink.user.username}
-        />
-        <PhoneMockup biolink={biolinkPreview} />
+      <div className="h-screen w-full max-w-3xl">
+        {biolink && (
+          <Layout
+            biolink={biolinkPreview}
+            preview
+            layout={biolinkPreview.config.profile?.layout}
+          />
+        )}
       </div>
     );
   }
@@ -56,7 +58,7 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
       </button>
       <div
         className={cn(
-          "fixed inset-0 z-[99] grid place-content-center overflow-y-auto bg-background duration-500",
+          "fixed inset-0 z-[99] overflow-y-auto bg-background duration-500",
           open
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-full opacity-0",
@@ -71,9 +73,15 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
         </button>
         <BiolinkOptions
           className="fixed left-4 top-4"
-          username={biolink.user.username}
+          username={biolinkPreview.user.username}
         />
-        <PhoneMockup className="pointer-events-none" biolink={biolinkPreview} />
+        {biolink && (
+          <Layout
+            biolink={biolinkPreview}
+            preview
+            layout={biolinkPreview.config.profile?.layout}
+          />
+        )}
       </div>
     </>
   );

@@ -18,14 +18,7 @@ export function Container({
 }: ContainerProps) {
   return (
     <div
-      className={cn(
-        "mx-auto w-full max-w-screen-lg px-4",
-        section && "py-24",
-        page && "min-h-[100svh] py-32",
-        variant === "landing" && "max-w-screen-2xl px-6 md:px-12 lg:px-16",
-
-        className,
-      )}
+      className={cn("mx-auto w-full max-w-[1150px] px-6", className)}
       {...props}
     >
       {props.children}

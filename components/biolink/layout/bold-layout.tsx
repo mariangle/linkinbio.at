@@ -1,9 +1,7 @@
 import { Bio } from "@/components/biolink/bio";
 import { Title } from "@/components/biolink/title";
-import { Button } from "@/components/biolink/button";
 import { Username } from "@/components/biolink/username";
 import { ProfilePicture } from "@/components/biolink/profile-picture";
-import { TopIcon } from "@/components/biolink/icon";
 import { Footer } from "@/components/biolink/footer";
 import {
   BackgroundContainer,
@@ -33,7 +31,10 @@ export function BoldLayout({
       className={cn(preview && "relative h-full")}
       preview={preview}
     >
-      <BackgroundMedia url={config.background?.url} className="fixed inset-0" />
+      <BackgroundMedia
+        url={config.background?.url}
+        className={cn("fixed inset-0", preview && "absolute")}
+      />
       <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-start p-0 py-16">
         <div className="flex w-full items-center justify-start gap-4 md:gap-6">
           <ProfilePicture

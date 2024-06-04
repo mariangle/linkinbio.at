@@ -19,7 +19,7 @@ export function Navigation({ user }: { user: User }) {
   return (
     <header
       className={cn(
-        "group/nav fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start ",
+        "group/nav fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start md:pr-0 ",
       )}
     >
       <div className="relative flex h-full flex-col items-center justify-center gap-4">

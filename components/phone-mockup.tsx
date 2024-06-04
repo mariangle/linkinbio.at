@@ -5,13 +5,11 @@ import { Biolink, Layout as LayoutEnum } from "@/lib/types";
 export function PhoneMockup({
   hero,
   biolink,
-  layout,
   className,
   scale = true,
 }: {
   hero?: boolean;
   biolink?: Biolink;
-  layout?: LayoutEnum;
   className?: string;
   scale?: boolean;
 }) {
@@ -30,7 +28,7 @@ export function PhoneMockup({
             <Layout
               biolink={biolink}
               preview
-              layout={layout ?? biolink.config.profile?.layout}
+              layout={biolink.config.profile?.layout}
             />
           )}
         </div>

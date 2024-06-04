@@ -1,5 +1,3 @@
-import { PageWithPreview } from "@/components/dashboard/page";
-import { Heading } from "@/components/ui/typography";
 import { CardsMetric } from "./metrics";
 import { cn } from "@/lib/utils";
 import { MousePointerClick } from "lucide-react";
@@ -12,8 +10,7 @@ export default async function Analytics() {
   if (!analytics) return null;
 
   return (
-    <PageWithPreview>
-      <Heading>Analytics</Heading>
+    <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <StatCard
           label="Views"
@@ -66,7 +63,7 @@ export default async function Analytics() {
           </div>
         </div>
       </div>
-    </PageWithPreview>
+    </>
   );
 }
 

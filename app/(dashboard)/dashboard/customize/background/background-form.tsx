@@ -98,39 +98,36 @@ export function BackgroundForm({ data }: { data?: BackgroundData }) {
         <div className="space-y-4">
           <FormHeading>Background Media</FormHeading>
           <div className="space-y-2">
-            <div className="relative h-[250px] overflow-hidden rounded-lg bg-primary/10">
-              <BackgroundMedia
-                className="absolute inset-0"
-                url={form.getValues("url")}
-              ></BackgroundMedia>
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="flex flex-col gap-2">
-                  <ImagePicker
-                    setUrl={(url) => {
-                      form.setValue("url", url || "");
-                    }}
-                  >
-                    <Button size="lg">
-                      <div className="truncate whitespace-nowrap text-sm">
-                        {form.getValues("url") ? "Change" : "Add Media"}
-                      </div>
-                    </Button>
-                  </ImagePicker>
-                  {form.getValues("url") && (
-                    <Button
-                      size="lg"
-                      variant="secondary"
-                      onClick={() => {
-                        form.setValue("url", "");
-                      }}
-                    >
-                      <div className="truncate whitespace-nowrap text-sm">
-                        Remove
-                      </div>
-                    </Button>
-                  )}
-                </div>
-              </div>
+            <BackgroundMedia
+              url={form.getValues("url")}
+              className="h-[150px]"
+            ></BackgroundMedia>
+            <div className="flex w-full items-center gap-2">
+              <ImagePicker
+                setUrl={(url) => {
+                  form.setValue("url", url || "");
+                }}
+              >
+                <Button size="lg" className="w-full">
+                  <div className="truncate whitespace-nowrap text-sm">
+                    {form.getValues("url") ? "Change" : "Add Media"}
+                  </div>
+                </Button>
+              </ImagePicker>
+              {form.getValues("url") && (
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  onClick={() => {
+                    form.setValue("url", "");
+                  }}
+                  className="w-full"
+                >
+                  <div className="truncate whitespace-nowrap text-sm">
+                    Remove
+                  </div>
+                </Button>
+              )}
             </div>
             <div className="text-sm text-muted-foreground">
               Your chosen media will act as either a cover photo or replace the

@@ -6,7 +6,7 @@ export default function WebsiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white text-black dark:bg-neutral-950 dark:text-white">
+    <div className="bg-[#0B363C] text-[#E3FFCC]">
       <Header />
       {children}
     </div>

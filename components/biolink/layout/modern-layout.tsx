@@ -26,10 +26,13 @@ export function ModernLayout({
     <BackgroundContainer
       premium={user.premium}
       options={config.background}
-      className={cn("p-2", preview && "absolute inset-0")}
+      className={cn("p-2", preview && "relative")}
       preview={preview}
     >
-      <BackgroundMedia url={config.background?.url} className="fixed inset-0" />
+      <BackgroundMedia
+        url={config.background?.url}
+        className={cn("fixed inset-0", preview && "absolute")}
+      />
       <div className="mt-[200px] flex h-full w-full flex-col justify-end">
         <ContentContainer
           className={cn(
