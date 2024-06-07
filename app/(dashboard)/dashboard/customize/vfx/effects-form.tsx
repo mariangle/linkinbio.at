@@ -102,7 +102,7 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
               )}
             />
           </div>
-          <div className="grid grid-cols-1 gap-4 rounded-2xl bg-primary/10 p-2">
+          <div className="glassmorphism grid grid-cols-1 gap-4 rounded-2xl p-2 sm:grid-cols-2">
             {titleEffects.map((item, idx) => (
               <button
                 type="button"
@@ -112,12 +112,12 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
                 }}
                 className={cn(
                   "flex justify-center rounded-lg p-3",
-                  form.getValues("title") === item.value && "bg-primary/20",
+                  form.getValues("title") === item.value &&
+                    "border border-white/10 bg-primary/20",
                 )}
               >
                 <Title
                   effect={item.value as TitleEffect}
-                  className="!text-foreground"
                   user={{ title: item.label, premium: true }}
                 />
               </button>

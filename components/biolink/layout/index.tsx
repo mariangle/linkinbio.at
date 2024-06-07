@@ -14,6 +14,7 @@ import { ProfessionalLayout } from "@/components/biolink/layout/professional-lay
 import { BoldLayout } from "@/components/biolink/layout/bold-layout";
 import { WeatherEffect } from "@/components/biolink/effects/weather-effect";
 import { ModernLayout } from "@/components/biolink/layout/modern-layout";
+import { cn } from "@/lib/utils";
 
 export interface LayoutProps {
   user: User;
@@ -27,10 +28,12 @@ export function Layout({
   biolink,
   preview,
   layout,
+  className,
 }: {
   biolink: Biolink;
   preview?: boolean;
   layout?: LayoutEnum;
+  className?: string;
 }) {
   if (biolink.user.premium) {
     switch (layout ?? biolink.config.profile?.layout) {
@@ -40,6 +43,7 @@ export function Layout({
             premium={biolink.user.premium}
             preview={preview}
             effects={biolink.config.effects}
+            className={className}
           >
             <GlassmorphismLayout
               widgets={biolink.widgets}
@@ -57,6 +61,7 @@ export function Layout({
             premium={biolink.user.premium}
             preview={preview}
             effects={biolink.config.effects}
+            className={className}
           >
             <WithCoverLayout
               widgets={biolink.widgets}
@@ -74,6 +79,7 @@ export function Layout({
             premium={biolink.user.premium}
             preview={preview}
             effects={biolink.config.effects}
+            className={className}
           >
             <ProfessionalLayout
               widgets={biolink.widgets}
@@ -91,6 +97,7 @@ export function Layout({
             premium={biolink.user.premium}
             preview={preview}
             effects={biolink.config.effects}
+            className={className}
           >
             <BoldLayout
               widgets={biolink.widgets}
@@ -108,6 +115,7 @@ export function Layout({
             premium={biolink.user.premium}
             preview={preview}
             effects={biolink.config.effects}
+            className={className}
           >
             <ModernLayout
               widgets={biolink.widgets}
@@ -127,6 +135,7 @@ export function Layout({
       premium={biolink.user.premium}
       preview={preview}
       effects={biolink.config.effects}
+      className={className}
     >
       <StandardLayout
         widgets={biolink.widgets}
@@ -144,14 +153,16 @@ export function LayoutWrapper({
   effects,
   preview,
   premium = true,
+  className,
 }: {
   children: React.ReactNode;
   effects?: EffectsOptions;
   preview?: boolean;
   premium: boolean;
+  className?: string;
 }) {
   return (
-    <div className="h-full w-full overflow-x-hidden">
+    <div className={cn("h-full w-full overflow-x-hidden", className)}>
       {premium && (
         <WeatherEffect preview={preview} variant={effects?.weather} />
       )}

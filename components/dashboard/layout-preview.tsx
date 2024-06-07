@@ -99,9 +99,9 @@ export function BoldLayoutPreview() {
 
 export function ModernLayoutPreview() {
   return (
-    <LayoutPreviewWrapper className="bg-neutral-300 p-2 dark:bg-[#2a2c3a]">
+    <LayoutPreviewWrapper className="bg-neutral-300 p-2 dark:bg-zinc-950">
       <CoverPreview className="static inset-0 rounded-none" />
-      <div className="relative flex w-full flex-col items-center justify-start gap-2 rounded-lg bg-[#ecedef] p-4 pb-10 dark:bg-[#15161d]">
+      <div className="relative flex w-full flex-col items-center justify-start gap-2 rounded-lg bg-white/50 p-4 pb-10 dark:bg-neutral-900/50">
         <TitlePreview />
         <BioPreview />
         <ButtonsPreview count={2} />
@@ -114,7 +114,7 @@ export function TitlePreview({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "h-4 w-16 rounded-full bg-white shadow-sm dark:bg-[#1c1e29]",
+        "h-4 w-16 rounded-full bg-zinc-200 shadow-sm dark:bg-zinc-800",
         className,
       )}
     />
@@ -125,7 +125,7 @@ export function CoverPreview({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "absolute left-4 right-4 top-4 grid h-20 place-content-center rounded-2xl bg-neutral-300 shadow-sm dark:bg-[#2a2c3a]",
+        "absolute left-4 right-4 top-4 grid h-20 place-content-center rounded-2xl bg-neutral-300 shadow-sm dark:bg-zinc-950/50",
         className,
       )}
     >
@@ -138,7 +138,7 @@ export function BioPreview({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "h-4 w-32 rounded-lg bg-white shadow-sm dark:bg-[#1c1e29]",
+        "h-4 w-32 rounded-lg bg-zinc-200 shadow-sm dark:bg-zinc-800",
         className,
       )}
     />
@@ -153,8 +153,8 @@ export function TopIconsPreview({ className }: { className?: string }) {
         className,
       )}
     >
-      <div className="size-5 rounded-full bg-white shadow-sm dark:bg-[#1c1e29]" />
-      <div className="size-5 rounded-full bg-white shadow-sm dark:bg-[#1c1e29]" />
+      <div className="size-5 rounded-full bg-zinc-200 shadow-sm dark:bg-zinc-800" />
+      <div className="size-5 rounded-full bg-zinc-200 shadow-sm dark:bg-zinc-800" />
     </div>
   );
 }
@@ -163,7 +163,7 @@ export function ProfilePicturePreview({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "size-10 rounded-full bg-white shadow-sm dark:bg-[#1c1e29]",
+        "size-10 rounded-full bg-zinc-200 shadow-sm dark:bg-zinc-800",
         className,
       )}
     />
@@ -176,7 +176,7 @@ export function ButtonsPreview({ count = 3 }: { count?: number }) {
       {Array.from({ length: count }).map((_, index) => (
         <div
           key={index}
-          className="h-6 w-full rounded-lg bg-white shadow-sm dark:bg-[#1c1e29]"
+          className="h-6 w-full rounded-lg bg-zinc-200 shadow-sm dark:bg-zinc-800"
         />
       ))}
     </div>
@@ -193,7 +193,7 @@ export function LayoutPreviewWrapper({
   return (
     <div
       className={cn(
-        "relative h-[275px] w-[200px] overflow-hidden rounded-2xl bg-[#ecedef] p-4 dark:bg-[#15161d]",
+        "relative h-[275px] w-[200px] overflow-hidden rounded-2xl bg-white/50 p-4 dark:bg-neutral-950/50",
         className,
       )}
     >

@@ -81,7 +81,7 @@ export function WebsiteLinkForm({ item }: { item: WebsiteLink }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="border-glass bg-glass group rounded-lg border">
+        <div className="glassmorphism group rounded-lg">
           <div className="flex w-full items-center justify-between">
             {isEditing ? (
               <div className="flex w-full flex-col">

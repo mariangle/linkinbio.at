@@ -1,9 +1,10 @@
+import Image from "next/image";
+
 import { Navigation } from "@/components/dashboard/navigation";
 import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { redirect } from "next/navigation";
 import { BiolinkPreview } from "@/components/dashboard/biolink-preview";
 import { DashboardHeading } from "@/components/dashboard/dashboard-heading";
-import { CustomizationNavigation } from "@/components/dashboard/customize-header";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export default async function Layout({
@@ -27,11 +28,24 @@ export default async function Layout({
       disableTransitionOnChange
     >
       <div className="relative flex w-full justify-between overflow-x-hidden bg-gray-400 dark:bg-zinc-950">
-        <div className="relative flex w-full flex-col overflow-y-auto overflow-x-hidden md:flex-row">
+        <Image
+          src="/dashboard.jpg"
+          width={2560}
+          height={1440}
+          className="fixed inset-0 hidden h-full w-full object-cover blur-3xl brightness-[0.2] hue-rotate-[320deg] dark:block"
+          alt="background-image"
+        />
+        <Image
+          src="/dashboard.jpg"
+          width={2560}
+          height={1440}
+          className="fixed inset-0 h-full w-full scale-110 object-cover blur-[100px] brightness-[0.8] hue-rotate-[320deg] saturate-50 dark:hidden"
+          alt="background-image"
+        />
+        <div className="relative flex w-full flex-col overflow-x-hidden overflow-y-hidden text-white md:flex-row">
           <Navigation user={biolink.user} />
-          <div className="z-10 mx-auto h-screen max-h-screen w-full max-w-3xl space-y-4 overflow-y-auto p-4 pt-12">
+          <div className="z-10 mx-auto h-screen max-h-screen w-full max-w-3xl space-y-4 overflow-y-auto p-4 py-12 pb-32 md:pb-12">
             <DashboardHeading />
-            <CustomizationNavigation />
             {children}
           </div>
         </div>

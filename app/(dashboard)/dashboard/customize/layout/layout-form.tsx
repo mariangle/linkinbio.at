@@ -63,7 +63,7 @@ export function LayoutForm({ layout: defaultLayout }: { layout?: Layout }) {
               <div
                 className={cn(
                   "flex w-full justify-center border border-transparent px-4 py-4",
-                  selected && "rounded-xl border-border bg-primary/35",
+                  selected && "rounded-xl border-white/10 bg-primary/15",
                 )}
               >
                 <LayoutPreview layout={item.value} />

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ImageIcon } from "lucide-react";
-import { isValidImage } from "@/lib/utils/media-validation";
+import { isValidMedia } from "@/lib/utils/media-validation";
 
 export function ImagePicker({
   url,
@@ -77,8 +77,8 @@ export function ImagePicker({
             value={localUrl}
             onChange={(e) => {
               setLocalUrl(e.target.value);
-              setIsImageValid(isValidImage(e.target.value));
-              if (isValidImage(e.target.value)) {
+              setIsImageValid(isValidMedia(e.target.value));
+              if (isValidMedia(e.target.value)) {
                 setValidUrl(e.target.value);
               }
             }}

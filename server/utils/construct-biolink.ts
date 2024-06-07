@@ -131,6 +131,9 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
           angle:
             user.background?.gradientAngle ??
             defaultBackgroundOptions.gradient?.angle,
+          enabled:
+            user.background?.gradientEnabled ??
+            defaultBackgroundOptions.gradient?.enabled,
         },
       },
       icons: {

@@ -10,7 +10,7 @@ import {
   FormFooter,
   FormContent,
 } from "@/components/dashboard/form";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { deleteAccount } from "@/server/actions/delete-account";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 
@@ -23,16 +23,14 @@ export function DeleteAccountForm() {
       <ConfirmDialog
         open={open}
         close={() => setOpen(false)}
-        onConfirm={async () => {
-          await deleteAccount();
-        }}
+        onConfirm={async () => await deleteAccount()}
       />
       <form
         action={() => {
           setOpen(true);
         }}
       >
-        <FormContainer className="border-destructive/50">
+        <FormContainer className="border-destructive/50 dark:border-destructive/50">
           <FormContent>
             <div>
               <FormHeading>Delete Account</FormHeading>

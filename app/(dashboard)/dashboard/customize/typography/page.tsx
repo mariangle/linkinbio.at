@@ -1,6 +1,5 @@
 import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { TypographyForm } from "./typography-form";
-import { PageHeading } from "@/components/dashboard/page";
 
 export default async function Typography() {
   const biolink = await getCachedBiolink();
@@ -9,7 +8,6 @@ export default async function Typography() {
 
   return (
     <>
-      <PageHeading>Typography</PageHeading>
       <TypographyForm data={biolink.config?.profile} />
     </>
   );

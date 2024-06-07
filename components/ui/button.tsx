@@ -6,18 +6,18 @@ import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex disabled:cursor-not-allowed items-center duration-300 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50",
+  "inline-flex disabled:cursor-not-allowed tracking-wide items-center duration-300 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-white hover:bg-primary/75 dark:bg-white dark:text-black",
+          "bg-primary/65 text-white hover:bg-primary/40 border border-white/15 shadow-sm drop-shadow-[0_0px_5px_hsl(var(--primary))]",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-destructive/65 text-destructive-foreground border border-white/10 dark:border-white/5 shadow-sm hover:bg-destructive/50 drop-shadow-[0_0px_5px_hsl(var(--destructive))]",
         outline:
           "bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-white/20 border border-white/10 dark:border-white/5 hover:bg-white/30 dark:bg-white/5 dark:hover:bg-white/10 shadow-sm",
         foreground:
           "bg-foreground text-white dark:text-black shadow-sm hover:bg-foreground/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",

@@ -104,6 +104,8 @@ export const dummyBiolinks: Biolink[] = [
         gradient: {
           startColor: "#000000",
           endColor: "#000000",
+          angle: 0,
+          enabled: false,
         },
       },
       icons: {
@@ -193,6 +195,10 @@ export const dummyBiolinks: Biolink[] = [
       background: {
         color: "#12012E",
         url: "https://img.freepik.com/premium-photo/luxury-elegant-gold-background-abstract-design-elegance_1030736-3092.jpg",
+        gradient: {
+          angle: 0,
+          enabled: false,
+        },
       },
       icons: {
         shadow: false,
@@ -265,8 +271,8 @@ export const dummyBiolinks: Biolink[] = [
         color: "#FFC0CB",
         url: "https://img.freepik.com/free-vector/abstract-3d-perspective-indoor-wireframe-vector-design_1017-39916.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716336000&semt=ais_user",
         gradient: {
-          startColor: "#FFC0CB",
-          endColor: "#FFFFFF",
+          angle: 0,
+          enabled: false,
         },
       },
       icons: {
@@ -349,6 +355,7 @@ export const dummyBiolinks: Biolink[] = [
           startColor: "#F5EDCE",
           endColor: "#CDD2BE",
           angle: 45,
+          enabled: true,
         },
       },
       icons: {

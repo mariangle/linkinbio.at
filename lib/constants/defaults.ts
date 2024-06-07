@@ -18,6 +18,9 @@ export const defaultBackgroundOptions: BackgroundOptions = {
   color: "#000000",
   gradient: {
     angle: 0,
+    endColor: "#000000",
+    startColor: "#000000",
+    enabled: false,
   },
 };
 

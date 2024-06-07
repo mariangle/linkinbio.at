@@ -1,9 +1,10 @@
 export interface BackgroundOptions {
   url?: string;
   color?: string;
-  gradient?: {
+  gradient: {
     startColor?: string;
     endColor?: string;
-    angle?: number;
+    angle: number;
+    enabled: boolean;
   };
 }

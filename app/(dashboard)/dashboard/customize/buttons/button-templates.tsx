@@ -1,3 +1,5 @@
+"use client";
+
 import { ButtonOptions, Font } from "@/lib/types";
 import { Button } from "@/components/biolink/button";
 
@@ -166,7 +168,7 @@ export function ButtonTemplates({
   onSelect: (button: ButtonOptions) => void;
 }) {
   return (
-    <div className="grid grid-cols-1 gap-8 rounded-lg bg-primary/10 p-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="glassmorphism grid grid-cols-1 gap-8 rounded-lg p-4 sm:grid-cols-2 lg:grid-cols-3">
       {buttonTemplates.map((button, index) => (
         <div
           onClick={() => onSelect(button)}
@@ -179,9 +181,9 @@ export function ButtonTemplates({
               key={index}
               config={button}
               item={{
-                url: "https://facebook.com",
+                url: "https://spotify.com",
                 archived: false,
-                title: "Facebook",
+                title: "Spotify",
               }}
             />
           </div>

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { useBiolinkPreviewStore } from "@/lib/store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { EyeIcon, XIcon, Share2 } from "lucide-react";
+import { EyeIcon, XIcon, Share2, ExternalLink } from "lucide-react";
 import { useMounted } from "@/hooks/use-mounted";
 import { SharePopover } from "@/components/dashboard/share-popover";
 import { Button } from "@/components/ui/button";
@@ -31,18 +31,31 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
     }
   }, [biolink, biolinkGlobalState, setBiolink]);
 
-  if (!isMounted) return null; // TODO: Add a loading state
+  if (!isMounted) return null;
 
   if (isDesktop) {
     return (
-      <div className="h-screen w-full max-w-3xl">
-        {biolink && (
-          <Layout
-            biolink={biolinkPreview}
-            preview
-            layout={biolinkPreview.config.profile?.layout}
-          />
-        )}
+      <div className="glassmorphism h-screen w-full overflow-hidden lg:max-w-lg xl:max-w-2xl">
+        <div className="flex items-center justify-between border-b border-b-white/10 p-1 px-2">
+          <div className="flex items-center gap-2 font-medium text-foreground">
+            <EyeIcon className="size-4" />
+            Preview
+          </div>
+          <Button variant="secondary">
+            <ExternalLink className="mr-2 size-4" />
+            View live
+          </Button>
+        </div>
+        <div className="relative h-[calc(100%-43px)] p-2">
+          {biolink && (
+            <Layout
+              biolink={biolinkPreview}
+              preview
+              layout={biolinkPreview.config.profile?.layout}
+              className="rounded-sm"
+            />
+          )}
+        </div>
       </div>
     );
   }

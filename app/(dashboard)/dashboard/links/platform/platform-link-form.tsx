@@ -28,6 +28,7 @@ import {
 } from "@/lib/validations";
 import { useFormSubmit } from "@/hooks/use-form-action";
 import { getIconByProvider } from "@/lib/utils/getters";
+import { getPlatformByProvider } from "@/lib/utils/getters";
 
 export function PlatformLinkForm({ item }: { item: PlatformLink }) {
   const [isEditing, setIsEditing] = React.useState(false);
@@ -77,17 +78,16 @@ export function PlatformLinkForm({ item }: { item: PlatformLink }) {
   };
 
   const Icon = getIconByProvider(data.provider);
+  const platform = getPlatformByProvider(data.provider);
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="border-glass bg-glass group rounded-lg border">
+        <div className="glassmorphism group rounded-lg">
           <div className="flex items-center">
             <GripVerticalIcon className="ml-2 size-4 text-muted-foreground" />
-            <div className="flex w-full items-center justify-between gap-4 p-4">
-              <div className="rounded-full bg-foreground p-1 text-background">
-                <Icon />
-              </div>
+            <div className="flex w-full items-center justify-between gap-3 p-4">
+              <Icon className="size-5 text-white" />
               <div className="flex w-full items-center justify-between gap-4">
                 {isEditing ? (
                   <div className="w-full space-y-1.5">
@@ -105,13 +105,11 @@ export function PlatformLinkForm({ item }: { item: PlatformLink }) {
                     />
                   </div>
                 ) : (
-                  <div>
-                    <div className="text-sm font-medium">
-                      {form.getValues("provider")}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {form.getValues("username")}
-                    </div>
+                  <div className="text-sm text-foreground">
+                    <span className="text-muted-foreground">
+                      {platform?.domain}/
+                    </span>
+                    {form.getValues("username")}
                   </div>
                 )}
                 <div className="flex items-center gap-2 text-muted-foreground">

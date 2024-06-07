@@ -161,6 +161,7 @@ model Background {
   gradientStartColor String? @map("gradient_start_color")
   gradientEndColor   String? @map("gradient_end_color")
   gradientAngle      Int?    @map("gradient_angle")
+  gradientEnabled    Boolean @default(false) @map("gradient_enabled")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

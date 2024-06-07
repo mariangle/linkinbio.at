@@ -29,14 +29,13 @@ export function GlassmorphismLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
-      preview={preview}
     >
       <BackgroundMedia
         url={config.background?.url}
         className={cn("fixed inset-0", preview && "absolute")}
       />
       <div className="my-12 flex w-full max-w-[350px] flex-col items-center justify-center gap-4 md:my-24">
-        <ContentContainer className="relative flex h-fit w-full flex-col items-center rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-black/75 to-black/50 p-6 backdrop-blur-xl">
+        <ContentContainer className="relative flex h-fit w-full flex-col items-center rounded-[1.6rem] border border-white/10 bg-zinc-800/25 p-6 backdrop-blur-xl">
           <div className="flex w-full flex-col items-start justify-start">
             <ProfilePicture
               src={user.image}

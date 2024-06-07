@@ -6,14 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { platforms } from "@/lib/constants/platforms";
+import { Platform } from "@/lib/constants/platforms";
 import {
   Form,
   FormControl,
@@ -28,20 +21,26 @@ import {
   PlatformLinkFormValues,
 } from "@/lib/validations";
 
-export function NewPlatformLinkForm({ close }: { close: () => void }) {
+export function NewPlatformLinkForm({
+  close,
+  platform,
+}: {
+  close: () => void;
+  platform: Platform;
+}) {
   const router = useRouter();
 
   const form = useForm<PlatformLinkFormValues>({
     resolver: zodResolver(PlatformLinkFormSchema),
     defaultValues: {
-      provider: "",
+      provider: platform.name,
       username: "",
     },
   });
 
   const { loading, dirty, submit } = useFormSubmit<PlatformLinkFormValues>({
     initialData: {
-      provider: "",
+      provider: platform.name,
       username: "",
     },
     formValues: form.getValues(),
@@ -66,37 +65,22 @@ export function NewPlatformLinkForm({ close }: { close: () => void }) {
         <div className="space-y-4">
           <FormField
             control={form.control}
-            name="provider"
-            render={({ field }) => (
-              <FormItem>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select platform" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {platforms.map((item, index) => (
-                      <SelectItem key={index} value={item.name}>
-                        {item.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="username"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Username or name" {...field} />
+                  <div className="glassmorphism flex items-center rounded-lg px-4">
+                    <div className="flex items-center gap-2 text-sm">
+                      <platform.icon />
+                      {platform.domain}/
+                    </div>
+                    <Input
+                      variant="transparent"
+                      placeholder="..."
+                      {...field}
+                      className="px-0"
+                    />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>

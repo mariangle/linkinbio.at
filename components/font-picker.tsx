@@ -42,7 +42,7 @@ export function FontPicker({
           disabled={!premium}
           type="button"
           className={cn(
-            "border-glass flex h-9 w-full items-center justify-between whitespace-nowrap rounded-lg border bg-input/50 px-3 text-sm disabled:opacity-75",
+            "glassmorphism flex h-9 w-full items-center justify-between whitespace-nowrap rounded-lg px-3 text-sm disabled:opacity-75",
             fontValue && "text-muted-foreground",
             className,
           )}

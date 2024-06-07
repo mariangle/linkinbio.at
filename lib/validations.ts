@@ -2,9 +2,10 @@ import * as z from "zod";
 
 export const BackgroundFormSchema = z.object({
   color: z.string(),
-  gradientStartColor: z.string().optional(),
-  gradientEndColor: z.string().optional(),
-  gradientAngle: z.number().optional(),
+  gradientStartColor: z.string(),
+  gradientEndColor: z.string(),
+  gradientAngle: z.number(),
+  gradientEnabled: z.boolean(),
   url: z.string().optional(),
 });
 

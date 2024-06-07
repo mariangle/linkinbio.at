@@ -1,6 +1,6 @@
 import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { ProfileForm } from "./profile-form";
-import { PageHeading } from "@/components/dashboard/page";
+import { Heading } from "@/components/ui/typography";
 
 export default async function Profile() {
   const biolink = await getCachedBiolink();
@@ -9,7 +9,6 @@ export default async function Profile() {
 
   return (
     <>
-      <PageHeading>Profile</PageHeading>
       <ProfileForm data={biolink.user} />
     </>
   );

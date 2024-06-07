@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BackgroundOptions } from "@/lib/types";
-import { isValidImage, isValidVideo } from "@/lib/utils/media-validation";
+import { isValidMedia, isValidVideo } from "@/lib/utils/media-validation";
 import { BackgroundVideo } from "@/components/biolink/background-video";
 import { defaultBackgroundOptions } from "@/lib/constants/defaults";
 
@@ -11,17 +11,15 @@ export function BackgroundContainer({
   children,
   className,
   premium = true,
-  preview,
 }: {
   options?: BackgroundOptions;
   children?: React.ReactNode;
   className?: string;
   premium?: boolean;
-  preview?: boolean;
 }) {
   // Check if options or options.gradient is null before accessing properties
   const backgroundStyle =
-    options?.gradient?.endColor && options?.gradient?.startColor && premium
+    options?.gradient?.enabled && premium
       ? {
           backgroundImage: `linear-gradient(${options.gradient.angle || 0}deg, ${options.gradient.startColor}, ${options.gradient.endColor})`,
         }
@@ -53,7 +51,7 @@ export function BackgroundMedia({
     return <BackgroundVideo url={url} className={className} />;
   }
 
-  if (isValidImage(url)) {
+  if (isValidMedia(url)) {
     return (
       <Image
         src={url}

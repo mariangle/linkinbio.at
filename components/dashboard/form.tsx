@@ -24,7 +24,7 @@ export function FormContainer({
   return (
     <div
       className={cn(
-        "bg-glass border-glass relative rounded-lg border",
+        "glassmorphism relative rounded-lg",
         className,
         disabled && "opacity-75",
       )}
@@ -73,7 +73,7 @@ export function FormSwitch({
   description?: string;
 }) {
   return (
-    <div className="border-glass flex flex-col gap-4 rounded-lg border bg-input/50 p-4 backdrop-blur-lg md:flex-row md:items-center md:justify-between">
+    <div className="glassmorphism flex flex-col gap-4 rounded-lg p-4 md:flex-row md:items-center md:justify-between">
       <div className="space-y-1">
         <div className="text-sm font-semibold">{title}</div>
         {description && (
@@ -97,19 +97,14 @@ export function FormActions({
   return (
     <div className="flex w-full items-center justify-end gap-4">
       {dirty && (
-        <Button
-          type="button"
-          className="rounded-full"
-          variant="secondary"
-          onClick={cancel}
-        >
+        <Button type="button" variant="secondary" onClick={cancel}>
           Cancel
         </Button>
       )}
       <Button
         loading={loading}
         disabled={!dirty}
-        className="w-full max-w-[150px] rounded-full"
+        className="w-full max-w-[150px]"
       >
         Save
       </Button>

@@ -29,7 +29,6 @@ export function ProfessionalLayout({
       premium={user.premium}
       options={config.background}
       className={cn(!preview && "min-h-screen", preview && "relative")}
-      preview={preview}
     >
       <BackgroundMedia
         url={config.background?.url}

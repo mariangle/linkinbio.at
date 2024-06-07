@@ -16,7 +16,7 @@ export function Heading({
   return (
     <HeadingTag
       className={cn(
-        "pb-4 text-3xl font-semibold capitalize tracking-tight md:text-4xl",
+        "pb-4 text-xl font-semibold capitalize tracking-tight",
         className,
       )}
       id={id}

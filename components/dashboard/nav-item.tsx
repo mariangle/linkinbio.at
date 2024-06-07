@@ -4,18 +4,24 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
+import { DashboardLink } from "@/lib/constants/nav-links";
+
 export function NavItem({
   item,
   collapsed,
 }: {
-  item: { label: string; href: string; icon: any };
+  item: DashboardLink;
   collapsed?: boolean;
 }) {
   const pathname = usePathname();
-  const customizePathanme = pathname.includes("customize");
-  const active =
-    pathname.includes(item.href) ||
-    (customizePathanme && item.href === "/dashboard/customize/profile");
+
+  const conditions = [
+    pathname === item.href,
+    pathname.includes("customize") &&
+      item.href === "/dashboard/customize/profile",
+  ];
+
+  const active = conditions.some(Boolean);
 
   return (
     <motion.div
@@ -37,9 +43,9 @@ export function NavItem({
       <Link
         href={item.href}
         className={cn(
-          "bg-glass-secondary flex h-11 items-center justify-start gap-3 rounded-xl px-3.5 py-2 text-sm text-muted-foreground opacity-50 backdrop-blur-xl",
+          "bg-glass-secondary flex h-11 items-center justify-start gap-3 rounded-xl px-3.5 py-2 text-sm text-foreground/80 opacity-50 backdrop-blur-xl",
           active &&
-            "bg-gradient-to-t from-white/50 to-transparent text-foreground text-primary opacity-100 dark:from-primary/20 dark:text-white md:bg-gradient-to-r",
+            "bg-gradient-to-t from-primary/20 to-transparent text-foreground opacity-100 dark:text-white md:bg-gradient-to-r",
           !collapsed && "md:bg-transparent",
         )}
       >

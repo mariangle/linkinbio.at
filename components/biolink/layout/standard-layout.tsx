@@ -29,7 +29,6 @@ export function StandardLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative p-0")}
-      preview={preview}
     >
       <BackgroundMedia
         url={config.background?.url}

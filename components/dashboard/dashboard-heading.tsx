@@ -12,7 +12,9 @@ export function DashboardHeading() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold">{currentLink?.label}</h1>
+      <h1 className="text-2xl font-semibold">
+        {currentLink?.label || "Dashboard"}
+      </h1>
     </div>
   );
 }

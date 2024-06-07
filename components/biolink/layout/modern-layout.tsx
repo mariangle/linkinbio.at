@@ -27,7 +27,6 @@ export function ModernLayout({
       premium={user.premium}
       options={config.background}
       className={cn("p-2", preview && "relative")}
-      preview={preview}
     >
       <BackgroundMedia
         url={config.background?.url}

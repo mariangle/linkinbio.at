@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 import { ChevronLeft } from "lucide-react";
@@ -11,6 +10,7 @@ import { UserNav } from "./user-nav";
 import { EyeIcon } from "lucide-react";
 import { useBiolinkPreviewStore } from "@/lib/store";
 import { User } from "@/lib/types";
+import { Logo } from "../ui/logo";
 
 export function Navigation({ user }: { user: User }) {
   const { setOpen, open } = useBiolinkPreviewStore();
@@ -19,7 +19,7 @@ export function Navigation({ user }: { user: User }) {
   return (
     <header
       className={cn(
-        "group/nav fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start md:pr-0 ",
+        "group/nav fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start md:pr-0",
       )}
     >
       <div className="relative flex h-full flex-col items-center justify-center gap-4">
@@ -38,8 +38,8 @@ export function Navigation({ user }: { user: User }) {
         </div>
         <div
           className={cn(
-            "bg-glass border-glass relative flex gap-4 rounded-2xl border p-3 duration-300",
-            "h-full flex-col justify-between md:w-auto",
+            "glassmorphism relative flex gap-4 rounded-2xl border p-3 duration-300",
+            "h-full flex-col justify-between shadow-[0_0px_15px_rgba(0,0,0,0.1)] md:w-auto",
             collapsed ? "md:w-[70px]" : "md:w-[190px]",
           )}
         >
@@ -53,13 +53,7 @@ export function Navigation({ user }: { user: User }) {
           <div className="flex h-full w-full flex-row justify-between gap-4 md:flex-col">
             <div>
               <div className="hidden p-2 md:block">
-                <Image
-                  src="/icon.svg"
-                  alt="logo"
-                  width={50}
-                  height={50}
-                  className="size-7 shrink-0 invert-0"
-                />
+                <Logo className="fill-white" />
               </div>
               <ul className="flex flex-row gap-2 md:my-2 md:flex-col">
                 {dashboardLinks.map((item, index) => (

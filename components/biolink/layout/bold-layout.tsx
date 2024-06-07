@@ -29,7 +29,6 @@ export function BoldLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
-      preview={preview}
     >
       <BackgroundMedia
         url={config.background?.url}

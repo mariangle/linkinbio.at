@@ -30,18 +30,14 @@ export function WithCoverLayout({
       premium={user.premium}
       options={config.background}
       className={cn(preview && "relative h-full")}
-      preview={preview}
     >
       <div className="absolute inset-x-0 top-0 m-2 flex h-60 justify-center overflow-hidden">
         <BackgroundMedia
           url={config.background?.url}
-          className={cn(
-            "max-w-screen-md rounded-b-md rounded-t-xl",
-            preview && "rounded-t-3xl",
-          )}
+          className={cn("max-w-screen-md rounded-md")}
         />
       </div>
-      <ContentContainer className="mb-24 mt-40 p-0">
+      <ContentContainer className="mb-32 mt-44 p-0">
         <div className="flex flex-col items-center justify-center">
           <ProfilePicture className="mb-4" src={user.image} nullable />
           <Title

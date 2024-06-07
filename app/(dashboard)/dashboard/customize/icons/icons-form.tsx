@@ -81,15 +81,16 @@ export function IconsForm({ data }: { data?: IconData }) {
     style?: IconStyleOption,
     key?: number,
   ) => {
-    const selected = form.getValues("style") === style?.value;
+    const selected =
+      form.getValues("style") === style?.value ||
+      (!style?.value && !form.getValues("style"));
     return (
       <div
         key={key}
         onClick={() => form.setValue("style", style?.value)}
         className={cn(
           "relative grid h-24 w-full cursor-pointer place-content-center rounded-lg p-4",
-          !style?.value && !form.getValues("style") && " bg-primary/20",
-          selected && "bg-primary/20",
+          selected && "border border-white/10 bg-primary/20",
         )}
       >
         <TopIcon
@@ -114,13 +115,13 @@ export function IconsForm({ data }: { data?: IconData }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-6 lg:flex-row"
       >
-        <div className="grid w-full grid-cols-2 overflow-hidden rounded-lg bg-primary/10 p-2">
+        <div className="glassmorphism grid w-full grid-cols-2 overflow-hidden rounded-lg p-2">
           {renderIconOption(form)}
           {iconStyles.map((style, idx) => {
             return renderIconOption(form, style, idx);
           })}
         </div>
-        <div className="flex flex-col justify-between rounded-lg bg-secondary/25 p-4">
+        <div className="glassmorphism flex flex-col justify-between rounded-lg p-4">
           <div className="space-y-4">
             <div className="space-y-2">
               <FormLabel>Color</FormLabel>
@@ -132,7 +133,7 @@ export function IconsForm({ data }: { data?: IconData }) {
               />
             </div>
             <div className="flex w-full items-center gap-2">
-              <div className="border-glass flex w-full items-center justify-between gap-2 rounded-lg border bg-input/50 px-4 py-2">
+              <div className="glassmorphism flex w-full items-center justify-between gap-2 rounded-lg px-4 py-2">
                 <div className="text-sm">Shadow</div>
                 <FormField
                   control={form.control}

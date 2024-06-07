@@ -19,7 +19,6 @@ import {
   FaSkype,
   FaQuora,
 } from "react-icons/fa";
-import { FaThreads } from "react-icons/fa6";
 import { IconType } from "react-icons/lib";
 
 export interface Platform {
@@ -42,7 +41,7 @@ export const platforms: Platform[] = [
   {
     icon: FaDiscord,
     name: "Discord",
-    color: "#7289DA",
+    color: "#5865F2",
     domain: "discord.com",
     iconName: "FaDiscord",
   },
@@ -167,3 +166,7 @@ export const platforms: Platform[] = [
     iconName: "FaPinterest",
   },
 ];
+
+export const sortedPlatforms = platforms.sort((a, b) =>
+  a.name > b.name ? 1 : -1,
+);
