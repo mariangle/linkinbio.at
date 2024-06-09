@@ -66,6 +66,9 @@ export function PlatformOptions() {
                   <TopIcon
                     options={{
                       size: "small",
+                      backgroundRadius: "full",
+                      shadow: false,
+                      color: "white",
                     }}
                     item={{
                       provider: platform.name,

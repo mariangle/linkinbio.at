@@ -39,7 +39,7 @@ export default async function Layout({
           src="/dashboard.jpg"
           width={2560}
           height={1440}
-          className="fixed inset-0 h-full w-full scale-110 object-cover blur-[100px] brightness-[0.8] hue-rotate-[320deg] saturate-50 dark:hidden"
+          className="fixed inset-0 h-full w-full scale-110 object-cover blur-[100px] brightness-[0.8] hue-rotate-[320deg] saturate-[0.25] dark:hidden"
           alt="background-image"
         />
         <div className="relative flex w-full flex-col overflow-x-hidden overflow-y-hidden text-white md:flex-row">

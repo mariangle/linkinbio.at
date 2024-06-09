@@ -27,6 +27,8 @@ export function TopIcon({
   options = {
     shadow: false,
     color: "#FFFFFF",
+    backgroundRadius: "full",
+    size: "medium",
   },
 }: TopIconProps) {
   const platform = getPlatformByProvider(item.provider);
@@ -125,7 +127,7 @@ export function TopIcon({
       >
         <div
           className={cn(
-            "grid size-8 place-content-center rounded-full",
+            `grid size-8 place-content-center rounded-${options.backgroundRadius} p-2`,
             options.size === "small" && "size-7",
             options.size === "large" && "size-9",
           )}

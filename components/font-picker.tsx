@@ -26,12 +26,10 @@ export function FontPicker({
   font,
   setFont,
   className,
-  premium = true,
 }: {
   font: Font;
   setFont: (font: Font) => void;
   className?: string;
-  premium?: boolean;
 }) {
   const [fontValue, setFontValue] = React.useState<Font>(font);
 
@@ -39,11 +37,10 @@ export function FontPicker({
     <Popover>
       <PopoverTrigger asChild>
         <button
-          disabled={!premium}
           type="button"
           className={cn(
             "glassmorphism flex h-9 w-full items-center justify-between whitespace-nowrap rounded-lg px-3 text-sm disabled:opacity-75",
-            fontValue && "text-muted-foreground",
+            fontValue && "text-foreground",
             className,
           )}
         >

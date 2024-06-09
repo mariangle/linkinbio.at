@@ -18,6 +18,9 @@ export const TopIconsFormSchema = z.object({
   position: z.enum(["bottom", "top"], {
     required_error: "You need to select a position.",
   }),
+  backgroundRadius: z.enum(["none", "sm", "md", "lg", "xl", "full"], {
+    required_error: "You need to select a size.",
+  }),
   size: z.enum(["small", "medium", "large"], {
     required_error: "You need to select a size.",
   }),

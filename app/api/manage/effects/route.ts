@@ -15,7 +15,7 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { title: titleEffect, weather: weatherEffect } = await req.json();
+  const { title: titleEffect, weather: backgroundEffect } = await req.json();
 
   let effects;
 
@@ -34,7 +34,7 @@ export async function PATCH(req: Request) {
       },
       data: {
         titleEffect: titleEffect ?? null,
-        weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
+        backgroundEffect: convertToPrismaWeatherEffect(backgroundEffect),
       },
     });
   } else {
@@ -43,7 +43,7 @@ export async function PATCH(req: Request) {
       data: {
         userId: session.user.id,
         titleEffect: titleEffect ?? null,
-        weatherEffect: convertToPrismaWeatherEffect(weatherEffect),
+        backgroundEffect: convertToPrismaWeatherEffect(backgroundEffect),
       },
     });
   }

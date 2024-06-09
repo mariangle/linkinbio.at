@@ -113,6 +113,8 @@ export const dummyBiolinks: Biolink[] = [
         style: IconStyle.CustomBackgroundWhiteColor,
         color: "#001731",
         position: "bottom",
+        size: "medium",
+        backgroundRadius: "full",
       },
       effects: {
         weather: WeatherEffect.Rain,
@@ -204,6 +206,8 @@ export const dummyBiolinks: Biolink[] = [
         shadow: false,
         style: IconStyle.WhiteBackgroundCustomColor,
         color: "#FEBB4E",
+        size: "medium",
+        backgroundRadius: "full",
       },
       effects: {
         title: TitleEffect.Sparkles,
@@ -280,6 +284,7 @@ export const dummyBiolinks: Biolink[] = [
         color: "#FFFFFF",
         style: IconStyle.NoBackgroundSocialColor,
         size: "small",
+        backgroundRadius: "full",
       },
       effects: {
         title: TitleEffect.Typewriter,
@@ -361,6 +366,8 @@ export const dummyBiolinks: Biolink[] = [
       icons: {
         shadow: true,
         color: "4C3222",
+        size: "medium",
+        backgroundRadius: "full",
       },
       effects: {
         title: TitleEffect.CherryBlossoms,

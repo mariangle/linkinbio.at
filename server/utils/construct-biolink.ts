@@ -6,6 +6,7 @@ import {
   Position,
   Size,
   TitleEffect,
+  BorderSize,
 } from "@/lib/types";
 import {
   convertToWeatherEffect,
@@ -143,13 +144,16 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
         position:
           (user.icons?.position as Position) ?? defaultIconsOptions.position,
         size: (user.icons?.size as Size) ?? defaultIconsOptions.size,
+        backgroundRadius:
+          (user.icons?.borderRadius as BorderSize) ??
+          defaultIconsOptions.backgroundRadius,
       },
       effects: {
         title:
           (user.effect?.titleEffect as TitleEffect) ??
           defaultEffectsOptions.title,
         weather:
-          convertToWeatherEffect(user.effect?.weatherEffect) ??
+          convertToWeatherEffect(user.effect?.backgroundEffect) ??
           defaultEffectsOptions.weather,
       },
     },

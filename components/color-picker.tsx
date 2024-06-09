@@ -1,24 +1,7 @@
-import React from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-const colors = [
-  "#FFFFFF", // White
-  "#000000", // Black
-  "#FF6347", // Tomato
-  "#7FFFD4", // Aquamarine
-  "#40E0D0", // Turquoise
-  "#FFD700", // Gold
-  "#9932CC", // Dark Orchid
-  "#FF8C00", // Dark Orange
-  "#4682B4", // Steel Blue
-  "#8A2BE2", // Blue Violet
-];
+import * as React from "react";
 
 export function ColorPicker({
   color,
@@ -41,19 +24,24 @@ export function ColorPicker({
     setColorValue(event.target.value);
   };
 
-  const handleColorBlur = () => {
-    setColor(colorValue || colorFallback);
-  };
+  const handleColorBlur = () => setColor(colorValue || colorFallback);
 
   return (
-    <Popover>
-      <PopoverTrigger
-        disabled={disabled}
+    <div className="relative">
+      <Input
+        type="color"
+        value={colorValue}
+        onChange={handleColorChange}
+        onBlur={handleColorBlur} // Call handleColorBlur on blur event
+        className="absolute left-0 top-0 z-10 w-full cursor-pointer bg-none p-0 opacity-0"
+      />
+      <div
         className={cn(
-          "glassmorphism flex h-9 w-full items-center gap-2 rounded-lg p-2",
+          "glassmorphism relative flex h-9 w-full items-center gap-2 rounded-lg p-2",
           small && "w-9 justify-center p-0",
           className,
         )}
+        role="button"
       >
         <div
           className={cn("size-4 rounded-md", small && "size-5 rounded-full")}
@@ -64,41 +52,8 @@ export function ColorPicker({
           }}
         />
         {!small && <div className="text-sm">{color}</div>}
-      </PopoverTrigger>
-      <PopoverContent className="bg-secondary">
-        <div className="grid grid-cols-8 gap-2">
-          {colors.map((color, index) => (
-            <div
-              key={index}
-              className="size-6 cursor-pointer rounded-sm"
-              style={{ backgroundColor: color }}
-              onClick={() => {
-                setColor(color);
-                setColorValue(color);
-              }}
-            />
-          ))}
-        </div>
-        <div className="mt-4 flex items-center gap-2">
-          <Input
-            type="color"
-            value={colorValue}
-            onChange={handleColorChange}
-            onBlur={handleColorBlur} // Call handleColorBlur on blur event
-            className="w-10 bg-none p-0"
-          />
-          <Input
-            value={colorValue}
-            onChange={handleColorChange}
-            className={cn(
-              "w-full",
-              !isValidHexColor(colorValue || "") &&
-                "border-destructive focus-visible:ring-destructive",
-            )}
-          />
-        </div>
-      </PopoverContent>
-    </Popover>
+      </div>
+    </div>
   );
 }
 

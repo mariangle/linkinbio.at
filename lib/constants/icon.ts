@@ -1,4 +1,4 @@
-import { IconStyle, Position, Size } from "@/lib/types";
+import { IconStyle, Position } from "@/lib/types";
 
 export const iconStyles = [
   {
