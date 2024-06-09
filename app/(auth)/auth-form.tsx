@@ -36,7 +36,7 @@ export function AuthForm({ variant }: { variant: Variant }) {
         <button
           onClick={login}
           disabled
-          className="flex h-12 w-full items-center gap-2 rounded-full bg-foreground px-4 font-medium text-background disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex h-12 w-full items-center gap-2 rounded-full bg-foreground px-4 font-medium text-black disabled:cursor-not-allowed disabled:opacity-70"
         >
           <FaGoogle className="size-4" />
           {variant === "sign-in" ? "Continue" : "Sign up"} with Google
