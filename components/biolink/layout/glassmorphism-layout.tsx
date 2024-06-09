@@ -32,7 +32,7 @@ export function GlassmorphismLayout({
     >
       <BackgroundMedia
         url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute")}
+        className={cn("fixed inset-0", preview && "xl:absolute")}
       />
       <div className="my-12 flex w-full max-w-[350px] flex-col items-center justify-center gap-4 md:my-24">
         <ContentContainer className="relative flex h-fit w-full flex-col items-center rounded-[1.6rem] border border-white/10 bg-zinc-800/25 p-6 backdrop-blur-xl">

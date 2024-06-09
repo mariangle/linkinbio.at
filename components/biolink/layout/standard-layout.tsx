@@ -32,7 +32,7 @@ export function StandardLayout({
     >
       <BackgroundMedia
         url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute")}
+        className={cn("fixed inset-0", preview && "xl:absolute")}
       />
       <ContentContainer className="h-fit py-16">
         <div className="flex flex-col items-center justify-center">

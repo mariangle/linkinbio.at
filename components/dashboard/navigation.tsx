@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, X } from "lucide-react";
 import { dashboardLinks } from "@/lib/constants/nav-links";
 import { NavItem } from "@/components/dashboard/nav-item";
 import { UserNav } from "./user-nav";
@@ -20,9 +20,23 @@ export function Navigation({ user }: { user: User }) {
     <header
       className={cn(
         "group/nav fixed bottom-0 z-50 flex w-full items-end justify-center p-4 md:static md:top-0 md:h-screen md:w-auto md:self-start md:pr-0",
+        open && "z-[999]",
       )}
     >
-      <div className="relative flex h-full flex-col items-center justify-center gap-4">
+      <button
+        onClick={() => setOpen(!open)}
+        className="absolute left-1/2 z-[99] flex w-fit -translate-x-1/2 -translate-y-[80px] items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl md:fixed md:bottom-0 md:-translate-y-[20px] xl:hidden"
+      >
+        {open ? <X className="size-4" /> : <EyeIcon className="size-4" />}
+        {open ? "Close Preview" : "Preview"}
+      </button>
+      <div
+        className={cn(
+          "relative flex h-full flex-col items-center justify-center gap-4 duration-300",
+          open &&
+            "pointer-events-none opacity-0 xl:pointer-events-auto xl:opacity-100",
+        )}
+      >
         <div className="absolute left-full top-0 hidden translate-x-4 p-4 pl-0 md:block">
           <button
             className="rounded-full bg-primary/50 p-1.5 opacity-0 backdrop-blur-xl duration-100 group-hover/nav:opacity-100"
@@ -38,18 +52,11 @@ export function Navigation({ user }: { user: User }) {
         </div>
         <div
           className={cn(
-            "glassmorphism relative flex gap-4 rounded-2xl border p-3 duration-300",
-            "h-full flex-col justify-between shadow-[0_0px_15px_rgba(0,0,0,0.1)] md:w-auto",
+            "glassmorphism relative flex h-full flex-col justify-between gap-4 rounded-2xl border p-3 duration-300",
+            "shadow-[0_0px_15px_rgba(0,0,0,0.1)] md:w-auto",
             collapsed ? "md:w-[70px]" : "md:w-[190px]",
           )}
         >
-          <button
-            onClick={() => setOpen(!open)}
-            className="absolute left-1/2 flex w-fit -translate-x-1/2 -translate-y-[60px] items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl md:hidden"
-          >
-            <EyeIcon className="size-3" />
-            Preview
-          </button>
           <div className="flex h-full w-full flex-row justify-between gap-4 md:flex-col">
             <div>
               <div className="hidden p-2 md:block">

@@ -20,7 +20,7 @@ export function Tooltip({
       {children}
       <div
         className={cn(
-          "pointer-events-none absolute whitespace-nowrap rounded-full border border-white/10 bg-neutral-950/50 px-2.5 py-1.5 text-xs text-white opacity-0 backdrop-blur-2xl duration-200 group-hover:opacity-100",
+          "pointer-events-none absolute whitespace-nowrap rounded-full border border-b-0 border-white/5 bg-neutral-950/50 px-2.5 py-1.5 text-xs text-white opacity-0 backdrop-blur-2xl duration-200 group-hover:opacity-100",
           position === "top" &&
             "bottom-6 left-1/2 -translate-x-1/2 -translate-y-1 group-hover:-translate-y-1/2",
           position === "right" &&

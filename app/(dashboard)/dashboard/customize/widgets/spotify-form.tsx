@@ -129,7 +129,7 @@ export function SpotifyForm({ data }: { data?: SpotifyData }) {
                   className="mt-4 space-y-6"
                   onSubmit={form.handleSubmit(onSubmit)}
                 >
-                  <div className="border-glass flex w-fit items-center gap-2 rounded-md border bg-input/50 p-1 text-muted-foreground/50">
+                  <div className="border-glass flex w-fit items-center gap-2 rounded-md border bg-input/50 p-1 text-muted-foreground">
                     {tabs.map((item, index) => (
                       <button
                         key={index}
@@ -137,7 +137,7 @@ export function SpotifyForm({ data }: { data?: SpotifyData }) {
                         className={cn(
                           "px-3 py-1.5 text-sm",
                           item.name === tab.name &&
-                            "bg-glass-secondary rounded-lg text-foreground",
+                            "rounded-lg bg-black/10 text-foreground",
                         )}
                         onClick={() => {
                           setTab(item);

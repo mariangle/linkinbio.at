@@ -32,7 +32,7 @@ export function BoldLayout({
     >
       <BackgroundMedia
         url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute")}
+        className={cn("fixed inset-0", preview && "xl:absolute")}
       />
       <ContentContainer className="relative z-20 flex h-fit w-full flex-col items-start p-0 py-16">
         <div className="flex w-full items-center justify-start gap-4 md:gap-6">

@@ -185,28 +185,22 @@
     @apply bg-gradient-to-b from-white/15 to-white/20 backdrop-blur-3xl dark:from-neutral-800/50 dark:to-neutral-900/50;
   }
 
-  .bg-glass-secondary {
-    @apply bg-white/25 backdrop-blur-3xl dark:bg-neutral-700/50;
-  }
-
   .border-glass {
     @apply border-white/10 dark:border-white/5;
   }
 
   .glassmorphism-secondary {
-    @apply border border-white/10 bg-white/5 text-neutral-50 dark:border-white/5 dark:bg-black/10 dark:text-neutral-300;
+    @apply border border-white/10 bg-white/5 text-neutral-50 dark:border-white/5 dark:bg-black/5 dark:text-neutral-300;
   }
 
   .glassmorphism {
-    @apply border border-white/20  bg-white/15 text-neutral-50 backdrop-blur-xl dark:border-white/5 dark:bg-black/15 dark:text-neutral-300;
+    @apply border border-white/15  bg-white/10 text-neutral-50 backdrop-blur-xl dark:border-white/5 dark:bg-black/10 dark:text-neutral-300;
   }
 
   .glitch-effect {
     font-size: 8rem;
     font-weight: 700;
-    text-transform: uppercase;
     position: relative;
-
     text-shadow:
       0.05em 0 0 rgba(255, 0, 0, 0.75),
       -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
