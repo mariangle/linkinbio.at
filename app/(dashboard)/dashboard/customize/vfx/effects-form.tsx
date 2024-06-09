@@ -107,9 +107,7 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
               <button
                 type="button"
                 key={idx}
-                onClick={() => {
-                  form.setValue("title", item.value);
-                }}
+                onClick={() => form.setValue("title", item.value)}
                 className={cn(
                   "flex justify-center rounded-lg p-3",
                   form.getValues("title") === item.value &&

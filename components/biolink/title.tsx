@@ -71,6 +71,7 @@ export function Title({
           className,
           effect === TitleEffect.Glitch && "glitch-effect",
           effect === TitleEffect.Shake && "shake-effect",
+          effect === TitleEffect.Rainbow && "rainbow-effect",
           getFontDisplay(options?.font),
         )}
       >

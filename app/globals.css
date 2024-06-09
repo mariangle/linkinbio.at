@@ -298,6 +298,10 @@
     }
   }
 
+  .shake-effect {
+    animation: shake-animation 2.5s infinite;
+  }
+
   @keyframes shake-animation {
     0% {
       transform: translateX(0);
@@ -331,7 +335,28 @@
     }
   }
 
-  .shake-effect {
-    animation: shake-animation 2.5s infinite;
+  .rainbow-effect {
+    animation: rainbow-color-change 6s ease-in-out infinite;
+  }
+
+  @keyframes rainbow-color-change {
+    0% {
+      color: #6666ff;
+    }
+    20% {
+      color: #0099ff;
+    }
+    40% {
+      color: #00ff00;
+    }
+    60% {
+      color: #ff3399;
+    }
+    80% {
+      color: #ff6600;
+    }
+    100% {
+      color: #6666ff;
+    }
   }
 }
