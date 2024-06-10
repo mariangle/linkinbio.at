@@ -45,7 +45,7 @@ export function LayoutForm({ layout: defaultLayout }: { layout?: Layout }) {
 
   return (
     <div>
-      <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-3">
+      <div className="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {layouts.map((item, index) => {
           const selected = layout === item.value;
           return (
@@ -72,7 +72,7 @@ export function LayoutForm({ layout: defaultLayout }: { layout?: Layout }) {
           );
         })}
       </div>
-      <div className="flex justify-end">
+      <div className="mt-4 flex justify-end">
         <Button
           disabled={!dirty}
           loading={loading}

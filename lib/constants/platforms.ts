@@ -35,7 +35,7 @@ export const platforms: Platform[] = [
   {
     icon: FaGlobe,
     name: "Website",
-    color: "#FFFFFF",
+    color: "#000000",
     domain: "",
     iconName: "FaGlobe",
   },

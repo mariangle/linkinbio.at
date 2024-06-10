@@ -10,6 +10,7 @@ export enum Layout {
 export enum Font {
   Inter = "inter",
   Readex = "readex",
+  Array = "array",
   Roboto = "roboto",
   DancingScript = "dancing-script",
   Oswald = "oswald",
@@ -19,6 +20,8 @@ export enum Font {
   GreatVibes = "great-vibes",
   Creepster = "creepster",
   Bangers = "bangers",
+  Mostwasted = "mostwasted",
+  Werebeast = "werebeast",
 }
 
 export enum TitleEffect {

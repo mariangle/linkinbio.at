@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import { ProfileFormSchema, ProfileFormValues } from "@/lib/validations";
 import type { User as UserData } from "@/lib/types";
+import { Button } from "@/components/ui/button";
 
 export function ProfileForm({ data }: { data: UserData }) {
   const { biolink, setBiolink } = useBiolinkPreviewStore();
@@ -74,18 +75,30 @@ export function ProfileForm({ data }: { data: UserData }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="relative h-fit w-fit">
+        <div className="relative flex h-fit w-full flex-row gap-4">
           <ProfilePicture src={form.getValues("image")} className="size-20" />
-          <ImagePicker
-            url={form.getValues("image")}
-            setUrl={(url) => {
-              form.setValue("image", url || "");
-            }}
-          >
-            <button className="absolute bottom-0 right-0 grid place-content-center rounded-full bg-primary p-1.5">
-              <Pencil className="size-3 text-white" />
-            </button>
-          </ImagePicker>
+          <div className="flex w-full flex-col gap-4">
+            <ImagePicker
+              url={form.getValues("image")}
+              setUrl={(url) => {
+                form.setValue("image", url || "");
+              }}
+            >
+              <Button className="w-full rounded-full" type="button">
+                Change
+              </Button>
+            </ImagePicker>
+            <Button
+              variant="secondary"
+              type="button"
+              className="w-full rounded-full"
+              onClick={() => {
+                form.setValue("image", "");
+              }}
+            >
+              Remove
+            </Button>
+          </div>
         </div>
         <div className="my-4 space-y-4">
           <FormField
@@ -93,7 +106,7 @@ export function ProfileForm({ data }: { data: UserData }) {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Profile Title</FormLabel>
+                <FormLabel>Title</FormLabel>
                 <FormControl>
                   <Input placeholder="Your title" {...field} />
                 </FormControl>
