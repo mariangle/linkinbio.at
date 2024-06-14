@@ -6,9 +6,8 @@ import { cn } from "@/lib/utils";
 import { useBiolinkPreviewStore } from "@/lib/store";
 import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { EyeIcon, XIcon, Share2, ExternalLink } from "lucide-react";
+import { EyeIcon, ExternalLink } from "lucide-react";
 import { useMounted } from "@/hooks/use-mounted";
-import { SharePopover } from "@/components/dashboard/share-popover";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/biolink/layout";
 
@@ -20,7 +19,6 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
     biolink: biolinkGlobalState,
     setBiolink,
     open,
-    setOpen,
   } = useBiolinkPreviewStore();
 
   React.useEffect(() => {
@@ -33,88 +31,51 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
 
   if (!isMounted) return null;
 
+  // h-[calc(100%-70px)]
+
   if (isDesktop) {
     return (
-      <div className="glassmorphism h-screen w-full overflow-hidden lg:max-w-lg xl:max-w-2xl">
-        <div className="flex items-center justify-between border-b border-b-white/10 p-1 px-2">
-          <div className="flex items-center gap-2 font-medium text-foreground">
-            <EyeIcon className="size-4" />
+      <div className="glassmorphism h-screen w-full max-w-xl overflow-hidden">
+        <div className="flex items-center justify-between border-b border-b-white/10 p-4">
+          <Button variant="secondary">
+            <EyeIcon className="mr-2 size-4" />
             Preview
-          </div>
+          </Button>
           <Button variant="secondary">
             <ExternalLink className="mr-2 size-4" />
             View live
           </Button>
         </div>
-        <div className="relative h-[calc(100%-43px)] p-2">
-          {biolink && (
-            <Layout
-              biolink={biolinkPreview}
-              preview
-              layout={biolinkPreview.config.profile?.layout}
-              className="rounded-sm"
-            />
-          )}
+        <div className="relative flex h-full justify-center overflow-y-auto pt-24">
+          <div className="h-[calc(100%-70px)] max-h-[700px] w-[344px] rounded-[1.6rem] border bg-white p-1 shadow-2xl dark:bg-zinc-800">
+            {biolink && (
+              <Layout
+                biolink={biolinkPreview}
+                preview
+                layout={biolinkPreview.config.profile?.layout}
+                className="overflow-y-auto rounded-[1.4rem]"
+              />
+            )}
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <>
-      <button
-        onClick={() => setOpen(!open)}
-        className="hidden w-fit items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl md:fixed md:bottom-4 md:right-4 md:flex xl:hidden"
-      >
-        <EyeIcon className="size-3" />
-        Preview
-      </button>
-      <div
-        className={cn(
-          "fixed inset-0 z-[99] overflow-y-auto bg-background duration-500",
-          open
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-full opacity-0",
-        )}
-      >
-        <button
-          onClick={() => setOpen(false)}
-          className="fixed right-4 top-4 z-[9999] flex items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-2xl"
-        >
-          <XIcon className="size-4" />
-          Close
-        </button>
-        <BiolinkOptions
-          className="fixed left-4 top-4"
-          username={biolinkPreview.user.username}
+    <div
+      className={cn(
+        "fixed inset-0 z-[99] overflow-y-auto duration-300",
+        open ? " opacity-100" : "pointer-events-none opacity-0",
+      )}
+    >
+      {biolink && (
+        <Layout
+          biolink={biolinkPreview}
+          preview
+          layout={biolinkPreview.config.profile?.layout}
         />
-        {biolink && (
-          <Layout
-            biolink={biolinkPreview}
-            preview
-            layout={biolinkPreview.config.profile?.layout}
-          />
-        )}
-      </div>
-    </>
-  );
-}
-
-function BiolinkOptions({
-  username,
-  className,
-}: {
-  username: string;
-  className?: string;
-}) {
-  return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <SharePopover username={username}>
-        <Button variant="secondary">
-          <Share2 className="mr-2.5 size-4" />
-          Share
-        </Button>
-      </SharePopover>
+      )}
     </div>
   );
 }

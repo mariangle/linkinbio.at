@@ -12,6 +12,19 @@ import {
   Readex_Pro,
 } from "next/font/google";
 import { Font as FontEnum } from "@/lib/types";
+import localFont from "next/font/local";
+
+export const array = localFont({
+  src: "../../public/fonts/Array.ttf",
+});
+
+export const mostwasted = localFont({
+  src: "../../public/fonts/Mostwasted.ttf",
+});
+
+export const werebeast = localFont({
+  src: "../../public/fonts/Werebeast.ttf",
+});
 
 export const inter = Inter({ subsets: ["latin"] });
 
@@ -130,5 +143,20 @@ export const fonts = [
     name: "Bangers",
     value: FontEnum.Bangers,
     display: bangers.className,
+  },
+  {
+    name: "Array",
+    value: FontEnum.Array,
+    display: array.className,
+  },
+  {
+    name: "Mostwasted",
+    value: FontEnum.Mostwasted,
+    display: mostwasted.className,
+  },
+  {
+    name: "Werebeast",
+    value: FontEnum.Werebeast,
+    display: werebeast.className,
   },
 ];

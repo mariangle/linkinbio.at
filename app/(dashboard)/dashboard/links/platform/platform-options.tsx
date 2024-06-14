@@ -53,7 +53,7 @@ export function PlatformOptions() {
                 <div
                   key={index}
                   className={cn(
-                    "glassmorphism-secondary rounded-2xl border-2 p-2",
+                    "glassmorphism-secondary rounded-2xl border-2 p-2 hover:bg-white/10 dark:hover:bg-white/5",
                     selected && "!bg-white/25 dark:!bg-white/10",
                   )}
                   role="button"
@@ -66,6 +66,9 @@ export function PlatformOptions() {
                   <TopIcon
                     options={{
                       size: "small",
+                      backgroundRadius: "full",
+                      shadow: false,
+                      color: "white",
                     }}
                     item={{
                       provider: platform.name,

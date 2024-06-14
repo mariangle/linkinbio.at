@@ -14,8 +14,14 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { color, url, gradientStartColor, gradientEndColor, gradientAngle } =
-    await req.json();
+  const {
+    color,
+    url,
+    gradientStartColor,
+    gradientEndColor,
+    gradientAngle,
+    gradientEnabled,
+  } = await req.json();
 
   let background;
 
@@ -38,6 +44,7 @@ export async function PATCH(req: Request) {
         gradientStartColor,
         gradientEndColor,
         gradientAngle,
+        gradientEnabled,
       },
     });
   } else {
@@ -50,6 +57,7 @@ export async function PATCH(req: Request) {
         gradientStartColor,
         gradientEndColor,
         gradientAngle,
+        gradientEnabled,
       },
     });
   }

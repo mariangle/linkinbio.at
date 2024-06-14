@@ -27,7 +27,7 @@ export function NavItem({
     <motion.div
       className="relative"
       whileHover={{
-        scale: 1.1,
+        scale: 1.05,
         transition: {
           type: "spring",
           stiffness: 300,
@@ -43,15 +43,23 @@ export function NavItem({
       <Link
         href={item.href}
         className={cn(
-          "bg-glass-secondary flex h-11 items-center justify-start gap-3 rounded-xl px-3.5 py-2 text-sm text-foreground/80 opacity-50 backdrop-blur-xl",
+          "flex h-11 items-center justify-start gap-3 rounded-xl bg-neutral-50 px-3.5 py-2 text-sm text-gray-500/80 opacity-50 backdrop-blur-xl dark:bg-zinc-800",
           active &&
-            "bg-gradient-to-t from-primary/20 to-transparent text-foreground opacity-100 dark:text-white md:bg-gradient-to-r",
-          !collapsed && "md:bg-transparent",
+            "bg-gradient-to-t from-primary/20 to-transparent opacity-100 md:bg-gradient-to-r",
         )}
       >
-        <item.icon className="size-3.5 shrink-0" />
+        <item.icon
+          className={cn(
+            "size-3.5 shrink-0",
+            active &&
+              "text-primary drop-shadow-[0_0px_15px_hsl(var(--primary))] dark:text-white",
+          )}
+        />
         <span
-          className={cn("hidden whitespace-nowrap", !collapsed && "md:block")}
+          className={cn(
+            "hidden whitespace-nowrap dark:text-white",
+            !collapsed && "md:block",
+          )}
         >
           {item.label}
         </span>

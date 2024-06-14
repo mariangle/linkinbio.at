@@ -30,7 +30,7 @@ export function ModernLayout({
     >
       <BackgroundMedia
         url={config.background?.url}
-        className={cn("fixed inset-0", preview && "absolute")}
+        className={cn("fixed inset-0", preview && "xl:absolute")}
       />
       <div className="mt-[200px] flex h-full w-full flex-col justify-end">
         <ContentContainer

@@ -19,19 +19,19 @@ export default async function Analytics() {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <StatCard
           label="Views"
-          value={analytics.views.current}
+          value={`${analytics.views.current}`}
           previousValue={analytics.views.previous}
           className="bg-emerald-500"
         />
         <StatCard
           label="Clicks"
-          value={analytics.clicks.current}
+          value={`${analytics.clicks.current}`}
           previousValue={analytics.clicks.previous}
           className="bg-indigo-500"
         />
         <StatCard
           label="CTR"
-          value={analytics.ctr.current}
+          value={`${analytics.ctr.current.toFixed(2)}%`}
           previousValue={analytics.ctr.previous}
           className="bg-yellow-500"
         />
@@ -79,7 +79,7 @@ function StatCard({
   className,
 }: {
   label: string;
-  value: number;
+  value: string;
   previousValue?: number;
   className?: string;
 }) {

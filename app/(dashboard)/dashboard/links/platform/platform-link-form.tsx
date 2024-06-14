@@ -29,6 +29,7 @@ import {
 import { useFormSubmit } from "@/hooks/use-form-action";
 import { getIconByProvider } from "@/lib/utils/getters";
 import { getPlatformByProvider } from "@/lib/utils/getters";
+import { cn } from "@/lib/utils";
 
 export function PlatformLinkForm({ item }: { item: PlatformLink }) {
   const [isEditing, setIsEditing] = React.useState(false);
@@ -105,10 +106,15 @@ export function PlatformLinkForm({ item }: { item: PlatformLink }) {
                     />
                   </div>
                 ) : (
-                  <div className="text-sm text-foreground">
-                    <span className="text-muted-foreground">
-                      {platform?.domain}/
-                    </span>
+                  <div
+                    className={cn(
+                      "text-sm text-foreground",
+                      !platform?.domain && "text-muted-foreground",
+                    )}
+                  >
+                    {platform?.domain && (
+                      <span className="text-muted-foreground">{`${platform.domain}/`}</span>
+                    )}
                     {form.getValues("username")}
                   </div>
                 )}

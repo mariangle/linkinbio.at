@@ -24,9 +24,8 @@ export function ProfilePicture({
     );
   }
   return (
-    // TODO: handle this better
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Image
+      unoptimized
       src={src}
       width={100}
       height={100}

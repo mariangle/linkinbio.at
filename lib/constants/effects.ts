@@ -40,4 +40,8 @@ export const titleEffects = [
     value: TitleEffect.Glitch,
     label: "Glitch",
   },
+  {
+    value: TitleEffect.Rainbow,
+    label: "Rainbow",
+  },
 ];

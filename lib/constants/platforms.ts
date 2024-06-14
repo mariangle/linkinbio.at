@@ -18,6 +18,7 @@ import {
   FaTumblr,
   FaSkype,
   FaQuora,
+  FaGlobe,
 } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 
@@ -31,6 +32,13 @@ export interface Platform {
 }
 
 export const platforms: Platform[] = [
+  {
+    icon: FaGlobe,
+    name: "Website",
+    color: "#000000",
+    domain: "",
+    iconName: "FaGlobe",
+  },
   {
     icon: FaLinkedinIn,
     name: "LinkedIn",

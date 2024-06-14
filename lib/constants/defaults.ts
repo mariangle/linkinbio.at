@@ -32,9 +32,11 @@ export const defaultProfileOptions: ProfileOptions = {
 };
 
 export const defaultIconsOptions: IconOptions = {
+  shadow: false,
   color: "#FFFFFF",
   position: "top",
   size: "medium",
+  backgroundRadius: "full",
 };
 
 export const defaultEffectsOptions: EffectsOptions = {};

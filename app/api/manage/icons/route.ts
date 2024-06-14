@@ -14,7 +14,8 @@ export async function PATCH(req: Request) {
     });
   }
 
-  const { shadow, style, color, position, size } = await req.json();
+  const { shadow, style, color, position, size, backgroundRadius } =
+    await req.json();
 
   if (position !== "top" && position !== "bottom") {
     return NextResponse.json({
@@ -31,6 +32,21 @@ export async function PATCH(req: Request) {
       ok: false,
       data: null,
       message: "Size must be either 'small', 'medium', or 'large'",
+    });
+  }
+
+  if (
+    backgroundRadius !== "sm" &&
+    backgroundRadius !== "md" &&
+    backgroundRadius !== "lg" &&
+    backgroundRadius !== "none" &&
+    backgroundRadius !== "full"
+  ) {
+    return NextResponse.json({
+      status: 400,
+      ok: false,
+      data: null,
+      message: "Border size must be either 'sm', 'md', 'lg', 'none', or 'full'",
     });
   }
 
@@ -54,6 +70,8 @@ export async function PATCH(req: Request) {
         style: style ?? null,
         color: color ?? null,
         position: position ?? null,
+        size: size ?? null,
+        borderRadius: backgroundRadius ?? null,
       },
     });
   } else {
@@ -65,6 +83,8 @@ export async function PATCH(req: Request) {
         style: style ?? null,
         color: color ?? null,
         position: position ?? null,
+        size: size ?? null,
+        borderRadius: backgroundRadius ?? null,
       },
     });
   }

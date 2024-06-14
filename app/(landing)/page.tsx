@@ -8,7 +8,7 @@ import { FlipWords } from "./_components/flip-words";
 import { CircleCheckBig } from "lucide-react";
 
 const highlights = [
-  "Instant setup",
+  "14 days free trial",
   "No credit card required",
   "Unlimited access",
 ];
@@ -28,11 +28,11 @@ export default function Page() {
             <span>
               The most <FlipWords words={words} /> <br />
             </span>
-            link-in-bio. Ever.
+            link-in-bio tool.
           </div>
           <div className="pointer-events-auto max-w-2xl text-base text-[#B8CEC1] sm:text-xl lg:text-left">
-            Introducing your advanced, no-cost solution for engaging with your
-            audience, offering full customization without any themes.
+            Introducing your feature-rich solution for connecting all your links
+            in one place.
           </div>
           <div className="pointer-events-auto">
             <ClaimLink />

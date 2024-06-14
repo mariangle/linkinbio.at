@@ -56,7 +56,7 @@ export function ImagePicker({
           {title && <DialogTitle>{title}</DialogTitle>}
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        <div className="bg-glass-secondary grid h-32 place-content-center overflow-hidden rounded-lg">
+        <div className="grid h-32 place-content-center overflow-hidden rounded-lg bg-white dark:bg-neutral-800">
           {validUrl ? (
             <Image
               width={500}

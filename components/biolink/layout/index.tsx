@@ -162,7 +162,7 @@ export function LayoutWrapper({
   className?: string;
 }) {
   return (
-    <div className={cn("h-full w-full overflow-x-hidden", className)}>
+    <div className={cn("relative h-full w-full overflow-x-hidden", className)}>
       {premium && (
         <WeatherEffect preview={preview} variant={effects?.weather} />
       )}

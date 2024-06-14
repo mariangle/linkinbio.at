@@ -39,14 +39,16 @@ export default async function Layout({
           src="/dashboard.jpg"
           width={2560}
           height={1440}
-          className="fixed inset-0 h-full w-full scale-110 object-cover blur-[100px] brightness-[0.8] hue-rotate-[320deg] saturate-50 dark:hidden"
+          className="fixed inset-0 h-full w-full scale-110 object-cover blur-[100px] brightness-[0.8] hue-rotate-[320deg] saturate-[0.25] dark:hidden"
           alt="background-image"
         />
         <div className="relative flex w-full flex-col overflow-x-hidden overflow-y-hidden text-white md:flex-row">
           <Navigation user={biolink.user} />
-          <div className="z-10 mx-auto h-screen max-h-screen w-full max-w-3xl space-y-4 overflow-y-auto p-4 py-12 pb-32 md:pb-12">
-            <DashboardHeading />
-            {children}
+          <div className="z-10 h-screen max-h-screen w-full overflow-y-auto">
+            <div className="mx-auto w-full max-w-2xl space-y-4 px-4 py-12 pb-32 md:pb-12">
+              <DashboardHeading />
+              {children}
+            </div>
           </div>
         </div>
         <BiolinkPreview biolink={biolink} />

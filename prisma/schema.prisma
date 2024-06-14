@@ -201,6 +201,7 @@ model Profile {
   textColor    String?  @map("text_color")
   textFont     String?  @map("text_font")
   hideUsername Boolean? @map("hide_username")
+  imageRadius  Int?     @map("image_radius")
   layout       Layout?  @default(Standard)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -210,13 +211,14 @@ model Profile {
 }
 
 model Icons {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId   String   @unique @map("user_id") @db.ObjectId
-  shadow   Boolean?
-  style    String?
-  color    String?
-  size     String?
-  position String?  @default("top")
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @unique @map("user_id") @db.ObjectId
+  shadow       Boolean?
+  style        String?
+  color        String?
+  size         String?
+  borderRadius String?
+  position     String?  @default("top")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -224,7 +226,7 @@ model Icons {
   @@map("icons")
 }
 
-enum WeatherEffect {
+enum BackgroundEffect {
   Snow
   Rain
   Thunder
@@ -233,10 +235,10 @@ enum WeatherEffect {
 }
 
 model Effect {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String         @unique @map("user_id") @db.ObjectId
-  titleEffect   String?        @map("title_effect")
-  weatherEffect WeatherEffect? @map("background_weather")
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String            @unique @map("user_id") @db.ObjectId
+  titleEffect      String?           @map("title_effect")
+  backgroundEffect BackgroundEffect? @map("background_weather")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

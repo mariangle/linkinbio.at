@@ -12,14 +12,18 @@ import {
   FormActions,
 } from "@/components/dashboard/form";
 import { FontPicker } from "@/components/font-picker";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { Form, FormLabel } from "@/components/ui/form";
 import { Button as ExampleButton } from "@/components/biolink/button";
 import { ButtonTemplates } from "./button-templates";
 import { ButtonsFormSchema, ButtonsFormValues } from "@/lib/validations";
 import { ButtonOptions, Font } from "@/lib/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  buttonRadiusOptions,
+  buttonWidthOptions,
+} from "@/components/radius-picker";
 
+import { RadiusPicker } from "@/components/radius-picker";
 import { ColorPicker } from "@/components/color-picker";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Slider } from "@/components/ui/slider";
@@ -135,7 +139,7 @@ export function ButtonsForm({ data }: { data: ButtonOptions }) {
         <FormHeading>Templates</FormHeading>
         <ButtonTemplates onSelect={(button) => setButtonValues(button, form)} />
         <FormHeading>Customize</FormHeading>
-        <div className="flex flex-col rounded-lg bg-secondary/25 p-2 md:flex-row">
+        <div className="flex flex-col rounded-lg bg-secondary/25 p-2">
           <div className="grid w-full place-content-center rounded-lg bg-secondary/35 p-4">
             <div className="pointer-events-none w-full max-w-xs">
               <ExampleButton
@@ -174,9 +178,9 @@ export function ButtonsForm({ data }: { data: ButtonOptions }) {
               />
             </div>
           </div>
-          <div className="p-4 md:w-[340px]">
+          <div className="p-4">
             <Tabs defaultValue="font">
-              <TabsList className="mb-4">
+              <TabsList className="mb-4 w-full">
                 <TabsTrigger value="font">Font</TabsTrigger>
                 <TabsTrigger value="background" className="gap-2">
                   Background
@@ -337,97 +341,40 @@ export function ButtonsForm({ data }: { data: ButtonOptions }) {
                   <div className="space-y-4">
                     <Label>Border Width</Label>
                     <div className="grid grid-cols-6 gap-2">
-                      {[
-                        {
-                          label: "0px",
-                          value: 0,
-                        },
-                        {
-                          label: "1px",
-                          value: 1,
-                        },
-                        {
-                          label: "2px",
-                          value: 2,
-                        },
-                        {
-                          label: "3px",
-                          value: 3,
-                        },
-                        {
-                          label: "4px",
-                          value: 4,
-                        },
-                        {
-                          label: "5px",
-                          value: 5,
-                        },
-                      ].map((radius, index) => (
-                        <Button
+                      {buttonWidthOptions.map((radius, index) => (
+                        <button
                           key={index}
                           type="button"
-                          variant="outline"
                           onClick={() =>
-                            form.setValue("borderWidth", radius.value)
+                            form.setValue("borderWidth", radius.value as number)
                           }
                           className={cn(
-                            "rounded-lg px-3 py-1 text-xs",
+                            "glassmorphism rounded-md px-1 py-2 text-sm",
                             form.getValues("borderWidth") === radius.value &&
-                              "ring-1 ring-foreground/50",
+                              "border border-primary dark:border-primary/50",
                           )}
                         >
                           {radius.label}
-                        </Button>
+                        </button>
                       ))}
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <Label>Border Radius</Label>
-                    <div className="grid grid-cols-6 gap-2">
-                      {[
-                        {
-                          label: "0",
-                          value: 0,
-                        },
-                        {
-                          label: "0.2",
-                          value: 5,
-                        },
-                        {
-                          label: "0.4",
-                          value: 10,
-                        },
-                        {
-                          label: "0.6",
-                          value: 15,
-                        },
-                        {
-                          label: "0.8",
-                          value: 20,
-                        },
-                        {
-                          label: "1",
-                          value: 25,
-                        },
-                      ].map((radius, index) => (
-                        <Button
-                          key={index}
-                          type="button"
-                          variant="outline"
-                          onClick={() =>
-                            form.setValue("borderRadius", radius.value)
-                          }
-                          className={cn(
-                            "rounded-lg px-3 py-1 text-xs",
-                            form.getValues("borderRadius") === radius.value &&
-                              "ring-1 ring-foreground/50",
-                          )}
-                        >
-                          {radius.label}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="borderRadius"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Border Radius</FormLabel>
+                        <FormControl>
+                          <RadiusPicker
+                            value={field.value}
+                            onChange={field.onChange}
+                            options={buttonRadiusOptions}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </TabsContent>
               <TabsContent value="shadow">

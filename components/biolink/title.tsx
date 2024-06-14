@@ -71,11 +71,17 @@ export function Title({
           className,
           effect === TitleEffect.Glitch && "glitch-effect",
           effect === TitleEffect.Shake && "shake-effect",
+          effect === TitleEffect.Rainbow && "rainbow-effect",
           getFontDisplay(options?.font),
         )}
-        data-text={user.title}
       >
+        {effect === TitleEffect.Glitch && (
+          <span aria-hidden="true">{user.title}</span>
+        )}
         {user.title}
+        {effect === TitleEffect.Glitch && (
+          <span aria-hidden="true">{user.title}</span>
+        )}
       </h2>
     </div>
   );

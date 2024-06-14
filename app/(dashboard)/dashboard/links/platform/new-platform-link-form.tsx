@@ -72,7 +72,7 @@ export function NewPlatformLinkForm({
                   <div className="glassmorphism flex items-center rounded-lg px-4">
                     <div className="flex items-center gap-2 text-sm">
                       <platform.icon />
-                      {platform.domain}/
+                      {platform.domain ? `${platform.domain}/` : "https://"}
                     </div>
                     <Input
                       variant="transparent"

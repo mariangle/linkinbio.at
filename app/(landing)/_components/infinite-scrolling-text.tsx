@@ -121,9 +121,9 @@ export const InfiniteMovingHighlights = ({
 
 const features = [
   "Fully customizable buttons",
-  "Weather Effects",
+  "Backround Effects",
   "Embeddable Widgets",
-  "6 Beautiful Layouts",
+  "Beautiful Layouts",
   "Universal Icon Library",
   "Text Effects",
   "Video and GIF Support",
