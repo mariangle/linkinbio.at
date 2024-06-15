@@ -46,25 +46,31 @@ export default async function Analytics() {
         <div className="col-span-2">
           <Heading>Top Links by Clicks</Heading>
           <div className="grid grid-cols-1 gap-2">
-            {analytics.popularLinks.map((link) => (
-              <div
-                key={link.id}
-                className="glassmorphism rounded-lg border p-2"
-              >
-                <Link
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-[10px] text-muted-foreground"
+            {analytics.popularLinks.map((link) => {
+              if (!link.url) return null;
+
+              // TODO: Copy to clipboard
+
+              return (
+                <div
+                  key={link.id}
+                  className="glassmorphism rounded-lg border p-2"
                 >
-                  {link.url}
-                </Link>
-                <div className="mt-1 flex items-center gap-1 text-xs">
-                  <MousePointerClick className="size-3" />
-                  {link.clicks}
+                  <Link
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-[10px] text-muted-foreground"
+                  >
+                    {link.url}
+                  </Link>
+                  <div className="mt-1 flex items-center gap-1 text-xs">
+                    <MousePointerClick className="size-3" />
+                    {link.clicks}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

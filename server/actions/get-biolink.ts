@@ -26,6 +26,7 @@ export async function getBiolink() {
       spotify: true,
       youtube: true,
       soundcloud: true,
+      views: true,
     },
   });
 
@@ -67,6 +68,7 @@ export async function getBiolinkByUsername(username: string) {
         spotify: true,
         youtube: true,
         soundcloud: true,
+        views: true,
       },
     });
 

@@ -11,17 +11,7 @@ export function ProfilePicture({
   nullable?: boolean;
 }) {
   if (!src) {
-    return nullable ? (
-      <div className="size-24"></div>
-    ) : (
-      <Image
-        alt="profile image"
-        src="/default-pfp.png"
-        width={100}
-        height={100}
-        className={cn("size-24 shrink-0 rounded-full bg-secondary", className)}
-      />
-    );
+    return nullable ? null : <div className="size-24"></div>;
   }
   return (
     <Image

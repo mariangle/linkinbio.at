@@ -17,7 +17,7 @@ export interface Analytics {
   };
   popularLinks: {
     id: string;
-    url: string;
+    url?: string;
     clicks: number;
   }[];
   data: {

@@ -18,7 +18,7 @@ export interface WebsiteLink extends Link {
 
 export interface PlatformLink extends Link {
   id?: string;
-  url: string;
+  url?: string;
   order?: number;
   archived?: boolean;
   provider: string;

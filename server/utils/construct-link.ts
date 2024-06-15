@@ -25,14 +25,18 @@ export function constructPlatformUrl({
 }: {
   provider: string;
   username: string;
-}): string {
+}) {
   const foundProvider = platforms.find((link) => link.name === provider);
 
   if (foundProvider?.name === "Website") {
-    return `https://${username}`;
+    return `${username}`;
   }
 
-  return `https://${foundProvider?.domain}/${username}`;
+  if (!foundProvider?.baseURL) {
+    return undefined;
+  }
+
+  return `https://${foundProvider?.baseURL}${username}`;
 }
 
 export function constructLinkFromPlatform(

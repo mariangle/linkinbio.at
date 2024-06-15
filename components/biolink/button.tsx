@@ -13,7 +13,9 @@ import { CustomIcon } from "@/components/biolink/custom-icon";
 
 function getPlatformFromUrl(url: string): Platform | null {
   for (const platform of platforms) {
-    if (url.includes(platform.domain)) {
+    if (!platform.baseURL) return null;
+
+    if (url.includes(platform.baseURL)) {
       return platform;
     }
   }

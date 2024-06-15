@@ -5,12 +5,14 @@ import { Platform } from "@/lib/constants/platforms";
 import { cn } from "@/lib/utils";
 import { IconStyle, type IconOptions } from "@/lib/types";
 import { Tooltip } from "@/components/ui/tooltip";
+import { toast } from "sonner";
 import { useTracking } from "@/hooks/use-tracking";
 import { getPlatformByProvider, getIconByProvider } from "@/lib/utils/getters";
 
 interface TopIconProps {
   item: {
     provider: string;
+    username?: string;
     url?: string;
     id?: string;
   };
@@ -23,6 +25,7 @@ export function TopIcon({
     provider: "",
     url: "",
     id: "",
+    username: "",
   },
   options = {
     shadow: false,
@@ -96,6 +99,7 @@ export function TopIcon({
             id: item.id,
             name: platform?.name!,
             url: item.url,
+            username: item.username,
           }}
         >
           <DisplayIcon
@@ -123,6 +127,7 @@ export function TopIcon({
           id: item.id,
           name: platform?.name!,
           url: item.url,
+          username: item.username,
         }}
       >
         <div
@@ -303,29 +308,31 @@ export function TopIconLink({
     id?: string;
     url?: string;
     name: string;
+    username?: string;
   };
 }) {
   const { trackClick } = useTracking();
+  const [copied, setCopied] = React.useState(false);
 
-  const isPreview = !link.id || !link.url || !link.name;
+  const disableTracking = !link.id || !link.url || !link.name;
 
   const redirect = async () => {
-    if (isPreview) return;
-
-    window.open(link.url, "_blank");
+    if (link.url) {
+      window.open(link.url, "_blank");
+    } else if (link.username) {
+      navigator.clipboard.writeText(link.username);
+      toast.success("Copied to clipboard");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+    if (disableTracking) return;
 
     await trackClick(link.id!, true);
   };
 
   return (
-    <Tooltip content={link.name} smallWidth>
-      <button
-        onClick={redirect}
-        className={cn(
-          "group relative block w-fit",
-          isPreview && "cursor-default",
-        )}
-      >
+    <Tooltip content={copied ? "Copied" : link.name} smallWidth>
+      <button onClick={redirect} className={cn("group relative block w-fit")}>
         {children}
       </button>
     </Tooltip>

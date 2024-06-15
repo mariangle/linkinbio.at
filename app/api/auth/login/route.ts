@@ -63,6 +63,6 @@ export async function POST(req: Request) {
     status: 200,
     ok: true,
     data: null,
-    message: "Logged in successfully. Redirecting...",
+    message: "Success. Redirecting...",
   });
 }
