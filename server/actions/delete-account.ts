@@ -1,17 +1,17 @@
 "use server";
 
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
+import { getCurrentUser } from "@/lib/functions/auth";
 import { revalidatePath } from "next/cache";
 
 export async function deleteAccount() {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user?.id) return null;
+  if (!currentUser) return null;
 
   await db.user.delete({
     where: {
-      id: session.user.id,
+      id: currentUser.id,
     },
   });
 

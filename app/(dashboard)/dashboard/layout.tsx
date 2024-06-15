@@ -14,7 +14,7 @@ export default async function Layout({
 }) {
   const biolink = await getCachedBiolink();
 
-  if (!biolink?.user) redirect("/");
+  if (!biolink?.user) return null;
 
   if (!biolink.user?.username) {
     redirect("/onboarding");

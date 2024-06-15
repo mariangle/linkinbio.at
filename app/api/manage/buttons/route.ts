@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
-
+import { getCurrentUser } from "@/lib/functions/auth";
 export async function PATCH(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user || !session.user.id) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -36,7 +35,7 @@ export async function PATCH(req: Request) {
   // Check if the user already has buttons
   const existingButtons = await db.buttons.findUnique({
     where: {
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 
@@ -44,7 +43,7 @@ export async function PATCH(req: Request) {
     // If buttons exist, update them
     buttons = await db.buttons.update({
       where: {
-        userId: session.user.id,
+        userId: currentUser.id,
       },
       data: {
         shadowSolid: shadowSolid ?? null,
@@ -67,7 +66,7 @@ export async function PATCH(req: Request) {
     // If buttons don't exist, create them
     buttons = await db.buttons.create({
       data: {
-        userId: session.user.id,
+        userId: currentUser.id,
         shadowSolid: shadowSolid ?? null,
         shadowSpreadRadius: shadowSpreadRadius ?? null,
         shadowColor: shadowColor ?? null,

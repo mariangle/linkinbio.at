@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { signOut } from "next-auth/react";
 
 import { LogOut, Palette, CreditCard, Sun, Moon } from "lucide-react";
 import {
@@ -21,9 +20,11 @@ import { ProfilePicture } from "@/components/biolink/profile-picture";
 import Link from "next/link";
 import { User } from "@/lib/types";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 export function UserNav({ user }: { user: User }) {
   const { setTheme } = useTheme();
+  const router = useRouter();
 
   return (
     <DropdownMenu>
@@ -65,7 +66,12 @@ export function UserNav({ user }: { user: User }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <button
-            onClick={async () => await signOut()}
+            onClick={async () => {
+              await fetch("/api/auth/logout", {
+                method: "POST",
+              });
+              router.push("/");
+            }}
             className="w-full cursor-pointer"
           >
             <LogOut className="mr-2 size-4" />

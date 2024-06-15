@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
-
+import { getCurrentUser } from "@/lib/functions/auth";
 import { getPlatformByProvider } from "@/lib/utils/getters";
 
 export async function POST(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -44,7 +43,7 @@ export async function POST(req: Request) {
       provider: validPlatform.name,
       user: {
         connect: {
-          id: session.user.id,
+          id: currentUser.id,
         },
       },
       order: 0,

@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
-
+import { getCurrentUser } from "@/lib/functions/auth";
 export async function PATCH(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user || !session.user.id) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -30,7 +29,7 @@ export async function PATCH(req: Request) {
   // Check if the user already has YouTube data
   const existingYoutube = await db.youtube.findUnique({
     where: {
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 
@@ -38,7 +37,7 @@ export async function PATCH(req: Request) {
     // If YouTube data exists, update it
     youtube = await db.youtube.update({
       where: {
-        userId: session.user.id,
+        userId: currentUser.id,
       },
       data: {
         videoId,
@@ -49,7 +48,7 @@ export async function PATCH(req: Request) {
     // If YouTube data doesn't exist, create it
     youtube = await db.youtube.create({
       data: {
-        userId: session.user.id,
+        userId: currentUser.id,
         videoId,
         enabled,
       },
@@ -65,9 +64,9 @@ export async function PATCH(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -78,7 +77,7 @@ export async function DELETE(req: Request) {
 
   const youtube = await db.youtube.delete({
     where: {
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 
