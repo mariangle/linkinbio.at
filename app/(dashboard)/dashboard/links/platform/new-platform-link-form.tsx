@@ -69,10 +69,10 @@ export function NewPlatformLinkForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="glassmorphism flex items-center rounded-lg px-4">
+                  <div className="glassmorphism flex items-center gap-0 rounded-lg px-4">
                     <div className="flex items-center gap-2 text-sm">
                       <platform.icon />
-                      {platform.domain ? `${platform.domain}/` : "https://"}
+                      {platform.baseURL ? `${platform.baseURL}` : ""}
                     </div>
                     <Input
                       variant="transparent"

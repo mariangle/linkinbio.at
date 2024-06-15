@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
+import { getCurrentUser } from "@/lib/functions/auth";
 import { dummyBiolinks } from "@/lib/constants/dummy";
 
 export async function PATCH(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -60,7 +60,7 @@ export async function PATCH(req: Request) {
 
   const user = await db.user.update({
     where: {
-      id: session.user.id,
+      id: currentUser.id,
     },
     data: {
       username: lowercaseUsername,

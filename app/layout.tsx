@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster position="top-right" richColors closeButton />
+        <Toaster position="top-right" closeButton />
         <NextTopLoader color="#19795Dp" height={4} showSpinner={false} />
         {children}
       </body>

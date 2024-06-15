@@ -106,14 +106,9 @@ export function PlatformLinkForm({ item }: { item: PlatformLink }) {
                     />
                   </div>
                 ) : (
-                  <div
-                    className={cn(
-                      "text-sm text-foreground",
-                      !platform?.domain && "text-muted-foreground",
-                    )}
-                  >
-                    {platform?.domain && (
-                      <span className="text-muted-foreground">{`${platform.domain}/`}</span>
+                  <div className={cn("text-sm text-white")}>
+                    {platform?.baseURL && (
+                      <span className="text-muted-foreground">{`${platform.baseURL}`}</span>
                     )}
                     {form.getValues("username")}
                   </div>

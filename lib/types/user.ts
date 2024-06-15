@@ -9,3 +9,9 @@ export interface User {
   bio?: string;
   premium: boolean;
 }
+
+export interface SesssionUser {
+  id: string;
+  username: string;
+  email: string;
+}

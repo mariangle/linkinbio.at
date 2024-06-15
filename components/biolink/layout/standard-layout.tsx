@@ -36,7 +36,7 @@ export function StandardLayout({
       />
       <ContentContainer className="h-fit py-16">
         <div className="flex flex-col items-center justify-center">
-          <ProfilePicture className="mb-4" src={user.image} nullable />
+          <ProfilePicture className="mb-4" src={user.image} />
           <Title
             options={config.profile?.title}
             user={user}

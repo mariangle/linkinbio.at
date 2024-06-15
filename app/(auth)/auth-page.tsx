@@ -1,13 +1,17 @@
 import Link from "next/link";
-import { AuthForm } from "./auth-form";
 import { ChevronLeft } from "lucide-react";
 import { BackgroundCellCore } from "@/components/ui/background-ripple-effect";
+import { AuthForm } from "./auth-form";
+import { getCurrentUser, getSession } from "@/lib/functions/auth";
 
-export default function AuthPage({
+export default async function AuthPage({
   variant,
 }: {
   variant: "sign-in" | "sign-up";
 }) {
+  const session = await getSession();
+  const user = await getCurrentUser();
+
   return (
     <div className="relative grid h-screen w-full place-content-center overflow-x-hidden bg-[#0B363C] p-6 text-[#E3FFCC]">
       <BackgroundCellCore />

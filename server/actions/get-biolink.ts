@@ -1,19 +1,19 @@
 import { cache } from "react";
-import { auth } from "@/server/auth";
 import { db } from "@/server/db";
 import { constructBiolink } from "@/server/utils/construct-biolink";
 import { ExtendedUser } from "@/server/utils/construct-biolink";
 
 import { dummyBiolinks } from "@/lib/constants/dummy";
+import { getCurrentUser } from "@/lib/functions/auth";
 
 export async function getBiolink() {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user?.id) return null;
+  if (!currentUser) return null;
 
   const user = await db.user.findUnique({
     where: {
-      id: session.user.id,
+      id: currentUser.id,
     },
     include: {
       background: true,
@@ -26,6 +26,7 @@ export async function getBiolink() {
       spotify: true,
       youtube: true,
       soundcloud: true,
+      views: true,
     },
   });
 
@@ -67,6 +68,7 @@ export async function getBiolinkByUsername(username: string) {
         spotify: true,
         youtube: true,
         soundcloud: true,
+        views: true,
       },
     });
 

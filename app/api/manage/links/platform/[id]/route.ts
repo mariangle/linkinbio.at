@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
+import { getCurrentUser } from "@/lib/functions/auth";
 import { getPlatformByProvider } from "@/lib/utils/getters";
 
 export async function PATCH(
@@ -16,9 +16,9 @@ export async function PATCH(
     });
   }
 
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -52,7 +52,7 @@ export async function PATCH(
   const link = await db.platformLink.update({
     where: {
       id: params.id,
-      userId: session.user.id,
+      userId: currentUser.id,
     },
     data: {
       username: username,
@@ -83,9 +83,9 @@ export async function DELETE(
     });
   }
 
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -97,7 +97,7 @@ export async function DELETE(
   const deletedLink = await db.platformLink.delete({
     where: {
       id: params.id,
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 

@@ -39,7 +39,7 @@ export function WithCoverLayout({
       </div>
       <ContentContainer className="mb-32 mt-44 p-0">
         <div className="flex flex-col items-center justify-center">
-          <ProfilePicture className="mb-4" src={user.image} nullable />
+          <ProfilePicture className="mb-4" src={user.image} />
           <Title
             options={config.profile?.title}
             user={user}

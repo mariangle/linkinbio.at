@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
-
+import { getCurrentUser } from "@/lib/functions/auth";
 import { isValidURL } from "@/lib/utils/media-validation";
 import { scrapeMetadata } from "@/server/actions/scrape-metadata";
 
 export async function createLink({ url }: { url: string }) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -45,7 +44,7 @@ export async function createLink({ url }: { url: string }) {
       imageUrl: image || null,
       user: {
         connect: {
-          id: session.user.id,
+          id: currentUser.id,
         },
       },
       order: 0, // ! Setting order to 0 for now, will be updated later

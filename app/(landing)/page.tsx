@@ -6,6 +6,7 @@ import { ClaimLink } from "./_components/claim-link";
 import { BackgroundCellCore } from "@/components/ui/background-ripple-effect";
 import { FlipWords } from "./_components/flip-words";
 import { CircleCheckBig } from "lucide-react";
+import { GlareCard } from "@/components/ui/glare-card";
 
 const highlights = [
   "14 days free trial",

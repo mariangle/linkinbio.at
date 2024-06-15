@@ -1,4 +1,4 @@
-import { auth } from "@/server/auth";
+import { getCurrentUser } from "@/lib/functions/auth";
 import { db } from "@/server/db";
 import { constructPlatformUrl } from "@/server/utils/construct-link";
 
@@ -17,7 +17,7 @@ export interface Analytics {
   };
   popularLinks: {
     id: string;
-    url: string;
+    url?: string;
     clicks: number;
   }[];
   data: {
@@ -27,13 +27,13 @@ export interface Analytics {
 }
 
 export async function getAnalytics(): Promise<Analytics | null> {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user?.id) return null;
+  if (!currentUser) return null;
 
   const user = await db.user.findUnique({
     where: {
-      id: session.user.id,
+      id: currentUser.id,
     },
     include: {
       views: true,

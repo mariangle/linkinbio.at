@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
+import { getCurrentUser } from "@/lib/functions/auth";
 import { convertToPrismaLayout } from "@/lib/utils/enum-mappings";
 
 export async function PATCH(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user || !session.user.id) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -33,7 +33,7 @@ export async function PATCH(req: Request) {
   // Check if the user already has a profile
   const existingProfile = await db.profile.findUnique({
     where: {
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 
@@ -41,7 +41,7 @@ export async function PATCH(req: Request) {
     // If profile exists, update it
     profile = await db.profile.update({
       where: {
-        userId: session.user.id,
+        userId: currentUser.id,
       },
       data: {
         layout: prismaLayout,
@@ -51,7 +51,7 @@ export async function PATCH(req: Request) {
     // If profile doesn't exist, create it
     profile = await db.profile.create({
       data: {
-        userId: session.user.id,
+        userId: currentUser.id,
         layout: prismaLayout,
       },
     });

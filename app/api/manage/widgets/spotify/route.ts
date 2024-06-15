@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
-import { auth } from "@/server/auth";
+import { getCurrentUser } from "@/lib/functions/auth";
 import { convertToPrismaContentType } from "@/lib/utils/enum-mappings";
 
 export async function PATCH(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user || !session.user.id) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -49,7 +49,7 @@ export async function PATCH(req: Request) {
   // Check if the user already has Spotify data
   const existingSpotify = await db.spotify.findUnique({
     where: {
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 
@@ -57,7 +57,7 @@ export async function PATCH(req: Request) {
     // If Spotify data exists, update it
     spotify = await db.spotify.update({
       where: {
-        userId: session.user.id,
+        userId: currentUser.id,
       },
       data: {
         contentId,
@@ -71,7 +71,7 @@ export async function PATCH(req: Request) {
     // If Spotify data doesn't exist, create it
     spotify = await db.spotify.create({
       data: {
-        userId: session.user.id,
+        userId: currentUser.id,
         contentId,
         type: prismaContentType,
         darkBackground,
@@ -90,9 +90,9 @@ export async function PATCH(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const session = await auth();
+  const currentUser = await getCurrentUser();
 
-  if (!session?.user) {
+  if (!currentUser) {
     return NextResponse.json({
       status: 401,
       ok: false,
@@ -103,7 +103,7 @@ export async function DELETE(req: Request) {
 
   const spotify = await db.spotify.delete({
     where: {
-      userId: session.user.id,
+      userId: currentUser.id,
     },
   });
 

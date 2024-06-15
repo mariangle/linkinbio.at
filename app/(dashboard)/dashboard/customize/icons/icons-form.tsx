@@ -102,7 +102,7 @@ export function IconsForm({ data }: { data: IconData }) {
             backgroundRadius: form.getValues("backgroundRadius"),
           }}
           item={{
-            provider: "twitter",
+            provider: "instagram",
           }}
         />
       </div>
