@@ -103,18 +103,13 @@ export function RegisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Password" {...field} />
+                <Input placeholder="Password" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="w-full"
-          loading={loading}
-          disabled={!dirty}
-        >
+        <Button type="submit" className="w-full" loading={loading} disabled>
           Sign Up
         </Button>
       </form>

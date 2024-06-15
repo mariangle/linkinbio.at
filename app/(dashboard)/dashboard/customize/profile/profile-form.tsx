@@ -42,7 +42,7 @@ export function ProfileForm({ data }: { data: UserData }) {
   const { loading, dirty, submit } = useFormSubmit<ProfileFormValues>({
     initialData: data,
     formValues: form.getValues(),
-    endpoint: "/api/manage/user",
+    endpoint: "/api/manage/profile",
   });
 
   React.useEffect(() => {

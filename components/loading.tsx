@@ -1,8 +1,13 @@
-import React from "react";
+import { cn } from "@/lib/utils";
 
-export function Loading() {
+export function Loading({ className }: { className?: string }) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950 text-white">
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center text-white",
+        className,
+      )}
+    >
       <div className="loader loader--style6" title="5">
         <svg
           version="1.1"
@@ -16,7 +21,7 @@ export function Loading() {
           viewBox="0 0 24 30"
           xmlSpace="preserve"
         >
-          <rect x="0" y="13" width="4" height="5" className="fill-indigo-800">
+          <rect x="0" y="13" width="4" height="5" className="fill-primary">
             <animate
               attributeName="height"
               attributeType="XML"
@@ -34,7 +39,7 @@ export function Loading() {
               repeatCount="indefinite"
             />
           </rect>
-          <rect x="10" y="13" width="4" height="5" className="fill-indigo-800">
+          <rect x="10" y="13" width="4" height="5" className="fill-primary">
             <animate
               attributeName="height"
               attributeType="XML"
@@ -52,7 +57,7 @@ export function Loading() {
               repeatCount="indefinite"
             />
           </rect>
-          <rect x="20" y="13" width="4" height="5" className="fill-indigo-800">
+          <rect x="20" y="13" width="4" height="5" className="fill-primary">
             <animate
               attributeName="height"
               attributeType="XML"

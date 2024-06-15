@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { useBiolinkPreviewStore } from "@/lib/store";
@@ -8,7 +9,7 @@ import { Biolink } from "@/lib/types";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { EyeIcon, ExternalLink } from "lucide-react";
 import { useMounted } from "@/hooks/use-mounted";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Layout } from "@/components/biolink/layout";
 
 export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
@@ -35,16 +36,19 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
 
   if (isDesktop) {
     return (
-      <div className="glassmorphism h-screen w-full max-w-xl overflow-hidden">
+      <div className="glassmorphism z-10 h-screen w-full max-w-xl overflow-hidden">
         <div className="flex items-center justify-between border-b border-b-white/10 p-4">
           <Button variant="secondary">
             <EyeIcon className="mr-2 size-4" />
             Preview
           </Button>
-          <Button variant="secondary">
+          <Link
+            href={`/${biolinkPreview.user.username}`}
+            className={cn(buttonVariants({ variant: "secondary" }))}
+          >
             <ExternalLink className="mr-2 size-4" />
             View live
-          </Button>
+          </Link>
         </div>
         <div className="relative flex h-full justify-center overflow-y-auto pt-24">
           <div className="h-[calc(100%-70px)] max-h-[700px] w-[344px] rounded-[1.6rem] border bg-white p-1 shadow-2xl dark:bg-zinc-800">

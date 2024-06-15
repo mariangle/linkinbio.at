@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import z from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -16,30 +17,32 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { UsernameFormSchema, UsernameFormValues } from "@/lib/validations";
 import { useFormSubmit } from "@/hooks/use-form-action";
 
-export function UsernameForm({ username }: { username?: string }) {
-  const form = useForm<UsernameFormValues>({
-    resolver: zodResolver(UsernameFormSchema),
+export const EmailFormSchema = z.object({
+  email: z.string().email(),
+});
+
+export type EmailFormValues = z.infer<typeof EmailFormSchema>;
+
+export function EmailForm({ email }: { email?: string }) {
+  const form = useForm<EmailFormValues>({
+    resolver: zodResolver(EmailFormSchema),
     defaultValues: {
-      username: username ?? "",
+      email: email ?? "",
     },
   });
 
   const { loading, dirty, submit } = useFormSubmit({
     initialData: {
-      username: username,
+      email: email,
     },
-    formValues: {
-      username: form.getValues().username,
-    },
-    endpoint: "/api/account/username",
+    formValues: form.getValues(),
+    endpoint: "/api/account/email",
   });
 
   async function onSubmit() {
@@ -56,24 +59,17 @@ export function UsernameForm({ username }: { username?: string }) {
         <FormContainer>
           <FormContent>
             <div>
-              <FormHeading>Username</FormHeading>
-              <Description>
-                Your username is how people find you on linkinbio.at/
-                <span className="text-foreground">{username}</span>. It&apos;s
-                unique to you and can only be changed once every 14 days.
-              </Description>
+              <FormHeading>Email</FormHeading>
+              <Description>Lorem ipsum dolor sit amet.</Description>
             </div>
             <FormField
               control={form.control}
-              name="username"
+              name="email"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Your username" {...field} />
+                    <Input placeholder="Your email" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

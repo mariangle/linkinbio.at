@@ -26,14 +26,6 @@ export async function POST(req: Request) {
     });
   }
 
-  if (!existingUserWithEmail.password) {
-    return NextResponse.json({
-      status: 400,
-      ok: false,
-      message: "User has no password",
-    });
-  }
-
   const passwordMatch = await comparePassword(
     password,
     existingUserWithEmail.password,

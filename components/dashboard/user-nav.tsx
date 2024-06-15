@@ -30,12 +30,12 @@ export function UserNav({ user }: { user: User }) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <ProfilePicture
-          className="mb-1 size-8 md:size-9"
+          className="size-8 md:ml-1 md:size-9"
           nullable
-          src={user.image}
+          src={user.image ? user.image : "/default-pfp.png"}
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="max-w-[200px]">
+      <DropdownMenuContent className="z-[99] max-w-[200px]">
         <DropdownMenuLabel className="truncate">{user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild disabled>
@@ -76,10 +76,10 @@ export function UserNav({ user }: { user: User }) {
               });
               router.push("/");
             }}
-            className="w-full cursor-pointer"
+            className="w-full cursor-pointer text-destructive"
           >
             <LogOut className="mr-2 size-4" />
-            Sign Out
+            Logout
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

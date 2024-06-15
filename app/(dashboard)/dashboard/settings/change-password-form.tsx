@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import z from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -16,30 +17,31 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { UsernameFormSchema, UsernameFormValues } from "@/lib/validations";
 import { useFormSubmit } from "@/hooks/use-form-action";
 
-export function UsernameForm({ username }: { username?: string }) {
-  const form = useForm<UsernameFormValues>({
-    resolver: zodResolver(UsernameFormSchema),
+export const PasswordFormSchema = z.object({
+  oldPassword: z.string().min(8),
+  newPassword: z.string().min(8),
+});
+
+export type EmailFormValues = z.infer<typeof PasswordFormSchema>;
+
+export function ChangePasswordForm() {
+  const form = useForm<EmailFormValues>({
+    resolver: zodResolver(PasswordFormSchema),
     defaultValues: {
-      username: username ?? "",
+      oldPassword: "",
+      newPassword: "",
     },
   });
 
   const { loading, dirty, submit } = useFormSubmit({
-    initialData: {
-      username: username,
-    },
-    formValues: {
-      username: form.getValues().username,
-    },
-    endpoint: "/api/account/username",
+    formValues: form.getValues(),
+    endpoint: "/api/account/password",
   });
 
   async function onSubmit() {
@@ -56,24 +58,29 @@ export function UsernameForm({ username }: { username?: string }) {
         <FormContainer>
           <FormContent>
             <div>
-              <FormHeading>Username</FormHeading>
-              <Description>
-                Your username is how people find you on linkinbio.at/
-                <span className="text-foreground">{username}</span>. It&apos;s
-                unique to you and can only be changed once every 14 days.
-              </Description>
+              <FormHeading>Change Password</FormHeading>
+              <Description>Lorem ipsum dolor sit amet.</Description>
             </div>
             <FormField
               control={form.control}
-              name="username"
+              name="oldPassword"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Your username" {...field} />
+                    <Input placeholder="Your old password" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="newPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input placeholder="Your new password" {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

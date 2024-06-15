@@ -14,11 +14,7 @@ export default async function Layout({
 }) {
   const biolink = await getCachedBiolink();
 
-  if (!biolink?.user) return null;
-
-  if (!biolink.user?.username) {
-    redirect("/onboarding");
-  }
+  if (!biolink) return null;
 
   return (
     <ThemeProvider
@@ -32,14 +28,7 @@ export default async function Layout({
           src="/dashboard.jpg"
           width={2560}
           height={1440}
-          className="fixed inset-0 hidden h-full w-full object-cover blur-3xl brightness-[0.2] hue-rotate-[320deg] dark:block"
-          alt="background-image"
-        />
-        <Image
-          src="/dashboard.jpg"
-          width={2560}
-          height={1440}
-          className="fixed inset-0 h-full w-full scale-110 object-cover blur-[100px] brightness-[0.8] hue-rotate-[320deg] saturate-[0.25] dark:hidden"
+          className="fixed inset-0 h-full w-full scale-110   object-cover blur-3xl brightness-[0.8] hue-rotate-[370deg] saturate-[0.2] dark:brightness-[0.125] dark:hue-rotate-[370deg] dark:saturate-[0.5]"
           alt="background-image"
         />
         <div className="relative flex w-full flex-col overflow-x-hidden overflow-y-hidden text-white md:flex-row">

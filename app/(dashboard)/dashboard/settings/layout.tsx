@@ -7,5 +7,5 @@ export default function SettingsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return <div className="space-y-6">{children}</div>;
 }

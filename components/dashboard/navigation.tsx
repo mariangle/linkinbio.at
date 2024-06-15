@@ -52,15 +52,15 @@ export function Navigation({ user }: { user: User }) {
         </div>
         <div
           className={cn(
-            "glassmorphism relative flex h-full flex-col justify-between gap-4 rounded-2xl border p-3 duration-300",
+            "glassmorphism relative flex h-full flex-col justify-between gap-4 rounded-2xl p-3 duration-300",
             "shadow-[0_0px_15px_rgba(0,0,0,0.1)] md:w-auto",
             collapsed ? "md:w-[70px]" : "md:w-[190px]",
           )}
         >
-          <div className="flex h-full w-full flex-row justify-between gap-4 md:flex-col">
+          <div className="flex h-full w-full flex-row justify-between gap-3 md:flex-col md:gap-4">
             <div>
-              <div className="hidden p-2 md:block">
-                <Logo className="fill-white" />
+              <div className="hidden p-1.5 md:block">
+                <Logo className="size-8 fill-white" />
               </div>
               <ul className="flex flex-row gap-2 md:my-2 md:flex-col">
                 {dashboardLinks.map((item, index) => (
@@ -70,8 +70,21 @@ export function Navigation({ user }: { user: User }) {
                 ))}
               </ul>
             </div>
-            <div className="grid place-content-center">
-              <UserNav user={user} />
+            <div className="flex flex-row items-center gap-2 md:flex-col md:items-start md:gap-3">
+              <div className="h-[70%] w-px bg-border/25 md:h-px md:w-full"></div>
+              <div className="flex w-full items-start justify-start gap-3">
+                <div className="grid shrink-0 place-content-center">
+                  <UserNav user={user} />
+                </div>
+                {!collapsed && (
+                  <div className="hidden flex-col truncate md:flex">
+                    <div className="text-sm text-white">{user.username}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {user.email}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

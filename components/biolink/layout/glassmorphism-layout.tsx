@@ -14,6 +14,7 @@ import { ContentContainer } from "@/components/biolink/content-container";
 import { Details } from "@/components/biolink/details";
 import { Footer } from "@/components/biolink/footer";
 import { Widgets } from "@/components/biolink/widgets";
+import { Badges } from "@/components/biolink/badges";
 import { cn } from "@/lib/utils";
 import { LayoutProps } from ".";
 
@@ -34,7 +35,7 @@ export function GlassmorphismLayout({
         url={config.background?.url}
         className={cn("fixed inset-0", preview && "xl:absolute")}
       />
-      <div className="my-12 flex w-full max-w-[400px] flex-col items-center justify-center gap-4 md:my-24">
+      <div className="my-12 flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-4 md:my-32">
         <ContentContainer className="relative flex h-fit w-full flex-col items-center rounded-[1.6rem] border border-white/10 bg-zinc-800/25 p-6 backdrop-blur-xl">
           <div className="flex w-full flex-col items-start justify-start">
             <ProfilePicture
@@ -46,6 +47,12 @@ export function GlassmorphismLayout({
               options={config.profile?.title}
               user={user}
               effect={config.effects?.title}
+            />
+            <Badges
+              badges={user.badges}
+              options={{
+                color: config.profile?.text?.color,
+              }}
             />
             {!config.profile?.hideUsername && (
               <Username

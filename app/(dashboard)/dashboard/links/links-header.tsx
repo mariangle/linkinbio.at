@@ -23,9 +23,8 @@ export function LinksHeader() {
             key={item.label}
             href={item.href}
             className={cn(
-              "border-b-2 border-b-transparent px-4 py-1.5 text-sm font-medium",
-              isActive(item.href) &&
-                "border-b-primary bg-gradient-to-b from-transparent to-white/5",
+              "border-b-2 border-b-transparent px-5 py-2 text-sm font-medium",
+              isActive(item.href) && "border-b-white",
             )}
           >
             <span

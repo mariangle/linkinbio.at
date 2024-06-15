@@ -42,7 +42,7 @@ export default async function Page({
   if (!biolink) return <NotFound />;
 
   return (
-    <React.Suspense fallback={<Loading />}>
+    <React.Suspense fallback={<Loading className="min-h-screen" />}>
       <ViewTracker userId={biolink.user.id} />
       <Layout biolink={biolink} />
     </React.Suspense>

@@ -67,6 +67,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       location: user.location ?? undefined,
       bio: user.bio ?? undefined,
       premium: true ?? false,
+      badges: [],
     },
     config: {
       profile: {

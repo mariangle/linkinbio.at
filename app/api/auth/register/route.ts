@@ -13,8 +13,10 @@ export async function POST(req: Request) {
     });
   }
 
+  const lowercaseUsername = username.toLowerCase();
+
   const existingUserWithUsername = await db.user.findUnique({
-    where: { username },
+    where: { username: lowercaseUsername },
   });
 
   if (existingUserWithUsername) {
@@ -25,8 +27,10 @@ export async function POST(req: Request) {
     });
   }
 
+  const lowercaseEmail = email.toLowerCase();
+
   const existingUserWithEmail = await db.user.findUnique({
-    where: { email },
+    where: { email: lowercaseEmail },
   });
 
   if (existingUserWithEmail) {
@@ -41,8 +45,8 @@ export async function POST(req: Request) {
 
   await db.user.create({
     data: {
-      username,
-      email,
+      username: lowercaseEmail,
+      email: lowercaseEmail,
       password: hashedPassword,
     },
   });
