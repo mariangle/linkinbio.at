@@ -42,7 +42,6 @@ export function LoginForm() {
     try {
       await submit();
       router.push("/dashboard");
-      alert("shoud redirect yessh");
     } catch (error) {
       console.error(error);
     }

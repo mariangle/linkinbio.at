@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
-import { StatusBanner } from "./status-banner";
 
 export function Header() {
   return (
@@ -24,7 +23,6 @@ export function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <StatusBanner />
           <Link href="/sign-in" className="text-sm font-medium">
             Sign In
           </Link>

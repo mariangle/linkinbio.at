@@ -171,7 +171,7 @@ export function WebsiteLinkForm({ item }: { item: WebsiteLink }) {
             ) : (
               <div className="flex w-full items-center justify-between gap-4 p-4">
                 <div className="w-full">
-                  <div className="max-w-full truncate text-sm text-foreground">
+                  <div className="max-w-full truncate text-sm text-white">
                     {form.getValues("title")}
                   </div>
                   <div className="max-w-full truncate text-xs text-muted-foreground">

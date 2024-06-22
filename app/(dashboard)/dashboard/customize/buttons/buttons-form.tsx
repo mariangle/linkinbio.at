@@ -139,7 +139,7 @@ export function ButtonsForm({ data }: { data: ButtonOptions }) {
         <FormHeading>Templates</FormHeading>
         <ButtonTemplates onSelect={(button) => setButtonValues(button, form)} />
         <FormHeading>Customize</FormHeading>
-        <div className="flex flex-col rounded-lg bg-secondary/25 p-2">
+        <div className="glassmorphism flex flex-col rounded-lg p-2">
           <div className="grid w-full place-content-center rounded-lg bg-secondary/35 p-4">
             <div className="pointer-events-none w-full max-w-xs">
               <ExampleButton
@@ -180,7 +180,7 @@ export function ButtonsForm({ data }: { data: ButtonOptions }) {
           </div>
           <div className="p-4">
             <Tabs defaultValue="font">
-              <TabsList className="mb-4 w-full">
+              <TabsList className="mb-4 w-full border border-border/50">
                 <TabsTrigger value="font">Font</TabsTrigger>
                 <TabsTrigger value="background" className="gap-2">
                   Background

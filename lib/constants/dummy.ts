@@ -58,6 +58,7 @@ export const dummyBiolinks: Biolink[] = [
       occupation: "Google",
       location: "Denmark",
       premium: true,
+      badges: [],
     },
     config: {
       profile: {
@@ -154,6 +155,7 @@ export const dummyBiolinks: Biolink[] = [
         "https://t4.ftcdn.net/jpg/05/91/73/91/360_F_591739168_JjLY7nji77hvf094509GOU1Yc3ATIXMe.jpg",
       bio: "Designer and Creative Director",
       premium: true,
+      badges: [],
     },
     config: {
       profile: {
@@ -231,6 +233,7 @@ export const dummyBiolinks: Biolink[] = [
         "https://img.freepik.com/premium-photo/happy-stick-figure-drawing-white-background-illustration-image-ai-generated-art_848903-6762.jpg",
       bio: "typescript, next.js, tailwindcss",
       premium: true,
+      badges: [],
     },
     config: {
       profile: {
@@ -314,6 +317,7 @@ export const dummyBiolinks: Biolink[] = [
       image:
         "https://yt3.googleusercontent.com/gNL3HdMcYAtyjFFcjWJk5KIf0eeAxLOsIfWFMMtShmK3PYZA4Etsye0qwHKz3WFETkUzvGeKyw=s900-c-k-c0x00ffffff-no-rj",
       premium: true,
+      badges: [],
     },
     config: {
       profile: {

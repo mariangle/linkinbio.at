@@ -4,13 +4,16 @@ import { BackgroundCellCore } from "@/components/ui/background-ripple-effect";
 import { AuthForm } from "./auth-form";
 import { getCurrentUser, getSession } from "@/lib/functions/auth";
 
+import { redirect } from "next/navigation";
+
 export default async function AuthPage({
   variant,
 }: {
   variant: "sign-in" | "sign-up";
 }) {
   const session = await getSession();
-  const user = await getCurrentUser();
+
+  if (session) redirect("/dashboard");
 
   return (
     <div className="relative grid h-screen w-full place-content-center overflow-x-hidden bg-[#0B363C] p-6 text-[#E3FFCC]">
