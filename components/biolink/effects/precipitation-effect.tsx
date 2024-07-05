@@ -84,7 +84,7 @@ export const PrecipitationEffect: React.FC<PrecipitationEffectProps> = ({
         ctx.arc(
           particle.x,
           particle.y,
-          type === "snow" ? 2 : 1,
+          type === "snow" ? 2 : 1.5,
           0,
           Math.PI * 2,
         ); // Larger size for snow particles

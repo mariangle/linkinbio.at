@@ -8,7 +8,13 @@ import Link from "next/link";
 
 type Variant = "sign-in" | "sign-up";
 
-export function AuthForm({ variant }: { variant: Variant }) {
+export function AuthForm({
+  variant,
+  username,
+}: {
+  variant: Variant;
+  username?: string;
+}) {
   return (
     <div className="flex flex-col items-center gap-4 p-6">
       <div className="flex flex-col items-center">
@@ -21,7 +27,11 @@ export function AuthForm({ variant }: { variant: Variant }) {
         </p>
       </div>
       <div className="pointer-events-auto mt-4 w-full">
-        {variant === "sign-up" ? <RegisterForm /> : <LoginForm />}
+        {variant === "sign-up" ? (
+          <RegisterForm username={username} />
+        ) : (
+          <LoginForm />
+        )}
         <div className="mt-8 text-center text-xs text-[#B8CEC1]">
           {variant === "sign-in"
             ? "Don't have an account?"

@@ -4,10 +4,9 @@ import Link from "next/link";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { buttonVariants } from "../../../components/ui/button";
 
 export function ClaimLink() {
-  const [link, setLink] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -22,7 +21,7 @@ export function ClaimLink() {
       </label>
       <Input
         id="claim-link"
-        onChange={(e) => setLink(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder="username"
@@ -30,7 +29,10 @@ export function ClaimLink() {
         maxLength={20}
       />
       <Link
-        href="/sign-up"
+        href={{
+          pathname: "/sign-up",
+          query: username ? { username } : {},
+        }}
         className="flex h-[37.5px] items-center justify-center whitespace-nowrap rounded-full bg-[#E3FFCC] px-3.5 text-sm font-semibold text-[#0B363C]"
       >
         Claim Link

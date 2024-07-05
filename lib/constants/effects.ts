@@ -44,4 +44,12 @@ export const titleEffects = [
     value: TitleEffect.Rainbow,
     label: "Rainbow",
   },
+  {
+    value: TitleEffect.Flicker,
+    label: "Flicker",
+  },
+  {
+    value: TitleEffect.Shimmer,
+    label: "Shimmer",
+  },
 ];

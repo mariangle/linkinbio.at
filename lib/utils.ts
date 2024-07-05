@@ -5,7 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function hexToRgb(hex: string) {
+export function hexToRgb(hex?: string) {
+  if (!hex) {
+    hex = "#FFFFFF";
+  }
+
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
@@ -13,5 +17,9 @@ export function hexToRgb(hex: string) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
       }
-    : null;
+    : {
+        r: 0,
+        g: 0,
+        b: 0,
+      };
 }

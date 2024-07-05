@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef } from "react";
 
 interface Bug {
@@ -19,8 +20,10 @@ interface LightningBugsProps {
 
 export const LightningBugsEffect: React.FC<LightningBugsProps> = ({
   density = 0.00005,
+  className,
 }: {
   density?: number;
+  className?: string;
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -91,5 +94,5 @@ export const LightningBugsEffect: React.FC<LightningBugsProps> = ({
     };
   }, [bugs, density]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} className={cn("h-full w-full", className)} />;
 };

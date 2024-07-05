@@ -8,8 +8,10 @@ import { redirect } from "next/navigation";
 
 export default async function AuthPage({
   variant,
+  username,
 }: {
   variant: "sign-in" | "sign-up";
+  username?: string;
 }) {
   const session = await getSession();
 
@@ -25,7 +27,7 @@ export default async function AuthPage({
         </Link>
       </div>
       <div className="pointer-events-none relative z-50">
-        <AuthForm variant={variant} />
+        <AuthForm variant={variant} username={username} />
       </div>
     </div>
   );

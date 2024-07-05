@@ -2,8 +2,10 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { TypewriterEffect } from "@/components/biolink/effects/typewriter-effect";
+import { FlickerText } from "@/components/biolink/effects/flicker-text";
 import { TitleOptions, TitleEffect, User } from "@/lib/types";
 import { getFontDisplay } from "@/lib/utils/getters";
+import { hexToRgb } from "@/lib/utils";
 
 export function Title({
   options,
@@ -18,24 +20,21 @@ export function Title({
 }) {
   if (!user.title) return null;
 
-  if (user.premium && effect === TitleEffect.Typewriter) {
-    return (
-      <div className="relative">
-        <div
-          style={{
-            color: options?.color,
-          }}
-          className={cn(
-            "text-wrap break-all text-xl font-semibold tracking-wider",
-            className,
-            getFontDisplay(options?.font),
-          )}
-        >
-          <TypewriterEffect words={user.title} />
-        </div>
-      </div>
-    );
+  if (!user.premium) {
+    effect = undefined;
   }
+
+  const { r, g, b } = hexToRgb(options?.color);
+
+  const shimmerStyles = effect === TitleEffect.Shimmer && {
+    background: `linear-gradient(90deg, transparent, rgba(${r}, ${g}, ${b}, 1), transparent)`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "80%",
+    animation: "shining 2s linear infinite",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: `rgba(${r}, ${g}, ${b}, 0.25)`,
+    backgroundClip: "text",
+  };
 
   return (
     <div className="relative w-fit">
@@ -64,7 +63,7 @@ export function Title({
       <h2
         style={{
           color: options?.color,
-          font: options?.font,
+          ...shimmerStyles,
         }}
         className={cn(
           "relative w-fit text-wrap break-all bg-transparent text-xl font-semibold tracking-wider",
@@ -78,7 +77,13 @@ export function Title({
         {effect === TitleEffect.Glitch && (
           <span aria-hidden="true">{user.title}</span>
         )}
-        {user.title}
+        {effect === TitleEffect.Typewriter ? (
+          <TypewriterEffect words={user.title} />
+        ) : effect === TitleEffect.Flicker ? (
+          <FlickerText title={user.title} color={options?.color} />
+        ) : (
+          user.title
+        )}
         {effect === TitleEffect.Glitch && (
           <span aria-hidden="true">{user.title}</span>
         )}

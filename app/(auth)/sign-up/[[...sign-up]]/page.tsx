@@ -1,5 +1,11 @@
 import AuthPage from "@/app/(auth)/auth-page";
 
-export default function Page() {
-  return <AuthPage variant="sign-up" />;
+export default function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    username?: string;
+  };
+}) {
+  return <AuthPage variant="sign-up" username={searchParams?.username} />;
 }

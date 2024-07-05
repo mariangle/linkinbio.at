@@ -33,6 +33,8 @@ export enum TitleEffect {
   Glitch = "glitch",
   Hearts = "hearts",
   Rainbow = "rainbow",
+  Flicker = "flicker",
+  Shimmer = "shimmer",
 }
 
 export enum WeatherEffect {

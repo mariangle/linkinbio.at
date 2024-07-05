@@ -32,12 +32,12 @@ export const RegisterFormSchema = z.object({
 
 export type RegisterFormValues = z.infer<typeof RegisterFormSchema>;
 
-export function RegisterForm() {
+export function RegisterForm({ username }: { username?: string }) {
   const router = useRouter();
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
-      username: "",
+      username: username || "",
       email: "",
       password: "",
     },
@@ -109,7 +109,7 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" loading={loading} disabled>
+        <Button type="submit" className="w-full" loading={loading}>
           Sign Up
         </Button>
       </form>
