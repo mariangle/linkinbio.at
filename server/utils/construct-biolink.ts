@@ -7,9 +7,9 @@ import {
   Size,
   TitleEffect,
   BorderSize,
+  BackgroundEffect,
 } from "@/lib/types";
 import {
-  convertToWeatherEffect,
   convertToLayout,
   convertToContentType,
 } from "@/lib/utils/enum-mappings";
@@ -40,6 +40,7 @@ import type {
   Spotify,
   Soundcloud,
   Youtube,
+  UserView,
 } from "@prisma/client";
 
 export interface ExtendedUser extends User {
@@ -53,6 +54,7 @@ export interface ExtendedUser extends User {
   spotify?: Spotify;
   soundcloud?: Soundcloud;
   youtube?: Youtube;
+  views: UserView[];
 }
 
 export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
@@ -69,6 +71,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
       premium: true ?? false,
       badges: [],
     },
+    views: user.views.length,
     config: {
       profile: {
         title: {
@@ -154,8 +157,7 @@ export function constructBiolink({ user }: { user: ExtendedUser }): Biolink {
           (user.effect?.titleEffect as TitleEffect) ??
           defaultEffectsOptions.title,
         weather:
-          convertToWeatherEffect(user.effect?.backgroundEffect) ??
-          defaultEffectsOptions.weather,
+          (user.effect?.backgroundEffect as BackgroundEffect) ?? undefined,
       },
     },
     links: {

@@ -1,6 +1,6 @@
-import { WeatherEffect, TitleEffect } from ".";
+import { BackgroundEffect, TitleEffect } from ".";
 
 export interface EffectsOptions {
   title?: TitleEffect;
-  weather?: WeatherEffect;
+  weather?: BackgroundEffect;
 }

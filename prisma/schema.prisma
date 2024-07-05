@@ -196,19 +196,11 @@ model Icons {
   @@map("icons")
 }
 
-enum BackgroundEffect {
-  Snow
-  Rain
-  Thunder
-  LightningBugs
-  Stars
-}
-
 model Effect {
-  id               String            @id @default(auto()) @map("_id") @db.ObjectId
-  userId           String            @unique @map("user_id") @db.ObjectId
-  titleEffect      String?           @map("title_effect")
-  backgroundEffect BackgroundEffect? @map("background_weather")
+  id               String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String  @unique @map("user_id") @db.ObjectId
+  titleEffect      String? @map("title_effect")
+  backgroundEffect String? @map("background_weather")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

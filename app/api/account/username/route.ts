@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
 import { getCurrentUser } from "@/lib/functions/auth";
-import { dummyBiolinks } from "@/lib/constants/dummy";
 
 export async function PATCH(req: Request) {
   const currentUser = await getCurrentUser();
@@ -25,19 +24,6 @@ export async function PATCH(req: Request) {
       ok: false,
       data: null,
       message: "Username is required",
-    });
-  }
-
-  const dummyBiolinkUsernames = dummyBiolinks.map(
-    (biolink) => biolink.user.username,
-  );
-
-  if (dummyBiolinkUsernames.includes(lowercaseUsername)) {
-    return NextResponse.json({
-      status: 400,
-      ok: false,
-      data: null,
-      message: "Username is not available",
     });
   }
 

@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/server/db";
 import { getCurrentUser } from "@/lib/functions/auth";
-import { convertToPrismaWeatherEffect } from "@/lib/utils/enum-mappings";
 
 export async function PATCH(req: Request) {
   const currentUser = await getCurrentUser();
@@ -27,23 +26,21 @@ export async function PATCH(req: Request) {
   });
 
   if (existingEffects) {
-    // If effects exist, update them
     effects = await db.effect.update({
       where: {
         userId: currentUser.id,
       },
       data: {
         titleEffect: titleEffect ?? null,
-        backgroundEffect: convertToPrismaWeatherEffect(backgroundEffect),
+        backgroundEffect: backgroundEffect,
       },
     });
   } else {
-    // If effects don't exist, create them
     effects = await db.effect.create({
       data: {
         userId: currentUser.id,
         titleEffect: titleEffect ?? null,
-        backgroundEffect: convertToPrismaWeatherEffect(backgroundEffect),
+        backgroundEffect: backgroundEffect,
       },
     });
   }

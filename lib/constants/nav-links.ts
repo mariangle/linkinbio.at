@@ -63,6 +63,11 @@ export const dashboardLinks: DashboardLink[] = [
         icon: FaFont,
       },
       {
+        label: "Background",
+        href: "/dashboard/customize/background",
+        icon: FaFileImage,
+      },
+      {
         label: "Layout",
         href: "/dashboard/customize/layout",
         icon: PanelLeft,
@@ -73,17 +78,12 @@ export const dashboardLinks: DashboardLink[] = [
         icon: FaFacebook,
       },
       {
-        label: "Background",
-        href: "/dashboard/customize/background",
-        icon: FaFileImage,
-      },
-      {
         label: "Buttons",
         href: "/dashboard/customize/buttons",
         icon: FaPalette,
       },
       {
-        label: "VFX",
+        label: "Effects",
         href: "/dashboard/customize/vfx",
         icon: SparklesIcon,
       },

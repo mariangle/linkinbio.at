@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Layout } from "@/components/biolink/layout";
 import { constructMetadata } from "@/lib/utils/construct-metadata";
-import { getCachedBiolinkByUsername } from "@/server/actions/get-biolink";
+import { getCachedBiolink } from "@/server/actions/get-biolink";
 import { ViewTracker } from "@/components/view-tracker";
 import { NotFound } from "@/components/404";
 import { Loading } from "@/components/loading";
@@ -15,7 +15,7 @@ export async function generateMetadata({
   };
 }) {
   try {
-    const biolink = await getCachedBiolinkByUsername(params.username);
+    const biolink = await getCachedBiolink(params.username);
 
     if (!biolink) return null;
 
@@ -37,7 +37,7 @@ export default async function Page({
     username: string;
   };
 }) {
-  const biolink = await getCachedBiolinkByUsername(params.username);
+  const biolink = await getCachedBiolink(params.username);
 
   if (!biolink) return <NotFound />;
 

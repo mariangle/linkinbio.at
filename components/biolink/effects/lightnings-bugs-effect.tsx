@@ -16,6 +16,7 @@ interface Bug {
 
 interface LightningBugsProps {
   density?: number;
+  className?: string;
 }
 
 export const LightningBugsEffect: React.FC<LightningBugsProps> = ({

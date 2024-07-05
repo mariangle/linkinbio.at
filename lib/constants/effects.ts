@@ -1,21 +1,32 @@
-import { WeatherEffect, TitleEffect } from "@/lib/types";
+import { TitleEffect, BackgroundEffect } from "@/lib/types";
 
-export const weatherEffects = [
+export const weatherEffects: {
+  value: BackgroundEffect;
+  label: string;
+}[] = [
   {
-    value: WeatherEffect.Rain,
+    value: "rain",
     label: "Rain",
   },
   {
-    value: WeatherEffect.Snow,
+    value: "snow",
     label: "Snow",
   },
   {
-    value: WeatherEffect.Thunder,
+    value: "thunder",
     label: "Thunder",
   },
   {
-    value: WeatherEffect.LightningBugs,
+    value: "lightning-bugs",
     label: "Lightning Bugs",
+  },
+  {
+    value: "stars",
+    label: "Stars",
+  },
+  {
+    value: "cash",
+    label: "Cash Rain",
   },
 ];
 

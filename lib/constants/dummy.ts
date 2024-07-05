@@ -1,11 +1,10 @@
-import {
+/*import {
   Biolink,
   ContentType,
   Font,
   Layout,
   TitleEffect,
   IconStyle,
-  WeatherEffect,
 } from "@/lib/types";
 
 const dummyPlatformlinks = [
@@ -118,7 +117,7 @@ export const dummyBiolinks: Biolink[] = [
         backgroundRadius: "full",
       },
       effects: {
-        weather: WeatherEffect.Rain,
+        weather: "WeatherEffect.Rain",
       },
     },
     links: {
@@ -400,3 +399,5 @@ export const dummyBiolinks: Biolink[] = [
     widgets: {},
   },
 ];
+
+*/

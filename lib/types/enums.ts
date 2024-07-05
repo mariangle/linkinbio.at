@@ -37,13 +37,13 @@ export enum TitleEffect {
   Shimmer = "shimmer",
 }
 
-export enum WeatherEffect {
-  Rain = "rain",
-  Snow = "snow",
-  Thunder = "thunder",
-  LightningBugs = "lightning-bugs",
-  Staras = "stars",
-}
+export type BackgroundEffect =
+  | "rain"
+  | "snow"
+  | "thunder"
+  | "lightning-bugs"
+  | "stars"
+  | "cash";
 
 export enum IconStyle {
   CustomBackgroundWhiteColor = "custom-background-white-color",

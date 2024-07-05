@@ -50,14 +50,14 @@ export function BiolinkPreview({ biolink }: { biolink: Biolink }) {
             View live
           </Link>
         </div>
-        <div className="relative flex h-full justify-center overflow-y-auto pt-24">
+        <div className="flex h-full justify-center overflow-y-auto pt-24">
           <div className="h-[calc(100%-70px)] max-h-[700px] w-[344px] rounded-[1.6rem] border bg-white p-1 shadow-2xl dark:bg-zinc-800">
             {biolink && (
               <Layout
                 biolink={biolinkPreview}
                 preview
                 layout={biolinkPreview.config.profile?.layout}
-                className="overflow-y-auto rounded-[1.4rem]"
+                className="relative overflow-y-auto rounded-[1.4rem]"
               />
             )}
           </div>

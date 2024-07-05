@@ -1,7 +1,6 @@
-import { Layout, WeatherEffect, ContentType } from "@/lib/types/enums";
+import { Layout, ContentType } from "@/lib/types/enums";
 import {
   Layout as PrismaLayout,
-  BackgroundEffect as PrismaBackgroundEffect,
   ContentType as PrismaContentType,
 } from "@prisma/client";
 
@@ -31,40 +30,6 @@ export function convertToLayout(
   };
 
   return layoutMap[layout!] || Layout.Standard;
-}
-
-export function convertToWeatherEffect(
-  prismaBackgroundEffect?: PrismaBackgroundEffect | null,
-) {
-  switch (prismaBackgroundEffect) {
-    case PrismaBackgroundEffect.Snow:
-      return WeatherEffect.Snow;
-    case PrismaBackgroundEffect.Rain:
-      return WeatherEffect.Rain;
-    case PrismaBackgroundEffect.LightningBugs:
-      return WeatherEffect.LightningBugs;
-    case PrismaBackgroundEffect.Thunder:
-      return WeatherEffect.Thunder;
-    default:
-      return undefined;
-  }
-}
-
-export function convertToPrismaWeatherEffect(
-  weatherEffect: string | undefined,
-) {
-  switch (weatherEffect) {
-    case WeatherEffect.Snow:
-      return PrismaBackgroundEffect.Snow;
-    case WeatherEffect.Rain:
-      return PrismaBackgroundEffect.Rain;
-    case WeatherEffect.LightningBugs:
-      return PrismaBackgroundEffect.LightningBugs;
-    case WeatherEffect.Thunder:
-      return PrismaBackgroundEffect.Thunder;
-    default:
-      return null;
-  }
 }
 
 export function convertToContentType(

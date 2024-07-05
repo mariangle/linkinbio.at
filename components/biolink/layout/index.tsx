@@ -164,9 +164,13 @@ export function LayoutWrapper({
   return (
     <div className={cn("relative h-full w-full overflow-x-hidden", className)}>
       {premium && (
-        <WeatherEffect preview={preview} variant={effects?.weather} />
+        <WeatherEffect
+          preview={preview}
+          variant={effects?.weather}
+          className="pointer-events-none absolute inset-0 z-10"
+        />
       )}
-      {children}
+      <div className="relative h-full">{children}</div>
     </div>
   );
 }

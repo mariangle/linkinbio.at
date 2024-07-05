@@ -8,4 +8,5 @@ export interface Biolink {
     platform: PlatformLink[];
   };
   widgets: Widgets;
+  views: number;
 }

@@ -1,52 +1,33 @@
 import { ThunderEffect } from "@/components/biolink/effects/thunder-effect";
 import { PrecipitationEffect } from "@/components/biolink/effects/precipitation-effect";
 import { LightningBugsEffect } from "@/components/biolink/effects/lightnings-bugs-effect";
-import { WeatherEffect as WeatherEffectType } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { CashRainEffect } from "./cash-rain-effect";
+import { StarsEffect } from "./stars-effect";
+import { BackgroundEffect } from "@/lib/types";
 
 export function WeatherEffect({
   variant,
   preview,
+  className,
 }: {
-  variant?: WeatherEffectType;
+  variant?: BackgroundEffect;
   preview?: boolean;
+  className?: string;
 }) {
-  // TODO: Fix z-index issue
   switch (variant) {
-    case WeatherEffectType.Thunder:
-      return (
-        <div
-          className={cn(
-            "pointer-events-none fixed inset-0 z-10",
-            preview && "absolute",
-          )}
-        >
-          <ThunderEffect />
-        </div>
-      );
-    case WeatherEffectType.Rain:
-      return (
-        <div
-          className={cn(
-            "pointer-events-none fixed inset-0 z-10",
-            preview && "absolute",
-          )}
-        >
-          <PrecipitationEffect type="rain" />
-        </div>
-      );
-    case WeatherEffectType.Snow:
-      return (
-        <div className="pointer-events-none absolute inset-0 z-10">
-          <PrecipitationEffect type="snow" />
-        </div>
-      );
-    case WeatherEffectType.LightningBugs:
-      return (
-        <div className="pointer-events-none absolute inset-0 z-10">
-          <LightningBugsEffect />
-        </div>
-      );
+    case "thunder":
+      return <ThunderEffect className={className} />;
+    case "rain":
+      return <PrecipitationEffect type="rain" className={className} />;
+    case "snow":
+      return <PrecipitationEffect type="snow" className={className} />;
+    case "lightning-bugs":
+      return <LightningBugsEffect className={className} />;
+    case "stars":
+      return <StarsEffect className={className} />;
+
+    case "cash":
+      return <CashRainEffect className={className} />;
     default:
       return null;
   }

@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import { Navigation } from "@/components/dashboard/navigation";
 import { getCachedBiolink } from "@/server/actions/get-biolink";
-import { redirect } from "next/navigation";
 import { BiolinkPreview } from "@/components/dashboard/biolink-preview";
 import { DashboardHeading } from "@/components/dashboard/dashboard-heading";
 import { ThemeProvider } from "@/components/theme-provider";

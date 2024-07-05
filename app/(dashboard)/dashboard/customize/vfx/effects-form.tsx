@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/select";
 import { useBiolinkPreviewStore } from "@/lib/store";
 import {
-  WeatherEffect,
   TitleEffect,
   EffectsOptions as EffectsData,
+  BackgroundEffect,
 } from "@/lib/types";
 import { weatherEffects, titleEffects } from "@/lib/constants/effects";
 import { EffectsFormValues, EffectsFormSchema } from "@/lib/validations";
@@ -59,7 +59,7 @@ export function EffectsForm({ data }: { data?: EffectsData }) {
             ...biolink.config,
             effects: {
               title: value.title as TitleEffect,
-              weather: value.weather as WeatherEffect,
+              weather: value.weather as BackgroundEffect,
             },
           },
         });
