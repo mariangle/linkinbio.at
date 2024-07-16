@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://linkinbio.at">
-    <img alt="typing test screenshot" src="https://github.com/mariangle/linkinbio.at/assets/124585244/9eab0f9f-9963-4c65-8139-4de15593d0d5">
+    <img alt="typing test screenshot" src="https://github.com/user-attachments/assets/b3c13983-9468-4747-b580-3dd3a3d84d7a">
     <h1 align="center">linkinbio.at</h1>
   </a>
 </p>
@@ -22,7 +22,7 @@
 
 View the website live: https://linkinbio.at/
 
-See live example: https://linkinbio.at/maria
+See more images under projects section: https://www.linkedin.com/in/maria-nguyen-le
 
 ## Tech stack
 
@@ -40,8 +40,8 @@ See live example: https://linkinbio.at/maria
 - .MP4 and .GIF support
 - Choose between multiple layouts
 - Fully customizable buttons
-- Weather effects (thunder, rain, snow, lightning bugs)
-- Text animations (sparkles, typewriter)
+- Weather effects (thunder, rain, snow, lightning bugs, cash, rose petals)
+- Text animations (sparkles, typewriter, shimmer, glitch, flicker, shake, cherry blossoms)
 - Embedded content (youtube, soundcloud, spotify)
 
 View more at: https://linkinbio.at/features
@@ -58,7 +58,7 @@ View more at: https://linkinbio.at/features
 - [x] Add new layout and update glassmorpism layout
 - [x] Handle social media vs website links better
 - [x] Improved dashboard styling
-- [ ] Payment (Stripe) / Premium
+- [x] Payment (Stripe) / Premium
 - [ ] Customize page metadata (favicon, title, description, image, apple-icon)
 
 ## License
